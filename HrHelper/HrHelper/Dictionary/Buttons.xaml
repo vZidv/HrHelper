@@ -1,0 +1,20 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="defaultBut" TargetType="Button">
+        <Setter Property="Content" Value="Кнопка"/>
+        <Setter Property="Height" Value="55"/>
+        <Setter Property="Width" Value="216"/>
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Background" Value="{StaticResource mainClor}"/>
+        <Setter Property="Foreground" Value="{StaticResource accentSecontColor}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource accentSecontColor}"/>
+        <Setter Property="BorderThickness" Value="6"/>
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="10"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+</ResourceDictionary>

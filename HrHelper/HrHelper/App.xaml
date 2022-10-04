@@ -1,0 +1,15 @@
+﻿<Application x:Class="HrHelper.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:HrHelper"
+             StartupUri="Windows/Authorization_win.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Dictionary/Colors.xaml"/>
+                <ResourceDictionary Source="Dictionary/TextBoxes.xaml"/>
+                <ResourceDictionary Source="Dictionary/Buttons.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
