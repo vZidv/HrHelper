@@ -15,7 +15,7 @@
         
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="{Binding Color, Source={StaticResource backColor}}" Offset="0.247"/>
+                <GradientStop Color="White" Offset="0.247"/>
                 <GradientStop Color="{Binding Color, Source={StaticResource accentSecontColor}}" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
