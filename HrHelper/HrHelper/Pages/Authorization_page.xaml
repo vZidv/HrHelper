@@ -33,7 +33,7 @@
         <Grid Grid.Row="1" VerticalAlignment="Center">
             <StackPanel>
                 <Grid>
-                <TextBox Text="" x:Name="login_textbox"
+                <TextBox Text="" x:Name="login_textbox" Focusable="True"
                     Style="{DynamicResource defaultTextbox}"/>
                     <TextBlock>
                         <TextBlock.Style>
@@ -66,7 +66,8 @@
                         </TextBlock.Style>
                     </TextBlock>
                 </Grid>
-                <Button Content="Авторизаваться" Style="{StaticResource defaultBut}"
+                <Button x:Name="Authorization_but" IsDefault='True'
+                    Content="Авторизаваться" Style="{StaticResource defaultBut}" Click="Authorization_but_Click"
                     />
             </StackPanel>
         </Grid>

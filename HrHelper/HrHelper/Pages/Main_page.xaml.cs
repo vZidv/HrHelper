@@ -10,25 +10,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.IO;
-namespace HrHelper.Windows
+
+namespace HrHelper.Pages
 {
     /// <summary>
-    /// Interaction logic for Authorization_win.xaml
+    /// Interaction logic for Main_page.xaml
     /// </summary>
-    public partial class Authorization_win : Window
+    public partial class Main_page : Page
     {
-        public Authorization_win()
+        public Main_page()
         {
             InitializeComponent();
-
-            mainFrame.Content = new Pages.Authorization_page() { authorization_win = this};
         }
 
-        private void ToolBar_MouseDown(object sender, MouseButtonEventArgs e)
+        private void settings_button_Click(object sender, RoutedEventArgs e)
         {
-            DragMove();
+
         }
     }
 }

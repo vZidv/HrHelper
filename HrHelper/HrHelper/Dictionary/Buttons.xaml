@@ -17,4 +17,21 @@
             </Style>
         </Style.Resources>
     </Style>
+    <Style x:Key="bookMarkBut" TargetType="Button">
+        <Setter Property="Content" Value="Кнопка"/>
+        <Setter Property="Height" Value="27"/>
+        <Setter Property="Width" Value="108"/>
+        <Setter Property="Margin" Value="0,10,0,0"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Background" Value="{StaticResource mainClor}"/>
+        <Setter Property="Foreground" Value="{StaticResource accentColor}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource accentSecontColor}"/>
+        <Setter Property="BorderThickness" Value="2.5"/>
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="10,10,0,0"/>
+            </Style>
+        </Style.Resources>
+    </Style>
 </ResourceDictionary>

@@ -1,0 +1,56 @@
+﻿<Page x:Class="HrHelper.Pages.Main_page"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HrHelper.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Main_page">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="91*"/>
+            <ColumnDefinition Width="173*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+        <Button Content="Вернуться к окну авторизации"  x:Name="backToAuthorization_button"
+                Style="{DynamicResource defaultBut}" 
+            Grid.Row="2" HorizontalAlignment="Left" Width="250" Height="80" Margin="10,10,0,10" />
+        <Button Content="Настройки"  x:Name="settings_button"
+                Style="{DynamicResource defaultBut}" 
+            Grid.Row="2" Grid.Column="1" HorizontalAlignment ="Right" Width="250" Height="80" Margin="0,10,10,10" />
+        <Button Content="Новое резюме" Style="{DynamicResource defaultBut}" x:Name="refresh_button"
+            Grid.Row="0" HorizontalAlignment="Left" Width="180" Height="40" Margin="10,10,0,10" />
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Принят" Style="{DynamicResource bookMarkBut}"
+                        Margin="5,10,0,0"/>
+                <Button Content="Отказ" Style="{DynamicResource bookMarkBut}"/>
+                <Button Content="Приглашён" Style="{DynamicResource bookMarkBut}"/>
+                <Button Content="Без Статутса" Style="{DynamicResource bookMarkBut}"/>
+            </StackPanel>
+            <DataGrid x:Name="dataGridView_Users" IsReadOnly="True" 
+            Grid.Row="1" Margin="5,0,5,0" BorderThickness="0" AutoGenerateColumns="False" Grid.ColumnSpan="2">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Login}" Header="Логин" MinWidth="170" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding Password}" Header="Пароль" MinWidth="170" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding TypeUser}" Header="Тип" MinWidth="170" Width="*"/>
+                    <DataGridTemplateColumn Header="Удалить" MinWidth="170" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Удалить" x:Name="deletePerson_button"  />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</Page>

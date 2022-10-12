@@ -22,6 +22,9 @@ namespace HrHelper.Windows
         public Main_win()
         {
             InitializeComponent();
+
+            frameMain.Navigate(new Pages.Main_page());
         }
+
     }
 }
