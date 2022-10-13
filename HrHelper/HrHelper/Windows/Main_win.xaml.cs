@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Reflection;
+using System.IO;
+using HrHelper.Classes;
 
 namespace HrHelper.Windows
 {
@@ -21,9 +24,10 @@ namespace HrHelper.Windows
     {
         public Main_win()
         {
-            InitializeComponent();
-
-            frameMain.Navigate(new Pages.Main_page());
+            InitializeComponent();            
+            if(!PhotoFolder.CheckPhotoFolder())
+                PhotoFolder.CreatePhotoFolder();
+            frameMain.Navigate(new Pages.SummaryEdit_page());
         }
 
     }

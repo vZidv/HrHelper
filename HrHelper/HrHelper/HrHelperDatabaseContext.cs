@@ -9,7 +9,6 @@ namespace HrHelper
     {
         public HrHelperDatabaseContext()
         {
-       
         }
 
         public HrHelperDatabaseContext(DbContextOptions<HrHelperDatabaseContext> options)
@@ -53,7 +52,7 @@ namespace HrHelper
             {
                 entity.ToTable("Photo");
 
-                entity.Property(e => e.Path).HasMaxLength(80);
+                entity.Property(e => e.Path).HasMaxLength(150);
             });
 
             modelBuilder.Entity<Summary>(entity =>
@@ -87,12 +86,11 @@ namespace HrHelper
                 entity.HasOne(d => d.Busyness)
                     .WithMany(p => p.Summaries)
                     .HasForeignKey(d => d.BusynessId)
-                    .HasForeignKey(d => d.BusynessId);
+                    .HasConstraintName("FK_Summary_Busyness");
 
                 entity.HasOne(d => d.Photo)
                     .WithMany(p => p.Summaries)
                     .HasForeignKey(d => d.PhotoId)
-                    .OnDelete(DeleteBehavior.SetNull)
                     .HasConstraintName("FK_Summary_Photo");
             });
 
