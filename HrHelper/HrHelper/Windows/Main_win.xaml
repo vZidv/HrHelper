@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HrHelper.Windows"
         mc:Ignorable="d"
-        Title="Main_win" Height="900" Width="1600" WindowStartupLocation="CenterScreen">
-    <Grid>
-        <Frame x:Name="frameMain" />
+        Title="Main_win" Height="900" Width="1600" WindowStartupLocation="CenterScreen" >
+    <Grid Background="{StaticResource Chat}">
+        <Grid.RowDefinitions>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.08*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Background="{StaticResource Channels}">
+        </Grid>
+        <Frame x:Name="frameMain" Grid.Column="1"/>
     </Grid>
+
 </Window>

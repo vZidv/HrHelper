@@ -7,18 +7,12 @@
         mc:Ignorable="d"
         Title="Authorization_win" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None"
         Height="585" Width="465">
-    <Grid>
+    <Grid Background="{StaticResource Channels}">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="White" Offset="0.247"/>
-                <GradientStop Color="{Binding Color, Source={StaticResource accentSecontColor}}" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
 
         <StackPanel x:Name="ToolBar" Orientation="Horizontal" Background="Transparent"
                     MouseDown="ToolBar_MouseDown"/>

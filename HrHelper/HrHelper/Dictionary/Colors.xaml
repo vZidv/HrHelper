@@ -1,7 +1,18 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <SolidColorBrush x:Key="accentColor" Color="#FF577F"/>
-    <SolidColorBrush x:Key="accentSecontColor" Color="#FF884B"/>
-    <SolidColorBrush x:Key="mainClor" Color="#FFD384"/>
-    <SolidColorBrush x:Key="backColor" Color="#FFF9B0"/>
+    <SolidColorBrush x:Key="Chat" Color="#36393F"/>
+    <SolidColorBrush x:Key="Channels" Color="#2F3136"/>
+    <SolidColorBrush x:Key="Servers" Color="#202225"/>
+    <SolidColorBrush x:Key="Grey" Color="#99AAB5"/>
+    <SolidColorBrush x:Key="White" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="Bravery" Color="#9B84EE"/>
+    <SolidColorBrush x:Key="Balance" Color="#44DDBF"/>
+    <SolidColorBrush x:Key="Brilliance" Color="#F47B68"/>
+    <SolidColorBrush x:Key="High" Color="#F57731"/>
+    <SolidColorBrush x:Key="Skin" Color="#F9C9A9"/>
+    <SolidColorBrush x:Key="Purple" Color="#7289DA"/>
+    <SolidColorBrush x:Key="Online" Color="#43B581"/>
+    <SolidColorBrush x:Key="Dnd" Color="#F04747"/>
+    <SolidColorBrush x:Key="Idle" Color="#fAA61A"/>
+    <SolidColorBrush x:Key="Nitro" Color="#FF73Fa"/>
 </ResourceDictionary>
