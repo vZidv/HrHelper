@@ -23,6 +23,20 @@ namespace HrHelper.Pages
         public Main_page()
         {
             InitializeComponent();
+
+            LoadDataGrid();
+        }
+
+        void LoadDataGrid()
+        {
+            using(HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                Summary[] summaries = db.Summaries.ToArray();
+                foreach(Summary summary in summaries)
+                    summary.Busyness = db.Busynesses.Where(o => o.Id == summary.BusynessId).First();
+
+                summary_dg.ItemsSource = summaries;
+            }
         }
 
         private void settings_button_Click(object sender, RoutedEventArgs e)
