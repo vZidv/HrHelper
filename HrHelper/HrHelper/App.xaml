@@ -9,6 +9,7 @@
                 <ResourceDictionary Source="Dictionary/Colors.xaml"/>
                 <ResourceDictionary Source="Dictionary/TextBoxes.xaml"/>
                 <ResourceDictionary Source="Dictionary/Buttons.xaml"/>
+                <ResourceDictionary Source="Dictionary/TextBlocks.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

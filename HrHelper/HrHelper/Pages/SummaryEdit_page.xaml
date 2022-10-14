@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HrHelper.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="800" d:DesignWidth="1500"
       Title="SummaryEdit_page">
 
     <Grid>
@@ -14,7 +14,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.27*"/>
+            <ColumnDefinition Width="0.23*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Border  
@@ -34,6 +34,30 @@
                     <TextBox Text="Patronymic"  x:Name="patronymic_tb"
                         Style="{DynamicResource defaultTextbox}" Height="40" Width="200"/>
                 </StackPanel>
+                <StackPanel>
+                    <TextBox Text="Phone" x:Name="phone_tb"
+                        Style="{DynamicResource defaultTextbox}" Height="40" Width="325"/>
+                    <TextBox Text="Email"  x:Name="email_tb"
+                        Style="{DynamicResource defaultTextbox}" Height="40" Width="325"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBox Text="Town" x:Name="town_tb"
+                        Style="{DynamicResource defaultTextbox}" Height="40" Width="325"/>
+                    <TextBox Text="Address"  x:Name="address_tb"
+                        Style="{DynamicResource defaultTextbox}" Height="40" Width="325"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <StackPanel>
+                <Grid>
+                    <TextBlock Text="age" x:Name="age_tBlock" FontSize="15" HorizontalAlignment="Left" Margin="10,0,0,0"
+                    Style="{StaticResource defaultTextBlock}"/>
+                    <TextBlock Text="Gender" x:Name="gender_tBlock" FontSize="15" HorizontalAlignment="Right" Margin="0,0,10,0"
+                    Style="{StaticResource defaultTextBlock}"/>
+                </Grid>
+                <TextBlock Text="BirthdayDay" x:Name="birthdayDate_tBlock"
+                    Style="{StaticResource defaultTextBlock}"/>
             </StackPanel>
         </Grid>
     </Grid>

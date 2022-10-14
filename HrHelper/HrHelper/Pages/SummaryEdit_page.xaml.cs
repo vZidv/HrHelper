@@ -38,7 +38,25 @@ namespace HrHelper.Pages
                 patronymic_tb.Text = summary.Patronymic;
                 Photo photo = db.Photos.Where(o => o.Id == summary.Id).First();
                 photo_image.ImageSource = new BitmapImage(new Uri(photo.Path));
+                birthdayDate_tBlock.Text = "Дата рождениия: " + summary.Birthday.ToString("yyyy MM dd");
+                age_tBlock.Text = "Возраст: " + GetAge(summary).ToString();
+                gender_tBlock.Text = "Пол: " + summary.Gender;
+                phone_tb.Text = "+" + summary.Phone.ToString();
+                email_tb.Text = summary.Email;
+                town_tb.Text = summary.Town;
+                address_tb.Text = summary.Address;
             }
+        }
+        int GetAge(Summary summary)
+        {
+            int year = (DateTime.Now.Year - summary.Birthday.Year);
+            if (DateTime.Now.Month < summary.Birthday.Month)
+                year--;
+            else if (DateTime.Now.Month == summary.Birthday.Month)
+                if (DateTime.Now.Day < summary.Birthday.Day)
+                    year--;
+
+            return year;
         }
     }
 }

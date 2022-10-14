@@ -79,6 +79,8 @@ namespace HrHelper
 
                 entity.Property(e => e.Patronymic).HasMaxLength(25);
 
+                entity.Property(e => e.Phone).HasMaxLength(12);
+
                 entity.Property(e => e.Specialization).HasMaxLength(50);
 
                 entity.Property(e => e.Town).HasMaxLength(40);
