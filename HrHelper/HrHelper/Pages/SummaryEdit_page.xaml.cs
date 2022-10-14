@@ -32,19 +32,26 @@ namespace HrHelper.Pages
             using (var db = new HrHelperDatabaseContext())
             {
                 Summary summary = db.Summaries.Where(o => o.Id == 1).First();
+                summary.Busyness = db.Busynesses.Where(o => o.Id == summary.BusynessId).First();
 
                 name_tb.Text = summary.FirstName;
                 lastname_tb.Text = summary.LastName;
                 patronymic_tb.Text = summary.Patronymic;
                 Photo photo = db.Photos.Where(o => o.Id == summary.Id).First();
                 photo_image.ImageSource = new BitmapImage(new Uri(photo.Path));
-                birthdayDate_tBlock.Text = "Дата рождениия: " + summary.Birthday.ToString("yyyy MM dd");
+                birthdayDate_tBlock.Text = "Дата рождениия: " + summary.Birthday.ToString("yyyy.MM.dd");
                 age_tBlock.Text = "Возраст: " + GetAge(summary).ToString();
                 gender_tBlock.Text = "Пол: " + summary.Gender;
                 phone_tb.Text = "+" + summary.Phone.ToString();
                 email_tb.Text = summary.Email;
                 town_tb.Text = summary.Town;
                 address_tb.Text = summary.Address;
+
+                jobTitle_tb.Text = summary.JobTitle;
+                specialization_tb.Text = summary.Specialization;
+                busyness_tb.Text = summary.Busyness.Type;
+                education_tb.Text = summary.Education;
+                commnet_tb.Text = summary.Comments;
             }
         }
         int GetAge(Summary summary)

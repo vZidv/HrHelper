@@ -11,11 +11,11 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.7*"/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.23*"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Border  
                 Margin="7" CornerRadius="15" Grid.Column="0" Grid.Row="0">
@@ -51,14 +51,33 @@
         <Grid Grid.Row="1" Grid.Column="0">
             <StackPanel>
                 <Grid>
-                    <TextBlock Text="age" x:Name="age_tBlock" FontSize="15" HorizontalAlignment="Left" Margin="10,0,0,0"
+                    <TextBlock Text="age" x:Name="age_tBlock" FontSize="20" HorizontalAlignment="Left" Margin="10,0,0,0"
                     Style="{StaticResource defaultTextBlock}"/>
-                    <TextBlock Text="Gender" x:Name="gender_tBlock" FontSize="15" HorizontalAlignment="Right" Margin="0,0,10,0"
+                    <TextBlock Text="Gender" x:Name="gender_tBlock" FontSize="20" HorizontalAlignment="Right" Margin="0,0,10,0"
                     Style="{StaticResource defaultTextBlock}"/>
                 </Grid>
                 <TextBlock Text="BirthdayDay" x:Name="birthdayDate_tBlock"
                     Style="{StaticResource defaultTextBlock}"/>
             </StackPanel>
         </Grid>
-    </Grid>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel>
+                    <TextBox Text="JobTitle" x:Name="jobTitle_tb"
+                        Style="{DynamicResource defaultTextbox}" Height="60" Width="350"/>
+                    <TextBox Text="Specialization"  x:Name="specialization_tb"
+                        Style="{DynamicResource defaultTextbox}" Height="60" Width="350"/>
+                    <TextBox Text="Busyness"  x:Name="busyness_tb"
+                        Style="{DynamicResource defaultTextbox}" Height="60" Width="350"/>
+                    <TextBox Text="Education"  x:Name="education_tb"
+                        Style="{DynamicResource defaultTextbox}" Height="60" Width="350"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBox Text="Commetn"  Style="{StaticResource defaultTextbox}" MinHeight="450" MinWidth="400"
+                     x:Name="commnet_tb" TextWrapping="Wrap" AcceptsReturn="True"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        </Grid>
 </Page>
