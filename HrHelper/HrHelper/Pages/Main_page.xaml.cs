@@ -29,10 +29,10 @@ namespace HrHelper.Pages
 
         void LoadDataGrid()
         {
-            using(HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
                 Summary[] summaries = db.Summaries.ToArray();
-                foreach(Summary summary in summaries)
+                foreach (Summary summary in summaries)
                     summary.Busyness = db.Busynesses.Where(o => o.Id == summary.BusynessId).First();
 
                 summary_dg.ItemsSource = summaries;
@@ -42,6 +42,26 @@ namespace HrHelper.Pages
         private void settings_button_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void openSummary_button_Click(object sender, RoutedEventArgs e)
+        {
+            int r = summary_dg.SelectedIndex;
+
+            string id = null;
+
+            for (int i = 0; i < 2;)
+            {
+                switch (i)
+                {
+                    case 0:
+                        TextBlock itemL = summary_dg.Columns[i].GetCellContent(summary_dg.Items[r]) as TextBlock;
+                        id = itemL.Text;
+                        break;
+                }
+                i++;
+            }
+            Classes.Settings.mainFrame.Navigate(new Pages.SummaryEdit_page(Convert.ToInt32(id)));
         }
     }
 }

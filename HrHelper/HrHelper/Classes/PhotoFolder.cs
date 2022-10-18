@@ -27,5 +27,11 @@ namespace HrHelper.Classes
             string path = ProjectPath();
             Directory.CreateDirectory(path + "\\Photo");
         }
+        static public string AddPhoto(string sourcePath,string fileName,string format)
+        {           
+            string filePath = ProjectPath() + $"\\Photo\\{fileName}{format}";
+            File.Copy(sourcePath,filePath, true);
+            return filePath;
+        }
     }
 }

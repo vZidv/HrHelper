@@ -8,8 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Source\exit.png" />
     <None Remove="Source\Logo.png" />
     <None Remove="Source\LogoMini.png" />
+    <None Remove="Source\Person.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,10 +24,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Source\exit.png" />
     <Resource Include="Source\Logo.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Source\LogoMini.png" />
+    <Resource Include="Source\Person.png" />
   </ItemGroup>
 
 </Project>

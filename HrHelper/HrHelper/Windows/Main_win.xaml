@@ -6,6 +6,26 @@
         xmlns:local="clr-namespace:HrHelper.Windows"
         mc:Ignorable="d"
         Title="Main_win" Height="900" Width="1600" WindowStartupLocation="CenterScreen" >
+    <Window.Resources>
+        <Style x:Key="MenuButton" TargetType="Button">
+            <Setter Property="Height" Value="125"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                
+            </Style.Triggers>
+                
+        </Style>
+    </Window.Resources>
     <Grid Background="{StaticResource Chat}">
         <Grid.RowDefinitions>
         </Grid.RowDefinitions>
@@ -15,10 +35,33 @@
         </Grid.ColumnDefinitions>
 
         <Grid Background="{StaticResource Channels}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="0.7*"/>
+                <RowDefinition Height="0.4*"/>
+            </Grid.RowDefinitions>
             <Image Source="/Source/LogoMini.png"
                 VerticalAlignment="Top" Height="100" />
+            <StackPanel Grid.Row="1" VerticalAlignment="Top">
+                <Button x:Name="person_but"
+                VerticalAlignment="Top"
+                Style="{StaticResource MenuButton}" Click="person_but_Click">
+                    <Grid>
+                        <Image Source="/Source/Person.png" Margin="32"/>
+                    </Grid>
+                </Button>
+            </StackPanel>
+            <StackPanel Grid.Row="2" VerticalAlignment="Center">
+                <Button x:Name="exit_but"
+                Style="{StaticResource MenuButton}" Click="exit_but_Click">
+                    <Grid>
+                        <Image Source="/Source/exit.png" Margin="32"/>
+                    </Grid>
+                </Button>
+            </StackPanel>
+
         </Grid>
-        <Frame x:Name="frameMain" Grid.Column="1"/>
+        <Frame x:Name="frameMain" Grid.Column="1" NavigationUIVisibility="Hidden"/>
     </Grid>
 
 </Window>

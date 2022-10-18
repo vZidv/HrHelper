@@ -27,8 +27,19 @@ namespace HrHelper.Windows
             InitializeComponent();            
             if(!PhotoFolder.CheckPhotoFolder())
                 PhotoFolder.CreatePhotoFolder();
-            frameMain.Navigate(new Pages.SummaryEdit_page());
+            frameMain.Navigate(new Pages.Main_page());
+
+            Settings.mainFrame = frameMain;
         }
 
+        private void exit_but_Click(object sender, RoutedEventArgs e)
+        {
+           Application.Current.Shutdown();
+        }
+
+        private void person_but_Click(object sender, RoutedEventArgs e)
+        {
+            frameMain.Navigate(new Pages.Main_page());
+        }
     }
 }

@@ -46,10 +46,17 @@
                     <TextBox Text="Address"  x:Name="address_tb"
                         Style="{DynamicResource defaultTextbox}" Height="40" Width="325"/>
                 </StackPanel>
+                <StackPanel>
+                    <Button Content="Сохранить" x:Name="save_bt"
+                        Style="{StaticResource defaultBut}" Click="save_bt_Click"/>
+                </StackPanel>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="0">
             <StackPanel>
+                <Button Content="Выбрать фото" x:Name="changePhoto_bt"
+                    Height="45" Width="200"
+                    Style="{StaticResource defaultBut}" Click="changePhoto_bt_Click"/>
                 <Grid>
                     <TextBlock Text="age" x:Name="age_tBlock" FontSize="20" HorizontalAlignment="Left" Margin="10,0,0,0"
                     Style="{StaticResource defaultTextBlock}"/>
@@ -73,7 +80,9 @@
                         Style="{DynamicResource defaultTextbox}" Height="60" Width="350"/>
                 </StackPanel>
                 <StackPanel>
-                    <TextBox Text="Commetn"  Style="{StaticResource defaultTextbox}" MinHeight="450" MinWidth="400"
+                    <ToggleButton x:Name="openComment_toggleBt"
+                        Content="Показать" Height="30" Width="120" IsThreeState="True" HorizontalAlignment="Left" Margin="10" Checked="openComment_toggleBt_Checked"/>
+                    <TextBox Text="Commetn"  Style="{StaticResource defaultTextbox}" MinHeight="400" MinWidth="400" 
                      x:Name="commnet_tb" TextWrapping="Wrap" AcceptsReturn="True"/>
                 </StackPanel>
             </StackPanel>
