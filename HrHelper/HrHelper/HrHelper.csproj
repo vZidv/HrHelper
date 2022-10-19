@@ -12,6 +12,7 @@
     <None Remove="Source\Logo.png" />
     <None Remove="Source\LogoMini.png" />
     <None Remove="Source\Person.png" />
+    <None Remove="Source\Settings.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +31,7 @@
     </Resource>
     <Resource Include="Source\LogoMini.png" />
     <Resource Include="Source\Person.png" />
+    <Resource Include="Source\Settings.png" />
   </ItemGroup>
 
 </Project>

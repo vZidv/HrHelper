@@ -37,22 +37,29 @@ namespace HrHelper.Pages
             using (var db = new HrHelperDatabaseContext())
             {
                 Summary summary = db.Summaries.Where(o => o.Id == id).First();
-                summary.Busyness = db.Busynesses.Where(o => o.Id == summary.BusynessId).First();
+                if (summary.BusynessId != null)
+                {
+                    summary.Busyness = db.Busynesses.Where(o => o.Id == summary.BusynessId).First();
+                    busyness_tb.Text = summary.Busyness.Type;
+                }
 
                 name_tb.Text = summary.FirstName;
                 lastname_tb.Text = summary.LastName;
-                patronymic_tb.Text = summary.Patronymic;
-                Photo photo = db.Photos.Where(o => o.Id == summary.Id).First();
-                
-                 using(Stream stream = File.OpenRead(photo.Path))
+                patronymic_tb.Text = summary.Patronymic;                
+                if (summary.PhotoId != null)
                 {
-                    BitmapImage bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.StreamSource = stream;
-                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                    bitmap.EndInit();
-                    bitmap.Freeze();
-                    photo_image.ImageSource = bitmap;
+                    Photo photo = db.Photos.Where(o => o.Id == summary.PhotoId).First();
+
+                    using (Stream stream = File.OpenRead(photo.Path))
+                    {
+                        BitmapImage bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.StreamSource = stream;
+                        bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmap.EndInit();
+                        bitmap.Freeze();
+                        photo_image.ImageSource = bitmap;
+                    }
                 }
                 birthdayDate_tBlock.Text = "Дата рождениия: " + summary.Birthday.ToString("yyyy.MM.dd");
                 age_tBlock.Text = "Возраст: " + GetAge(summary).ToString();
@@ -64,7 +71,6 @@ namespace HrHelper.Pages
 
                 jobTitle_tb.Text = summary.JobTitle;
                 specialization_tb.Text = summary.Specialization;
-                busyness_tb.Text = summary.Busyness.Type;
                 education_tb.Text = summary.Education;
                 commnet_tb.Text = summary.Comments;
 
@@ -107,7 +113,7 @@ namespace HrHelper.Pages
                 
                 using (var db = new HrHelperDatabaseContext())
                 {
-                    Summary summary = db.Summaries.Where(o => o.Id == idSummary).First();
+                    Summary summary = db.Summaries.Where(o => o.Id == idSummary).First();                    
                     Photo photo = db.Photos.Where(o => o.Id == summary.PhotoId).First();
 
                     string fileFormat = new FileInfo(imagePathNow).Extension;

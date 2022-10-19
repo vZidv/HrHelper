@@ -11,6 +11,7 @@
             <Setter Property="Height" Value="125"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="32,0,32,0"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -47,15 +48,21 @@
                 VerticalAlignment="Top"
                 Style="{StaticResource MenuButton}" Click="person_but_Click">
                     <Grid>
-                        <Image Source="/Source/Person.png" Margin="32"/>
+                        <Image Source="/Source/Person.png"/>
                     </Grid>
                 </Button>
             </StackPanel>
             <StackPanel Grid.Row="2" VerticalAlignment="Center">
-                <Button x:Name="exit_but"
+                <Button x:Name="settings_but"
+                Style="{StaticResource MenuButton}">
+                    <Grid>
+                        <Image Source="/Source/Settings.png" />
+                    </Grid>
+                </Button>
+                <Button x:Name="exit_but" 
                 Style="{StaticResource MenuButton}" Click="exit_but_Click">
                     <Grid>
-                        <Image Source="/Source/exit.png" Margin="32"/>
+                        <Image Source="/Source/exit.png" />
                     </Grid>
                 </Button>
             </StackPanel>

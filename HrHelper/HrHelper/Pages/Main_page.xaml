@@ -19,8 +19,8 @@
             <RowDefinition/>
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
-        <Button Content="Новое резюме" Style="{DynamicResource defaultBut}" x:Name="refresh_button"
-            Grid.Row="0" HorizontalAlignment="Left" Width="180" Height="40" Margin="10,10,0,10" />
+        <Button Content="Новое резюме" Style="{DynamicResource defaultBut}" x:Name="summaryAdd_bt"
+            Grid.Row="0" HorizontalAlignment="Left" Width="180" Height="40" Margin="10,10,0,10" Click="summaryAdd_bt_Click" />
         <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
             <StackPanel Orientation="Horizontal">
                 <Button Content="Принят" Style="{DynamicResource bookMarkBut}"

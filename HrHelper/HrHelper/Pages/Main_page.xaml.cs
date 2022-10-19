@@ -33,7 +33,11 @@ namespace HrHelper.Pages
             {
                 Summary[] summaries = db.Summaries.ToArray();
                 foreach (Summary summary in summaries)
+                {
+                    if(summary.BusynessId != null)
                     summary.Busyness = db.Busynesses.Where(o => o.Id == summary.BusynessId).First();
+                }
+                   
 
                 summary_dg.ItemsSource = summaries;
             }
@@ -63,5 +67,7 @@ namespace HrHelper.Pages
             }
             Classes.Settings.mainFrame.Navigate(new Pages.SummaryEdit_page(Convert.ToInt32(id)));
         }
+
+        private void summaryAdd_bt_Click(object sender, RoutedEventArgs e) => Classes.Settings.mainFrame.Navigate(new Pages.SummaryAdd_page());
     }
 }

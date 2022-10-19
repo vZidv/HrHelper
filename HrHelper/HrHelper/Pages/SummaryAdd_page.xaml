@@ -1,4 +1,4 @@
-﻿<Page x:Class="HrHelper.Pages.SummaryEdit_page"
+﻿<Page x:Class="HrHelper.Pages.SummaryAdd_page"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:HrHelper.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="1500"
-      Title="SummaryEdit_page">
+      Title="SummaryAdd_page">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -33,6 +33,11 @@
                         Style="{DynamicResource defaultTextbox}" Height="40" Width="200"/>
                     <TextBox Text="Patronymic"  x:Name="patronymic_tb"
                         Style="{DynamicResource defaultTextbox}" Height="40" Width="200"/>
+                    <ComboBox x:Name="gender_cb">
+                        <ComboBoxItem Content="Мужской"/>
+                        <ComboBoxItem Content="Женский"/>
+                    </ComboBox>
+                    <DatePicker x:Name="birthday_dateP"/>
                 </StackPanel>
                 <StackPanel>
                     <TextBox Text="Phone" x:Name="phone_tb"
@@ -47,6 +52,8 @@
                         Style="{DynamicResource defaultTextbox}" Height="40" Width="325"/>
                 </StackPanel>
                 <StackPanel>
+                    <Button Content="Создать" x:Name="summaryAdd_bt" 
+                            Style="{StaticResource defaultBut}" Click="summaryAdd_bt_Click"/>
                 </StackPanel>
             </StackPanel>
         </Grid>
@@ -54,15 +61,7 @@
             <StackPanel>
                 <Button Content="Выбрать фото" x:Name="changePhoto_bt"
                     Height="45" Width="200"
-                    Style="{StaticResource defaultBut}" Click="changePhoto_bt_Click"/>
-                <Grid>
-                    <TextBlock Text="age" x:Name="age_tBlock" FontSize="20" HorizontalAlignment="Left" Margin="10,0,0,0"
-                    Style="{StaticResource defaultTextBlock}"/>
-                    <TextBlock Text="Gender" x:Name="gender_tBlock" FontSize="20" HorizontalAlignment="Right" Margin="0,0,10,0"
-                    Style="{StaticResource defaultTextBlock}"/>
-                </Grid>
-                <TextBlock Text="BirthdayDay" x:Name="birthdayDate_tBlock"
-                    Style="{StaticResource defaultTextBlock}"/>
+                    Style="{StaticResource defaultBut}" Click="changePhoto_bt_Click" />
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1">
@@ -79,12 +78,12 @@
                 </StackPanel>
                 <StackPanel>
                     <ToggleButton x:Name="openComment_toggleBt"
-                        Content="Показать" Height="30" Width="120" IsThreeState="True" HorizontalAlignment="Left" Margin="10" Checked="openComment_toggleBt_Checked"/>
+                        Content="Показать" Height="30" Width="120" IsThreeState="True" HorizontalAlignment="Left" Margin="10"/>
                     <TextBox Text="Commetn"  Style="{StaticResource defaultTextbox}" MinHeight="400" MinWidth="400" 
                      x:Name="commnet_tb" TextWrapping="Wrap" AcceptsReturn="True"/>
                 </StackPanel>
             </StackPanel>
         </Grid>
 
-        </Grid>
+    </Grid>
 </Page>
