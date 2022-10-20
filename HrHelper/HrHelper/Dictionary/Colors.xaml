@@ -15,4 +15,7 @@
     <SolidColorBrush x:Key="Dnd" Color="#F04747"/>
     <SolidColorBrush x:Key="Idle" Color="#fAA61A"/>
     <SolidColorBrush x:Key="Nitro" Color="#FF73Fa"/>
+    <SolidColorBrush x:Key="AccentColorSecond" Color="#FF884B"/>
+    <SolidColorBrush x:Key="AccentColor" Color="#FF577F"/>
+    <SolidColorBrush x:Key="AccentColorAction" Color="#FF819E"/>
 </ResourceDictionary>

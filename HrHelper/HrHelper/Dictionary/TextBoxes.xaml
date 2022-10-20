@@ -12,6 +12,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="FontSize" Value="30"/>
+        <Setter Property="BorderThickness" Value="2.5"/>
         <Style.Resources>
             <Style TargetType="{x:Type Border}">
                 <Setter Property="CornerRadius" Value="6"/>

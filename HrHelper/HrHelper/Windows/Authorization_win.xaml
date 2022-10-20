@@ -5,14 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HrHelper.Windows"
         mc:Ignorable="d"
-        Title="Authorization_win" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None"
+        Title="Authorization_win" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Background="Transparent" AllowsTransparency="True"
         Height="585" Width="465">
-    <Grid Background="{StaticResource Channels}">
+    <Grid Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+        <Border Background="{StaticResource Chat}" CornerRadius="17"
+            Grid.RowSpan="2"/>
 
         <StackPanel x:Name="ToolBar" Orientation="Horizontal" Background="Transparent"
                     MouseDown="ToolBar_MouseDown"/>

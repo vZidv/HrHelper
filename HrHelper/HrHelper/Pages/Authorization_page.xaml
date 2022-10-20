@@ -17,7 +17,6 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Panel.ZIndex" Value="1"/>
             <Setter Property="IsHitTestVisible" Value="False"/>
-
         </Style>
     </Page.Resources>
     <Grid Background="Transparent">
@@ -66,8 +65,9 @@
                         </TextBlock.Style>
                     </TextBlock>
                 </Grid>
-                <Button x:Name="Authorization_but" IsDefault='True'
-                    Content="Авторизаваться" Style="{StaticResource defaultBut}" Click="Authorization_but_Click"
+                <Button x:Name="Authorization_but" 
+                        Style="{StaticResource defaultBut}" Height="65" Width="230" 
+                    Content="Авторизаваться" Click="Authorization_but_Click"
                     />
             </StackPanel>
         </Grid>
