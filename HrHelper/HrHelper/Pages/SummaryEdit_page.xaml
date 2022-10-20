@@ -47,6 +47,10 @@
                         Style="{DynamicResource defaultTextbox}" Height="40" Width="325"/>
                 </StackPanel>
                 <StackPanel>
+                    <Button Content="Редактировать" x:Name="editSummary_bt" 
+                        Style="{StaticResource defaultBut}" Click="editSummary_bt_Click"/>
+                    <Button Content="Сохранить" x:Name="saveSummary_bt" 
+                        Style="{StaticResource defaultBut}" Click="saveSummary_bt_Click"/>
                 </StackPanel>
             </StackPanel>
         </Grid>

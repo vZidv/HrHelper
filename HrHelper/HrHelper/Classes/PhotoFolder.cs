@@ -9,6 +9,7 @@ namespace HrHelper.Classes
 {
     public static class PhotoFolder
     {
+        //До папки bin
         static public string ProjectPath()
         {
             string path = Directory.GetCurrentDirectory();
