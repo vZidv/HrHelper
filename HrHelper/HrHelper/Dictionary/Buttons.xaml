@@ -13,6 +13,11 @@
         <Setter Property="Foreground" Value="{StaticResource White}"/>
         <Setter Property="BorderBrush" Value="{StaticResource AccentColor}"/>
         <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect Color="Black" Direction="-90" ShadowDepth="9" Opacity="0.2" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -24,7 +29,7 @@
                             <Setter Property="Background" Value="{DynamicResource AccentColorAction}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource Purple}" />
+                            <Setter Property="Background" Value="{DynamicResource AccentColorAction2}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

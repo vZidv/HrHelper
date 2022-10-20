@@ -14,7 +14,8 @@
         </Grid.RowDefinitions>
         <Border Background="{StaticResource Chat}" CornerRadius="17"
             Grid.RowSpan="2"/>
-
+        <Border Background="{StaticResource Channels}" CornerRadius="17,17,0,0"
+            Grid.Row ="0"/>
         <StackPanel x:Name="ToolBar" Orientation="Horizontal" Background="Transparent"
                     MouseDown="ToolBar_MouseDown"/>
 

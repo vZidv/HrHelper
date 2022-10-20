@@ -18,4 +18,5 @@
     <SolidColorBrush x:Key="AccentColorSecond" Color="#FF884B"/>
     <SolidColorBrush x:Key="AccentColor" Color="#FF577F"/>
     <SolidColorBrush x:Key="AccentColorAction" Color="#FF819E"/>
+    <SolidColorBrush x:Key="AccentColorAction2" Color="#BF6177"/> 
 </ResourceDictionary>

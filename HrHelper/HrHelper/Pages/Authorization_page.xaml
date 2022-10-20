@@ -65,10 +65,10 @@
                         </TextBlock.Style>
                     </TextBlock>
                 </Grid>
-                <Button x:Name="Authorization_but" 
+                <Button x:Name="Authorization_but" IsDefault="True"
                         Style="{StaticResource defaultBut}" Height="65" Width="230" 
-                    Content="Авторизаваться" Click="Authorization_but_Click"
-                    />
+                    Content="Авторизаваться" Click="Authorization_but_Click"/>
+
             </StackPanel>
         </Grid>
     </Grid>
