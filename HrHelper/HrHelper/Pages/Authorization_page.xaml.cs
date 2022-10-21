@@ -29,29 +29,36 @@ namespace HrHelper.Pages
         }
 
         private void Authorization_but_Click(object sender, RoutedEventArgs e)
-        {
-           if(login_textbox.Text == String.Empty || password_textbox.Text == String.Empty)
+        {         
+            if (login_textbox.Text == String.Empty || password_pb.Password == String.Empty)
             {
-                MessageBox.Show("Одно из полей пусто!");
+                MessageBox.Show("Одно из полей пустое!");
                 return;
             }
-            using(HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
                 AuthorizationUser user = db.AuthorizationUsers.Where(u => u.Login == login_textbox.Text).FirstOrDefault();
 
-                if(user == null)
+                if (user == null)
                 {
                     MessageBox.Show("Неверный логин или пароль!");
                     return;
                 }
-                if (password_textbox.Text == user.Password)
+                if (password_pb.Password == user.Password)
                 {
                     Main_win main_win = new Main_win();
                     main_win.Show();
-                    authorization_win.Close();              
+                    authorization_win.Close();
                 }
-                    
             }
+        }
+
+        private void password_pb_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (password_pb.Password.Length > 0)
+                password_textblock.Visibility = Visibility.Collapsed;
+            else
+                password_textblock.Visibility = Visibility.Visible;
         }
     }
 }

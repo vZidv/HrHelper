@@ -18,6 +18,27 @@
             <Setter Property="Panel.ZIndex" Value="1"/>
             <Setter Property="IsHitTestVisible" Value="False"/>
         </Style>
+        <Style x:Key="defaultPasswordbox" TargetType="PasswordBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="Foreground" Value="DarkGray"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="BorderThickness" Value="2.5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Grid x:Name="root" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" SnapsToDevicePixels="True">
+                            <Border x:Name="Background" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="6" Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"/>
+                            <ScrollViewer x:Name="PART_ContentHost" BorderThickness="0" Padding="{TemplateBinding Padding}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                       IsTabStop="False" Background="{x:Null}" TextElement.Foreground="{TemplateBinding Foreground}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
     <Grid Background="Transparent">
         <Grid.RowDefinitions>
@@ -32,7 +53,7 @@
         <Grid Grid.Row="1" VerticalAlignment="Center">
             <StackPanel>
                 <Grid>
-                <TextBox Text="" x:Name="login_textbox" Focusable="True"
+                    <TextBox Text="" x:Name="login_textbox" Focusable="True"
                     Style="{DynamicResource defaultTextbox}"/>
                     <TextBlock>
                         <TextBlock.Style>
@@ -49,21 +70,9 @@
                     </TextBlock>
                 </Grid>
                 <Grid>
-                    <TextBox Text="" x:Name="password_textbox"
-                    Style="{DynamicResource defaultTextbox}"/>
-                    <TextBlock Text="Пароль">
-                        <TextBlock.Style>
-                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlock}">
-
-                                <Setter Property="Visibility" Value="Hidden"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Text,ElementName=password_textbox}" Value="">
-                                        <Setter Property="Visibility" Value="Visible"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
+                    <PasswordBox x:Name="password_pb" Password=""
+                        Style="{StaticResource defaultPasswordbox}" PasswordChanged="password_pb_PasswordChanged"/>
+                    <TextBlock Text="Пароль" x:Name="password_textblock" Style="{StaticResource TextBlock}"/>
                 </Grid>
                 <Button x:Name="Authorization_but" IsDefault="True"
                         Style="{StaticResource defaultBut}" Height="65" Width="230" 
