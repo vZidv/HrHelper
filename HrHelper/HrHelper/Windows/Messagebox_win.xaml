@@ -1,0 +1,54 @@
+﻿<Window x:Class="HrHelper.Windows.Messagebox_win"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HrHelper.Windows"
+        mc:Ignorable="d"
+        Title="Messagebox_win" Height="250" Width="400" WindowStyle="None" Background="Transparent" WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Border 
+            Grid.RowSpan="3" Grid.ColumnSpan="2" Background="{StaticResource Channels}" CornerRadius="15"/>
+        <Border 
+            Grid.Row="0"  Grid.ColumnSpan="2" Background="{StaticResource Servers}" CornerRadius="15,15,0,0"/>
+
+        <Grid x:Name="toolBar_grid" Grid.ColumnSpan="2" Background="Transparent" MouseDown="toolBar_grid_MouseDown">
+            
+        </Grid>
+
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <TextBlock x:Name="titile_tb" FontSize="17"
+                       FontWeight="Bold"
+                   Margin="10,10,10,0" TextAlignment="Left"
+            Text="Title message"/>
+            <TextBlock x:Name="message_tb" Text="Message text" FontSize="15"
+                       Margin="10,5,10,0"/>
+        </StackPanel>
+
+        <Grid Grid.Row="2" Grid.ColumnSpan="2">
+            <StackPanel x:Name="yesNo_sp" Visibility="Hidden" 
+                Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Да"
+                    Style="{StaticResource defaultBut}" Height="50" Width="150"/>
+                <Button Content="Нет"
+                    Style="{StaticResource defaultBut}" Height="50" Width="150"/>
+            </StackPanel>
+            <StackPanel x:Name="ok_sp" Visibility="Hidden" 
+                Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="ок" x:Name="ok_but"
+                    Style="{StaticResource defaultBut}" Height="50" Width="150" Click="ok_but_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

@@ -26,9 +26,16 @@ namespace HrHelper.Windows
             mainFrame.Content = new Pages.Authorization_page() { authorization_win = this};
         }
 
-        private void ToolBar_MouseDown(object sender, MouseButtonEventArgs e)
+        private void ToolBar_MouseDown(object sender, MouseButtonEventArgs e) => DragMove();
+
+        private void close_but_Click(object sender, RoutedEventArgs e)
         {
-            DragMove();
+            Application.Current.Shutdown();
+        }
+
+        private void minWind_but_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
         }
     }
 }

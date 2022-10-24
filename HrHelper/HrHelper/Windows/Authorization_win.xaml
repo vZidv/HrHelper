@@ -13,11 +13,60 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Border Background="{StaticResource Chat}" CornerRadius="17"
-            Grid.RowSpan="2"/>
+            Grid.RowSpan="2">
+        </Border>
         <Border Background="{StaticResource Channels}" CornerRadius="17,17,0,0"
-            Grid.Row ="0"/>
-        <StackPanel x:Name="ToolBar" Orientation="Horizontal" Background="Transparent"
-                    MouseDown="ToolBar_MouseDown"/>
+            Grid.Row ="0">
+            <Border.OpacityMask>
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <Border
+                    Background="Black"
+                    CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource FindAncestor, AncestorType=Border}}"
+                    Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=Border}}"
+                    Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=Border}}"
+                    />
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Border.OpacityMask>
+            
+            <StackPanel x:Name="ToolBar" HorizontalAlignment="Right"
+                        Orientation="Horizontal" Background="Transparent"
+                    MouseDown="ToolBar_MouseDown">
+                <Button x:Name="minWind_but" Style="{StaticResource minWinBut}" Width="50" Click="minWind_but_Click">
+                    <Line X1="0" Y1="0" X2="70" Y2="0"  StrokeThickness="10" Margin="15,0">
+                        <Line.Style>
+                            <Style TargetType="Line">
+                                <Setter Property="Stroke" Value="{StaticResource Chat}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsMouseOver,ElementName=minWind_but}" Value="true">
+                                        <Setter Property="Stroke" Value="{StaticResource Channels}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Line.Style>
+                    </Line>
+                </Button>
+            
+                <Button x:Name="close_but" Style="{StaticResource closeBut}" Click="close_but_Click">
+                    <Path Data="M1,1L15,15M15,1L1,15" StrokeThickness="3.5">
+                        <Path.Style>
+                            <Style TargetType="Path">
+                                <Setter Property="Stroke" Value="{StaticResource Chat}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsMouseOver,ElementName=close_but }" Value="true">
+                                        <Setter Property="Stroke" Value="{StaticResource Channels}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Path.Style>
+                    </Path>
+                </Button>
+
+
+            </StackPanel>
+        </Border>
+
 
         <Frame x:Name="mainFrame" Grid.Row="1"/>
     </Grid>

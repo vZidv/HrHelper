@@ -32,14 +32,14 @@ namespace HrHelper.Pages
         {         
             if (login_textbox.Text == String.Empty || password_pb.Password == String.Empty)
             {
-                MessageBox.Show("Одно из полей пустое!");
+                Classes.MyMessageBox.Show("Ошибка","Поле логин или пароль пустое!");
                 return;
             }
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
                 AuthorizationUser user = db.AuthorizationUsers.Where(u => u.Login == login_textbox.Text).FirstOrDefault();
 
-                if (user == null)
+                if (user == null || password_pb.Password != user.Password)
                 {
                     MessageBox.Show("Неверный логин или пароль!");
                     return;
