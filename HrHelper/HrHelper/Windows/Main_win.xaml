@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HrHelper.Windows"
         mc:Ignorable="d"
-        Title="Main_win" Height="900" Width="1600" WindowStartupLocation="CenterScreen" >
+        Title="Main_win" Height="900" Width="1600" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
     <Window.Resources>
         <Style x:Key="MenuButton" TargetType="Button">
-            <Setter Property="Height" Value="125"/>
+            <Setter Property="Height" Value="100"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Margin" Value="32,0,32,0"/>
@@ -22,53 +22,139 @@
                 </Setter.Value>
             </Setter>
             <Style.Triggers>
-                
+
             </Style.Triggers>
-                
+
         </Style>
     </Window.Resources>
-    <Grid Background="{StaticResource Chat}">
-        <Grid.RowDefinitions>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.08*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <Border Background="{StaticResource Channels}" CornerRadius="17"
+            Grid.ColumnSpan="2" Grid.RowSpan="3">
+        <Border.OpacityMask>
+            <VisualBrush>
+                <VisualBrush.Visual>
+                    <Border
+                    Background="Black"
+                    CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource FindAncestor, AncestorType=Border}}"
+                    Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=Border}}"
+                    Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=Border}}"
+                    />
+                </VisualBrush.Visual>
+            </VisualBrush>
+        </Border.OpacityMask>
 
-        <Grid Background="{StaticResource Channels}">
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="0.7*"/>
-                <RowDefinition Height="0.4*"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Image Source="/Source/LogoMini.png"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.08*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid x:Name="toolBar_grid"
+                Grid.ColumnSpan="2" Grid.Row="0" Background="{StaticResource Channels}" MouseDown="toolBar_grid_MouseDown" >
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button x:Name="minWind_but" Style="{StaticResource minWinBut}" Width="50" Click="minWind_but_Click">
+                        <Line X1="0" Y1="0" X2="70" Y2="0"  StrokeThickness="10" Margin="15,0">
+                            <Line.Style>
+                                <Style TargetType="Line">
+                                    <Setter Property="Stroke" Value="{StaticResource Chat}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsMouseOver,ElementName=minWind_but}" Value="true">
+                                            <Setter Property="Stroke" Value="{StaticResource Channels}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Line.Style>
+                        </Line>
+                    </Button>
+                    <Button x:Name="maxWind_but" Style="{StaticResource minWinBut}" Width="50" Click="maxWind_but_Click">
+                        <Grid>
+                            <Border Height="19" Width="23" CornerRadius="5" Margin="2">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Background" Value="{StaticResource Chat}"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsMouseOver,ElementName=minWind_but}" Value="true">
+                                                <Setter Property="Background" Value="{StaticResource Channels}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                            </Border>
+                        </Grid>
+                    </Button>
+                    <Button x:Name="close_but" Style="{StaticResource closeBut}" Click="close_but_Click">
+                        <Path Data="M1,1L15,15M15,1L1,15" StrokeThickness="3.5">
+                            <Path.Style>
+                                <Style TargetType="Path">
+                                    <Setter Property="Stroke" Value="{StaticResource Chat}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsMouseOver,ElementName=close_but }" Value="true">
+                                            <Setter Property="Stroke" Value="{StaticResource Channels}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Path.Style>
+                        </Path>
+                    </Button>
+                </StackPanel>
+            </Grid>
+                <Grid Background="{StaticResource Channels}" Visibility="Visible" Grid.RowSpan="2"> 
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="0.7*"/>
+                        <RowDefinition Height="0.4*"/>
+                    </Grid.RowDefinitions>
+                    <Image Source="/Source/LogoMini.png"
                 VerticalAlignment="Top" Height="100" />
-            <StackPanel Grid.Row="1" VerticalAlignment="Top">
-                <Button x:Name="person_but"
+                    <StackPanel Grid.Row="1" VerticalAlignment="Top">
+                        <Button x:Name="person_but"
                 VerticalAlignment="Top"
                 Style="{StaticResource MenuButton}" Click="person_but_Click">
-                    <Grid>
-                        <Image Source="/Source/Person.png"/>
-                    </Grid>
-                </Button>
-            </StackPanel>
-            <StackPanel Grid.Row="2" VerticalAlignment="Center">
-                <Button x:Name="settings_but"
+                            <Grid>
+                                <Image Source="/Source/Person.png"/>
+                            </Grid>
+                        </Button>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" VerticalAlignment="Bottom">
+                        <Button x:Name="settings_but"
                 Style="{StaticResource MenuButton}">
-                    <Grid>
-                        <Image Source="/Source/Settings.png" />
-                    </Grid>
-                </Button>
-                <Button x:Name="exit_but" 
+                            <Grid>
+                                <Image Source="/Source/Settings.png" />
+                            </Grid>
+                        </Button>
+                        <Button x:Name="exit_but" 
                 Style="{StaticResource MenuButton}" Click="exit_but_Click">
-                    <Grid>
-                        <Image Source="/Source/exit.png" />
-                    </Grid>
-                </Button>
-            </StackPanel>
+                            <Grid>
+                                <Image Source="/Source/exit.png" />
+                            </Grid>
+                        </Button>
+                    </StackPanel>
 
-        </Grid>
-        <Frame x:Name="frameMain" Grid.Column="1" NavigationUIVisibility="Hidden"/>
-    </Grid>
+                </Grid>
+            <Border Grid.Row="1" Grid.Column="1" Background="{StaticResource Chat}" CornerRadius="10,0,0,0">
+                <Border.OpacityMask>
+                    <VisualBrush>
+                        <VisualBrush.Visual>
+                            <Border
+                    Background="Black"
+                    CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource FindAncestor, AncestorType=Border}}"
+                    Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=Border}}"
+                    Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=Border}}"
+                    />
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </Border.OpacityMask>
+                <Frame x:Name="frameMain" Grid.Column="1" Grid.Row="1"
+                   NavigationUIVisibility="Hidden"/>
+            </Border>
+
+            </Grid>
+        
+        
+    </Border>
+    
 
 </Window>

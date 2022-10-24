@@ -32,7 +32,8 @@
             
             <StackPanel x:Name="ToolBar" HorizontalAlignment="Right"
                         Orientation="Horizontal" Background="Transparent"
-                    MouseDown="ToolBar_MouseDown">
+                    >
+                <Grid Background="Transparent" MouseDown="ToolBar_MouseDown" Width="345"/>
                 <Button x:Name="minWind_but" Style="{StaticResource minWinBut}" Width="50" Click="minWind_but_Click">
                     <Line X1="0" Y1="0" X2="70" Y2="0"  StrokeThickness="10" Margin="15,0">
                         <Line.Style>

@@ -56,5 +56,15 @@ namespace HrHelper.Windows
         }
 
         private void toolBar_grid_MouseDown(object sender, MouseButtonEventArgs e)=> DragMove();
+
+        private void close_but_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void minWind_but_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
     }
 }

@@ -41,5 +41,22 @@ namespace HrHelper.Windows
         {
             frameMain.Navigate(new Pages.Main_page());
         }
+
+        private void minWind_but_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
+
+
+        private void close_but_Click(object sender, RoutedEventArgs e) => Application.Current.Shutdown();
+
+
+        private void toolBar_grid_MouseDown(object sender, MouseButtonEventArgs e) => DragMove();
+
+        private void maxWind_but_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == System.Windows.WindowState.Maximized)
+                WindowState = System.Windows.WindowState.Normal;
+            else
+                WindowState = System.Windows.WindowState.Maximized;
+        }
+
     }
 }
