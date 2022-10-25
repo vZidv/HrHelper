@@ -23,10 +23,25 @@ namespace HrHelper.Pages
     {
         string? photoPath;
         string photoFormat;
+        int status;
 
         public SummaryAdd_page()
         {
             InitializeComponent();
+
+            LoadStatusComboBox();
+        }
+        private void LoadStatusComboBox()
+        {
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                SummaryStatus[] statuses = db.SummaryStatuses.ToArray();
+                foreach (SummaryStatus stat in statuses)
+                {
+                    status_cb.Items.Add(stat.Status);
+                }
+                
+            }
         }
 
         private void summaryAdd_bt_Click(object sender, RoutedEventArgs e)
@@ -34,6 +49,18 @@ namespace HrHelper.Pages
             //date
             DateTime date = Convert.ToDateTime(birthday_dateP.SelectedDate);
             date.ToString("yyyy-MM-dd");
+
+            
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                SummaryStatus[] statuses = db.SummaryStatuses.ToArray();
+                foreach (SummaryStatus stat in statuses)
+                {
+                    if (stat.Status == status_cb.Text)
+                        status = stat.Id;
+                }
+
+            }
 
 
             Summary summary = new Summary()
@@ -49,10 +76,12 @@ namespace HrHelper.Pages
                 Town = town_tb.Text,
                 Specialization = specialization_tb.Text,
                 JobTitle = jobTitle_tb.Text,
+                Status = status,
                 //BusynessId
                 Education = education_tb.Text,
                 PhotoId = CreatePhoto(),          
                 Comments = commnet_tb.Text
+                
             };
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {

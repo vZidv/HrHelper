@@ -20,6 +20,7 @@ namespace HrHelper
         public virtual DbSet<Busyness> Busynesses { get; set; } = null!;
         public virtual DbSet<Photo> Photos { get; set; } = null!;
         public virtual DbSet<Summary> Summaries { get; set; } = null!;
+        public virtual DbSet<SummaryStatus> SummaryStatuses { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -94,6 +95,21 @@ namespace HrHelper
                     .WithMany(p => p.Summaries)
                     .HasForeignKey(d => d.PhotoId)
                     .HasConstraintName("FK_Summary_Photo");
+
+                entity.HasOne(d => d.StatusNavigation)
+                    .WithMany(p => p.Summaries)
+                    .HasForeignKey(d => d.Status)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Summary_SummaryStatus");
+            });
+
+            modelBuilder.Entity<SummaryStatus>(entity =>
+            {
+                entity.ToTable("SummaryStatus");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Status).HasMaxLength(20);
             });
 
             OnModelCreatingPartial(modelBuilder);

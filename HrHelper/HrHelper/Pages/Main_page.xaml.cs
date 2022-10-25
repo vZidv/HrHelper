@@ -34,10 +34,10 @@ namespace HrHelper.Pages
                 Summary[] summaries = db.Summaries.ToArray();
                 foreach (Summary summary in summaries)
                 {
-                    if(summary.BusynessId != null)
-                    summary.Busyness = db.Busynesses.Where(o => o.Id == summary.BusynessId).First();
+                    if (summary.BusynessId != null)
+                        summary.Busyness = db.Busynesses.Where(o => o.Id == summary.BusynessId).First();
                 }
-                   
+
 
                 summary_dg.ItemsSource = summaries;
             }
@@ -69,5 +69,21 @@ namespace HrHelper.Pages
         }
 
         private void summaryAdd_bt_Click(object sender, RoutedEventArgs e) => Classes.Settings.mainFrame.Navigate(new Pages.SummaryAdd_page());
+
+        public void ChangeSummaryForDataGrid(int status)
+        {
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                summary_dg.ItemsSource = db.Summaries.Where(o => o.Status == status).ToArray();
+            }
+        }
+
+        private void acceptSammury_but_Click(object sender, RoutedEventArgs e) => ChangeSummaryForDataGrid(3);
+
+        private void refusal_but_Click(object sender, RoutedEventArgs e) => ChangeSummaryForDataGrid(2);
+
+        private void invitedSummary_but_Click(object sender, RoutedEventArgs e) => ChangeSummaryForDataGrid(1);
+
+        private void withoutStatusSummary_but_Click(object sender, RoutedEventArgs e) => ChangeSummaryForDataGrid(4);
     }
 }

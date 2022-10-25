@@ -79,6 +79,8 @@
                         Style="{DynamicResource defaultTextbox}" Height="60" Width="350"/>
                     <TextBox Text="Education"  x:Name="education_tb"
                         Style="{DynamicResource defaultTextbox}" Height="60" Width="350"/>
+                    <ComboBox x:Name="status_cb">
+                    </ComboBox>
                 </StackPanel>
                 <StackPanel>
                     <ToggleButton x:Name="openComment_toggleBt"

@@ -23,11 +23,15 @@
             Grid.Row="0" HorizontalAlignment="Left" Width="180" Height="40" Margin="10,10,0,10" Click="summaryAdd_bt_Click" />
         <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
             <StackPanel Orientation="Horizontal">
-                <Button Content="Принят" Style="{DynamicResource bookMarkBut}"
-                        Margin="5,10,0,0"/>
-                <Button Content="Отказ" Style="{DynamicResource bookMarkBut}"/>
-                <Button Content="Приглашён" Style="{DynamicResource bookMarkBut}"/>
-                <Button Content="Без Статутса" Style="{DynamicResource bookMarkBut}"/>
+                <Button x:Name="acceptSammury_but"
+                    Content="Принят" Style="{DynamicResource bookMarkBut}"
+                        Margin="5,10,0,0" Click="acceptSammury_but_Click"/>
+                <Button x:Name="refusal_but"
+                    Content="Отказ" Style="{DynamicResource bookMarkBut}" Click="refusal_but_Click"/>
+                <Button x:Name="invitedSummary_but"
+                    Content="Приглашён" Style="{DynamicResource bookMarkBut}" Click="invitedSummary_but_Click"/>
+                <Button x:Name="withoutStatusSummary_but"
+                    Content="Без Статутса" Style="{DynamicResource bookMarkBut}" Click="withoutStatusSummary_but_Click"/>
             </StackPanel>
             <DataGrid RowStyle="{DynamicResource DataGridRowStyle}" CellStyle="{StaticResource DataGridCell}"
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}" Style="{DynamicResource defaultDataGridStyle}"  x:Name="summary_dg" IsReadOnly="True" RowHeaderWidth="0"

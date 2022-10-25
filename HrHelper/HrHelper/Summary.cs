@@ -21,8 +21,10 @@ namespace HrHelper
         public string? Education { get; set; }
         public int? PhotoId { get; set; }
         public string? Comments { get; set; }
+        public int Status { get; set; }
 
         public virtual Busyness? Busyness { get; set; }
         public virtual Photo? Photo { get; set; }
+        public virtual SummaryStatus StatusNavigation { get; set; } = null!;
     }
 }
