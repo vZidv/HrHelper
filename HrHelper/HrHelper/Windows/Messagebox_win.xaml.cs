@@ -40,6 +40,7 @@ namespace HrHelper.Windows
                 message_tb.Text = value;
             }
         }
+        public bool result = true;
         public Messagebox_win(MyMessageBoxOptions messageBoxoptions)
         {
             InitializeComponent();
@@ -66,5 +67,18 @@ namespace HrHelper.Windows
         {
             this.WindowState = WindowState.Minimized;
         }
+
+        private void yes_but_Click(object sender, RoutedEventArgs e)
+        {
+            result = true;
+            this.Close();
+        }
+
+        private void no_but_Click(object sender, RoutedEventArgs e)
+        {
+            result = false;
+            this.Close();
+        }
+
     }
 }

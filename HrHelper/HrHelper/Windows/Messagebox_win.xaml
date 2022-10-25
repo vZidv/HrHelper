@@ -76,17 +76,17 @@
                        FontWeight="Bold"
                    Margin="10,10,10,0" TextAlignment="Left"
             Text="Title message"/>
-            <TextBlock x:Name="message_tb" Text="Message text" FontSize="15"
-                       Margin="10,5,10,0"/>
+            <TextBlock x:Name="message_tb" Text="Message text" FontSize="15" TextWrapping="Wrap"
+                       Margin="10,5,27,0"/>
         </StackPanel>
 
         <Grid Grid.Row="2" Grid.ColumnSpan="2">
             <StackPanel x:Name="yesNo_sp" Visibility="Hidden" 
                 Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="Да"
-                    Style="{StaticResource defaultBut}" Height="50" Width="150"/>
-                <Button Content="Нет"
-                    Style="{StaticResource defaultBut}" Height="50" Width="150"/>
+                <Button Content="Да" x:Name="yes_but"
+                    Style="{StaticResource defaultBut}" Height="50" Width="150" Click="yes_but_Click"/>
+                <Button Content="Нет" x:Name="no_but"
+                    Style="{StaticResource defaultBut}" Height="50" Width="150" Click="no_but_Click"/>
             </StackPanel>
             <StackPanel x:Name="ok_sp" Visibility="Hidden" 
                 Orientation="Horizontal" HorizontalAlignment="Center">

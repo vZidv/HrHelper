@@ -30,11 +30,12 @@ namespace HrHelper.Classes
             SystemSounds.Exclamation.Play(); 
             messagebox.ShowDialog();
         }
-        public static void Show(string title, string message, MyMessageBoxOptions messageBoxButtons)
+        public static bool Show(string title, string message, MyMessageBoxOptions messageBoxButtons)
         {
             Windows.Messagebox_win messagebox = CreateMessageBox(title, message,messageBoxButtons);
             SystemSounds.Exclamation.Play();
             messagebox.ShowDialog();
+            return messagebox.result;
         }
     }
 }

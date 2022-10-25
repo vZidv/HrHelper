@@ -44,12 +44,24 @@ namespace HrHelper.Pages
                     MessageBox.Show("Неверный логин или пароль!");
                     return;
                 }
-                if (password_pb.Password == user.Password)
+                if (password_pb.Password != user.Password)
                 {
-                    Main_win main_win = new Main_win();
-                    main_win.Show();
-                    authorization_win.Close();
+                    Classes.MyMessageBox.Show("Ошибка", "Неверный пароль!");
                 }
+                user.TypeNavigation = db.UserTypes.Where(o => o.Id == user.Type).First();
+
+                switch (user.TypeNavigation.Type)
+                {
+                    case "admin":
+                        Admin_win admin = new Admin_win();
+                        admin.Show();
+                        break;
+                    case "user":
+                        Main_win main_win = new Main_win();
+                        main_win.Show();
+                        break;
+                }
+                authorization_win.Close();
             }
         }
 

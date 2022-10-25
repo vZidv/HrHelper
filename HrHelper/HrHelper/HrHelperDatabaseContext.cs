@@ -21,6 +21,7 @@ namespace HrHelper
         public virtual DbSet<Photo> Photos { get; set; } = null!;
         public virtual DbSet<Summary> Summaries { get; set; } = null!;
         public virtual DbSet<SummaryStatus> SummaryStatuses { get; set; } = null!;
+        public virtual DbSet<UserType> UserTypes { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -40,6 +41,12 @@ namespace HrHelper
                 entity.Property(e => e.Login).HasMaxLength(30);
 
                 entity.Property(e => e.Password).HasMaxLength(50);
+
+                entity.HasOne(d => d.TypeNavigation)
+                    .WithMany(p => p.AuthorizationUsers)
+                    .HasForeignKey(d => d.Type)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_AuthorizationUser_UserType");
             });
 
             modelBuilder.Entity<Busyness>(entity =>
@@ -107,9 +114,14 @@ namespace HrHelper
             {
                 entity.ToTable("SummaryStatus");
 
-                entity.Property(e => e.Id).HasColumnName("id");
-
                 entity.Property(e => e.Status).HasMaxLength(20);
+            });
+
+            modelBuilder.Entity<UserType>(entity =>
+            {
+                entity.ToTable("UserType");
+
+                entity.Property(e => e.Type).HasMaxLength(20);
             });
 
             OnModelCreatingPartial(modelBuilder);

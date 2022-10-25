@@ -37,8 +37,6 @@ namespace HrHelper.Pages
                     if (summary.BusynessId != null)
                         summary.Busyness = db.Busynesses.Where(o => o.Id == summary.BusynessId).First();
                 }
-
-
                 summary_dg.ItemsSource = summaries;
             }
         }

@@ -62,7 +62,6 @@ namespace HrHelper.Pages
 
             }
 
-
             Summary summary = new Summary()
             {
                 FirstName = name_tb.Text,
