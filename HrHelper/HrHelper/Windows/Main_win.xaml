@@ -48,7 +48,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.08*"/>
+                <ColumnDefinition Width="0.07*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
@@ -71,6 +71,8 @@
                     </Button>
                     <Button x:Name="maxWind_but" Style="{StaticResource minWinBut}" Width="50" Click="maxWind_but_Click">
                         <Grid>
+                            <Border Background="{StaticResource Channels}"
+                                Height="11" Width="14" CornerRadius="2" Margin="3,7,3,4" Panel.ZIndex="1"/>
                             <Border Height="19" Width="23" CornerRadius="5" Margin="2">
                                 <Border.Style>
                                     <Style TargetType="Border">

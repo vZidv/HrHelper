@@ -36,6 +36,36 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style x:Key="dataGridtBut" TargetType="Button">
+        <Setter Property="Content" Value="Кнопка"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Width" Value="300"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Background" Value="{StaticResource AccentColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource White}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AccentColor}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="5"  BorderThickness="1">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource AccentColorAction}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource AccentColorAction2}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <Style x:Key="bookMarkBut" TargetType="Button">
         <Setter Property="Content" Value="Кнопка"/>
         <Setter Property="Height" Value="27"/>

@@ -17,12 +17,16 @@
             <ColumnDefinition Width="0.23*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Border  
+        <Grid  Grid.Column="0" Grid.Row="0">
+            <Border
                 Margin="7" CornerRadius="15" Grid.Column="0" Grid.Row="0">
-            <Border.Background>
-                <ImageBrush x:Name="photo_image"/>
-            </Border.Background>
-        </Border>
+                <Border.Background>
+                    <ImageBrush x:Name="photo_image"/>
+                </Border.Background>
+            </Border>
+        </Grid>
+
+
 
         <Grid Grid.Row="0" Grid.Column="1">
             <StackPanel Orientation="Horizontal">

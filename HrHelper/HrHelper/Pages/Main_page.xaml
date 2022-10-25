@@ -29,11 +29,12 @@
                 <Button Content="Приглашён" Style="{DynamicResource bookMarkBut}"/>
                 <Button Content="Без Статутса" Style="{DynamicResource bookMarkBut}"/>
             </StackPanel>
-            <DataGrid x:Name="summary_dg" IsReadOnly="True" RowHeaderWidth="0"
+            <DataGrid RowStyle="{DynamicResource DataGridRowStyle}" CellStyle="{StaticResource DataGridCell}"
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}" Style="{DynamicResource defaultDataGridStyle}"  x:Name="summary_dg" IsReadOnly="True" RowHeaderWidth="0"
             Grid.Row="1" Margin="5,0,5,0" BorderThickness="0" AutoGenerateColumns="False" Grid.ColumnSpan="2">
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Id}" Header="Id" />
+                    <DataGridTextColumn Binding="{Binding Id}" Header="ID" />
                     <DataGridTextColumn Header="Ф.И.О" MinWidth="170" Width="*">
                         <DataGridTextColumn.Binding>
                             <MultiBinding StringFormat="{}{0} {1} {2}">
@@ -46,10 +47,11 @@
 
                     <DataGridTextColumn Binding="{Binding Specialization}" Header="Специальность" MinWidth="170" Width="*"/>
                     <DataGridTextColumn Binding="{Binding Busyness.Type}" Header="Занятость" MinWidth="170" Width="*"/>
-                    <DataGridTemplateColumn Header="Открыть" MinWidth="170" Width="*">
+                    <DataGridTemplateColumn Header="Действие" MinWidth="170" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Открыть" x:Name="openSummary_button" Click="openSummary_button_Click"  />
+                                <Button Content="Открыть" Style="{StaticResource dataGridtBut}"
+                                        x:Name="openSummary_button" Click="openSummary_button_Click"  />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
