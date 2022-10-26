@@ -72,11 +72,12 @@
 
 
         <StackPanel Grid.Row="1" Grid.Column="1">
-            <TextBlock x:Name="titile_tb" FontSize="17"
+            <TextBlock x:Name="titile_tb" FontSize="17" Foreground="{StaticResource White}"
                        FontWeight="Bold"
                    Margin="10,10,10,0" TextAlignment="Left"
             Text="Title message"/>
-            <TextBlock x:Name="message_tb" Text="Message text" FontSize="15" TextWrapping="Wrap"
+            <TextBlock x:Name="message_tb" Text="Message text" Foreground="{StaticResource White}"
+                       FontSize="15" TextWrapping="Wrap"
                        Margin="10,5,27,0"/>
         </StackPanel>
 

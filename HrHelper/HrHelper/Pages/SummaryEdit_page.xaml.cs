@@ -55,7 +55,8 @@ namespace HrHelper.Pages
                 {
                     Photo photo = db.Photos.Where(o => o.Id == summary.PhotoId).First();
 
-                    using (Stream stream = File.OpenRead(photo.Path))
+                    string photoPath = Classes.PhotoFolder.ProjectPath() + photo.Path;
+                    using (Stream stream = File.OpenRead(photoPath))
                     {
                         BitmapImage bitmap = new BitmapImage();
                         bitmap.BeginInit();

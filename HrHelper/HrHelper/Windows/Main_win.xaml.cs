@@ -27,6 +27,7 @@ namespace HrHelper.Windows
             InitializeComponent();            
             if(!PhotoFolder.CheckPhotoFolder())
                 PhotoFolder.CreatePhotoFolder();
+
             frameMain.Navigate(new Pages.Main_page());
 
             Settings.mainFrame = frameMain;
