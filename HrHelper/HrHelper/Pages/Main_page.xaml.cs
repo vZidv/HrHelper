@@ -63,7 +63,7 @@ namespace HrHelper.Pages
                 }
                 i++;
             }
-            Classes.Settings.mainFrame.Navigate(new Pages.SummaryEdit_page(Convert.ToInt32(id)));
+            Classes.Settings.mainFrame.Navigate(new Pages.Summary_page(Convert.ToInt32(id)));
         }
 
         private void summaryAdd_bt_Click(object sender, RoutedEventArgs e) => Classes.Settings.mainFrame.Navigate(new Pages.SummaryAdd_page());

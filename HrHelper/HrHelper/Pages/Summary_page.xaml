@@ -29,18 +29,18 @@
 
                 <StackPanel>
 
-                    <TextBlock x:Name="fullname_tblock" FontSize="30" Margin="20"
+                    <TextBlock x:Name="fullname_tblock" FontSize="30" Margin="20" HorizontalAlignment="Left"
                                Text="Димитрий Мировец Сергеевич"
                         Style="{StaticResource defaultTextBlock}"/>
-                    <Border Background="{StaticResource Dnd}" CornerRadius="20"
-                        Height="40" Width="300" HorizontalAlignment="Left" Margin="50,0">
+                    <Border Background="{StaticResource Dnd}" CornerRadius="20" x:Name="status_border"
+                        Height="40" Width="300" HorizontalAlignment="Left" Margin="20,0">
                         <TextBlock Text="Отказ" x:Name="status_tblock"
                                    Style="{StaticResource defaultTextBlock}"
                                    VerticalAlignment="Center"/>
                     </Border>
                     <Polygon Stroke="{StaticResource White}" Points=" 
                  0,20
-                 465,20" Margin="25,10,40,0"/>
+                 465,20" Margin="25,0,40,0"/>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Возраст" HorizontalAlignment="Left" Margin="20,10" FontSize="20"
                                Style="{StaticResource defaultTextBlock}"/>
@@ -49,7 +49,15 @@
                                    VerticalAlignment="Center"
                                    Style="{StaticResource defaultTextBlock}"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="20,35,20,10">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Пол" HorizontalAlignment="Left" Margin="20,10" FontSize="20"
+                               Style="{StaticResource defaultTextBlock}"/>
+                        <TextBlock Text="мужской" x:Name="gender_tblock"
+                                   FontWeight="DemiBold" 
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource defaultTextBlock}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="20,15,20,10">
                         <Button Content="Excel" Background="{StaticResource Online}" FontSize="23"
                             Style="{StaticResource defaultBut}" Margin="10,0"/>
                         <Button Content="Word" Background="{StaticResource Purple}" FontSize="23"
@@ -67,6 +75,9 @@
                 <StackPanel Margin="10,0">
                     <TextBlock Text="Контакты"
                                Style="{StaticResource headerTextBlock}"/>
+                    <Polygon Stroke="{StaticResource White}" Points=" 
+                 5,10
+                 250,10" Margin="0"/>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Номер телефона" Style="{StaticResource defaultTextBlock}"/>
                         <TextBlock Text="+7965535353" Margin="10"
@@ -84,6 +95,9 @@
                 <StackPanel Margin="10,0">
                     <TextBlock Text="Место проживания" 
                                Style="{StaticResource headerTextBlock}"/>
+                    <Polygon Stroke="{StaticResource White}" Points=" 
+                 5,10
+                 250,10" Margin="0"/>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Город" Style="{StaticResource defaultTextBlock}"/>
                         <TextBlock Text="Боровичи" 
@@ -102,6 +116,9 @@
                 <StackPanel Margin="10,0">
                     <TextBlock Text="Пр.Место работы" 
                                Style="{StaticResource headerTextBlock}"/>
+                    <Polygon Stroke="{StaticResource White}" Points=" 
+                 5,10
+                 250,10" Margin="0"/>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Компания" Style="{StaticResource defaultTextBlock}"/>
                         <TextBlock Text="Пятерочка" 
@@ -118,7 +135,11 @@
                 <StackPanel Margin="10,0">
                     <TextBlock Text="Комментарии" 
                                Style="{StaticResource headerTextBlock}"/>
-                    <TextBox FontSize="22" TextWrapping="Wrap"
+                    <Polygon Stroke="{StaticResource White}" Points=" 
+                 5,10
+                 250,10" Margin="0"/>
+                    <TextBox x:Name="comments_tb"
+                        FontSize="22" TextWrapping="Wrap" Height="300"
                         Style="{StaticResource defaultTextbox}"/>
                 </StackPanel>
             </StackPanel>
