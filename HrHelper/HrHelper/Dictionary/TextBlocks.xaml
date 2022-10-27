@@ -3,8 +3,18 @@
     <Style x:Key="defaultTextBlock" TargetType="TextBlock">
         <Setter Property="Text" Value="Text"/>
         <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Foreground"  Value="{StaticResource White}"/>
         <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+    <Style x:Key="headerTextBlock" TargetType="TextBlock" BasedOn="{StaticResource defaultTextBlock}">
+        <Setter Property="FontSize" Value="32"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+    <Style x:Key="valueTextBlock" TargetType="TextBlock" BasedOn="{StaticResource defaultTextBlock}">
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontWeight" Value="DemiBold"/>
     </Style>
 </ResourceDictionary>

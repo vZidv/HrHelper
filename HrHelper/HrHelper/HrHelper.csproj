@@ -11,6 +11,7 @@
     <None Remove="Source\exit.png" />
     <None Remove="Source\Logo.png" />
     <None Remove="Source\LogoMini.png" />
+    <None Remove="Source\NoImage.png" />
     <None Remove="Source\Person.png" />
     <None Remove="Source\Settings.png" />
   </ItemGroup>
@@ -30,6 +31,7 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Source\LogoMini.png" />
+    <Resource Include="Source\NoImage.png" />
     <Resource Include="Source\Person.png" />
     <Resource Include="Source\Settings.png" />
   </ItemGroup>

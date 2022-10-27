@@ -1,0 +1,128 @@
+﻿<Page x:Class="HrHelper.Pages.Summary_page"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HrHelper.Pages"
+      mc:Ignorable="d" 
+     d:DesignHeight="800" d:DesignWidth="1500"
+      Title="SummaryEdit_page">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.7*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <Grid Grid.Row="0" Grid.Column="1">
+            <StackPanel Orientation="Horizontal">
+                <Border  Width="220" Height="270"
+                Margin="20,0" CornerRadius="15" Grid.Column="0" Grid.Row="0">
+                    <Border.Background>
+                        <ImageBrush x:Name="photo_image" ImageSource="/Source/NoImage.png"/>
+                    </Border.Background>
+                </Border>
+
+                <StackPanel>
+
+                    <TextBlock x:Name="fullname_tblock" FontSize="30" Margin="20"
+                               Text="Димитрий Мировец Сергеевич"
+                        Style="{StaticResource defaultTextBlock}"/>
+                    <Border Background="{StaticResource Dnd}" CornerRadius="20"
+                        Height="40" Width="300" HorizontalAlignment="Left" Margin="50,0">
+                        <TextBlock Text="Отказ" x:Name="status_tblock"
+                                   Style="{StaticResource defaultTextBlock}"
+                                   VerticalAlignment="Center"/>
+                    </Border>
+                    <Polygon Stroke="{StaticResource White}" Points=" 
+                 0,20
+                 465,20" Margin="25,10,40,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Возраст" HorizontalAlignment="Left" Margin="20,10" FontSize="20"
+                               Style="{StaticResource defaultTextBlock}"/>
+                        <TextBlock Text="2003.05.07 (19 годиков)" x:Name="dateBirthdayAge_tblock"
+                                   FontWeight="DemiBold" 
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource defaultTextBlock}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="20,35,20,10">
+                        <Button Content="Excel" Background="{StaticResource Online}" FontSize="23"
+                            Style="{StaticResource defaultBut}" Margin="10,0"/>
+                        <Button Content="Word" Background="{StaticResource Purple}" FontSize="23"
+                            Style="{StaticResource defaultBut}" Margin="10,0"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel>
+                    
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel Margin="10,0">
+                    <TextBlock Text="Контакты"
+                               Style="{StaticResource headerTextBlock}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Номер телефона" Style="{StaticResource defaultTextBlock}"/>
+                        <TextBlock Text="+7965535353" Margin="10"
+                            x:Name="phoneNumber_tblock"
+                                   Style="{StaticResource valueTextBlock}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Почта" Style="{StaticResource defaultTextBlock}"/>
+                        <TextBlock Text="dsergeev@mail.ru" 
+                            x:Name="email_tblock"  
+                                   Style="{StaticResource valueTextBlock}"/>
+                    </StackPanel>
+
+                </StackPanel>
+                <StackPanel Margin="10,0">
+                    <TextBlock Text="Место проживания" 
+                               Style="{StaticResource headerTextBlock}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Город" Style="{StaticResource defaultTextBlock}"/>
+                        <TextBlock Text="Боровичи" 
+                            x:Name="town_tblock"  
+                                   Style="{StaticResource valueTextBlock}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Адрес" Style="{StaticResource defaultTextBlock}"/>
+                        <TextBlock Text="Новгородская область.Боровичи.улПушкниа.12" 
+                            x:Name="address_tblock"  TextWrapping="Wrap"
+                                   Style="{StaticResource valueTextBlock}"/>
+                    </StackPanel>
+                    
+                </StackPanel>
+
+                <StackPanel Margin="10,0">
+                    <TextBlock Text="Пр.Место работы" 
+                               Style="{StaticResource headerTextBlock}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Компания" Style="{StaticResource defaultTextBlock}"/>
+                        <TextBlock Text="Пятерочка" 
+                            x:Name="company_tblock"  TextWrapping="Wrap"
+                                   Style="{StaticResource valueTextBlock}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Должность" Style="{StaticResource defaultTextBlock}"/>
+                        <TextBlock Text="Уборщик" 
+                            x:Name="jobTitle_tblock"  TextWrapping="Wrap"
+                                   Style="{StaticResource valueTextBlock}"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Margin="10,0">
+                    <TextBlock Text="Комментарии" 
+                               Style="{StaticResource headerTextBlock}"/>
+                    <TextBox FontSize="22" TextWrapping="Wrap"
+                        Style="{StaticResource defaultTextbox}"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</Page>

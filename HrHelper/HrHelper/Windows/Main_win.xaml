@@ -8,16 +8,21 @@
         Title="Main_win" Height="900" Width="1600" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
     <Window.Resources>
         <Style x:Key="MenuButton" TargetType="Button">
-            <Setter Property="Height" Value="100"/>
+            <Setter Property="Height" Value="60"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Margin" Value="32,0,32,0"/>
+            <Setter Property="Margin" Value="0,10"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="{TemplateBinding Background}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource Grey}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -48,7 +53,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.07*"/>
+                <ColumnDefinition Width="0.055*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
@@ -112,27 +117,41 @@
                 <Image Source="/Source/LogoMini.png"
                 VerticalAlignment="Top" Height="100" />
                 <StackPanel Grid.Row="1" VerticalAlignment="Top">
-                    <Button x:Name="person_but"
+                    
+                    <StackPanel>
+                        <Button x:Name="person_but"
                 VerticalAlignment="Top"
                 Style="{StaticResource MenuButton}" Click="person_but_Click">
-                        <Grid>
-                            <Image Source="/Source/Person.png"/>
-                        </Grid>
-                    </Button>
+                            <Grid>
+                                <Image Source="/Source/Person.png" Margin="3"/>
+                            </Grid>
+                        </Button>
+                        <TextBlock Text="Кандидаты" FontSize="12" Margin="0"
+                                   Style="{StaticResource defaultTextBlock}"/>
+                    </StackPanel>
+                    
                 </StackPanel>
                 <StackPanel Grid.Row="2" VerticalAlignment="Bottom">
+                    <StackPanel>
                     <Button x:Name="settings_but"
                 Style="{StaticResource MenuButton}">
                         <Grid>
-                            <Image Source="/Source/Settings.png" />
+                            <Image Source="/Source/Settings.png" Margin="3" />
                         </Grid>
                     </Button>
-                    <Button x:Name="exit_but" 
+                        <TextBlock Text="Настройки" FontSize="12" Margin="0"
+                                   Style="{StaticResource defaultTextBlock}"/>
+                    </StackPanel>
+                    <StackPanel Margin="2,10,0,50">
+                    <Button x:Name="exit_but"
                 Style="{StaticResource MenuButton}" Click="exit_but_Click">
                         <Grid>
-                            <Image Source="/Source/exit.png" />
+                                <Image Source="/Source/exit.png" Margin="3"/>
                         </Grid>
                     </Button>
+                        <TextBlock Text="Выйти" FontSize="12" Margin="0"
+                                   Style="{StaticResource defaultTextBlock}"/>
+                    </StackPanel>
                 </StackPanel>
 
             </Grid>
