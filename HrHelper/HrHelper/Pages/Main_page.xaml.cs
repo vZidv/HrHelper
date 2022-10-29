@@ -72,7 +72,7 @@ namespace HrHelper.Pages
         {
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
-                summary_dg.ItemsSource = db.Summaries.Where(o => o.Status == status).ToArray();
+                summary_dg.ItemsSource = db.Summaries.Where(o => o.StatusId == status).ToArray();
             }
         }
 

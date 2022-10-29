@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace HrHelper
 {
@@ -11,9 +10,6 @@ namespace HrHelper
         public string Password { get; set; } = null!;
         public int Type { get; set; }
 
-        public virtual UserType TypeNavigation
-        {
-            get; set;
-        } = null!;
+        public virtual UserType TypeNavigation { get; set; } = null!;
     }
 }

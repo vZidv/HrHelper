@@ -11,8 +11,7 @@ namespace HrHelper
         public string? Patronymic { get; set; }
         public string Gender { get; set; } = null!;
         public DateTime Birthday { get; set; }
-        public string? Phone { get; set; }
-        public string? Email { get; set; }
+        public int? ContactsId { get; set; }
         public string? Address { get; set; }
         public string? Town { get; set; }
         public string? Specialization { get; set; }
@@ -21,10 +20,11 @@ namespace HrHelper
         public string? Education { get; set; }
         public int? PhotoId { get; set; }
         public string? Comments { get; set; }
-        public int Status { get; set; }
+        public int StatusId { get; set; }
 
         public virtual Busyness? Busyness { get; set; }
+        public virtual SummaryContact? Contacts { get; set; }
         public virtual Photo? Photo { get; set; }
-        public virtual SummaryStatus StatusNavigation { get; set; } = null!;
+        public virtual SummaryStatus Status { get; set; } = null!;
     }
 }

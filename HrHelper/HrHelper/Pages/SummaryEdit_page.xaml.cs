@@ -70,8 +70,6 @@ namespace HrHelper.Pages
                 birthdayDate_tBlock.Text = "Дата рождениия: " + summary.Birthday.ToString("yyyy.MM.dd");
                 age_tBlock.Text = "Возраст: " + GetAge(summary).ToString();
                 gender_tBlock.Text = "Пол: " + summary.Gender;
-                phone_tb.Text = "+" + summary.Phone.ToString();
-                email_tb.Text = summary.Email;
                 town_tb.Text = summary.Town;
                 address_tb.Text = summary.Address;
 
@@ -181,8 +179,6 @@ namespace HrHelper.Pages
                 summary.Patronymic = patronymic_tb.Text;
                 //summary.Gender = gender_cb.Text,
                 //summary.Birthday = date,
-                summary.Phone = phone_tb.Text;
-                summary.Email = email_tb.Text;
                 summary.Address = address_tb.Text;
                 summary.Town = town_tb.Text;
                 summary.Specialization = specialization_tb.Text;

@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:HrHelper.Pages"
       mc:Ignorable="d" 
      d:DesignHeight="800" d:DesignWidth="1500"
-      Title="SummaryEdit_page">
+      Title="SummaryEdit_page" Unloaded="Page_Unloaded">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -14,11 +14,12 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.5*"/>
         </Grid.ColumnDefinitions>
 
 
-        <Grid Grid.Row="0" Grid.Column="1">
+        <Grid Grid.Row="0" Grid.Column="0">
             <StackPanel Orientation="Horizontal">
                 <Border  Width="220" Height="270"
                 Margin="20,0" CornerRadius="15" Grid.Column="0" Grid.Row="0">
@@ -64,32 +65,47 @@
                             Style="{StaticResource defaultBut}" Margin="10,0"/>
                     </StackPanel>
                 </StackPanel>
-                <StackPanel>
-                    
-                </StackPanel>
+               
             </StackPanel>
-        </Grid>
 
-        <Grid Grid.Row="1" Grid.Column="1">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <StackPanel Margin="10,0">
+        </Grid>
+        <Grid Grid.Column="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.3*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Button Content="Редактировать" HorizontalAlignment="Right"
+                        Style="{StaticResource defaultBut}"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock Text="Изменить статус" Style="{StaticResource defaultTextBlock}"/>
+                    <ComboBox Text="Отказ" x:Name="statusChange_cb"
+                              Margin="30,5"
+                        Style="{DynamicResource defaultComboBoxStyle}"  IsEditable="True" SelectionChanged="statusChange_cb_SelectionChanged">
+                        <ComboBoxItem>
+
+                        </ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+            <StackPanel 
+                Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel Margin="10,0" x:Name="contacts_sp">
                     <TextBlock Text="Контакты"
                                Style="{StaticResource headerTextBlock}"/>
                     <Polygon Stroke="{StaticResource White}" Points=" 
                  5,10
                  250,10" Margin="0"/>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Номер телефона" Style="{StaticResource defaultTextBlock}"/>
-                        <TextBlock Text="+7965535353" Margin="10"
-                            x:Name="phoneNumber_tblock"
-                                   Style="{StaticResource valueTextBlock}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Почта" Style="{StaticResource defaultTextBlock}"/>
-                        <TextBlock Text="dsergeev@mail.ru" 
-                            x:Name="email_tblock"  
-                                   Style="{StaticResource valueTextBlock}"/>
-                    </StackPanel>
 
                 </StackPanel>
                 <StackPanel Margin="10,0">
@@ -110,7 +126,7 @@
                             x:Name="address_tblock"  TextWrapping="Wrap"
                                    Style="{StaticResource valueTextBlock}"/>
                     </StackPanel>
-                    
+
                 </StackPanel>
 
                 <StackPanel Margin="10,0">
@@ -130,6 +146,26 @@
                         <TextBlock Text="Уборщик" 
                             x:Name="jobTitle_tblock"  TextWrapping="Wrap"
                                    Style="{StaticResource valueTextBlock}"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="0,10">
+                        <TextBlock Text="Образование" 
+                               Style="{StaticResource headerTextBlock}"/>
+                        <Polygon Stroke="{StaticResource White}" Points=" 
+                 5,10
+                 250,10" Margin="0"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Образование" Style="{StaticResource defaultTextBlock}"/>
+                            <TextBlock Text="Высшее" 
+                             TextWrapping="Wrap"
+                                   Style="{StaticResource valueTextBlock}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Уч.Заведение" Style="{StaticResource defaultTextBlock}"/>
+                            <TextBlock Text="Бит" 
+                             TextWrapping="Wrap"
+                                   Style="{StaticResource valueTextBlock}"/>
+                        </StackPanel>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Margin="10,0">

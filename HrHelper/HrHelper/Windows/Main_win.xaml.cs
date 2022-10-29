@@ -35,8 +35,11 @@ namespace HrHelper.Windows
 
         private void exit_but_Click(object sender, RoutedEventArgs e)
         {
-           Application.Current.Shutdown();
+            Authorization_win win = new Authorization_win();
+            win.Show();
+            this.Close();
         }
+
 
         private void person_but_Click(object sender, RoutedEventArgs e)
         {
@@ -58,6 +61,8 @@ namespace HrHelper.Windows
             else
                 WindowState = System.Windows.WindowState.Maximized;
         }
+
+        private void settings_but_Click(object sender, RoutedEventArgs e) =>  frameMain.Navigate(new Pages.Settings_page());
 
     }
 }

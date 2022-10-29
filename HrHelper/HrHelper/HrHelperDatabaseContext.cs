@@ -20,6 +20,7 @@ namespace HrHelper
         public virtual DbSet<Busyness> Busynesses { get; set; } = null!;
         public virtual DbSet<Photo> Photos { get; set; } = null!;
         public virtual DbSet<Summary> Summaries { get; set; } = null!;
+        public virtual DbSet<SummaryContact> SummaryContacts { get; set; } = null!;
         public virtual DbSet<SummaryStatus> SummaryStatuses { get; set; } = null!;
         public virtual DbSet<UserType> UserTypes { get; set; } = null!;
 
@@ -37,6 +38,8 @@ namespace HrHelper
             modelBuilder.Entity<AuthorizationUser>(entity =>
             {
                 entity.ToTable("AuthorizationUser");
+
+                entity.HasIndex(e => e.Type, "IX_AuthorizationUser_Type");
 
                 entity.Property(e => e.Login).HasMaxLength(30);
 
@@ -67,6 +70,12 @@ namespace HrHelper
             {
                 entity.ToTable("Summary");
 
+                entity.HasIndex(e => e.BusynessId, "IX_Summary_BusynessId");
+
+                entity.HasIndex(e => e.PhotoId, "IX_Summary_PhotoId");
+
+                entity.HasIndex(e => e.StatusId, "IX_Summary_Status");
+
                 entity.Property(e => e.Address).HasMaxLength(70);
 
                 entity.Property(e => e.Birthday).HasColumnType("date");
@@ -74,8 +83,6 @@ namespace HrHelper
                 entity.Property(e => e.Comments).HasMaxLength(200);
 
                 entity.Property(e => e.Education).HasMaxLength(50);
-
-                entity.Property(e => e.Email).HasMaxLength(50);
 
                 entity.Property(e => e.FirstName).HasMaxLength(25);
 
@@ -87,8 +94,6 @@ namespace HrHelper
 
                 entity.Property(e => e.Patronymic).HasMaxLength(25);
 
-                entity.Property(e => e.Phone).HasMaxLength(12);
-
                 entity.Property(e => e.Specialization).HasMaxLength(50);
 
                 entity.Property(e => e.Town).HasMaxLength(40);
@@ -98,16 +103,30 @@ namespace HrHelper
                     .HasForeignKey(d => d.BusynessId)
                     .HasConstraintName("FK_Summary_Busyness");
 
+                entity.HasOne(d => d.Contacts)
+                    .WithMany(p => p.Summaries)
+                    .HasForeignKey(d => d.ContactsId)
+                    .HasConstraintName("FK_Summary_SummaryContacts");
+
                 entity.HasOne(d => d.Photo)
                     .WithMany(p => p.Summaries)
                     .HasForeignKey(d => d.PhotoId)
                     .HasConstraintName("FK_Summary_Photo");
 
-                entity.HasOne(d => d.StatusNavigation)
+                entity.HasOne(d => d.Status)
                     .WithMany(p => p.Summaries)
-                    .HasForeignKey(d => d.Status)
+                    .HasForeignKey(d => d.StatusId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Summary_SummaryStatus");
+            });
+
+            modelBuilder.Entity<SummaryContact>(entity =>
+            {
+                entity.Property(e => e.Email).HasMaxLength(30);
+
+                entity.Property(e => e.Phone).HasMaxLength(15);
+
+                entity.Property(e => e.Skype).HasMaxLength(50);
             });
 
             modelBuilder.Entity<SummaryStatus>(entity =>

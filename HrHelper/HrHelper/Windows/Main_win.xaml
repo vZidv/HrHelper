@@ -134,7 +134,7 @@
                 <StackPanel Grid.Row="2" VerticalAlignment="Bottom">
                     <StackPanel>
                     <Button x:Name="settings_but"
-                Style="{StaticResource MenuButton}">
+                Style="{StaticResource MenuButton}" Click="settings_but_Click">
                         <Grid>
                             <Image Source="/Source/Settings.png" Margin="3" />
                         </Grid>

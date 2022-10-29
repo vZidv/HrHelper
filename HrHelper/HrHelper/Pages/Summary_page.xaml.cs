@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Runtime.InteropServices;
+using HrHelper.Classes;
 
 namespace HrHelper.Pages
 {
@@ -30,8 +32,8 @@ namespace HrHelper.Pages
 
             InitializeComponent();
             LoadSummary(idSummary);
+            LoadStatusComboBox();
         }
-
         void LoadSummary(int id)
         {
             using (var db = new HrHelperDatabaseContext())
@@ -61,6 +63,8 @@ namespace HrHelper.Pages
                     }
                 }
 
+                LoadContacts(summary);
+
                 dateBirthdayAge_tblock.Text = summary.Birthday.ToString("dd.MM.yyyy")+$"({GetAge(summary)} годиков)";
                 gender_tblock.Text = summary.Gender;
                 //phone_tb.Text = "+" + summary.Phone.ToString();
@@ -73,41 +77,112 @@ namespace HrHelper.Pages
                 //education_tb.Text = summary.Education;
                 comments_tb.Text = summary.Comments;
 
-                SummaryStatus status = db.SummaryStatuses.Where(o => o.Id == summary.Status).First();
+                SummaryStatus status = db.SummaryStatuses.Where(o => o.Id == summary.StatusId).First();
                 SetStatus(status);
             }
-            int GetAge(Summary summary)
-            {
-                int year = (DateTime.Now.Year - summary.Birthday.Year);
-                if (DateTime.Now.Month < summary.Birthday.Month)
-                    year--;
-                else if (DateTime.Now.Month == summary.Birthday.Month)
-                    if (DateTime.Now.Day < summary.Birthday.Day)
-                        year--;
 
-                return year;
-            }
-            void SetStatus(SummaryStatus status)
+
+        }
+        void LoadContacts(Summary summary)
+        {
+            if (summary.ContactsId == null)
+                return;
+            using (var db = new HrHelperDatabaseContext())
             {
-                status_tblock.Text = status.Status;
-                string statusColor = null;
-                switch(status.Status)
-                {
-                    case "Приглашен":
-                        statusColor = "Online";
-                        break;
-                    case "Принят":
-                        statusColor = "Balance";
-                        break;
-                    case "Отказ":
-                        statusColor = "Dnd";
-                        break;
-                    case "Без Статуса":
-                        statusColor = "Grey";
-                        break;
-                }
-                status_border.Background = Application.Current.Resources[$"{statusColor}"] as SolidColorBrush;
+                summary.Contacts = db.SummaryContacts.Where(o => o.Id == summary.ContactsId).First();
             }
+
+            if (summary.Contacts.Phone != null)
+                ContactsAddView("Номер телефона",summary.Contacts.Phone);
+             if (summary.Contacts.Email != null)
+                ContactsAddView("Почта", summary.Contacts.Email);
+             if (summary.Contacts.Skype != null)
+                ContactsAddView("Skype", summary.Contacts.Skype);
+        }
+        void ContactsAddView(string titleContact,string contact)
+        {
+            StackPanel contact_sp = new StackPanel();
+            contact_sp.Orientation = Orientation.Horizontal;
+
+            TextBlock title_tb = new TextBlock();
+            title_tb.Text = titleContact;
+            title_tb.Style = (Style)Application.Current.Resources["defaultTextBlock"];
+
+            TextBlock contact_tb = new TextBlock();
+            contact_tb.Margin = new Thickness(10);
+            contact_tb.Text = contact;
+            contact_tb.Style = (Style)Application.Current.Resources["valueTextBlock"];
+
+            contact_sp.Children.Add(title_tb);
+            contact_sp.Children.Add(contact_tb);
+
+            contacts_sp.Children.Add(contact_sp);
+        }
+        int GetAge(Summary summary)
+        {
+            int year = (DateTime.Now.Year - summary.Birthday.Year);
+            if (DateTime.Now.Month < summary.Birthday.Month)
+                year--;
+            else if (DateTime.Now.Month == summary.Birthday.Month)
+                if (DateTime.Now.Day < summary.Birthday.Day)
+                    year--;
+
+            return year;
+        }
+        void SetStatus(SummaryStatus status)
+        {
+            status_tblock.Text = status.Status;
+            string statusColor = null;
+            switch (status.Status)
+            {
+                case "Приглашен":
+                    statusColor = "Online";
+                    break;
+                case "Принят":
+                    statusColor = "Balance";
+                    break;
+                case "Отказ":
+                    statusColor = "Dnd";
+                    break;
+                case "Без Статуса":
+                    statusColor = "Grey";
+                    break;
+            }
+            status_border.Background = Application.Current.Resources[$"{statusColor}"] as SolidColorBrush;
+        }
+        private void LoadStatusComboBox()
+        {
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                SummaryStatus[] statuses = db.SummaryStatuses.ToArray();
+                foreach (SummaryStatus status in statuses)
+                {
+                    statusChange_cb.Items.Add(status.Status);
+                }
+
+            }
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                Summary summary = db.Summaries.Where(o => o.Id == idSummary).First();
+
+                summary.Comments = comments_tb.Text;
+                summary.StatusId = db.SummaryStatuses.Where(o => o.Status == status_tblock.Text).First().Id;
+                db.SaveChanges();
+            }
+        }
+
+        private void statusChange_cb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SummaryStatus status = new SummaryStatus()
+            {
+                Status = statusChange_cb.SelectedValue.ToString()
+            };
+
+            SetStatus(status);
         }
     }
 }
