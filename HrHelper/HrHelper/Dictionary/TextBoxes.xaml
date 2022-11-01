@@ -19,4 +19,20 @@
             </Style>
         </Style.Resources>
     </Style>
+    <Style x:Key="inputTextbox" TargetType="TextBox" BasedOn="{StaticResource defaultTextbox}">
+        <Setter Property="Text" Value=""/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="DarkGray"/>
+        <Setter Property="Height" Value="45"/>
+        <Setter Property="Width" Value="250"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="FontWeight" Value="DemiBold"/>
+        <Setter Property="FontSize" Value="27"/>
+        <Setter Property="BorderThickness" Value="0,0,0,3"/>
+        <Style.Resources>
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="CornerRadius" Value="5"/>
+            </Style>
+        </Style.Resources>
+    </Style>
 </ResourceDictionary>

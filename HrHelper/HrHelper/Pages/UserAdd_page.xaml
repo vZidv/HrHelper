@@ -5,25 +5,45 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HrHelper.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="900" d:DesignWidth="1500"
       Title="UserAdd_page">
 
     <Grid>
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock Text="Логин" HorizontalAlignment="Left"
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.6*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.6*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.35*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.4*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="1">
+            <TextBlock Text="Добавить пользователя"
+                       Style="{StaticResource headerTextBlock}" FontSize="55"/>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Border Background="{StaticResource Channels}" CornerRadius="12" Margin="5"/>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="Логин" HorizontalAlignment="Left" FontSize="40"
                        Style="{StaticResource defaultTextBlock}"/>
-                <TextBox x:Name="login_tb" Text=""
+                <TextBox x:Name="login_tb" Text="" Width="400" FontSize="35"
                     Style="{StaticResource defaultTextbox}"/>
-                <TextBlock Text="Пароль" HorizontalAlignment="Left"
+                <TextBlock Text="Пароль" HorizontalAlignment="Left" FontSize="40"
                        Style="{StaticResource defaultTextBlock}"/>
-            <TextBox x:Name="password_tb" Text=""
+                <TextBox x:Name="password_tb" Text="" FontSize="35" Width="400"
                     Style="{StaticResource defaultTextbox}"/>
-            <TextBlock Text="Тип" HorizontalAlignment="Left"
+                <TextBlock Text="Тип" HorizontalAlignment="Left" FontSize="40"
                        Style="{StaticResource defaultTextBlock}"/>
-            <ComboBox x:Name="userType_cb"/>
-                <Button Content="Добавить" x:Name="userAdd_but"
+                <ComboBox x:Name="userType_cb" Style="{StaticResource defaultComboBoxStyle}" Width="400" FontSize="35"/>
+
+
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Button Content="Добавить" x:Name="userAdd_but" Margin="0,20" Width="400" Height="100" FontSize="50"
                 Style="{StaticResource defaultBut}" Click="userAdd_but_Click"/>
-            
-        </StackPanel>
+        </Grid>
     </Grid>
 </Page>

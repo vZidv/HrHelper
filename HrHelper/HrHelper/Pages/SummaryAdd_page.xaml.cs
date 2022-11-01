@@ -24,14 +24,16 @@ namespace HrHelper.Pages
         string? photoPath;
         string photoFormat;
         int status;
+        int busyness;
 
         public SummaryAdd_page()
         {
             InitializeComponent();
 
             LoadStatusComboBox();
+            LoadBusynnesComboBox();
         }
-        private void LoadStatusComboBox()
+        private void LoadStatusComboBox ()
         {
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
@@ -43,14 +45,25 @@ namespace HrHelper.Pages
                 
             }
         }
+        private void LoadBusynnesComboBox()
+        {
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                Busyness[] busynesses = db.Busynesses.ToArray();
+                foreach (Busyness busyness in busynesses)
+                {
+                    bussyness_cb.Items.Add(busyness.Type);
+                }
+
+            }
+        }
 
         private void summaryAdd_bt_Click(object sender, RoutedEventArgs e)
-        {
-            //date
-            DateTime date = Convert.ToDateTime(birthday_dateP.SelectedDate);
+        {           
+            DateTime date = Convert.ToDateTime(birthday_datePicker.SelectedDate);
             date.ToString("yyyy-MM-dd");
 
-            
+
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
                 SummaryStatus[] statuses = db.SummaryStatuses.ToArray();
@@ -62,23 +75,49 @@ namespace HrHelper.Pages
 
             }
 
-            Summary summary = new Summary()
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
-                FirstName = name_tb.Text,
-                LastName = lastname_tb.Text,
+                Busyness[] busynesses = db.Busynesses.ToArray();
+                foreach (Busyness busynes in busynesses)
+                {
+                    if (busynes.Type == bussyness_cb.Text)
+                        busyness = busynes.Id;
+                }
+
+            }
+            SummaryContact contacts = new SummaryContact()
+            {
+                Phone = phone_tb.Text,
+                Email = email_tb.Text,
+                Skype = skype_tb.Text
+            };
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                db.Add(contacts);
+                db.SaveChanges();
+            }
+
+                Summary summary = new Summary()
+            {
+                FirstName = firstName_tb.Text,
+                LastName = lastName_tb.Text,
                 Patronymic = patronymic_tb.Text,
                 Gender = gender_cb.Text,
                 Birthday = date,
+
+                ContactsId = contacts.Id,
                 Address = address_tb.Text,
                 Town = town_tb.Text,
-                Specialization = specialization_tb.Text,
-                JobTitle = jobTitle_tb.Text,
-                StatusId = status,
-                //BusynessId
-                Education = education_tb.Text,
-                PhotoId = CreatePhoto(),          
-                Comments = commnet_tb.Text
-                
+                    //Specialization = specialization_tb.Text,
+                    //JobTitle = jobTitle_tb.Text,
+
+                    StatusId = status,
+
+                    BusynessId = busyness,
+                    Education = education_tb.Text,
+                PhotoId = CreatePhoto(),
+                Comments = comments_tb.Text
+
             };
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
@@ -91,14 +130,14 @@ namespace HrHelper.Pages
             if (photoPath == string.Empty)
                 return null;
 
-            string path = Classes.PhotoFolder.AddPhoto(photoPath, $"{name_tb.Text} {lastname_tb.Text} {patronymic_tb.Text}", photoFormat);
+            string path = Classes.PhotoFolder.AddPhoto(photoPath, $"{firstName_tb.Text} {lastName_tb.Text} {patronymic_tb.Text}", photoFormat);
             Photo photo = new Photo() { Path = path };
 
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
                 db.Add(photo);
                 db.SaveChanges();
-            }          
+            }
             return photo.Id;
         }
         private void changePhoto_bt_Click(object sender, RoutedEventArgs e)
