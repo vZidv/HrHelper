@@ -22,7 +22,6 @@ namespace HrHelper.Windows
         public Authorization_win()
         {
             InitializeComponent();
-
             CheckDatabase();
             mainFrame.Content = new Pages.Authorization_page() { authorization_win = this};
         }
@@ -41,6 +40,12 @@ namespace HrHelper.Windows
 
         void CheckDatabase()
         {
+            AuthorizationUser user1 = new AuthorizationUser()
+            {
+                Login = "dima",
+                Password = "123",
+                Type = 1
+            };
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {               
                 if (db.Database.CanConnect())

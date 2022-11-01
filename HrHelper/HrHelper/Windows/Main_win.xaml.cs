@@ -24,10 +24,16 @@ namespace HrHelper.Windows
     {
         public Main_win()
         {
-            InitializeComponent();            
-            if(!PhotoFolder.CheckPhotoFolder())
-                PhotoFolder.CreatePhotoFolder();
-
+            InitializeComponent();          
+            try
+            {
+                if (!PhotoFolder.CheckPhotoFolder())
+                    PhotoFolder.CreatePhotoFolder();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             frameMain.Navigate(new Pages.Main_page());
 
             Settings.mainFrame = frameMain;

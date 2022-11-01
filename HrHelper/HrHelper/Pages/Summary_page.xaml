@@ -65,7 +65,7 @@
                             Style="{StaticResource defaultBut}" Margin="10,0"/>
                     </StackPanel>
                 </StackPanel>
-               
+
             </StackPanel>
 
         </Grid>
@@ -99,85 +99,96 @@
         </Grid>
         <Grid Grid.Row="1" Grid.ColumnSpan="2">
             <StackPanel 
-                Orientation="Horizontal" HorizontalAlignment="Center">
-                <StackPanel Margin="10,0" x:Name="contacts_sp">
-                    <TextBlock Text="Контакты"
+                Orientation="Horizontal" HorizontalAlignment="Left">
+                <Grid>
+                    <Border Background="{StaticResource Channels}" CornerRadius="12" Margin="5,59,5,60"/>
+                    <StackPanel Margin="20,0" x:Name="contacts_sp">
+                        <TextBlock Text="Контакты"
                                Style="{StaticResource headerTextBlock}"/>
-                    <Polygon Stroke="{StaticResource White}" Points=" 
+                        <Polygon Stroke="{StaticResource White}" Points=" 
                  5,10
                  250,10" Margin="0"/>
 
-                </StackPanel>
-                <StackPanel Margin="10,0">
-                    <TextBlock Text="Место проживания" 
-                               Style="{StaticResource headerTextBlock}"/>
-                    <Polygon Stroke="{StaticResource White}" Points=" 
-                 5,10
-                 250,10" Margin="0"/>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Город" Style="{StaticResource defaultTextBlock}"/>
-                        <TextBlock Text="Боровичи" 
-                            x:Name="town_tblock"  
-                                   Style="{StaticResource valueTextBlock}"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Адрес" Style="{StaticResource defaultTextBlock}"/>
-                        <TextBlock Text="Новгородская область.Боровичи.улПушкниа.12" 
-                            x:Name="address_tblock"  TextWrapping="Wrap"
-                                   Style="{StaticResource valueTextBlock}"/>
-                    </StackPanel>
-
-                </StackPanel>
-
-                <StackPanel Margin="10,0">
-                    <TextBlock Text="Пр.Место работы" 
-                               Style="{StaticResource headerTextBlock}"/>
-                    <Polygon Stroke="{StaticResource White}" Points=" 
-                 5,10
-                 250,10" Margin="0"/>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Компания" Style="{StaticResource defaultTextBlock}"/>
-                        <TextBlock Text="Пятерочка" 
-                            x:Name="company_tblock"  TextWrapping="Wrap"
-                                   Style="{StaticResource valueTextBlock}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Должность" Style="{StaticResource defaultTextBlock}"/>
-                        <TextBlock Text="Уборщик" 
-                            x:Name="jobTitle_tblock"  TextWrapping="Wrap"
-                                   Style="{StaticResource valueTextBlock}"/>
-                    </StackPanel>
-
-                    <StackPanel Margin="0,10">
-                        <TextBlock Text="Образование" 
+                </Grid>
+                <Grid>
+                    <Border Background="{StaticResource Channels}" CornerRadius="12" Margin="5,59,5,60"/>
+                    <StackPanel Margin="20,0">
+                        <TextBlock Text="Место проживания" 
                                Style="{StaticResource headerTextBlock}"/>
                         <Polygon Stroke="{StaticResource White}" Points=" 
                  5,10
                  250,10" Margin="0"/>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Образование" Style="{StaticResource defaultTextBlock}"/>
-                            <TextBlock Text="Высшее" 
-                             TextWrapping="Wrap"
+                            <TextBlock Text="Город" Style="{StaticResource defaultTextBlock}"/>
+                            <TextBlock Text="Боровичи" 
+                            x:Name="town_tblock"  
                                    Style="{StaticResource valueTextBlock}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Уч.Заведение" Style="{StaticResource defaultTextBlock}"/>
-                            <TextBlock Text="Бит" 
-                             TextWrapping="Wrap"
+                            <TextBlock Text="Адрес" Style="{StaticResource defaultTextBlock}"/>
+                            <TextBlock Text="Новгородская область.Боровичи.улПушкниа.12" 
+                            x:Name="address_tblock"  TextWrapping="Wrap"
                                    Style="{StaticResource valueTextBlock}"/>
                         </StackPanel>
+
                     </StackPanel>
-                </StackPanel>
-                <StackPanel Margin="10,0">
-                    <TextBlock Text="Комментарии" 
+                </Grid>
+                <Grid>
+                    <Border Background="{StaticResource Channels}" CornerRadius="12" Margin="5,59,5,60"/>
+                    <StackPanel Margin="20,0">
+                        <TextBlock Text="Пр.Место работы" 
                                Style="{StaticResource headerTextBlock}"/>
-                    <Polygon Stroke="{StaticResource White}" Points=" 
+                        <Polygon Stroke="{StaticResource White}" Points=" 
                  5,10
                  250,10" Margin="0"/>
-                    <TextBox x:Name="comments_tb"
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Компания" Style="{StaticResource defaultTextBlock}"/>
+                            <TextBlock Text="Пятерочка" 
+                            x:Name="company_tblock"  TextWrapping="Wrap"
+                                   Style="{StaticResource valueTextBlock}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Должность" Style="{StaticResource defaultTextBlock}"/>
+                            <TextBlock Text="Уборщик" 
+                            x:Name="jobTitle_tblock"  TextWrapping="Wrap"
+                                   Style="{StaticResource valueTextBlock}"/>
+                        </StackPanel>
+
+                        <StackPanel Margin="0,10">
+                            <TextBlock Text="Образование" 
+                               Style="{StaticResource headerTextBlock}"/>
+                            <Polygon Stroke="{StaticResource White}" Points=" 
+                 5,10
+                 250,10" Margin="0"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Образование" Style="{StaticResource defaultTextBlock}"/>
+                                <TextBlock Text="Высшее" 
+                             TextWrapping="Wrap"
+                                   Style="{StaticResource valueTextBlock}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Уч.Заведение" Style="{StaticResource defaultTextBlock}"/>
+                                <TextBlock Text="Бит" 
+                             TextWrapping="Wrap"
+                                   Style="{StaticResource valueTextBlock}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+                <Grid>
+                    <Border Background="{StaticResource Channels}" CornerRadius="12" Margin="5,59,5,60"/>
+                    <StackPanel Margin="20,0">
+                        <TextBlock Text="Комментарии" 
+                               Style="{StaticResource headerTextBlock}"/>
+                        <Polygon Stroke="{StaticResource White}" Points=" 
+                 5,10
+                 250,10" Margin="0"/>
+                        <TextBox x:Name="comments_tb"
                         FontSize="22" TextWrapping="Wrap" Height="300"
                         Style="{StaticResource defaultTextbox}"/>
-                </StackPanel>
+                    </StackPanel>
+                </Grid>
             </StackPanel>
         </Grid>
 

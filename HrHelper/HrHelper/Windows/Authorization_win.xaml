@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HrHelper.Windows"
         mc:Ignorable="d"
         Title="Authorization_win" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Background="Transparent" AllowsTransparency="True"
-        Height="585" Width="465">
+        Height="585" Width="425">
     <Grid Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
