@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Runtime.InteropServices;
 using HrHelper.Classes;
+using ex = Microsoft.Office.Interop.Excel;
 
 namespace HrHelper.Pages
 {
@@ -183,6 +184,33 @@ namespace HrHelper.Pages
             };
 
             SetStatus(status);
+        }
+
+        private void excelExport_but_Click(object sender, RoutedEventArgs e)
+        {
+            ex.Application exApp = new ex.Application();
+
+            exApp.Workbooks.Add();
+            ex.Worksheet wsh = (ex.Worksheet)exApp.ActiveSheet;
+            Summary summary;
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+                summary = db.Summaries.Where(o => o.Id == idSummary).First();
+            wsh.Cells[1, 1] = "Имя";
+            wsh.Cells[1, 2] = "Фамилия";
+            wsh.Cells[1, 3] = "Отчество";
+
+            wsh.Cells[1, 4] = "Дата рождения";
+            wsh.Cells[1, 5] = "Статус";
+            wsh.Cells[1, 6] = "Комментарии";
+
+            wsh.Cells[2, 1] = summary.FirstName;
+            wsh.Cells[2, 2] = summary.LastName;
+            wsh.Cells[2, 3] = summary.Patronymic;
+
+            wsh.Cells[2, 4] = summary.Birthday;
+            wsh.Cells[2, 5] = status_tblock.Text;
+            wsh.Cells[2, 6] = summary.Comments;
+            exApp.Visible = true;
         }
     }
 }

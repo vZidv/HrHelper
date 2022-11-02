@@ -59,8 +59,9 @@
                                    Style="{StaticResource defaultTextBlock}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="20,15,20,10">
-                        <Button Content="Excel" Background="{StaticResource Online}" FontSize="23"
-                            Style="{StaticResource defaultBut}" Margin="10,0"/>
+                        <Button Content="Excel" x:Name="excelExport_but"
+                                Background="{StaticResource Online}" FontSize="23"
+                            Style="{StaticResource defaultBut}" Margin="10,0" Click="excelExport_but_Click"/>
                         <Button Content="Word" Background="{StaticResource Purple}" FontSize="23"
                             Style="{StaticResource defaultBut}" Margin="10,0"/>
                     </StackPanel>
