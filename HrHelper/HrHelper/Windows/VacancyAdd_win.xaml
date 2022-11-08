@@ -1,11 +1,11 @@
-﻿<Window x:Class="HrHelper.Windows.Messagebox_win"
+﻿<Window x:Class="HrHelper.Windows.VacancyAdd_win"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HrHelper.Windows"
         mc:Ignorable="d"
-        Title="Messagebox_win" Height="250" Width="400" WindowStyle="None" Background="Transparent" WindowStartupLocation="CenterScreen"
+        Title="VacancyAdd_win" Height="250" Width="400" WindowStyle="None" Background="Transparent" WindowStartupLocation="CenterScreen"
         AllowsTransparency="True" Icon="/Source/LogoMini.png">
     <Grid>
         <Grid.RowDefinitions>
@@ -14,7 +14,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="60"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
@@ -34,9 +33,9 @@
                     </VisualBrush.Visual>
                 </VisualBrush>
             </Border.OpacityMask>
-            <Grid x:Name="toolBar_grid" Grid.ColumnSpan="2" Background="Transparent" MouseDown="toolBar_grid_MouseDown">
+            <Grid x:Name="toolBar_grid" Grid.ColumnSpan="2" Background="Transparent" >
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:Name="minWind_but" Style="{StaticResource minWinBut}" Width="50" Click="minWind_but_Click">
+                    <Button x:Name="minWind_but" Style="{StaticResource minWinBut}" Width="50" >
                         <Line X1="0" Y1="0" X2="70" Y2="0"  StrokeThickness="10" Margin="15,0">
                             <Line.Style>
                                 <Style TargetType="Line">
@@ -50,7 +49,7 @@
                             </Line.Style>
                         </Line>
                     </Button>
-                    <Button x:Name="close_but" Style="{StaticResource closeBut}" Click="close_but_Click">
+                    <Button x:Name="close_but" Style="{StaticResource closeBut}" >
                         <Path Data="M1,1L15,15M15,1L1,15" StrokeThickness="3.5">
                             <Path.Style>
                                 <Style TargetType="Path">
@@ -64,7 +63,7 @@
                             </Path.Style>
                         </Path>
                     </Button>
-                    
+
                 </StackPanel>
             </Grid>
         </Border>
@@ -72,28 +71,21 @@
 
 
         <StackPanel Grid.Row="1" Grid.Column="1">
-            <TextBlock x:Name="titile_tb" FontSize="17" Foreground="{StaticResource White}"
+            <TextBlock x:Name="titile_tb" Text="Название вакансии" 
+                       FontSize="17" Foreground="{StaticResource White}"
                        FontWeight="Bold"
                    Margin="10,10,10,0" TextAlignment="Left"
-            Text="Title message"/>
-            <TextBlock x:Name="message_tb" Text="Message text" Foreground="{StaticResource White}"
-                       FontSize="15" TextWrapping="Wrap"
-                       Margin="10,5,27,0"/>
+            />
+            <TextBox x:Name="jobTitle_tb" Style="{StaticResource inputTextbox}" Width="370"/>
         </StackPanel>
 
         <Grid Grid.Row="2" Grid.ColumnSpan="2">
-            <StackPanel x:Name="yesNo_sp" Visibility="Hidden" 
+            <StackPanel 
                 Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="Да" x:Name="yes_but"
-                    Style="{StaticResource defaultBut}" Height="50" Width="150" Click="yes_but_Click"/>
-                <Button Content="Нет" x:Name="no_but"
-                    Style="{StaticResource defaultBut}" Height="50" Width="150" Click="no_but_Click"/>
-            </StackPanel>
-            <StackPanel x:Name="ok_sp" Visibility="Hidden" 
-                Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="ок" x:Name="ok_but"
-                    Style="{StaticResource defaultBut}" Height="50" Width="150" Click="ok_but_Click"/>
+                <Button Content="Добавить" x:Name="vacancyAdd_but"
+                    Style="{StaticResource defaultBut}" Height="50" Click="vacancyAdd_but_Click"  />
             </StackPanel>
         </Grid>
     </Grid>
 </Window>
+

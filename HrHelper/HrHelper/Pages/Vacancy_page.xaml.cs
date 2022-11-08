@@ -1,0 +1,104 @@
+﻿using HrHelper.Classes;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace HrHelper.Pages
+{
+    /// <summary>
+    /// Interaction logic for Vacancy_page.xaml
+    /// </summary>
+    public partial class Vacancy_page : Page
+    {
+        Vacancy? vacancyNow;
+        public Vacancy_page()
+        {
+            InitializeComponent();
+
+            LoadVacancy();
+            LoadStatusComobox();
+        }
+
+        private void LoadVacancy()
+        {
+            Vacancy[] vacancies;
+            using (var db = new HrHelperDatabaseContext())
+                vacancies = db.Vacancies.ToArray();
+
+            foreach (var vacnci in vacancies)
+            {
+                Button button = new Button() { Content = vacnci.JobTitle, Style = (Style)Application.Current.Resources["defaultBut"] };
+                button.Click += ChooseVacancy_but_Click;
+                vacancy_sp.Children.Add(button);
+            }
+        }
+        private void LoadStatusComobox()
+        {
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                SummaryStatus[] statuses = db.SummaryStatuses.ToArray();
+                foreach (SummaryStatus status in statuses)
+                {
+                    status_cb.Items.Add(status.Status);
+                }
+                //status_cb.Text = status_cb.Items[0].ToString();
+            }
+        }
+        private void vacancyAdd_but_Click(object sender, RoutedEventArgs e)
+        {
+            Windows.VacancyAdd_win win = new Windows.VacancyAdd_win();
+            win.Show();
+        }
+
+        private void ChooseVacancy_but_Click(object sender, RoutedEventArgs e)
+        {
+            var but = sender as Button;
+            
+
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                vacancyNow = db.Vacancies.Where(o => o.JobTitle == but.Content.ToString()).First();
+
+                SummaryForVacancy[] summaryForVacancy = db.SummaryForVacancies.Where(o => o.JobId == vacancyNow.Id).ToArray();
+
+                List<Summary>? summaries = new List<Summary>();
+                foreach (var summaryFor in summaryForVacancy)
+                {
+                    Summary summary = db.Summaries.Where(o => o.Id == summaryFor.SummaryId).First();
+                    summaries.Add(summary);
+                }
+                summary_dg.ItemsSource = summaries;
+            }
+        }
+
+        //private void status_cb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+        //    {
+        //        SummaryForVacancy[] summaryForVacancy = db.SummaryForVacancies.Where(o => o.JobId == vacancyNow.Id).ToArray();
+
+        //        List<Summary>? summaries = new List<Summary>();
+        //        foreach (var summaryFor in summaryForVacancy)
+        //        {
+        //            Summary summary = db.Summaries.Where(o => o.Id == summaryFor.SummaryId).First();
+
+        //            if (status_cb.Text == db.SummaryStatuses.Where(o => o.Id == summary.StatusId).First().Status)
+        //                summaries.Add(summary);
+        //        }
+        //        summary_dg.ItemsSource = summaries;
+        //    }
+        //}
+    }
+}

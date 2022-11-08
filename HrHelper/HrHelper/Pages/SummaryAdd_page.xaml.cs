@@ -25,6 +25,7 @@ namespace HrHelper.Pages
         string photoFormat;
         int status;
         int busyness;
+        int education;
 
         public SummaryAdd_page()
         {
@@ -32,8 +33,9 @@ namespace HrHelper.Pages
 
             LoadStatusComboBox();
             LoadBusynnesComboBox();
+            LoadEducationComboBox();
         }
-        private void LoadStatusComboBox ()
+        private void LoadStatusComboBox()
         {
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
@@ -42,7 +44,7 @@ namespace HrHelper.Pages
                 {
                     status_cb.Items.Add(stat.Status);
                 }
-                
+
             }
         }
         private void LoadBusynnesComboBox()
@@ -57,9 +59,22 @@ namespace HrHelper.Pages
 
             }
         }
+        private void LoadEducationComboBox()
+        {
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                Education[] educations = db.Educations.ToArray();
+                foreach (Education education in educations)
+                {
+                    education_cb.Items.Add(education.EducationName);
+                }
+
+            }
+        }
+
 
         private void summaryAdd_bt_Click(object sender, RoutedEventArgs e)
-        {           
+        {
             DateTime date = Convert.ToDateTime(birthday_datePicker.SelectedDate);
             date.ToString("yyyy-MM-dd");
 
@@ -73,15 +88,18 @@ namespace HrHelper.Pages
                         status = stat.Id;
                 }
 
-            }
-
-            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
-            {
                 Busyness[] busynesses = db.Busynesses.ToArray();
                 foreach (Busyness busynes in busynesses)
                 {
                     if (busynes.Type == bussyness_cb.Text)
                         busyness = busynes.Id;
+                }
+
+                Education[] educations = db.Educations.ToArray();
+                foreach (Education education in educations)
+                {
+                    if (education.EducationName == education_cb.Text)
+                        this.education = education.Id;
                 }
 
             }
@@ -97,7 +115,7 @@ namespace HrHelper.Pages
                 db.SaveChanges();
             }
 
-                Summary summary = new Summary()
+            Summary summary = new Summary()
             {
                 FirstName = firstName_tb.Text,
                 LastName = lastName_tb.Text,
@@ -108,15 +126,16 @@ namespace HrHelper.Pages
                 ContactsId = contacts.Id,
                 Address = address_tb.Text,
                 Town = town_tb.Text,
-                    //Specialization = specialization_tb.Text,
-                    //JobTitle = jobTitle_tb.Text,
 
-                    StatusId = status,
-
-                    BusynessId = busyness,
-                    Education = education_tb.Text,
+                BusynessId = busyness,
                 PhotoId = CreatePhoto(),
-                Comments = comments_tb.Text
+                Comments = comments_tb.Text,
+                StatusId = status,
+                LastCompany = lastCompany_tb.Text,
+                LastJobTitle = lastJobTitle_tb.Text,
+                EducationId = education,
+                EducationInstution = educationInstution_tb.Text
+
 
             };
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
@@ -124,6 +143,9 @@ namespace HrHelper.Pages
                 db.Add(summary);
                 db.SaveChanges();
             }
+
+            Classes.MyMessageBox.Show("Внимание", "Пользователь добавлен.");
+            Classes.Settings.mainFrame.Navigate(new Main_page());
         }
         int? CreatePhoto()
         {

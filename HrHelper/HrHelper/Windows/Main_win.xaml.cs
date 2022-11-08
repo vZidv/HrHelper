@@ -70,5 +70,6 @@ namespace HrHelper.Windows
 
         private void settings_but_Click(object sender, RoutedEventArgs e) =>  frameMain.Navigate(new Pages.Settings_page());
 
+        private void vacancy_but_Click(object sender, RoutedEventArgs e) => frameMain.Navigate(new Pages.Vacancy_page());
     }
 }

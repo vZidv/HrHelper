@@ -18,19 +18,21 @@ namespace HrHelper
 
         public virtual DbSet<AuthorizationUser> AuthorizationUsers { get; set; } = null!;
         public virtual DbSet<Busyness> Busynesses { get; set; } = null!;
+        public virtual DbSet<Education> Educations { get; set; } = null!;
         public virtual DbSet<Photo> Photos { get; set; } = null!;
         public virtual DbSet<Summary> Summaries { get; set; } = null!;
         public virtual DbSet<SummaryContact> SummaryContacts { get; set; } = null!;
+        public virtual DbSet<SummaryForVacancy> SummaryForVacancies { get; set; } = null!;
         public virtual DbSet<SummaryStatus> SummaryStatuses { get; set; } = null!;
         public virtual DbSet<UserType> UserTypes { get; set; } = null!;
+        public virtual DbSet<Vacancy> Vacancies { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //(localdb)\\mssqllocaldb
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=(localdb)\\mssqllocaldb;Database=HrHelperDatabase;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;Database=HrHelperDatabase;Trusted_Connection=True;");
             }
         }
 
@@ -60,6 +62,13 @@ namespace HrHelper
                 entity.Property(e => e.Type).HasMaxLength(25);
             });
 
+            modelBuilder.Entity<Education>(entity =>
+            {
+                entity.ToTable("Education");
+
+                entity.Property(e => e.EducationName).HasMaxLength(60);
+            });
+
             modelBuilder.Entity<Photo>(entity =>
             {
                 entity.ToTable("Photo");
@@ -73,6 +82,10 @@ namespace HrHelper
 
                 entity.HasIndex(e => e.BusynessId, "IX_Summary_BusynessId");
 
+                entity.HasIndex(e => e.ContactsId, "IX_Summary_ContactsId");
+
+                entity.HasIndex(e => e.EducationId, "IX_Summary_EducationId");
+
                 entity.HasIndex(e => e.PhotoId, "IX_Summary_PhotoId");
 
                 entity.HasIndex(e => e.StatusId, "IX_Summary_Status");
@@ -83,19 +96,19 @@ namespace HrHelper
 
                 entity.Property(e => e.Comments).HasMaxLength(200);
 
-                entity.Property(e => e.Education).HasMaxLength(50);
+                entity.Property(e => e.EducationInstution).HasMaxLength(50);
 
                 entity.Property(e => e.FirstName).HasMaxLength(25);
 
                 entity.Property(e => e.Gender).HasMaxLength(10);
 
-                entity.Property(e => e.JobTitle).HasMaxLength(50);
+                entity.Property(e => e.LastCompany).HasMaxLength(50);
+
+                entity.Property(e => e.LastJobTitle).HasMaxLength(50);
 
                 entity.Property(e => e.LastName).HasMaxLength(25);
 
                 entity.Property(e => e.Patronymic).HasMaxLength(25);
-
-                entity.Property(e => e.Specialization).HasMaxLength(50);
 
                 entity.Property(e => e.Town).HasMaxLength(40);
 
@@ -108,6 +121,11 @@ namespace HrHelper
                     .WithMany(p => p.Summaries)
                     .HasForeignKey(d => d.ContactsId)
                     .HasConstraintName("FK_Summary_SummaryContacts");
+
+                entity.HasOne(d => d.Education)
+                    .WithMany(p => p.Summaries)
+                    .HasForeignKey(d => d.EducationId)
+                    .HasConstraintName("FK_Summary_Education");
 
                 entity.HasOne(d => d.Photo)
                     .WithMany(p => p.Summaries)
@@ -130,6 +148,23 @@ namespace HrHelper
                 entity.Property(e => e.Skype).HasMaxLength(50);
             });
 
+            modelBuilder.Entity<SummaryForVacancy>(entity =>
+            {
+                entity.ToTable("SummaryForVacancy");
+
+                entity.HasOne(d => d.Job)
+                    .WithMany(p => p.SummaryForVacancies)
+                    .HasForeignKey(d => d.JobId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SummaryForVacancy_Vacancy");
+
+                entity.HasOne(d => d.Summary)
+                    .WithMany(p => p.SummaryForVacancies)
+                    .HasForeignKey(d => d.SummaryId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SummaryForVacancy_Summary");
+            });
+
             modelBuilder.Entity<SummaryStatus>(entity =>
             {
                 entity.ToTable("SummaryStatus");
@@ -142,6 +177,13 @@ namespace HrHelper
                 entity.ToTable("UserType");
 
                 entity.Property(e => e.Type).HasMaxLength(20);
+            });
+
+            modelBuilder.Entity<Vacancy>(entity =>
+            {
+                entity.ToTable("Vacancy");
+
+                entity.Property(e => e.JobTitle).HasMaxLength(60);
             });
 
             OnModelCreatingPartial(modelBuilder);

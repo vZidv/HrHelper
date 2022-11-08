@@ -5,6 +5,11 @@ namespace HrHelper
 {
     public partial class Summary
     {
+        public Summary()
+        {
+            SummaryForVacancies = new HashSet<SummaryForVacancy>();
+        }
+
         public int Id { get; set; }
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
@@ -14,17 +19,20 @@ namespace HrHelper
         public int? ContactsId { get; set; }
         public string? Address { get; set; }
         public string? Town { get; set; }
-        public string? Specialization { get; set; }
-        public string? JobTitle { get; set; }
         public int? BusynessId { get; set; }
-        public string? Education { get; set; }
         public int? PhotoId { get; set; }
         public string? Comments { get; set; }
         public int StatusId { get; set; }
+        public string? LastCompany { get; set; }
+        public string? LastJobTitle { get; set; }
+        public int? EducationId { get; set; }
+        public string? EducationInstution { get; set; }
 
         public virtual Busyness? Busyness { get; set; }
         public virtual SummaryContact? Contacts { get; set; }
+        public virtual Education? Education { get; set; }
         public virtual Photo? Photo { get; set; }
         public virtual SummaryStatus Status { get; set; } = null!;
+        public virtual ICollection<SummaryForVacancy> SummaryForVacancies { get; set; }
     }
 }

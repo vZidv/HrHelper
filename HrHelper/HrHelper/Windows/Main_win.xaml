@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HrHelper.Windows"
         mc:Ignorable="d"
-        Title="Main_win" Height="900" Width="1600" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+        Title="Main_win" Height="900" Width="1600" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent" Icon="/Source/LogoMini.png">
     <Window.Resources>
         <Style x:Key="MenuButton" TargetType="Button">
             <Setter Property="Height" Value="60"/>
@@ -117,7 +117,18 @@
                 <Image Source="/Source/LogoMini.png"
                 VerticalAlignment="Top" Height="100" />
                 <StackPanel Grid.Row="1" VerticalAlignment="Top">
-                    
+                    <StackPanel>
+                        <Button x:Name="vacancy_but"
+                VerticalAlignment="Top"
+                Style="{StaticResource MenuButton}" Click="vacancy_but_Click">
+                            <Grid>
+                                <Image Source="/Source/Person.png" Margin="3"/>
+                            </Grid>
+                        </Button>
+                        <TextBlock Text="Вакансии" FontSize="12" Margin="0"
+                                   Style="{StaticResource defaultTextBlock}"/>
+                    </StackPanel>
+
                     <StackPanel>
                         <Button x:Name="person_but"
                 VerticalAlignment="Top"

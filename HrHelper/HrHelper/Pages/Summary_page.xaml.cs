@@ -34,17 +34,14 @@ namespace HrHelper.Pages
             InitializeComponent();
             LoadSummary(idSummary);
             LoadStatusComboBox();
+            LoadJobTitleComboBox();
         }
         void LoadSummary(int id)
         {
             using (var db = new HrHelperDatabaseContext())
             {
                 Summary summary = db.Summaries.Where(o => o.Id == id).First();
-                //if (summary.BusynessId != null)
-                //{
-                //    summary.Busyness = db.Busynesses.Where(o => o.Id == summary.BusynessId).First();
-                //    busyness_tb.Text = summary.Busyness.Type;
-                //}
+
                 fullname_tblock.Text = $"{summary.LastName} {summary.FirstName} {summary.Patronymic}";
 
                 if (summary.PhotoId != null)
@@ -66,20 +63,21 @@ namespace HrHelper.Pages
 
                 LoadContacts(summary);
 
-                dateBirthdayAge_tblock.Text = summary.Birthday.ToString("dd.MM.yyyy")+$"({GetAge(summary)} годиков)";
+
+                dateBirthdayAge_tblock.Text = summary.Birthday.ToString("dd.MM.yyyy") + $"({GetAge(summary)} годиков)";
                 gender_tblock.Text = summary.Gender;
-                //phone_tb.Text = "+" + summary.Phone.ToString();
-                //email_tb.Text = summary.Email;
+
                 town_tblock.Text = summary.Town;
                 address_tblock.Text = summary.Address;
 
-                //jobTitle_tb.Text = summary.JobTitle;
-                //specialization_tb.Text = summary.Specialization;
-                //education_tb.Text = summary.Education;
+                educationInstution_tblock.Text = summary.EducationInstution;
+                education_tblock.Text = db.Educations.Where(o => o.Id == summary.EducationId).First().EducationName;
+
                 comments_tb.Text = summary.Comments;
 
                 SummaryStatus status = db.SummaryStatuses.Where(o => o.Id == summary.StatusId).First();
                 SetStatus(status);
+                statusChange_cb.Text = status.Status;
             }
 
 
@@ -94,13 +92,13 @@ namespace HrHelper.Pages
             }
 
             if (summary.Contacts.Phone != null)
-                ContactsAddView("Номер телефона",summary.Contacts.Phone);
-             if (summary.Contacts.Email != null)
+                ContactsAddView("Номер телефона", summary.Contacts.Phone);
+            if (summary.Contacts.Email != null)
                 ContactsAddView("Почта", summary.Contacts.Email);
-             if (summary.Contacts.Skype != null)
+            if (summary.Contacts.Skype != null)
                 ContactsAddView("Skype", summary.Contacts.Skype);
         }
-        void ContactsAddView(string titleContact,string contact)
+        void ContactsAddView(string titleContact, string contact)
         {
             StackPanel contact_sp = new StackPanel();
             contact_sp.Orientation = Orientation.Horizontal;
@@ -163,6 +161,30 @@ namespace HrHelper.Pages
 
             }
         }
+        private void LoadJobTitleComboBox()
+        {
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                Vacancy[] vacancies = db.Vacancies.ToArray();
+                foreach (Vacancy vacancy in vacancies)
+                {
+                    jobTitleChange_cb.Items.Add(vacancy.JobTitle);
+                }
+                SummaryForVacancy? summaryFor = null;
+                try
+                {
+                    summaryFor = db.SummaryForVacancies.Where(o => o.SummaryId == idSummary).First();
+                }
+                catch { }
+
+                if (summaryFor == null)
+                    jobTitleChange_cb.Text = String.Empty;
+                // jobTitleChange_cb.Text = jobTitleChange_cb.Items[1].ToString();
+                else
+                    jobTitleChange_cb.Text = db.Vacancies.Where(o => o.Id == summaryFor.JobId).First().JobTitle;
+
+            }
+        }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
@@ -172,7 +194,19 @@ namespace HrHelper.Pages
 
                 summary.Comments = comments_tb.Text;
                 summary.StatusId = db.SummaryStatuses.Where(o => o.Status == status_tblock.Text).First().Id;
+
+                if (jobTitleChange_cb.Text != String.Empty)
+                {
+                    SummaryForVacancy summaryFor = new SummaryForVacancy()
+                    {
+                        JobId = db.Vacancies.Where(o => o.JobTitle == jobTitleChange_cb.Text).First().Id,
+                        SummaryId = summary.Id
+                    };
+
+                    db.SummaryForVacancies.Add(summaryFor);
+                }
                 db.SaveChanges();
+
             }
         }
 
@@ -182,7 +216,6 @@ namespace HrHelper.Pages
             {
                 Status = statusChange_cb.SelectedValue.ToString()
             };
-
             SetStatus(status);
         }
 
@@ -211,6 +244,11 @@ namespace HrHelper.Pages
             wsh.Cells[2, 5] = status_tblock.Text;
             wsh.Cells[2, 6] = summary.Comments;
             exApp.Visible = true;
+        }
+
+        private void jobTitleChange_cb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

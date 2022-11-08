@@ -87,9 +87,17 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel>
                     <TextBlock Text="Изменить статус" Style="{StaticResource defaultTextBlock}"/>
-                    <ComboBox Text="Отказ" x:Name="statusChange_cb"
+                    <ComboBox Text="Отказ" x:Name="statusChange_cb" IsReadOnly="True"
                               Margin="30,5"
                         Style="{DynamicResource defaultComboBoxStyle}"  IsEditable="True" SelectionChanged="statusChange_cb_SelectionChanged">
+                        <ComboBoxItem>
+
+                        </ComboBoxItem>
+                    </ComboBox>
+                    <TextBlock Text="Изменить вакансию" Style="{StaticResource defaultTextBlock}"/>
+                    <ComboBox x:Name="jobTitleChange_cb" IsReadOnly="True"
+                              Margin="30,5"
+                        Style="{DynamicResource defaultComboBoxStyle}"  IsEditable="True" SelectionChanged="jobTitleChange_cb_SelectionChanged">
                         <ComboBoxItem>
 
                         </ComboBoxItem>
@@ -164,13 +172,13 @@
                  250,10" Margin="0"/>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Образование" Style="{StaticResource defaultTextBlock}"/>
-                                <TextBlock Text="Высшее" 
+                                <TextBlock x:Name="education_tblock" Text="Высшее" 
                              TextWrapping="Wrap"
                                    Style="{StaticResource valueTextBlock}"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Уч.Заведение" Style="{StaticResource defaultTextBlock}"/>
-                                <TextBlock Text="Бит" 
+                                <TextBlock x:Name="educationInstution_tblock" Text="" 
                              TextWrapping="Wrap"
                                    Style="{StaticResource valueTextBlock}"/>
                             </StackPanel>
