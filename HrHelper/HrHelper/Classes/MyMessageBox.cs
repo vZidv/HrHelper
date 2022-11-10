@@ -37,5 +37,13 @@ namespace HrHelper.Classes
             messagebox.ShowDialog();
             return messagebox.result;
         }
+        public static bool Show(string title, string message,bool IsError)
+        {
+            Windows.Messagebox_win messagebox = CreateMessageBox(title, message, MyMessageBoxOptions.Ok);
+            SystemSounds.Exclamation.Play();
+            messagebox.error = IsError;
+            messagebox.ShowDialog();
+            return messagebox.result;
+        }
     }
 }

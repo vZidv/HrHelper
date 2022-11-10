@@ -197,14 +197,26 @@ namespace HrHelper.Pages
 
                 if (jobTitleChange_cb.Text != String.Empty)
                 {
-                    SummaryForVacancy summaryFor = new SummaryForVacancy()
-                    {
-                        JobId = db.Vacancies.Where(o => o.JobTitle == jobTitleChange_cb.Text).First().Id,
-                        SummaryId = summary.Id
-                    };
+                    SummaryForVacancy summaryFor;
 
-                    db.SummaryForVacancies.Add(summaryFor);
+                    try
+                    {
+                        summaryFor = db.SummaryForVacancies.Where(o => o.SummaryId == idSummary).First();
+                        summaryFor.JobId = db.Vacancies.Where(o => o.JobTitle == jobTitleChange_cb.Text).First().Id;
+                        db.SummaryForVacancies.Update(summaryFor);
+                    }
+                    catch 
+                    {
+                        summaryFor = new SummaryForVacancy()
+                        {
+                            JobId = db.Vacancies.Where(o => o.JobTitle == jobTitleChange_cb.Text).First().Id,
+                            SummaryId = idSummary
+                        };
+                        db.SummaryForVacancies.Add(summaryFor);
+                    }
                 }
+
+                
                 db.SaveChanges();
 
             }

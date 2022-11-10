@@ -24,13 +24,13 @@ namespace HrHelper.Windows
     {
         public Main_win()
         {
-            InitializeComponent();          
+            InitializeComponent();
             try
             {
                 if (!PhotoFolder.CheckPhotoFolder())
                     PhotoFolder.CreatePhotoFolder();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -50,6 +50,7 @@ namespace HrHelper.Windows
         private void person_but_Click(object sender, RoutedEventArgs e)
         {
             frameMain.Navigate(new Pages.Main_page());
+            ChangeColorBut(sender as Button);
         }
 
         private void minWind_but_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
@@ -68,8 +69,29 @@ namespace HrHelper.Windows
                 WindowState = System.Windows.WindowState.Maximized;
         }
 
-        private void settings_but_Click(object sender, RoutedEventArgs e) =>  frameMain.Navigate(new Pages.Settings_page());
+        private void settings_but_Click(object sender, RoutedEventArgs e)
+        { 
+            frameMain.Navigate(new Pages.Settings_page());
+            ChangeColorBut(sender as Button);
+        }
 
-        private void vacancy_but_Click(object sender, RoutedEventArgs e) => frameMain.Navigate(new Pages.Vacancy_page());
+        private void vacancy_but_Click(object sender, RoutedEventArgs e)
+        {
+            frameMain.Navigate(new Pages.Vacancy_page());
+            ChangeColorBut(sender as Button);
+        }
+
+
+        Button butLast;
+        private void ChangeColorBut(Button button)
+        {
+            button.Background = (SolidColorBrush)Application.Current.Resources["Grey"];
+            if (butLast != null)
+            {
+                butLast.Background = new SolidColorBrush(Colors.Transparent);
+                
+            }
+            butLast = button;
+        }
     }
 }

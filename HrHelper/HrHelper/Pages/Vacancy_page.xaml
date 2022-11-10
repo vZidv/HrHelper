@@ -63,7 +63,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Content="Открыть" Style="{StaticResource dataGridtBut}"
-                                        x:Name="openSummary_button"   />
+                                        x:Name="openSummary_button" Click="openSummary_button_Click" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

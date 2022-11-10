@@ -32,7 +32,7 @@ namespace HrHelper.Pages
         {         
             if (login_textbox.Text == String.Empty || password_pb.Password == String.Empty)
             {
-                Classes.MyMessageBox.Show("Ошибка","Поле логин или пароль пустое!");
+                Classes.MyMessageBox.Show("Ошибка","Поле логин или пароль пустое!",true);
                 return;
             }
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())

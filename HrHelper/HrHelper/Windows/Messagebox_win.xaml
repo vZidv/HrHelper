@@ -10,11 +10,11 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="140"/>
+            <RowDefinition Height="150"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="65"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
@@ -70,7 +70,13 @@
         </Border>
 
 
-
+        <Grid Grid.Column="0" Grid.Row="1">
+            <Path x:Name="errorIcon_path" Visibility="Hidden"
+                VerticalAlignment="Top" Margin="3,10"
+                Data="F0 M24,21z M0,0z M1.83657931,19.32L11.5863724,2.00844 21.3361655,19.32 1.83657931,19.32z M22.8696828,18.65808L12.9063724,0.966C12.5438897,0.32256 12.0647172,0 11.5863724,0 11.1080276,0 10.6288552,0.32256 10.2672,0.966L0.303062069,18.65808C-0.421903448,19.94664,0.198786207,21,1.68430345,21L21.4884414,21C22.9739586,21,23.5954759,19.94664,22.8696828,18.65808z M10.7587862,14.28L12.4139586,14.28 13.2415448,6.72 9.9312,6.72 10.7587862,14.28z M11.5863724,15.12C10.6727172,15.12 9.9312,15.87264 9.9312,16.8 9.9312,17.72736 10.6727172,18.48 11.5863724,18.48 12.5008552,18.48 13.2415448,17.72736 13.2415448,16.8 13.2415448,15.87264 12.5008552,15.12 11.5863724,15.12z"
+Stretch="Uniform"
+Fill="{StaticResource AccentColor}" />
+        </Grid>
         <StackPanel Grid.Row="1" Grid.Column="1">
             <TextBlock x:Name="titile_tb" FontSize="17" Foreground="{StaticResource White}"
                        FontWeight="Bold"

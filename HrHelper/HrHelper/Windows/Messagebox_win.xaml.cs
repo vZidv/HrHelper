@@ -41,6 +41,19 @@ namespace HrHelper.Windows
             }
         }
         public bool result = true;
+        public bool error
+        {
+            get 
+            {
+                return error;
+            }
+            set 
+            {
+                if (value == true)
+                    errorIcon_path.Visibility = Visibility.Visible;
+                else errorIcon_path.Visibility = Visibility.Hidden;
+            }
+        }
         public Messagebox_win(MyMessageBoxOptions messageBoxoptions)
         {
             InitializeComponent();

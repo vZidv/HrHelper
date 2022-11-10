@@ -14,6 +14,7 @@
     <None Remove="Source\NoImage.png" />
     <None Remove="Source\Person.png" />
     <None Remove="Source\Settings.png" />
+    <None Remove="Source\Vacancy.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,6 +47,7 @@
     <Resource Include="Source\NoImage.png" />
     <Resource Include="Source\Person.png" />
     <Resource Include="Source\Settings.png" />
+    <Resource Include="Source\Vacancy.png" />
   </ItemGroup>
 
 </Project>

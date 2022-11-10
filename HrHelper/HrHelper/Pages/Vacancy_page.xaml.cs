@@ -83,6 +83,26 @@ namespace HrHelper.Pages
             }
         }
 
+        private void openSummary_button_Click(object sender, RoutedEventArgs e)
+        {
+            int r = summary_dg.SelectedIndex;
+
+            string id = null;
+
+            for (int i = 0; i < 2;)
+            {
+                switch (i)
+                {
+                    case 0:
+                        TextBlock itemL = summary_dg.Columns[i].GetCellContent(summary_dg.Items[r]) as TextBlock;
+                        id = itemL.Text;
+                        break;
+                }
+                i++;
+            }
+            Classes.Settings.mainFrame.Navigate(new Pages.Summary_page(Convert.ToInt32(id)));
+        }
+
         //private void status_cb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         //{
         //    using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
