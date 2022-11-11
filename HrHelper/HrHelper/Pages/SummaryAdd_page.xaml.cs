@@ -23,9 +23,11 @@ namespace HrHelper.Pages
     {
         string? photoPath;
         string photoFormat;
+
         int status;
         int busyness;
         int education;
+        int vacancy;
 
         public SummaryAdd_page()
         {
@@ -34,6 +36,7 @@ namespace HrHelper.Pages
             LoadStatusComboBox();
             LoadBusynnesComboBox();
             LoadEducationComboBox();
+            LoadJobTitleComboBox();
         }
         private void LoadStatusComboBox()
         {
@@ -43,6 +46,18 @@ namespace HrHelper.Pages
                 foreach (SummaryStatus stat in statuses)
                 {
                     status_cb.Items.Add(stat.Status);
+                }
+
+            }
+        }
+        private void LoadJobTitleComboBox()
+        {
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                Vacancy[] vacancies = db.Vacancies.ToArray();
+                foreach (Vacancy vacancy in vacancies)
+                {
+                    jobTitle_cb.Items.Add(vacancy.JobTitle);
                 }
 
             }
@@ -102,7 +117,15 @@ namespace HrHelper.Pages
                         this.education = education.Id;
                 }
 
+                Vacancy[] vacancies = db.Vacancies.ToArray();
+                foreach (Vacancy vacancy in vacancies)
+                {
+                    if (vacancy.JobTitle == jobTitle_cb.Text)
+                        this.vacancy = vacancy.Id;
+                }
+
             }
+
             SummaryContact contacts = new SummaryContact()
             {
                 Phone = phone_tb.Text,
@@ -143,7 +166,16 @@ namespace HrHelper.Pages
                 db.Add(summary);
                 db.SaveChanges();
             }
-
+            SummaryForVacancy summaryFor = new SummaryForVacancy()
+            {
+                SummaryId = summary.Id,
+                JobId = vacancy
+            };
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                db.Add(summaryFor);
+                db.SaveChanges();
+            }
             Classes.MyMessageBox.Show("Внимание", "Пользователь добавлен.");
             Classes.Settings.mainFrame.Navigate(new Main_page());
         }

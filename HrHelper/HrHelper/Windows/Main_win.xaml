@@ -27,13 +27,9 @@
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
-                    
+
                 </Setter.Value>
             </Setter>
-            <Style.Triggers>
-
-            </Style.Triggers>
-
         </Style>
     </Window.Resources>
     <Border Background="{StaticResource Channels}" CornerRadius="17"

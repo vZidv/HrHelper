@@ -35,6 +35,7 @@ namespace HrHelper.Pages
             LoadSummary(idSummary);
             LoadStatusComboBox();
             LoadJobTitleComboBox();
+            LoadbussynesComboBox();
         }
         void LoadSummary(int id)
         {
@@ -69,6 +70,8 @@ namespace HrHelper.Pages
 
                 town_tblock.Text = summary.Town;
                 address_tblock.Text = summary.Address;
+
+                busynessChange_cb.Text = db.Busynesses.Where(o => o.Id == summary.BusynessId).First().Type;
 
                 educationInstution_tblock.Text = summary.EducationInstution;
                 education_tblock.Text = db.Educations.Where(o => o.Id == summary.EducationId).First().EducationName;
@@ -161,6 +164,18 @@ namespace HrHelper.Pages
 
             }
         }
+        private void LoadbussynesComboBox()
+        {
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                Busyness[] busynesses = db.Busynesses.ToArray();
+                foreach (Busyness busyness in busynesses)
+                {
+                    busynessChange_cb.Items.Add(busyness.Type);
+                }
+
+            }
+        }
         private void LoadJobTitleComboBox()
         {
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
@@ -194,6 +209,7 @@ namespace HrHelper.Pages
 
                 summary.Comments = comments_tb.Text;
                 summary.StatusId = db.SummaryStatuses.Where(o => o.Status == status_tblock.Text).First().Id;
+                summary.BusynessId = db.Busynesses.Where(o => o.Type == busynessChange_cb.Text).First().Id;
 
                 if (jobTitleChange_cb.Text != String.Empty)
                 {

@@ -18,19 +18,21 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid  Grid.Column="0" Grid.Row="0">
-            <Border
-                Margin="7" CornerRadius="15" Grid.Column="0" Grid.Row="0">
-                <Border.Background>
-                    <ImageBrush x:Name="photo_image" ImageSource="/Source/NoImage.png"/>
-                </Border.Background>
-            </Border>
-        </Grid>
-        <Grid Grid.Row="1" Grid.Column="0">
             <StackPanel>
+                <Border MinHeight="280"
+                Margin="28,7,28,0" CornerRadius="15" Grid.Column="0" Grid.Row="0">
+                    <Border.Background>
+                        <ImageBrush x:Name="photo_image" ImageSource="/Source/NoImage.png"/>
+                    </Border.Background>
+                </Border>
+
                 <Button Content="Выбрать фото" x:Name="changePhoto_bt"
                     Height="45" Width="200"
                     Style="{StaticResource defaultBut}" Click="changePhoto_bt_Click" />
             </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0">
+
         </Grid>
         <Grid Grid.Row="0" Grid.Column="1">
             <StackPanel Orientation="Horizontal">
@@ -86,34 +88,22 @@
                             Style="{StaticResource headerTextBlock}" HorizontalAlignment="Left"/>
                                 <TextBlock Text="Занятость" FontSize="30" Margin="10,12"
                             Style="{StaticResource headerTextBlock}" HorizontalAlignment="Left"/>
+                                <TextBlock Text="Вакансия" FontSize="30" Margin="10,12"
+                            Style="{StaticResource headerTextBlock}" HorizontalAlignment="Left"/>
                             </StackPanel>
                             <StackPanel>
                                 <ComboBox x:Name="status_cb"
                                     Width="250" Style="{StaticResource defaultComboBoxStyle}" Margin="17"/>
                                 <ComboBox x:Name="bussyness_cb"
                                     Width="250" Style="{StaticResource defaultComboBoxStyle}" Margin="17"/>
+                                <ComboBox x:Name="jobTitle_cb"
+                                    Width="250" Style="{StaticResource defaultComboBoxStyle}" Margin="17"/>
                             </StackPanel>
                         </StackPanel>
                     </Grid>
                     <Grid>
-                        
-                        <StackPanel>
-                            <StackPanel>
-                                
-                                <TextBlock Text="Комментарии" 
-                               Style="{StaticResource headerTextBlock}"/>
-                                <Polygon Stroke="{StaticResource White}" Points=" 
-                 5,10
-                 250,10" Margin="0"/>
-                            </StackPanel>
-                            <Grid>
-                                <Border Background="{StaticResource Channels}" CornerRadius="12" Margin="0,6,0,0"/>
-                                <TextBox x:Name="comments_tb" Width="450"  Height="120"
-                        FontSize="22" TextWrapping="Wrap"
-                        Style="{StaticResource defaultTextbox}"/>
-                            </Grid>
 
-                        </StackPanel>
+
                     </Grid>
                 </StackPanel>
 
@@ -121,7 +111,7 @@
             <Button Content="Добавить" x:Name="summaryAdd_but" Click="summaryAdd_bt_Click"
                 Style="{StaticResource defaultBut}" VerticalAlignment="Top" HorizontalAlignment="Right"/>
         </Grid>
-        <Grid Grid.Row="1" Grid.Column="1">
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
             <StackPanel 
                 Orientation="Horizontal" HorizontalAlignment="Left">
                 <StackPanel>
@@ -135,12 +125,12 @@
                  250,10" Margin="0"/>
                             <Grid>
                                 <Border Background="{StaticResource Channels}" CornerRadius="12" Margin="0,6"/>
-                                <StackPanel Orientation="Horizontal">
-                                    <StackPanel >
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Город" Style="{StaticResource headerTextBlock}"/>
                                         <TextBox x:Name="town_tb" Style="{StaticResource inputTextbox}"/>
                                     </StackPanel>
-                                    <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Адрес" Style="{StaticResource headerTextBlock}"/>
                                         <TextBox x:Name="address_tb" Style="{StaticResource inputTextbox}"/>
                                     </StackPanel>
@@ -227,6 +217,26 @@
                             </Grid>
                         </StackPanel>
 
+
+                    </StackPanel>
+                </Grid>
+                <Grid>
+                    <StackPanel>
+                        <StackPanel>
+
+                            <TextBlock Text="Комментарии" 
+                               Style="{StaticResource headerTextBlock}"/>
+                            <Polygon Stroke="{StaticResource White}" Points=" 
+                 5,10
+                 250,10" Margin="0"/>
+                        </StackPanel>
+                        <Grid>
+                            <Border MinHeight="400"
+                                Background="{StaticResource Channels}" CornerRadius="12" Margin="0,6,0,0"/>
+                            <TextBox x:Name="comments_tb" MinWidth="450"  MinHeight="380"
+                        FontSize="22" TextWrapping="Wrap"
+                        Style="{StaticResource defaultTextbox}"/>
+                        </Grid>
 
                     </StackPanel>
                 </Grid>
