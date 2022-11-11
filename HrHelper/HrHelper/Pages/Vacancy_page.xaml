@@ -38,11 +38,12 @@
             <Grid>
                 <StackPanel HorizontalAlignment="Left">
                     <TextBlock Text="Статус" Style="{StaticResource headerTextBlock}" Margin="10" HorizontalAlignment="Center"/>
-                    <ComboBox x:Name="status_cb" Style="{StaticResource defaultComboBoxStyle}" Width="250" />
+                    <ComboBox x:Name="status_cb" Style="{StaticResource defaultComboBoxStyle}" Width="250" SelectionChanged="status_cb_SelectionChanged" />
                 </StackPanel>
             </Grid>
-            <DataGrid RowStyle="{DynamicResource DataGridRowStyle}" CellStyle="{StaticResource DataGridCell}" 
-                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}" Style="{DynamicResource defaultDataGridStyle}"  x:Name="summary_dg" IsReadOnly="True" RowHeaderWidth="0"
+            <DataGrid x:Name="summary_dg"
+                RowStyle="{DynamicResource DataGridRowStyle}" CellStyle="{StaticResource DataGridCell}" 
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}" Style="{DynamicResource defaultDataGridStyle}"   IsReadOnly="True" RowHeaderWidth="0"
             Grid.Row="1" Margin="5,0,5,0" BorderThickness="0" AutoGenerateColumns="False" Grid.ColumnSpan="2">
 
                 <DataGrid.Columns>

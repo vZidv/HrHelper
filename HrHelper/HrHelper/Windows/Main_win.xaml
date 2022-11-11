@@ -11,7 +11,7 @@
             <Setter Property="Height" Value="60"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Margin" Value="0,10"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -22,8 +22,12 @@
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="{StaticResource Grey}"/>
                             </Trigger>
+                            <Trigger Property="IsFocused" Value="True" >
+                                <Setter Property="Background" Value="{StaticResource Grey}"/>
+                            </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
+                    
                 </Setter.Value>
             </Setter>
             <Style.Triggers>
@@ -133,9 +137,15 @@
                         <Button x:Name="person_but"
                 VerticalAlignment="Top"
                 Style="{StaticResource MenuButton}" Click="person_but_Click">
-                            <Grid>
-                                <Image Source="/Source/Person.png" Margin="3"/>
-                            </Grid>
+                            <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <Path Fill="{StaticResource White}" 
+                                    Data="F1 M16,16z M0,0z M3,14C3,14 2,14 2,13 2,12 3,9 8,9 13,9 14,12 14,13 14,14 13,14 13,14L3,14z M8,8A3,3,0,1,0,8,2A3,3,0,0,0,8,8z" Margin="-24,-24,24,24">
+                                    <Path.RenderTransform>
+                                        <ScaleTransform ScaleX="4" ScaleY="4"/>
+                                    </Path.RenderTransform>
+                                </Path>
+                                </Grid>
+                                <!--<Image Source="/Source/Person.png" Margin="3"/>-->
                         </Button>
                         <TextBlock Text="Кандидаты" FontSize="12" Margin="0"
                                    Style="{StaticResource defaultTextBlock}"/>

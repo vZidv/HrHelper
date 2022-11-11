@@ -22,6 +22,7 @@ namespace HrHelper.Windows
     /// </summary>
     public partial class Main_win : Window
     {
+        public bool someBool = false;
         public Main_win()
         {
             InitializeComponent();
@@ -85,13 +86,13 @@ namespace HrHelper.Windows
         Button butLast;
         private void ChangeColorBut(Button button)
         {
-            button.Background = (SolidColorBrush)Application.Current.Resources["Grey"];
-            if (butLast != null)
-            {
-                butLast.Background = new SolidColorBrush(Colors.Transparent);
-                
-            }
-            butLast = button;
+            //someBool = true;
+            //button.Background = (SolidColorBrush)Application.Current.Resources["Grey"];
+            //if (butLast != null)
+            //{
+            //    butLast.Background = (SolidColorBrush)Application.Current.Resources["Chanel"];
+            //}
+            //butLast = button;
         }
     }
 }

@@ -103,22 +103,29 @@ namespace HrHelper.Pages
             Classes.Settings.mainFrame.Navigate(new Pages.Summary_page(Convert.ToInt32(id)));
         }
 
-        //private void status_cb_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
-        //    {
-        //        SummaryForVacancy[] summaryForVacancy = db.SummaryForVacancies.Where(o => o.JobId == vacancyNow.Id).ToArray();
 
-        //        List<Summary>? summaries = new List<Summary>();
-        //        foreach (var summaryFor in summaryForVacancy)
-        //        {
-        //            Summary summary = db.Summaries.Where(o => o.Id == summaryFor.SummaryId).First();
 
-        //            if (status_cb.Text == db.SummaryStatuses.Where(o => o.Id == summary.StatusId).First().Status)
-        //                summaries.Add(summary);
-        //        }
-        //        summary_dg.ItemsSource = summaries;
-        //    }
-        //}
+        private void status_cb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            summary_dg.ItemsSource = null;
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                SummaryForVacancy[] summaryForVacancy = db.SummaryForVacancies.Where(o => o.JobId == vacancyNow.Id).ToArray();
+                List<Summary>? summaries = new List<Summary>();
+
+                foreach (var summaryFor in summaryForVacancy)
+                {
+                    Summary summary = db.Summaries.Where(o => o.Id == summaryFor.SummaryId).First();
+
+                    summary.Status = db.SummaryStatuses.Where(o => o.Id == summary.StatusId).First();
+                    if (status_cb.SelectedValue.ToString() == summary.Status.Status.ToString())
+                    {
+                        summaries.Add(summary);
+                    }
+                }
+                summary_dg.ItemsSource = summaries.ToArray();
+            }
+        }
+
     }
 }
