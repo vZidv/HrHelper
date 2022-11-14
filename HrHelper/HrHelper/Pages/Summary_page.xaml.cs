@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using Microsoft.EntityFrameworkCore;
 using System.Windows.Shapes;
 using System.Runtime.InteropServices;
 using HrHelper.Classes;
@@ -32,56 +33,61 @@ namespace HrHelper.Pages
             idSummary = summaryId;
 
             InitializeComponent();
+
             LoadSummary(idSummary);
+            LoadComboBoxes();
+        }
+        private void LoadComboBoxes()
+        {
             LoadStatusComboBox();
             LoadJobTitleComboBox();
             LoadbussynesComboBox();
         }
-        void LoadSummary(int id)
+
+        private void LoadSummary(int id)
         {
+            Summary summary;
             using (var db = new HrHelperDatabaseContext())
             {
-                Summary summary = db.Summaries.Where(o => o.Id == id).First();
-
-                fullname_tblock.Text = $"{summary.LastName} {summary.FirstName} {summary.Patronymic}";
-
-                if (summary.PhotoId != null)
-                {
-                    Photo photo = db.Photos.Where(o => o.Id == summary.PhotoId).First();
-
-                    string photoPath = Classes.PhotoFolder.ProjectPath() + photo.Path;
-                    using (Stream stream = File.OpenRead(photoPath))
-                    {
-                        BitmapImage bitmap = new BitmapImage();
-                        bitmap.BeginInit();
-                        bitmap.StreamSource = stream;
-                        bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                        bitmap.EndInit();
-                        bitmap.Freeze();
-                        photo_image.ImageSource = bitmap;
-                    }
-                }
-
-                LoadContacts(summary);
-
-
-                dateBirthdayAge_tblock.Text = summary.Birthday.ToString("dd.MM.yyyy") + $"({GetAge(summary)} годиков)";
-                gender_tblock.Text = summary.Gender;
-
-                town_tblock.Text = summary.Town;
-                address_tblock.Text = summary.Address;
-
-                busynessChange_cb.Text = db.Busynesses.Where(o => o.Id == summary.BusynessId).First().Type;
-
-                educationInstution_tblock.Text = summary.EducationInstution;
-                education_tblock.Text = db.Educations.Where(o => o.Id == summary.EducationId).First().EducationName;
-
-                comments_tb.Text = summary.Comments;
-
-                SummaryStatus status = db.SummaryStatuses.Where(o => o.Id == summary.StatusId).First();
-                SetStatus(status);
-                statusChange_cb.Text = status.Status;
+                summary = db.Summaries.Where(o => o.Id == id).
+                 Include(r => r.Photo).Include(o => o.Contacts).Include(o => o.Busyness).Include(o => o.Status).Include(o => o.Education)
+                 .First();
             }
+            fullname_tblock.Text = $"{summary.LastName} {summary.FirstName} {summary.Patronymic}";
+
+            if (summary.Photo != null)
+            {
+                string photoPath = Classes.PhotoFolder.ProjectPath() + summary.Photo.Path;
+                using (Stream stream = File.OpenRead(photoPath))
+                {
+                    BitmapImage bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.StreamSource = stream;
+                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmap.EndInit();
+                    bitmap.Freeze();
+                    photo_image.ImageSource = bitmap;
+                }
+            }
+
+            LoadContacts(summary);
+
+
+            dateBirthdayAge_tblock.Text = summary.Birthday.ToString("dd.MM.yyyy") + $"({GetAge(summary)} годиков)";
+            gender_tblock.Text = summary.Gender;
+
+            town_tblock.Text = summary.Town;
+            address_tblock.Text = summary.Address;
+
+            busynessChange_cb.Text = summary.Busyness.Type;
+
+            educationInstution_tblock.Text = summary.EducationInstution;
+            education_tblock.Text = summary.Education.EducationName;
+
+            comments_tb.Text = summary.Comments;
+
+            SetStatus(summary.Status);
+            statusChange_cb.Text = summary.Status.Status;
 
 
         }
@@ -89,10 +95,9 @@ namespace HrHelper.Pages
         {
             if (summary.ContactsId == null)
                 return;
+
             using (var db = new HrHelperDatabaseContext())
-            {
-                summary.Contacts = db.SummaryContacts.Where(o => o.Id == summary.ContactsId).First();
-            }
+                summary.Contacts = db.SummaryContacts.Where(o => o.Id == summary.ContactsId).First();           
 
             if (summary.Contacts.Phone != null)
                 ContactsAddView("Номер телефона", summary.Contacts.Phone);
@@ -194,7 +199,6 @@ namespace HrHelper.Pages
 
                 if (summaryFor == null)
                     jobTitleChange_cb.Text = String.Empty;
-                // jobTitleChange_cb.Text = jobTitleChange_cb.Items[1].ToString();
                 else
                     jobTitleChange_cb.Text = db.Vacancies.Where(o => o.Id == summaryFor.JobId).First().JobTitle;
 
@@ -221,7 +225,7 @@ namespace HrHelper.Pages
                         summaryFor.JobId = db.Vacancies.Where(o => o.JobTitle == jobTitleChange_cb.Text).First().Id;
                         db.SummaryForVacancies.Update(summaryFor);
                     }
-                    catch 
+                    catch
                     {
                         summaryFor = new SummaryForVacancy()
                         {
@@ -232,7 +236,7 @@ namespace HrHelper.Pages
                     }
                 }
 
-                
+
                 db.SaveChanges();
 
             }

@@ -20,14 +20,16 @@ namespace HrHelper.Windows
     /// </summary>
     public partial class Messagebox_win : Window
     {
-        public string title {
+        public string title
+        {
             get
             {
                 return titile_tb.Text;
             }
-            set {
+            set
+            {
                 titile_tb.Text = value;
-            } 
+            }
         }
         public string message
         {
@@ -40,47 +42,51 @@ namespace HrHelper.Windows
                 message_tb.Text = value;
             }
         }
-        public bool result = true;
         public bool error
         {
-            get 
+            get
             {
                 return error;
             }
-            set 
+            set
             {
                 if (value == true)
                     errorIcon_path.Visibility = Visibility.Visible;
                 else errorIcon_path.Visibility = Visibility.Hidden;
             }
         }
+        public bool result = true;
         public Messagebox_win(MyMessageBoxOptions messageBoxoptions)
         {
             InitializeComponent();
 
+            ChooseTypeButton(messageBoxoptions);
+        }
+        private void ChooseTypeButton(MyMessageBoxOptions messageBoxoptions)
+        {
             if (messageBoxoptions == MyMessageBoxOptions.Ok)
                 ok_sp.Visibility = Visibility.Visible;
             if (messageBoxoptions == MyMessageBoxOptions.YesNo)
                 yesNo_sp.Visibility = Visibility.Visible;
         }
 
-        private void ok_but_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+        //Toolbar buttons
+        #region Toolbar buttons
+        private void toolBar_grid_MouseDown(object sender, MouseButtonEventArgs e) => DragMove();
 
-        private void toolBar_grid_MouseDown(object sender, MouseButtonEventArgs e)=> DragMove();
+        private void close_but_Click(object sender, RoutedEventArgs e) => this.Close();
 
-        private void close_but_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
+        private void minWind_but_Click(object sender, RoutedEventArgs e) => this.WindowState = WindowState.Minimized;
+        #endregion
 
-        private void minWind_but_Click(object sender, RoutedEventArgs e)
-        {
-            this.WindowState = WindowState.Minimized;
-        }
+        //Types buttons
+        #region Types buttons
 
+        #region OK button
+        private void ok_but_Click(object sender, RoutedEventArgs e) => this.Close();
+        #endregion
+
+        #region Yes/No button
         private void yes_but_Click(object sender, RoutedEventArgs e)
         {
             result = true;
@@ -92,6 +98,8 @@ namespace HrHelper.Windows
             result = false;
             this.Close();
         }
+        #endregion
 
+        #endregion
     }
 }

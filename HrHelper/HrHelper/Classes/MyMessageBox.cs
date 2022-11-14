@@ -16,7 +16,6 @@ namespace HrHelper.Classes
 
     public static class MyMessageBox
     {
-
         static Windows.Messagebox_win CreateMessageBox(string title, string message, MyMessageBoxOptions messageBoxButtons)
         {
             Windows.Messagebox_win messagebox = new Windows.Messagebox_win(messageBoxButtons);

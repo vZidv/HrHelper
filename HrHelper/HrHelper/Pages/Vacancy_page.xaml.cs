@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.EntityFrameworkCore;
 
 namespace HrHelper.Pages
 {
@@ -46,14 +47,13 @@ namespace HrHelper.Pages
         }
         private void LoadStatusComobox()
         {
+            SummaryStatus[] statuses;
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+                statuses = db.SummaryStatuses.ToArray();
+
+            foreach (SummaryStatus status in statuses)
             {
-                SummaryStatus[] statuses = db.SummaryStatuses.ToArray();
-                foreach (SummaryStatus status in statuses)
-                {
-                    status_cb.Items.Add(status.Status);
-                }
-                //status_cb.Text = status_cb.Items[0].ToString();
+                status_cb.Items.Add(status.Status);
             }
         }
         private void vacancyAdd_but_Click(object sender, RoutedEventArgs e)
@@ -65,25 +65,33 @@ namespace HrHelper.Pages
         private void ChooseVacancy_but_Click(object sender, RoutedEventArgs e)
         {
             var but = sender as Button;
-            
 
+            SummaryForVacancy[] summaryForVacancy;
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
                 vacancyNow = db.Vacancies.Where(o => o.JobTitle == but.Content.ToString()).First();
 
-                SummaryForVacancy[] summaryForVacancy = db.SummaryForVacancies.Where(o => o.JobId == vacancyNow.Id).ToArray();
-
-                List<Summary>? summaries = new List<Summary>();
-                foreach (var summaryFor in summaryForVacancy)
-                {
-                    Summary summary = db.Summaries.Where(o => o.Id == summaryFor.SummaryId).First();
-                    summaries.Add(summary);
-                }
-                summary_dg.ItemsSource = summaries;
+                summaryForVacancy = db.SummaryForVacancies.Where(o => o.JobId == vacancyNow.Id).Include(o => o.Summary).ToArray();
             }
+
+            List<Summary>? summaries = new List<Summary>();
+            for (int i = 0; i < summaryForVacancy.Length;)
+            {
+                summaries.Add(summaryForVacancy[i].Summary);
+                i++;
+            }
+            summary_dg.ItemsSource = summaries;
+
+
         }
 
         private void openSummary_button_Click(object sender, RoutedEventArgs e)
+        {
+            int id = ChoosePersonId();
+            Classes.Settings.mainFrame.Navigate(new Pages.Summary_page(Convert.ToInt32(id)));
+        }
+
+        private int ChoosePersonId()
         {
             int r = summary_dg.SelectedIndex;
 
@@ -100,10 +108,8 @@ namespace HrHelper.Pages
                 }
                 i++;
             }
-            Classes.Settings.mainFrame.Navigate(new Pages.Summary_page(Convert.ToInt32(id)));
+            return Convert.ToInt32(id);
         }
-
-
 
         private void status_cb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

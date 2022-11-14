@@ -9,23 +9,22 @@ namespace HrHelper.Classes
 {
     public static class PhotoFolder
     {
-        //До папки bin
-        //static public string ProjectPath()
-        //{
-        //    string path = Directory.GetCurrentDirectory();
-        //    int number = path.Length - 21;
-        //    path = path.Remove(number, 21);
-        //    return path;
-        //}
         static public string ProjectPath()
         {
             return Directory.GetCurrentDirectory();          
         }
         static public bool CheckPhotoFolder()
         {
-            string path = ProjectPath();
-            path += "\\Photo";
-            return Directory.Exists(path);
+            try
+            {
+                string path = ProjectPath();
+                path += "\\Photo";
+                return Directory.Exists(path);
+            }
+            catch(Exception ex)
+            {
+               return MyMessageBox.Show("Ошибка", ex.Message, true);
+            }
         }
         static public void CreatePhotoFolder()
         {

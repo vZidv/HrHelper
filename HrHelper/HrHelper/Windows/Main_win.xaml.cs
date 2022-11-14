@@ -22,46 +22,24 @@ namespace HrHelper.Windows
     /// </summary>
     public partial class Main_win : Window
     {
-        public bool someBool = false;
         public Main_win()
         {
             InitializeComponent();
-            try
-            {
-                if (!PhotoFolder.CheckPhotoFolder())
-                    PhotoFolder.CreatePhotoFolder();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            frameMain.Navigate(new Pages.Main_page());
 
+            if (!PhotoFolder.CheckPhotoFolder())
+                PhotoFolder.CreatePhotoFolder();
+
+            frameMain.Navigate(new Pages.Main_page());
             Settings.mainFrame = frameMain;
         }
 
-        private void exit_but_Click(object sender, RoutedEventArgs e)
-        {
-            Authorization_win win = new Authorization_win();
-            win.Show();
-            this.Close();
-        }
 
 
-        private void person_but_Click(object sender, RoutedEventArgs e)
-        {
-            frameMain.Navigate(new Pages.Main_page());
-            ChangeColorBut(sender as Button);
-        }
-
+        //Toolbar Buttons
+        #region Toolbar Buttons
         private void minWind_but_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
-
-
         private void close_but_Click(object sender, RoutedEventArgs e) => Application.Current.Shutdown();
-
-
         private void toolBar_grid_MouseDown(object sender, MouseButtonEventArgs e) => DragMove();
-
         private void maxWind_but_Click(object sender, RoutedEventArgs e)
         {
             if (WindowState == System.Windows.WindowState.Maximized)
@@ -69,30 +47,20 @@ namespace HrHelper.Windows
             else
                 WindowState = System.Windows.WindowState.Maximized;
         }
+        #endregion
 
-        private void settings_but_Click(object sender, RoutedEventArgs e)
-        { 
-            frameMain.Navigate(new Pages.Settings_page());
-            ChangeColorBut(sender as Button);
-        }
-
-        private void vacancy_but_Click(object sender, RoutedEventArgs e)
+        //User Menu buttons
+        #region User Menu
+        private void person_but_Click(object sender, RoutedEventArgs e) => frameMain.Navigate(new Pages.Main_page());                          
+        private void settings_but_Click(object sender, RoutedEventArgs e) => frameMain.Navigate(new Pages.Settings_page());
+        private void vacancy_but_Click(object sender, RoutedEventArgs e) => frameMain.Navigate(new Pages.Vacancy_page());
+        private void exit_but_Click(object sender, RoutedEventArgs e)
         {
-            frameMain.Navigate(new Pages.Vacancy_page());
-            ChangeColorBut(sender as Button);
+            Authorization_win win = new Authorization_win();
+            win.Show();
+            this.Close();
         }
 
-
-        Button butLast;
-        private void ChangeColorBut(Button button)
-        {
-            //someBool = true;
-            //button.Background = (SolidColorBrush)Application.Current.Resources["Grey"];
-            //if (butLast != null)
-            //{
-            //    butLast.Background = (SolidColorBrush)Application.Current.Resources["Chanel"];
-            //}
-            //butLast = button;
-        }
+        #endregion
     }
 }

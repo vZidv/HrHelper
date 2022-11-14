@@ -19,7 +19,7 @@ namespace HrHelper.Pages
     /// Interaction logic for Admin_page.xaml
     /// </summary>
     public partial class Admin_page : Page
-    {       
+    {
         public Admin_page()
         {
             InitializeComponent();
@@ -37,9 +37,9 @@ namespace HrHelper.Pages
                 foreach (var user in users)
                 {
                     user.TypeNavigation = db.UserTypes.Where(o => o.Id == user.Type).First();
-                }               
+                }
             }
-            users_dg.ItemsSource = users;      
+            users_dg.ItemsSource = users;
         }
 
         private void userDelete_but_Click(object sender, RoutedEventArgs e)
@@ -47,7 +47,20 @@ namespace HrHelper.Pages
             if (!Classes.MyMessageBox.Show("Внимание", "Вы точно хотите удалить пользователя без возможности восстановления?", Classes.MyMessageBoxOptions.YesNo))
                 return;
 
+            int id = ChoosePerson();
 
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                AuthorizationUser user = db.AuthorizationUsers.Where(o => o.Id == Convert.ToInt32(id)).First();
+                db.AuthorizationUsers.Remove(user);
+                db.SaveChanges();
+            }
+            LoadDataGrid();
+            Classes.MyMessageBox.Show("Внимание", "Пользователь удален!");
+        }
+
+        private int ChoosePerson()
+        {
             int r = users_dg.SelectedIndex;
             string? id = null;
             for (int i = 0; i < 2;)
@@ -61,14 +74,7 @@ namespace HrHelper.Pages
                 }
                 i++;
             }
-            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
-            {
-                AuthorizationUser user = db.AuthorizationUsers.Where(o => o.Id == Convert.ToInt32(id)).First();
-                db.AuthorizationUsers.Remove(user);
-                db.SaveChanges();
-            }
-            LoadDataGrid();
-            Classes.MyMessageBox.Show("Внимание", "Пользователь удален!");
+            return Convert.ToInt32(id);
         }
 
         private void userAdd_bt_Click(object sender, RoutedEventArgs e) => Classes.Settings.mainFrame.Navigate(new Pages.UserAdd_page());

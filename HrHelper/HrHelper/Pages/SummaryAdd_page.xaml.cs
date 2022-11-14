@@ -33,6 +33,11 @@ namespace HrHelper.Pages
         {
             InitializeComponent();
 
+            LoadComboBoxes();
+        }
+
+        public void LoadComboBoxes()
+        {
             LoadStatusComboBox();
             LoadBusynnesComboBox();
             LoadEducationComboBox();

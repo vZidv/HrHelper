@@ -27,9 +27,10 @@ namespace HrHelper.Windows
 
         private void vacancyAdd_but_Click(object sender, RoutedEventArgs e)
         {
+            Vacancy vacancy = new Vacancy() { JobTitle = jobTitle_tb.Text };
+
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
-            {
-                Vacancy vacancy = new Vacancy() { JobTitle = jobTitle_tb.Text };
+            {                
                 db.Vacancies.Add(vacancy);
                 db.SaveChanges();
             }

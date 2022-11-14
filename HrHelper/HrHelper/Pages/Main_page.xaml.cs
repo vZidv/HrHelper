@@ -27,7 +27,7 @@ namespace HrHelper.Pages
             LoadDataGrid();
         }
 
-        void LoadDataGrid()
+        private void LoadDataGrid()
         {
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
@@ -41,15 +41,16 @@ namespace HrHelper.Pages
             }
         }
 
-        private void settings_button_Click(object sender, RoutedEventArgs e)
-        {
+        private void openSummary_button_Click(object sender, RoutedEventArgs e)
+        {           
 
+            int id = ChoosePersonId();
+            Classes.Settings.mainFrame.Navigate(new Pages.Summary_page(Convert.ToInt32(id)));
         }
 
-        private void openSummary_button_Click(object sender, RoutedEventArgs e)
+        private int ChoosePersonId()
         {
             int r = summary_dg.SelectedIndex;
-
             string id = null;
 
             for (int i = 0; i < 2;)
@@ -63,17 +64,15 @@ namespace HrHelper.Pages
                 }
                 i++;
             }
-            Classes.Settings.mainFrame.Navigate(new Pages.Summary_page(Convert.ToInt32(id)));
+            return Convert.ToInt32(id);
         }
-
         private void summaryAdd_bt_Click(object sender, RoutedEventArgs e) => Classes.Settings.mainFrame.Navigate(new Pages.SummaryAdd_page());
 
         public void ChangeSummaryForDataGrid(int status)
         {
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
-            {
-                summary_dg.ItemsSource = db.Summaries.Where(o => o.StatusId == status).ToArray();
-            }
+                summary_dg.ItemsSource = db.Summaries.Where(o => o.StatusId == status).ToArray();     
+            
         }
 
         private void acceptSammury_but_Click(object sender, RoutedEventArgs e) => ChangeSummaryForDataGrid(3);

@@ -36,6 +36,8 @@ namespace HrHelper.Windows
 
         private void toolBar_grid_MouseDown(object sender, MouseButtonEventArgs e) => DragMove();
 
+        private void user_but_Click(object sender, RoutedEventArgs e) => frameMain.Navigate(new Pages.Admin_page());
+
         private void maxWind_but_Click(object sender, RoutedEventArgs e)
         {
             if (WindowState == System.Windows.WindowState.Maximized)
@@ -43,16 +45,11 @@ namespace HrHelper.Windows
             else
                 WindowState = System.Windows.WindowState.Maximized;
         }
-
         private void logOut_but_Click(object sender, RoutedEventArgs e)
         {
             Windows.Authorization_win authorization = new Authorization_win();
             authorization.Show();
             this.Close();
         }
-
-        private void user_but_Click(object sender, RoutedEventArgs e) => frameMain.Navigate(new Pages.Admin_page());
-
-
     }
 }

@@ -44,7 +44,9 @@ namespace HrHelper.Pages
             if(login_tb.Text == String.Empty || password_tb.Text == String.Empty)
             {
                 Classes.MyMessageBox.Show("Ошибка", "Одно из полей пустое!");
-            }    
+                return;
+            }   
+            
             int userType = 0;
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {

@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using Microsoft.EntityFrameworkCore;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -35,20 +36,22 @@ namespace HrHelper.Pages
                 Classes.MyMessageBox.Show("Ошибка","Поле логин или пароль пустое!",true);
                 return;
             }
-            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
-            {
-                AuthorizationUser user = db.AuthorizationUsers.Where(u => u.Login == login_textbox.Text).FirstOrDefault();
+
+            AuthorizationUser user;
+
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())           
+                user = db.AuthorizationUsers.Where(u => u.Login == login_textbox.Text).Include(o => o.TypeNavigation).FirstOrDefault();
+
 
                 if (user == null || password_pb.Password != user.Password)
                 {
-                    Classes.MyMessageBox.Show("Ошибка", "Неверный логин или пароль!");
+                    Classes.MyMessageBox.Show("Ошибка", "Неверный логин или пароль!",true);
                     return;
                 }
                 if (password_pb.Password != user.Password)
                 {
-                    Classes.MyMessageBox.Show("Ошибка", "Неверный пароль!");
+                    Classes.MyMessageBox.Show("Ошибка", "Неверный пароль!",true);
                 }
-                user.TypeNavigation = db.UserTypes.Where(o => o.Id == user.Type).First();
 
                 switch (user.TypeNavigation.Type)
                 {
@@ -61,8 +64,8 @@ namespace HrHelper.Pages
                         main_win.Show();
                         break;
                 }
-                authorization_win.Close();
-            }
+
+                authorization_win.Close();          
         }
 
         private void password_pb_PasswordChanged(object sender, RoutedEventArgs e)
