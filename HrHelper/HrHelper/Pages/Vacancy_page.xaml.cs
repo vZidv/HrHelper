@@ -24,6 +24,7 @@ namespace HrHelper.Pages
     public partial class Vacancy_page : Page
     {
         Vacancy? vacancyNow;
+        Dictionary<string, Vacancy> deleteButtonForvacancy = new Dictionary<string, Vacancy>();
         public Vacancy_page()
         {
             InitializeComponent();
@@ -37,13 +38,52 @@ namespace HrHelper.Pages
             Vacancy[] vacancies;
             using (var db = new HrHelperDatabaseContext())
                 vacancies = db.Vacancies.ToArray();
-
+            
             foreach (var vacnci in vacancies)
             {
-                Button button = new Button() { Content = vacnci.JobTitle, Style = (Style)Application.Current.Resources["defaultBut"] };
-                button.Click += ChooseVacancy_but_Click;
-                vacancy_sp.Children.Add(button);
+                StackPanel stackPanel = new StackPanel() { Orientation = Orientation.Horizontal };
+                stackPanel.Name = $"vacancy_sp_id_{vacnci.Id}";
+                
+                Button vacancyBut = new Button() { Content = vacnci.JobTitle,Margin = new Thickness(3,10,0,10),Width = 170 ,Style = (Style)Application.Current.Resources["defaultBut"] };
+                vacancyBut.Click += ChooseVacancy_but_Click;
+                
+                Button vacancyDeleteBut = new Button() {Style= (Style)Application.Current.Resources["deleteBut"] };
+                vacancyDeleteBut.Name = $"vacancyDelete_but_{vacnci.Id}";
+                vacancyDeleteBut.Click += VacancyDelete;
+
+                deleteButtonForvacancy.Add(vacancyDeleteBut.Name,vacnci);
+
+                stackPanel.Children.Add(vacancyBut);
+                stackPanel.Children.Add(vacancyDeleteBut);
+
+                vacancy_sp.Children.Add(stackPanel);
             }
+        }
+        private void VacancyDelete(object sender, RoutedEventArgs e)
+        {
+            if (!MyMessageBox.Show("Внимание", "Вы точно хотите удалить эту вакансию?", MyMessageBoxOptions.YesNo))
+                return;
+
+            Button button = sender as Button;
+            foreach (var item in deleteButtonForvacancy)
+            {
+                if(item.Key == button.Name)
+                {
+                    using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+                    {
+                        SummaryForVacancy[] summaryFor = db.SummaryForVacancies.Where(o => o.JobId == item.Value.Id).ToArray();
+                        foreach (SummaryForVacancy summary in summaryFor)
+                        {
+                            db.SummaryForVacancies.Remove(summary);
+                        }
+
+                        db.Vacancies.Remove(item.Value);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            Vacancy_page vacancy_Page = new Vacancy_page();
+            Settings.mainFrame.Navigate(vacancy_Page);
         }
         private void LoadStatusComobox()
         {

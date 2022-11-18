@@ -33,9 +33,9 @@
                     </VisualBrush.Visual>
                 </VisualBrush>
             </Border.OpacityMask>
-            <Grid x:Name="toolBar_grid" Grid.ColumnSpan="2" Background="Transparent" >
+            <Grid x:Name="toolBar_grid" Grid.ColumnSpan="2" Background="Transparent" MouseDown="toolBar_grid_MouseDown">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:Name="minWind_but" Style="{StaticResource minWinBut}" Width="50" >
+                    <Button x:Name="minWind_but" Style="{StaticResource minWinBut}" Width="50" Click="minWind_but_Click">
                         <Line X1="0" Y1="0" X2="70" Y2="0"  StrokeThickness="10" Margin="15,0">
                             <Line.Style>
                                 <Style TargetType="Line">
@@ -49,7 +49,7 @@
                             </Line.Style>
                         </Line>
                     </Button>
-                    <Button x:Name="close_but" Style="{StaticResource closeBut}" >
+                    <Button x:Name="close_but" Style="{StaticResource closeBut}" Click="close_but_Click" >
                         <Path Data="M1,1L15,15M15,1L1,15" StrokeThickness="3.5">
                             <Path.Style>
                                 <Style TargetType="Path">

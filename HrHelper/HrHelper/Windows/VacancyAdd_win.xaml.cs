@@ -1,4 +1,5 @@
 ﻿using HrHelper.Classes;
+using HrHelper.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,19 @@ namespace HrHelper.Windows
                 db.SaveChanges();
             }
             MyMessageBox.Show("Внимание", "Вакансия успешно добавлена.",MyMessageBoxOptions.Ok);
+
+            Vacancy_page vacancy_Page = new Vacancy_page();
+            Settings.mainFrame.Navigate(vacancy_Page);
+
             this.Close();
         }
+
+        #region Toolbar buttons
+        private void toolBar_grid_MouseDown(object sender, MouseButtonEventArgs e) => DragMove();
+
+        private void close_but_Click(object sender, RoutedEventArgs e) => this.Close();
+
+        private void minWind_but_Click(object sender, RoutedEventArgs e) => this.WindowState = WindowState.Minimized;
+        #endregion
     }
 }

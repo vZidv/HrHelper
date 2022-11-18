@@ -324,7 +324,7 @@ namespace HrHelper.Pages
             if (summary.Photo != null)
                 photo = summary.Photo.Path;
             WordExport wordExport = new WordExport();
-            wordExport.ExportSummary(items, "F:\\Артём\\Проекты и их материалы\\HrHelper\\Материалы\\Резюме Шаблон С фото.docx", photo);
+            wordExport.ExportSummary(items,summary);
         }
     }
 }

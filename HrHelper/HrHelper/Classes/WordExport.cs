@@ -18,23 +18,40 @@ namespace HrHelper.Classes
 {
     public class WordExport
     {
-
-        public bool ExportSummary(Dictionary<string, string> items, string filleName, string photo)
+        static public string ProjectPath()
         {
+            return Directory.GetCurrentDirectory();
+        }
+
+        public bool ExportSummary(Dictionary<string, string> items,Summary summary)
+        {
+            string filleName = ProjectPath() + "\\Word\\SummaryModel.docx";
             Word.Application app = null;
 
             try
             {
-
                 FileInfo fileInfo = new FileInfo(filleName);
                 app = new Word.Application();
 
-                Object file = fileInfo.FullName;
+                Microsoft.Win32.SaveFileDialog dialog = new Microsoft.Win32.SaveFileDialog();
+                dialog.Filter = "All files (*.*)|*.*";
+                dialog.FileName = $"{summary.LastName} {summary.FirstName} {summary.Patronymic}";
+                dialog.ShowDialog();
+
+                fileInfo.CopyTo(dialog.FileName + ".docx");
+
+                MessageBox.Show(dialog.FileName);
+
+                fileInfo = new FileInfo(dialog.FileName + ".docx");
+
+                MessageBox.Show(fileInfo.FullName);
+                
+                string file = fileInfo.FullName;
                 object missing = Type.Missing;
 
                 Word.Document document = app.Documents.Open(file);
-                if (photo != null)
-                    AddPhoto(document, photo);
+                if (summary.Photo != null)
+                    AddPhoto(document, summary.Photo.Path);
 
                 foreach (var item in items)
                 {
@@ -55,15 +72,17 @@ namespace HrHelper.Classes
                         Wrap: wrap,
                         Format: false,
                         ReplaceWith: missing, Replace: replace);
-                }
+                }             
 
-                Object newFileName = Path.Combine(fileInfo.DirectoryName, "Test" + fileInfo.Name);
-                app.ActiveDocument.SaveAs2(newFileName);
-                app.ActiveDocument.Close();
-                app.Quit();
+                app.Visible = true;
+
                 return true;
             }
-            catch (Exception ex) { MyMessageBox.Show("Ошибка", ex.Message, true); }
+            catch (Exception ex) 
+            { 
+                //MyMessageBox.Show("Ошибка", ex.Message, true);
+                MessageBox.Show(ex.Message);
+            }
             finally
             {
                 if (app != null)
@@ -78,11 +97,10 @@ namespace HrHelper.Classes
             object t = true;
             object left = Type.Missing;
             object top = Type.Missing;
-            //object width = 300;
-            //object height = 300;
+
             object range = Type.Missing;
             Microsoft.Office.Interop.Word.WdWrapType wrapp = Microsoft.Office.Interop.Word.WdWrapType.wdWrapSquare;
-            document.Shapes.AddPicture("F:\\Артём\\Проекты и их материалы\\HrHelper\\Programm\\HrHelper\\HrHelper\\HrHelper\\bin\\Debug\\net6.0-windows" + photo,
+            document.Shapes.AddPicture(ProjectPath() + photo,
                 ref f, ref t, ref left, ref top, ref range).WrapFormat.Type = wrapp;
         }
     }
