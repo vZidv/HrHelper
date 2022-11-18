@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using HrHelper.Classes;
 
 namespace HrHelper.Pages
 {
@@ -21,12 +22,12 @@ namespace HrHelper.Pages
     /// </summary>
     public partial class SummaryAdd_page : Page
     {
-        string? photoPath;
+        string? photoPath = null;
         string photoFormat;
 
         int status;
-        int busyness;
-        int education;
+        int? busyness;
+        int? education;
         int vacancy;
 
         public SummaryAdd_page()
@@ -91,28 +92,75 @@ namespace HrHelper.Pages
 
             }
         }
+        bool CheckTextBoxForEmpty(TextBox[] textBoxes, string errorMessage)
+        {
+            //if true,then all good 
+            bool result = true;
+            foreach (TextBox textBox in textBoxes)
+            {
+                if (textBox.Text == string.Empty)
+                {
+                    textBox.BorderBrush = (SolidColorBrush)Application.Current.Resources["Dnd"];
+                    result = false;
+                }
+            }
+            if (!result)
+                MyMessageBox.Show("Ошибка", errorMessage, true);
 
+            return result;
+        }
+
+        bool CheckCorrectInputData()
+        {
+            //if true,then all good 
+
+            //Проверка Имя,Фамилия
+            TextBox[] fullname = new TextBox[] { firstName_tb, lastName_tb };
+            if (!CheckTextBoxForEmpty(fullname, "Поле имя или фамилия пустое!"))
+                return false;
+            else if (birthday_datePicker.Text == string.Empty)
+            {
+                birthday_datePicker.BorderBrush = (SolidColorBrush)Application.Current.Resources["Dnd"];
+                MyMessageBox.Show("Ошибка", "Не указана дата рождения!", true);
+                return false;
+            }
+
+            return true;
+        }
 
         private void summaryAdd_bt_Click(object sender, RoutedEventArgs e)
         {
+            if (!CheckCorrectInputData())
+                return;
+
             DateTime date = Convert.ToDateTime(birthday_datePicker.SelectedDate);
             date.ToString("yyyy-MM-dd");
 
-
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
-                SummaryStatus[] statuses = db.SummaryStatuses.ToArray();
-                foreach (SummaryStatus stat in statuses)
-                {
-                    if (stat.Status == status_cb.Text)
-                        status = stat.Id;
-                }
+                    SummaryStatus[] statuses = db.SummaryStatuses.ToArray();
+                    foreach (SummaryStatus stat in statuses)
+                    {
+                        if (stat.Status == status_cb.Text)
+                            status = stat.Id;
+                    }
 
-                Busyness[] busynesses = db.Busynesses.ToArray();
-                foreach (Busyness busynes in busynesses)
+
+                if(status == 0)
+                    status = 4;
+                    
+                try
                 {
-                    if (busynes.Type == bussyness_cb.Text)
-                        busyness = busynes.Id;
+                    Busyness[] busynesses = db.Busynesses.ToArray();
+                    foreach (Busyness busynes in busynesses)
+                    {
+                        if (busynes.Type == bussyness_cb.Text)
+                            busyness = busynes.Id;
+                    }
+                }
+                catch
+                {
+                    busyness = null;
                 }
 
                 Education[] educations = db.Educations.ToArray();
@@ -147,6 +195,7 @@ namespace HrHelper.Pages
             {
                 FirstName = firstName_tb.Text,
                 LastName = lastName_tb.Text,
+
                 Patronymic = patronymic_tb.Text,
                 Gender = gender_cb.Text,
                 Birthday = date,
@@ -163,30 +212,34 @@ namespace HrHelper.Pages
                 LastJobTitle = lastJobTitle_tb.Text,
                 EducationId = education,
                 EducationInstution = educationInstution_tb.Text
-
-
             };
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
                 db.Add(summary);
                 db.SaveChanges();
             }
-            SummaryForVacancy summaryFor = new SummaryForVacancy()
+            try
             {
-                SummaryId = summary.Id,
-                JobId = vacancy
-            };
-            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
-            {
-                db.Add(summaryFor);
-                db.SaveChanges();
+                SummaryForVacancy summaryFor = new SummaryForVacancy()
+                {
+                    SummaryId = summary.Id,
+                    JobId = vacancy
+                };
+                using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+                {
+                    db.Add(summaryFor);
+                    db.SaveChanges();
+                }
             }
+            catch
+            {}
+
             Classes.MyMessageBox.Show("Внимание", "Пользователь добавлен.");
             Classes.Settings.mainFrame.Navigate(new Main_page());
         }
         int? CreatePhoto()
         {
-            if (photoPath == string.Empty)
+            if (photoPath == null || photoPath == String.Empty)
                 return null;
 
             string path = Classes.PhotoFolder.AddPhoto(photoPath, $"{firstName_tb.Text} {lastName_tb.Text} {patronymic_tb.Text}", photoFormat);

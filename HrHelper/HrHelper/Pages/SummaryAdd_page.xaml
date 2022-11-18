@@ -67,7 +67,8 @@
                     <Grid>
                         <TextBlock Text="Пол" HorizontalAlignment="Left" Margin="20,10" FontSize="30"
                                Style="{StaticResource headerTextBlock}" />
-                        <ComboBox x:Name="gender_cb" HorizontalAlignment="Center"
+                        <ComboBox x:Name="gender_cb" Text="Мужской"
+                                  HorizontalAlignment="Center"
                             Width="200" Style="{StaticResource defaultComboBoxStyle}">
                             <ComboBoxItem Content="Мужской"/>
                             <ComboBoxItem Content="Женский"/>

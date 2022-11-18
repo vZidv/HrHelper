@@ -70,8 +70,8 @@
                         <Button Content="Pdf" x:Name="excelExport_but"
                                 Background="{StaticResource Brilliance}" FontSize="23"
                             Style="{StaticResource defaultBut}" Margin="10,0" Click="excelExport_but_Click"/>
-                        <Button Content="Word" Background="{StaticResource Purple}" FontSize="23"
-                            Style="{StaticResource defaultBut}" Margin="10,0"/>
+                        <Button x:Name="wordExport" Content="Word" Background="{StaticResource Purple}" FontSize="23"
+                            Style="{StaticResource defaultBut}" Margin="10,0" Click="wordExport_Click"/>
                     </StackPanel>
                 </StackPanel>
 

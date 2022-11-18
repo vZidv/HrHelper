@@ -26,6 +26,7 @@ namespace HrHelper.Pages
     public partial class Summary_page : Page
     {
         int idSummary { get; }
+        Summary summary;
         string? imagePathNow;
 
         public Summary_page(int summaryId)
@@ -46,7 +47,7 @@ namespace HrHelper.Pages
 
         private void LoadSummary(int id)
         {
-            Summary summary;
+
             using (var db = new HrHelperDatabaseContext())
             {
                 summary = db.Summaries.Where(o => o.Id == id).
@@ -78,11 +79,12 @@ namespace HrHelper.Pages
 
             town_tblock.Text = summary.Town;
             address_tblock.Text = summary.Address;
-
-            busynessChange_cb.Text = summary.Busyness.Type;
+            if (summary.Busyness != null)
+                busynessChange_cb.Text = summary.Busyness.Type;
 
             educationInstution_tblock.Text = summary.EducationInstution;
-            education_tblock.Text = summary.Education.EducationName;
+            if (summary.Education != null)
+                education_tblock.Text = summary.Education.EducationName;
 
             comments_tb.Text = summary.Comments;
 
@@ -97,7 +99,7 @@ namespace HrHelper.Pages
                 return;
 
             using (var db = new HrHelperDatabaseContext())
-                summary.Contacts = db.SummaryContacts.Where(o => o.Id == summary.ContactsId).First();           
+                summary.Contacts = db.SummaryContacts.Where(o => o.Id == summary.ContactsId).First();
 
             if (summary.Contacts.Phone != null)
                 ContactsAddView("Номер телефона", summary.Contacts.Phone);
@@ -213,7 +215,8 @@ namespace HrHelper.Pages
 
                 summary.Comments = comments_tb.Text;
                 summary.StatusId = db.SummaryStatuses.Where(o => o.Status == status_tblock.Text).First().Id;
-                summary.BusynessId = db.Busynesses.Where(o => o.Type == busynessChange_cb.Text).First().Id;
+                if (busynessChange_cb.SelectedIndex != -1)
+                    summary.BusynessId = db.Busynesses.Where(o => o.Type == busynessChange_cb.Text).First().Id;
 
                 if (jobTitleChange_cb.Text != String.Empty)
                 {
@@ -281,6 +284,47 @@ namespace HrHelper.Pages
         private void jobTitleChange_cb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void wordExport_Click(object sender, RoutedEventArgs e)
+        {
+            //Summary base data 
+            var items = new Dictionary<string, string>
+            {
+                {"<Fullname>", fullname_tblock.Text},
+                {"<Gender>", gender_tblock.Text},
+                {"<Age>", GetAge(summary).ToString()},
+                {"<BirthdayDate>",summary.Birthday.ToString("d MMMM yyyy")},
+            };
+            // Summary contacts
+            if (summary.Contacts != null)
+            {
+                items.Add("<PhoneNumber>", summary.Contacts.Phone);
+                items.Add("<Email>", summary.Contacts.Email);
+                items.Add("<Skype>", summary.Contacts.Skype);
+            }
+            if (summary.Town != null)
+            {
+                items.Add("<Town>", town_tblock.Text);
+                items.Add("<Address>", address_tblock.Text);
+            }
+            if (summary.Education != null)
+                items.Add("<Education>", summary.Education.EducationName);
+            if (summary.Busyness != null)
+                items.Add("<Busyness>", busynessChange_cb.Text);
+
+
+            items.Add("<JobTitle>", jobTitleChange_cb.Text);
+            items.Add("<LastCompany>", summary.LastCompany);
+            items.Add("<LastJobTitle>", summary.LastJobTitle);
+            items.Add("<EducationInstution>", educationInstution_tblock.Text);
+            items.Add("<Comments>", comments_tb.Text);
+
+            string? photo = null;
+            if (summary.Photo != null)
+                photo = summary.Photo.Path;
+            WordExport wordExport = new WordExport();
+            wordExport.ExportSummary(items, "F:\\Артём\\Проекты и их материалы\\HrHelper\\Материалы\\Резюме Шаблон С фото.docx", photo);
         }
     }
 }
