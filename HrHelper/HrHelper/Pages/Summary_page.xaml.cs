@@ -326,5 +326,8 @@ namespace HrHelper.Pages
             WordExport wordExport = new WordExport();
             wordExport.ExportSummary(items,summary);
         }
+
+        private void summaryEdit_but_Click(object sender, RoutedEventArgs e) => Settings.mainFrame.Navigate(new SummaryEdit_page(summary));
+
     }
 }
