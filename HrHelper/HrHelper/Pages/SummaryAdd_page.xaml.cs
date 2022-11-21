@@ -254,14 +254,18 @@ namespace HrHelper.Pages
         }
         private void changePhoto_bt_Click(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
-            dialog.DefaultExt = ".png";
-            dialog.Filter = "Image(*.jpg,*.png)|*.jpg;*.png|JPG Files(*.jpg)|*.jpg|PNG|*.png";
+            try
+            {
+                Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
+                dialog.DefaultExt = ".png";
+                dialog.Filter = "Image(*.jpg,*.png)|*.jpg;*.png|JPG Files(*.jpg)|*.jpg|PNG|*.png";
 
-            Nullable<bool> result = dialog.ShowDialog();
-            photoPath = dialog.FileName;
-            photoFormat = new FileInfo(photoPath).Extension;
-            photo_image.ImageSource = new BitmapImage(new Uri(dialog.FileName));
+                Nullable<bool> result = dialog.ShowDialog();
+                photoPath = dialog.FileName;
+                photoFormat = new FileInfo(photoPath).Extension;
+                photo_image.ImageSource = new BitmapImage(new Uri(dialog.FileName));
+            }
+            catch { photoPath = null; }
         }
     }
 }

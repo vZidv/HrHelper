@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HrHelper.Windows"
         mc:Ignorable="d"
-        Title="Main_win" Height="900" Width="1600" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent" Icon="/Source/LogoMini.png">
+        Title="HrHelper" Height="900" Width="1600" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent" Icon="/Source/LogoMini.png">
     <Window.Resources>
         <Style x:Key="MenuButton" TargetType="Button">
             <Setter Property="Height" Value="60"/>

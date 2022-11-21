@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HrHelper.Windows"
         mc:Ignorable="d"
-        Title="Authorization_win" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Background="Transparent" AllowsTransparency="True"
+        Title="HrHelper" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Background="Transparent" AllowsTransparency="True"
         Height="585" Width="425" Icon="/Source/LogoMini.png">
     <Grid Background="Transparent">
         <Grid.RowDefinitions>
