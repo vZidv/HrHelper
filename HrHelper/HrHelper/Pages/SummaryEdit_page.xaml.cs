@@ -4,23 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace HrHelper.Pages
 {
-    /// <summary>
-    /// Interaction logic for SummaryEdit_page.xaml
-    /// </summary>
     public partial class SummaryEdit_page : Page
     {
         Summary summary;
@@ -35,14 +25,10 @@ namespace HrHelper.Pages
         public SummaryEdit_page(Summary summary)
         {
             InitializeComponent();
-            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
-
                 this.summary = summary;
-
             LoadComboBoxes();
             LoadSummary();
         }
-
         //LoadComboBoxes
         #region LoadComboBoxes
         private void LoadComboBoxes()
@@ -109,10 +95,8 @@ namespace HrHelper.Pages
                     jobTitle_cb.Text = String.Empty;
                 else
                     jobTitle_cb.Text = db.Vacancies.Where(o => o.Id == summaryFor.JobId).First().JobTitle;
-
             }
         }
-
         #endregion
         private void LoadSummary()
         {
@@ -164,7 +148,6 @@ namespace HrHelper.Pages
             lastCompany_tb.Text = summary.LastCompany;
             lastJobTitle_tb.Text = summary.LastJobTitle;
         }
-
         private void save_but_Click(object sender, RoutedEventArgs e)
         {
             if (!CheckCorrectInputData())
@@ -181,7 +164,6 @@ namespace HrHelper.Pages
                     if (stat.Status == status_cb.Text)
                         status = stat.Id;
                 }
-
 
                 if (status == 0)
                     status = 4;
@@ -289,7 +271,6 @@ namespace HrHelper.Pages
                 MyMessageBox.Show("Ошибка", "Не указана дата рождения!", true);
                 return false;
             }
-
             return true;
         }
         int? CreatePhoto()

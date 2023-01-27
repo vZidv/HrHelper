@@ -6,20 +6,12 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using HrHelper.Classes;
 
 namespace HrHelper.Pages
 {
-    /// <summary>
-    /// Interaction logic for SummaryAdd_page.xaml
-    /// </summary>
     public partial class SummaryAdd_page : Page
     {
         string? photoPath = null;
@@ -53,7 +45,6 @@ namespace HrHelper.Pages
                 {
                     status_cb.Items.Add(stat.Status);
                 }
-
             }
         }
         private void LoadJobTitleComboBox()
@@ -113,7 +104,6 @@ namespace HrHelper.Pages
         bool CheckCorrectInputData()
         {
             //if true,then all good 
-
             //Проверка Имя,Фамилия
             TextBox[] fullname = new TextBox[] { firstName_tb, lastName_tb };
             if (!CheckTextBoxForEmpty(fullname, "Поле имя или фамилия пустое!"))
@@ -128,6 +118,9 @@ namespace HrHelper.Pages
             return true;
         }
 
+        /// <summary>
+        /// Add new Summary 
+        /// </summary>
         private void summaryAdd_bt_Click(object sender, RoutedEventArgs e)
         {
             if (!CheckCorrectInputData())
@@ -144,7 +137,6 @@ namespace HrHelper.Pages
                         if (stat.Status == status_cb.Text)
                             status = stat.Id;
                     }
-
 
                 if(status == 0)
                     status = 4;
@@ -169,14 +161,12 @@ namespace HrHelper.Pages
                     if (education.EducationName == education_cb.Text)
                         this.education = education.Id;
                 }
-
                 Vacancy[] vacancies = db.Vacancies.ToArray();
                 foreach (Vacancy vacancy in vacancies)
                 {
                     if (vacancy.JobTitle == jobTitle_cb.Text)
                         this.vacancy = vacancy.Id;
                 }
-
             }
 
             SummaryContact contacts = new SummaryContact()
@@ -252,6 +242,10 @@ namespace HrHelper.Pages
             }
             return photo.Id;
         }
+
+        /// <summary>
+        /// Change Photo person
+        /// </summary>
         private void changePhoto_bt_Click(object sender, RoutedEventArgs e)
         {
             try

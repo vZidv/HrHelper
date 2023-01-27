@@ -1,25 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Reflection;
-using System.IO;
 using HrHelper.Classes;
 
 namespace HrHelper.Windows
 {
-    /// <summary>
-    /// Interaction logic for Main_win.xaml
-    /// </summary>
     public partial class Main_win : Window
     {
         public Main_win()
@@ -32,9 +16,6 @@ namespace HrHelper.Windows
             frameMain.Navigate(new Pages.Main_page());
             Settings.mainFrame = frameMain;
         }
-
-
-
         //Toolbar Buttons
         #region Toolbar Buttons
         private void minWind_but_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
@@ -60,7 +41,6 @@ namespace HrHelper.Windows
             win.Show();
             this.Close();
         }
-
         #endregion
     }
 }

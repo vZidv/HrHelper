@@ -1,34 +1,20 @@
 ﻿using HrHelper.Classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace HrHelper.Windows
 {
-    /// <summary>
-    /// Interaction logic for Messagebox_win.xaml
-    /// </summary>
     public partial class Messagebox_win : Window
     {
         public string title
         {
             get
             {
-                return titile_tb.Text;
+                return title_tb.Text;
             }
             set
             {
-                titile_tb.Text = value;
+                title_tb.Text = value;
             }
         }
         public string message

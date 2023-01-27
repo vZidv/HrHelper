@@ -6,23 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using Microsoft.EntityFrameworkCore;
-using System.Windows.Shapes;
-using System.Runtime.InteropServices;
 using HrHelper.Classes;
 using ex = Microsoft.Office.Interop.Excel;
 
 namespace HrHelper.Pages
 {
-    /// <summary>
-    /// Interaction logic for Summary_page.xaml
-    /// </summary>
     public partial class Summary_page : Page
     {
         int idSummary { get; }
@@ -47,7 +39,6 @@ namespace HrHelper.Pages
 
         private void LoadSummary(int id)
         {
-
             using (var db = new HrHelperDatabaseContext())
             {
                 summary = db.Summaries.Where(o => o.Id == id).
@@ -73,7 +64,6 @@ namespace HrHelper.Pages
 
             LoadContacts(summary);
 
-
             dateBirthdayAge_tblock.Text = summary.Birthday.ToString("dd.MM.yyyy") + $"({GetAge(summary)} годиков)";
             gender_tblock.Text = summary.Gender;
 
@@ -90,8 +80,6 @@ namespace HrHelper.Pages
 
             SetStatus(summary.Status);
             statusChange_cb.Text = summary.Status.Status;
-
-
         }
         void LoadContacts(Summary summary)
         {
@@ -168,7 +156,6 @@ namespace HrHelper.Pages
                 {
                     statusChange_cb.Items.Add(status.Status);
                 }
-
             }
         }
         private void LoadbussynesComboBox()
@@ -203,7 +190,6 @@ namespace HrHelper.Pages
                     jobTitleChange_cb.Text = String.Empty;
                 else
                     jobTitleChange_cb.Text = db.Vacancies.Where(o => o.Id == summaryFor.JobId).First().JobTitle;
-
             }
         }
 
@@ -238,10 +224,7 @@ namespace HrHelper.Pages
                         db.SummaryForVacancies.Add(summaryFor);
                     }
                 }
-
-
                 db.SaveChanges();
-
             }
         }
 
@@ -281,11 +264,8 @@ namespace HrHelper.Pages
             exApp.Visible = true;
         }
 
-        private void jobTitleChange_cb_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
+        private void jobTitleChange_cb_SelectionChanged(object sender, SelectionChangedEventArgs e) { }
+        
         private void wordExport_Click(object sender, RoutedEventArgs e)
         {
             //Summary base data 
@@ -328,6 +308,5 @@ namespace HrHelper.Pages
         }
 
         private void summaryEdit_but_Click(object sender, RoutedEventArgs e) => Settings.mainFrame.Navigate(new SummaryEdit_page(summary));
-
     }
 }

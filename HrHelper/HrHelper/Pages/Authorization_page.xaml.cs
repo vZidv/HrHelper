@@ -6,28 +6,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using Microsoft.EntityFrameworkCore;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using HrHelper.Classes;
 
 namespace HrHelper.Pages
 {
-    /// <summary>
-    /// Interaction logic for Authorization_page.xaml
-    /// </summary>
     public partial class Authorization_page : Page
     {
         public Window authorization_win;
 
-        public Authorization_page()
-        {
-            InitializeComponent();
-        }
+        public Authorization_page() => InitializeComponent();
 
         private void Authorization_but_Click(object sender, RoutedEventArgs e)
         {         
@@ -36,22 +24,20 @@ namespace HrHelper.Pages
                 Classes.MyMessageBox.Show("Ошибка","Поле логин или пароль пустое!",true);
                 return;
             }
+            try
+            {
+                AuthorizationUser user;
 
-            AuthorizationUser user;
-
-            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())           
-                user = db.AuthorizationUsers.Where(u => u.Login == login_textbox.Text).Include(o => o.TypeNavigation).FirstOrDefault();
-
+                using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+                    user = db.AuthorizationUsers.Where(u => u.Login == login_textbox.Text).Include(o => o.TypeNavigation).FirstOrDefault();
 
                 if (user == null || password_pb.Password != user.Password)
                 {
-                    Classes.MyMessageBox.Show("Ошибка", "Неверный логин или пароль!",true);
+                    Classes.MyMessageBox.Show("Ошибка", "Неверный логин или пароль!", true);
                     return;
                 }
                 if (password_pb.Password != user.Password)
-                {
-                    Classes.MyMessageBox.Show("Ошибка", "Неверный пароль!",true);
-                }
+                    Classes.MyMessageBox.Show("Ошибка", "Неверный пароль!", true);
 
                 switch (user.TypeNavigation.Type)
                 {
@@ -64,8 +50,12 @@ namespace HrHelper.Pages
                         main_win.Show();
                         break;
                 }
-
-                authorization_win.Close();          
+                authorization_win.Close();
+            }
+            catch(Exception ex)
+            {
+                MyMessageBox.Show("Ошибка",ex.Message);
+            }
         }
 
         private void password_pb_PasswordChanged(object sender, RoutedEventArgs e)

@@ -27,7 +27,7 @@
             <StackPanel x:Name="vacancy_sp" Grid.Row="1">
                 <Button Style="{StaticResource defaultBut}" Margin="10,10,10,40"
                         Content="Добавить" x:Name="vacancyAdd_but" Click="vacancyAdd_but_Click" />
-                <StackPanel Orientation="Horizontal">
+                <!--<StackPanel Orientation="Horizontal">
                     <Button Style="{StaticResource defaultBut}"  Margin="3,10,0,10" Width="170"
                         Content="Уборщик" />
                     <Button  Style="{StaticResource deleteBut}" >
@@ -37,7 +37,7 @@
                     <Button Style="{StaticResource defaultBut}"  Margin="3,10,0,10" Width="170"
                         Content="Уборщик" />
                     <Button Style="{StaticResource deleteBut}"  IsCancel="True"/>
-                </StackPanel>
+                </StackPanel>-->
 
             </StackPanel>
         </Grid>

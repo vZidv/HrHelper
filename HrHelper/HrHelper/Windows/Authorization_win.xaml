@@ -12,10 +12,10 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Border Background="{StaticResource Chat}" CornerRadius="17"
+        <Border Background="{StaticResource Chat}" CornerRadius="19,19,17,17" Height="583"
             Grid.RowSpan="2">
         </Border>
-        <Border Background="{StaticResource Channels}" CornerRadius="17,17,0,0"
+        <Border Background="{StaticResource Channels}" CornerRadius="16,16,0,0" 
             Grid.Row ="0">
             <Border.OpacityMask>
                 <VisualBrush>

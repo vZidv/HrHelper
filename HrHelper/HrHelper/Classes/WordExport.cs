@@ -8,11 +8,6 @@ using System.Windows;
 using System.Threading.Tasks;
 using Word = Microsoft.Office.Interop.Word;
 using System.Windows.Media.Imaging;
-using Microsoft.Office.Interop.Word;
-using System.Windows.Controls;
-using Microsoft.Office.Interop.Excel;
-using System.Diagnostics;
-using System.Reflection.Metadata;
 
 namespace HrHelper.Classes
 {
@@ -40,11 +35,11 @@ namespace HrHelper.Classes
 
                 fileInfo.CopyTo(dialog.FileName + ".docx");
 
-                MessageBox.Show(dialog.FileName);
+               // MessageBox.Show(dialog.FileName);
 
                 fileInfo = new FileInfo(dialog.FileName + ".docx");
 
-                MessageBox.Show(fileInfo.FullName);
+                //MessageBox.Show(fileInfo.FullName);
                 
                 string file = fileInfo.FullName;
                 object missing = Type.Missing;

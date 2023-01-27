@@ -78,7 +78,7 @@ Stretch="Uniform"
 Fill="{StaticResource AccentColor}" />
         </Grid>
         <StackPanel Grid.Row="1" Grid.Column="1">
-            <TextBlock x:Name="titile_tb" FontSize="17" Foreground="{StaticResource White}"
+            <TextBlock x:Name="title_tb" FontSize="17" Foreground="{StaticResource White}"
                        FontWeight="Bold"
                    Margin="10,10,10,0" TextAlignment="Left"
             Text="Title message"/>

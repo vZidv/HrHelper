@@ -9,7 +9,24 @@
       Title="Settings_page">
 
     <Grid>
-        <Button x:Name="deleteDb_but"
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock Text="Тема приложения" TextWrapping="Wrap"
+                    Style="{StaticResource headerTextBlock}"/>
+                <ComboBox x:Name="themeColors_cb"
+                    Width="250" Margin="10"
+                    Style="{StaticResource defaultComboBoxStyle}" SelectionChanged="themeColors_cb_SelectionChanged" >
+                    <ComboBoxItem Content="Светлая"/>
+                    <ComboBoxItem Content="Темная"/>
+                </ComboBox>
+            </StackPanel>
+            
+        </Grid>
+            <Button x:Name="deleteDb_but" Grid.Row="1"
             Style="{StaticResource defaultBut}" 
                 Background="{StaticResource Dnd}"
                 Content="Удалить базу данных" Click="deleteDb_but_Click"/>

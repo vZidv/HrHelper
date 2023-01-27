@@ -5,19 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace HrHelper.Pages
 {
-    /// <summary>
-    /// Interaction logic for Main_page.xaml
-    /// </summary>
     public partial class Main_page : Page
     {
         public Main_page()
@@ -66,7 +56,6 @@ namespace HrHelper.Pages
             }
             return Convert.ToInt32(id);
         }
-        private void summaryAdd_bt_Click(object sender, RoutedEventArgs e) => Classes.Settings.mainFrame.Navigate(new Pages.SummaryAdd_page());
 
         public void ChangeSummaryForDataGrid(int status)
         {
@@ -74,13 +63,10 @@ namespace HrHelper.Pages
                 summary_dg.ItemsSource = db.Summaries.Where(o => o.StatusId == status).ToArray();     
             
         }
-
+        private void summaryAdd_bt_Click(object sender, RoutedEventArgs e) => Classes.Settings.mainFrame.Navigate(new Pages.SummaryAdd_page());
         private void acceptSammury_but_Click(object sender, RoutedEventArgs e) => ChangeSummaryForDataGrid(3);
-
         private void refusal_but_Click(object sender, RoutedEventArgs e) => ChangeSummaryForDataGrid(2);
-
         private void invitedSummary_but_Click(object sender, RoutedEventArgs e) => ChangeSummaryForDataGrid(1);
-
         private void withoutStatusSummary_but_Click(object sender, RoutedEventArgs e) => ChangeSummaryForDataGrid(4);
     }
 }

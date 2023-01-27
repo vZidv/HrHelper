@@ -6,21 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Microsoft.EntityFrameworkCore;
 
 namespace HrHelper.Pages
 {
-    /// <summary>
-    /// Interaction logic for Vacancy_page.xaml
-    /// </summary>
     public partial class Vacancy_page : Page
     {
         Vacancy? vacancyNow;
@@ -32,7 +21,6 @@ namespace HrHelper.Pages
             LoadVacancy();
             LoadStatusComobox();
         }
-
         private void LoadVacancy()
         {
             Vacancy[] vacancies;
@@ -110,7 +98,6 @@ namespace HrHelper.Pages
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
                 vacancyNow = db.Vacancies.Where(o => o.JobTitle == but.Content.ToString()).First();
-
                 summaryForVacancy = db.SummaryForVacancies.Where(o => o.JobId == vacancyNow.Id).Include(o => o.Summary).ToArray();
             }
 
@@ -121,8 +108,6 @@ namespace HrHelper.Pages
                 i++;
             }
             summary_dg.ItemsSource = summaries;
-
-
         }
 
         private void openSummary_button_Click(object sender, RoutedEventArgs e)
@@ -134,7 +119,6 @@ namespace HrHelper.Pages
         private int ChoosePersonId()
         {
             int r = summary_dg.SelectedIndex;
-
             string id = null;
 
             for (int i = 0; i < 2;)

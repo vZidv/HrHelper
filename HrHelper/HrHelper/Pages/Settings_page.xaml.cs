@@ -1,29 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace HrHelper.Pages
 {
-    /// <summary>
-    /// Interaction logic for Settings_page.xaml
-    /// </summary>
     public partial class Settings_page : Page
     {
-        public Settings_page()
-        {
-            InitializeComponent();
-        }
+        public Settings_page() => InitializeComponent();
 
         private void deleteDb_but_Click(object sender, RoutedEventArgs e)
         {
@@ -36,5 +19,18 @@ namespace HrHelper.Pages
 
             Application.Current.Shutdown();
         }
+
+        private void ChangeColorsTheme(string newtheme, string nowtheme)
+        {
+            Uri newThemeuri = new Uri($@"Dictionary\{newtheme}",UriKind.Relative);
+            Uri nowThemeuri = new Uri($@"Dictionary\{nowtheme}", UriKind.Relative);
+            ResourceDictionary newThemeDictionary = Application.LoadComponent(newThemeuri) as ResourceDictionary;
+            ResourceDictionary nowThemeDictionary = Application.LoadComponent(nowThemeuri) as ResourceDictionary;
+
+            Application.Current.Resources.Remove(nowThemeDictionary);
+            Application.Current.Resources.MergedDictionaries.Add(newThemeDictionary);           
+        }
+
+        private void themeColors_cb_SelectionChanged(object sender, SelectionChangedEventArgs e) => ChangeColorsTheme("WhiteThemeColors.xaml", "BlackThemeColors.xaml");
     }
 }
