@@ -13,6 +13,14 @@ using Microsoft.EntityFrameworkCore;
 using HrHelper.Classes;
 using ex = Microsoft.Office.Interop.Excel;
 
+using PdfSharp;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
+using System.Diagnostics;
+using System.Drawing.Configuration;
+using System.Drawing;
+
 namespace HrHelper.Pages
 {
     public partial class Summary_page : Page
@@ -308,5 +316,11 @@ namespace HrHelper.Pages
         }
 
         private void summaryEdit_but_Click(object sender, RoutedEventArgs e) => Settings.mainFrame.Navigate(new SummaryEdit_page(summary));
+
+        private void pdfExport_but_Click(object sender, RoutedEventArgs e)
+        {
+            PdfExport.SummaryExport(summary, GetAge(summary));
+        }
+     
     }
 }

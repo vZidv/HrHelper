@@ -67,9 +67,12 @@
                  30,20
                  430,20" Margin="25,0,40,0"/>
                     <StackPanel Orientation="Horizontal" Margin="20,15,20,10" >
-                        <Button Content="Excel" x:Name="excelExport_but"
+                        <Button Content="Pdf" x:Name="pdfExport_but"
+                                Background="{StaticResource AccentColorSecond}" FontSize="23"
+                            Style="{StaticResource defaultBut}" Margin="10,0" Click="pdfExport_but_Click"/>
+                        <!--<Button Content="Excel" x:Name="excelExport_but"
                                 Background="{StaticResource Online}" FontSize="23"
-                            Style="{StaticResource defaultBut}" Margin="10,0" Click="excelExport_but_Click"/>
+                            Style="{StaticResource defaultBut}" Margin="10,0" Click="excelExport_but_Click"/>-->
                         <Button x:Name="wordExport" Content="Word" Background="{StaticResource Purple}" FontSize="23"
                             Style="{StaticResource defaultBut}" Margin="10,0" Click="wordExport_Click"/>
                     </StackPanel>

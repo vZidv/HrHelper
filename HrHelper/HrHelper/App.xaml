@@ -2,7 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:HrHelper"
-             StartupUri="Windows/Authorization_win.xaml">
+             StartupUri="Windows/Main_win.xaml">
+    <!--Windows/Authorization_win.xaml-->
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
