@@ -13,13 +13,6 @@ using Microsoft.EntityFrameworkCore;
 using HrHelper.Classes;
 using ex = Microsoft.Office.Interop.Excel;
 
-using PdfSharp;
-using PdfSharp.Drawing;
-using PdfSharp.Pdf;
-using PdfSharp.Pdf.IO;
-using System.Diagnostics;
-using System.Drawing.Configuration;
-using System.Drawing;
 
 namespace HrHelper.Pages
 {
@@ -311,15 +304,50 @@ namespace HrHelper.Pages
             string? photo = null;
             if (summary.Photo != null)
                 photo = summary.Photo.Path;
-            WordExport wordExport = new WordExport();
-            wordExport.ExportSummary(items,summary);
+            
+            WordExport.ExportSummary(items,summary);
         }
 
         private void summaryEdit_but_Click(object sender, RoutedEventArgs e) => Settings.mainFrame.Navigate(new SummaryEdit_page(summary));
 
         private void pdfExport_but_Click(object sender, RoutedEventArgs e)
         {
-            PdfExport.SummaryExport(summary, GetAge(summary));
+            var items = new Dictionary<string, string>
+            {
+                {"<Fullname>", fullname_tblock.Text},
+                {"<Gender>", gender_tblock.Text},
+                {"<Age>", GetAge(summary).ToString()},
+                {"<BirthdayDate>",summary.Birthday.ToString("d MMMM yyyy")},
+            };
+            // Summary contacts
+            if (summary.Contacts != null)
+            {
+                items.Add("<PhoneNumber>", summary.Contacts.Phone);
+                items.Add("<Email>", summary.Contacts.Email);
+                items.Add("<Skype>", summary.Contacts.Skype);
+            }
+            if (summary.Town != null)
+            {
+                items.Add("<Town>", town_tblock.Text);
+                items.Add("<Address>", address_tblock.Text);
+            }
+            if (summary.Education != null)
+                items.Add("<Education>", summary.Education.EducationName);
+            if (summary.Busyness != null)
+                items.Add("<Busyness>", busynessChange_cb.Text);
+
+
+            items.Add("<JobTitle>", jobTitleChange_cb.Text);
+            items.Add("<LastCompany>", summary.LastCompany);
+            items.Add("<LastJobTitle>", summary.LastJobTitle);
+            items.Add("<EducationInstution>", educationInstution_tblock.Text);
+            items.Add("<Comments>", comments_tb.Text);
+
+            string? photo = null;
+            if (summary.Photo != null)
+                photo = summary.Photo.Path;
+
+            PdfExport.SummaryExport(items,summary);
         }
      
     }

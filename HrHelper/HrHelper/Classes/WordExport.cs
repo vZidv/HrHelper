@@ -11,14 +11,76 @@ using System.Windows.Media.Imaging;
 
 namespace HrHelper.Classes
 {
-    public class WordExport
+    public static class WordExport
     {
         static public string ProjectPath()
         {
             return Directory.GetCurrentDirectory();
         }
+        static public bool ExportSummary(Dictionary<string, string> items, Summary summary,Microsoft.Win32.SaveFileDialog dialog)
+        {
+            string filleName = ProjectPath() + "\\Word\\SummaryModel.docx";
+            Word.Application app = null;
 
-        public bool ExportSummary(Dictionary<string, string> items,Summary summary)
+            try
+            {
+                FileInfo fileInfo = new FileInfo(filleName);
+                app = new Word.Application();
+
+                fileInfo.CopyTo(dialog.FileName + ".docx");
+
+
+
+                fileInfo = new FileInfo(dialog.FileName + ".docx");
+
+
+
+                string file = fileInfo.FullName;
+                object missing = Type.Missing;
+
+                Word.Document document = app.Documents.Open(file);
+                if (summary.Photo != null)
+                    AddPhoto(document, summary.Photo.Path);
+
+                foreach (var item in items)
+                {
+                    Word.Find find = app.Selection.Find;
+                    find.Text = item.Key;
+                    find.Replacement.Text = item.Value;
+
+                    Object wrap = Word.WdFindWrap.wdFindContinue;
+                    object replace = Word.WdReplace.wdReplaceAll;
+
+                    find.Execute(FindText: Type.Missing,
+                        MatchCase: false,
+                        MatchWholeWord: false,
+                        MatchWildcards: false,
+                        MatchSoundsLike: false,
+                        MatchAllWordForms: false,
+                        Forward: false,
+                        Wrap: wrap,
+                        Format: false,
+                        ReplaceWith: missing, Replace: replace);
+                }
+                document.Save();
+                //app.Visible = true;
+                app.Documents.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                if (app != null)
+                    app.Quit();
+            }
+
+            return false;
+        }
+
+        static public bool ExportSummary(Dictionary<string, string> items,Summary summary)
         {
             string filleName = ProjectPath() + "\\Word\\SummaryModel.docx";
             Word.Application app = null;
@@ -35,11 +97,11 @@ namespace HrHelper.Classes
 
                 fileInfo.CopyTo(dialog.FileName + ".docx");
 
-               // MessageBox.Show(dialog.FileName);
+               
 
                 fileInfo = new FileInfo(dialog.FileName + ".docx");
 
-                //MessageBox.Show(fileInfo.FullName);
+                
                 
                 string file = fileInfo.FullName;
                 object missing = Type.Missing;
@@ -74,8 +136,7 @@ namespace HrHelper.Classes
                 return true;
             }
             catch (Exception ex) 
-            { 
-                //MyMessageBox.Show("Ошибка", ex.Message, true);
+            {               
                 MessageBox.Show(ex.Message);
             }
             finally
@@ -86,7 +147,7 @@ namespace HrHelper.Classes
 
             return false;
         }
-        public void AddPhoto(Word.Document document, string photo)
+        private static void AddPhoto(Word.Document document, string photo)
         {
             object f = false;
             object t = true;
