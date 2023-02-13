@@ -27,9 +27,18 @@ namespace HrHelper.Classes
             dialog.Filter = "All files (*.*)|*.*";
             dialog.FileName = $"{summary.LastName} {summary.FirstName} {summary.Patronymic}";
             dialog.ShowDialog();
+
+            string savePath = dialog.FileName;
+            dialog.FileName = Directory.GetCurrentDirectory() + $"\\Word\\ {summary.LastName} {summary.FirstName} {summary.Patronymic}";
+            
+            MessageBox.Show(dialog.FileName);
             WordExport.ExportSummary(items, summary, dialog);
-            ConvertDOCtoPDF(dialog.FileName + ".pdf", dialog.FileName + ".docx");
+            ConvertDOCtoPDF(savePath + ".pdf", dialog.FileName + ".docx");
+
+            File.Delete($"{dialog.FileName}.docx");
+
         }
+
         /// <summary>
         /// Conver File Docx to Pdf
         /// </summary>
@@ -47,8 +56,7 @@ namespace HrHelper.Classes
             misValue, misValue, misValue, misValue, misValue, misValue, misValue);
 
             doc.Close();
-            WORD.Quit();
-            MyMessageBox.Show("Вроде все!", "");
+            WORD.Quit();            
         }
     }
 }
