@@ -19,7 +19,7 @@ namespace HrHelper.Pages
 
         private void Authorization_but_Click(object sender, RoutedEventArgs e)
         {         
-            if (login_textbox.Text == String.Empty || password_pb.Password == String.Empty)
+            if (login_tb.Text == String.Empty || password_tb.Password == String.Empty)
             {
                 Classes.MyMessageBox.Show("Ошибка","Поле логин или пароль пустое!",true);
                 return;
@@ -29,14 +29,14 @@ namespace HrHelper.Pages
                 AuthorizationUser user;
 
                 using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
-                    user = db.AuthorizationUsers.Where(u => u.Login == login_textbox.Text).Include(o => o.TypeNavigation).FirstOrDefault();
+                    user = db.AuthorizationUsers.Where(u => u.Login == login_tb.Text).Include(o => o.TypeNavigation).FirstOrDefault();
 
-                if (user == null || password_pb.Password != user.Password)
+                if (user == null || password_tb.Password != user.Password)
                 {
                     Classes.MyMessageBox.Show("Ошибка", "Неверный логин или пароль!", true);
                     return;
                 }
-                if (password_pb.Password != user.Password)
+                if (password_tb.Password != user.Password)
                     Classes.MyMessageBox.Show("Ошибка", "Неверный пароль!", true);
 
                 switch (user.TypeNavigation.Type)
@@ -58,12 +58,6 @@ namespace HrHelper.Pages
             }
         }
 
-        private void password_pb_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            if (password_pb.Password.Length > 0)
-                password_textblock.Visibility = Visibility.Collapsed;
-            else
-                password_textblock.Visibility = Visibility.Visible;
-        }
+  
     }
 }

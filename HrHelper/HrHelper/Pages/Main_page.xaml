@@ -4,35 +4,30 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HrHelper.Pages"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Main_page">
+      d:DesignHeight="450" d:DesignWidth="900"
+      Title="Main_page" Loaded="Page_Loaded">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="91*"/>
-            <ColumnDefinition Width="173*"/>
-        </Grid.ColumnDefinitions>
-
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="0.3*"/>
             <RowDefinition/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height ="0.1*"/>
         </Grid.RowDefinitions>
-        <Button Content="Новое резюме" Style="{DynamicResource defaultBut}" x:Name="summaryAdd_bt"
-            Grid.Row="0" HorizontalAlignment="Left" Width="180" Height="40" Margin="10,10,0,10" Click="summaryAdd_bt_Click" />
-        <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
-            <StackPanel Orientation="Horizontal">
-                <Button x:Name="acceptSammury_but"
-                    Content="Принят" Style="{DynamicResource bookMarkBut}"
-                        Margin="5,10,0,0" Click="acceptSammury_but_Click"/>
-                <Button x:Name="refusal_but"
-                    Content="Отказ" Style="{DynamicResource bookMarkBut}" Click="refusal_but_Click"/>
-                <Button x:Name="invitedSummary_but"
-                    Content="Приглашён" Style="{DynamicResource bookMarkBut}" Click="invitedSummary_but_Click"/>
-                <Button x:Name="withoutStatusSummary_but"
-                    Content="Без Статутса" Style="{DynamicResource bookMarkBut}" Click="withoutStatusSummary_but_Click"/>
-            </StackPanel>
+        <Grid Grid.Row="0">
+            <ui:AutoSuggestBox PlaceholderText="Поиск"
+                Width="300"
+                x:Name="search_tb" SelectionChanged="search_tb_SelectionChanged"/>
+            <TextBlock Text="Кандидаты" 
+                       Style="{StaticResource defaultTextBlock}"
+                       HorizontalAlignment="Left" VerticalAlignment="Top" 
+                       FontSize="22" Margin="7"/>
+            <ui:Button Content="➕ Кандидат" x:Name="summaryAdd_but"
+                       VerticalAlignment="Bottom" Margin="10"
+                       Background="{StaticResource Online}" Click="summaryAdd_bt_Click"/>
+        </Grid>
+        <Grid Grid.Row="1">
             <DataGrid RowStyle="{DynamicResource DataGridRowStyle}" CellStyle="{StaticResource DataGridCell}"
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}" Style="{DynamicResource defaultDataGridStyle}"  x:Name="summary_dg" IsReadOnly="True" RowHeaderWidth="0"
             Grid.Row="1" Margin="5,0,5,0" BorderThickness="0" AutoGenerateColumns="False" Grid.ColumnSpan="2">
@@ -54,13 +49,22 @@
                     <DataGridTemplateColumn Header="Действие" MinWidth="170" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Открыть" Style="{StaticResource dataGridtBut}"
-                                        x:Name="openSummary_button" Click="openSummary_button_Click"  />
+                                <Grid>
+                                    <StackPanel Orientation="Horizontal">
+                                        <ui:Button Icon="Edit16" Background="{StaticResource Blue}"
+                                        x:Name="edit_button"  />
+                                        <ui:Button Icon="Delete12" Background="{StaticResource Dnd}"
+                                        x:Name="delete_button"/>
+                                    </StackPanel>
+                                </Grid>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-        </StackPanel>
+        </Grid>
+        <TextBlock Text="Всего кандидатов"  x:Name="allClients_tblock"
+                       Grid.Row="2" FontSize="12" HorizontalAlignment="Left" Margin="10"
+                   Style="{StaticResource defaultTextBlock}"/>
     </Grid>
 </Page>

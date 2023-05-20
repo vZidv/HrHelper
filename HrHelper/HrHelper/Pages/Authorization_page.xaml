@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HrHelper.Pages"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       mc:Ignorable="d" 
       d:DesignHeight="615" d:DesignWidth="465"
       Title="Authorization_page">
@@ -53,26 +54,12 @@
         <Grid Grid.Row="1" VerticalAlignment="Center">
             <StackPanel>
                 <Grid>
-                    <TextBox Text="" x:Name="login_textbox" Focusable="True"
-                    Style="{DynamicResource defaultTextbox}"/>
-                    <TextBlock>
-                        <TextBlock.Style>
-                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlock}">
-
-                                <Setter Property="Visibility" Value="Hidden"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Text,ElementName=login_textbox}" Value="">
-                                        <Setter Property="Visibility" Value="Visible"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
+                    <ui:TextBox PlaceholderText="Логин" x:Name="login_tb"
+                              FontWeight="DemiBold" FontSize="20" Width="300" Margin="10"/>
                 </Grid>
                 <Grid>
-                    <PasswordBox x:Name="password_pb" Password=""
-                        Style="{StaticResource defaultPasswordbox}" PasswordChanged="password_pb_PasswordChanged"/>
-                    <TextBlock Text="Пароль" x:Name="password_textblock" Style="{StaticResource TextBlock}"/>
+                    <ui:PasswordBox PlaceholderText="Пароль" x:Name="password_tb"
+                     Width="300" FontSize="20" Margin="10" FontWeight="DemiBold"/>
                 </Grid>
                 <Button x:Name="Authorization_but" IsDefault="True"
                         Style="{StaticResource defaultBut}" Height="65" Width="230" 

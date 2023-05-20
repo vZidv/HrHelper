@@ -4,71 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HrHelper.Windows"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
         Title="HrHelper" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Background="Transparent" AllowsTransparency="True"
-        Height="585" Width="425" Icon="/Source/LogoMini.png">
+        Height="550" Width="800" Icon="/Source/LogoMini.png">
     <Grid Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Border Background="{StaticResource Chat}" CornerRadius="19,19,17,17" Height="583"
-            Grid.RowSpan="2">
+        <Border Height="550" Width="800" Grid.RowSpan="2"
+                CornerRadius="25">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.7,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF884B"/>
+                    <GradientStop Color="#FF577F" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
         </Border>
-        <Border Background="{StaticResource Channels}" CornerRadius="16,16,0,0" 
-            Grid.Row ="0">
-            <Border.OpacityMask>
-                <VisualBrush>
-                    <VisualBrush.Visual>
-                        <Border
-                    Background="Black"
-                    CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource FindAncestor, AncestorType=Border}}"
-                    Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=Border}}"
-                    Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=Border}}"
-                    />
-                    </VisualBrush.Visual>
-                </VisualBrush>
-            </Border.OpacityMask>
-            
-            <StackPanel x:Name="ToolBar" HorizontalAlignment="Right"
-                        Orientation="Horizontal" Background="Transparent"
-                    >
-                <Grid Background="Transparent" MouseDown="ToolBar_MouseDown" Width="345"/>
-                <Button x:Name="minWind_but" Style="{StaticResource minWinBut}" Width="50" Click="minWind_but_Click">
-                    <Line X1="0" Y1="0" X2="70" Y2="0"  StrokeThickness="10" Margin="15,0">
-                        <Line.Style>
-                            <Style TargetType="Line">
-                                <Setter Property="Stroke" Value="{StaticResource Chat}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsMouseOver,ElementName=minWind_but}" Value="true">
-                                        <Setter Property="Stroke" Value="{StaticResource Channels}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Line.Style>
-                    </Line>
-                </Button>
-            
-                <Button x:Name="close_but" Style="{StaticResource closeBut}" Click="close_but_Click">
-                    <Path Data="M1,1L15,15M15,1L1,15" StrokeThickness="3.5">
-                        <Path.Style>
-                            <Style TargetType="Path">
-                                <Setter Property="Stroke" Value="{StaticResource Chat}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsMouseOver,ElementName=close_but }" Value="true">
-                                        <Setter Property="Stroke" Value="{StaticResource Channels}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Path.Style>
-                    </Path>
-                </Button>
-
-
-            </StackPanel>
-        </Border>
-
-
+        <ui:TitleBar Background="{StaticResource Chat}" ShowMaximize="False"/>
         <Frame x:Name="mainFrame" Grid.Row="1"/>
     </Grid>
 </Window>

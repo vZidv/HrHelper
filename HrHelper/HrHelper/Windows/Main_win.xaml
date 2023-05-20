@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HrHelper.Windows"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
-        Title="HrHelper" Height="900" Width="1600" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent" Icon="/Source/LogoMini.png">
+        Title="HrHelper" Height="700" Width="1300" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True"  Background="Transparent" Icon="/Source/LogoMini.png">
     <Window.Resources>
         <Style x:Key="MenuButton" TargetType="Button">
             <Setter Property="Height" Value="60"/>
@@ -32,7 +33,7 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Border Background="{StaticResource Channels}" CornerRadius="17"
+    <Border Background="{StaticResource Channels}" CornerRadius="0,0,17,17"
             Grid.ColumnSpan="2" Grid.RowSpan="3">
         <Border.OpacityMask>
             <VisualBrush>
@@ -57,120 +58,42 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Grid x:Name="toolBar_grid"
-                Grid.ColumnSpan="2" Grid.Row="0" Background="{StaticResource Channels}" MouseDown="toolBar_grid_MouseDown" >
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:Name="minWind_but" Style="{StaticResource minWinBut}" Width="50" Click="minWind_but_Click">
-                        <Line X1="0" Y1="0" X2="70" Y2="0"  StrokeThickness="10" Margin="15,0">
-                            <Line.Style>
-                                <Style TargetType="Line">
-                                    <Setter Property="Stroke" Value="{StaticResource Chat}"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsMouseOver,ElementName=minWind_but}" Value="true">
-                                            <Setter Property="Stroke" Value="{StaticResource Channels}"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Line.Style>
-                        </Line>
-                    </Button>
-                    <Button x:Name="maxWind_but" Style="{StaticResource minWinBut}" Width="50" Click="maxWind_but_Click">
-                        <Grid>
-                            <Border Background="{StaticResource Channels}"
-                                Height="11" Width="14" CornerRadius="2" Margin="3,7,3,4" Panel.ZIndex="1"/>
-                            <Border Height="19" Width="23" CornerRadius="5" Margin="2">
-                                <Border.Style>
-                                    <Style TargetType="Border">
-                                        <Setter Property="Background" Value="{StaticResource Chat}"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsMouseOver,ElementName=minWind_but}" Value="true">
-                                                <Setter Property="Background" Value="{StaticResource Channels}"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Border.Style>
-                            </Border>
-                        </Grid>
-                    </Button>
-                    <Button x:Name="close_but" Style="{StaticResource closeBut}" Click="close_but_Click">
-                        <Path Data="M1,1L15,15M15,1L1,15" StrokeThickness="3.5">
-                            <Path.Style>
-                                <Style TargetType="Path">
-                                    <Setter Property="Stroke" Value="{StaticResource Chat}"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsMouseOver,ElementName=close_but }" Value="true">
-                                            <Setter Property="Stroke" Value="{StaticResource Channels}"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Path.Style>
-                        </Path>
-                    </Button>
-                </StackPanel>
+            <Grid Grid.Column="1">
+                <ui:TitleBar Background="{StaticResource Channels}"/>
             </Grid>
-            <Grid Background="{StaticResource Channels}" Visibility="Visible" Grid.RowSpan="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="0.7*"/>
-                    <RowDefinition Height="0.4*"/>
-                </Grid.RowDefinitions>
-                <Image Source="/Source/LogoMini.png"
-                VerticalAlignment="Top" Height="100" />
-                <StackPanel Grid.Row="1" VerticalAlignment="Top">
-                    <StackPanel>
-                        <Button x:Name="vacancy_but"
-                VerticalAlignment="Top"
-                Style="{StaticResource MenuButton}" Click="vacancy_but_Click">
-                            <Grid>
-                                <Image Source="/Source/Vacancy.png" Margin="3"/>
-                            </Grid>
-                        </Button>
-                        <TextBlock Text="Вакансии" FontSize="12" Margin="0"
-                                   Style="{StaticResource defaultTextBlock}"/>
-                    </StackPanel>
 
-                    <StackPanel>
-                        <Button x:Name="person_but"
-                VerticalAlignment="Top"
-                Style="{StaticResource MenuButton}" Click="person_but_Click">
-                            <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
-                                <Path Fill="{StaticResource White}" 
-                                    Data="F1 M16,16z M0,0z M3,14C3,14 2,14 2,13 2,12 3,9 8,9 13,9 14,12 14,13 14,14 13,14 13,14L3,14z M8,8A3,3,0,1,0,8,2A3,3,0,0,0,8,8z" Margin="-24,-24,24,24">
-                                    <Path.RenderTransform>
-                                        <ScaleTransform ScaleX="4" ScaleY="4"/>
-                                    </Path.RenderTransform>
-                                </Path>
-                                </Grid>
-                                <!--<Image Source="/Source/Person.png" Margin="3"/>-->
-                        </Button>
-                        <TextBlock Text="Кандидаты" FontSize="12" Margin="0"
-                                   Style="{StaticResource defaultTextBlock}"/>
-                    </StackPanel>
-                    
-                </StackPanel>
-                <StackPanel Grid.Row="2" VerticalAlignment="Bottom">
-                    <StackPanel>
-                    <Button x:Name="settings_but"
-                Style="{StaticResource MenuButton}" Click="settings_but_Click">
-                        <Grid>
-                            <Image Source="/Source/Settings.png" Margin="3" />
-                        </Grid>
-                    </Button>
-                        <TextBlock Text="Настройки" FontSize="12" Margin="0"
-                                   Style="{StaticResource defaultTextBlock}"/>
-                    </StackPanel>
-                    <StackPanel Margin="2,10,0,50">
-                    <Button x:Name="exit_but"
-                Style="{StaticResource MenuButton}" Click="exit_but_Click">
-                        <Grid>
-                                <Image Source="/Source/exit.png" Margin="3"/>
-                        </Grid>
-                    </Button>
-                        <TextBlock Text="Выйти" FontSize="12" Margin="0"
-                                   Style="{StaticResource defaultTextBlock}"/>
-                    </StackPanel>
-                </StackPanel>
+            <Grid Grid.Column="0" Grid.RowSpan="2">
+                <DockPanel LastChildFill="True">
+                    <Image Source="/Source/LogoMini.png"
+                VerticalAlignment="Top" DockPanel.Dock="Top"/>
+                    <ui:NavigationStore DockPanel.Dock="Top">
+                        <ui:NavigationStore.Items>
+                            <ui:NavigationItem Foreground="{StaticResource White}" IconForeground="{StaticResource White}"
+                        x:Name="person_but" 
+                        Icon="Person20" IconSize="35"
+                        Content="Кандидаты" Click="person_but_Click"/>
+                            <ui:NavigationItem Foreground="{StaticResource White}" IconForeground="{StaticResource White}"
+                        x:Name="vacancy_but"
+                        Icon="AppGeneric20" IconSize="35"
+                        Content="Вакансии" Click="vacancy_but_Click"/>
+                            <ui:NavigationSeparator/>
+                        </ui:NavigationStore.Items>
+                        <ui:NavigationStore.Footer>
+                            <ui:NavigationItem Foreground="{StaticResource White}" IconForeground="{StaticResource White}"
+                        x:Name="users_but"
+                        Icon="ShieldPerson20" IconSize="35"
+                        Content="Пользователи"/>
+                            <ui:NavigationSeparator/>
+                            <ui:NavigationItem Foreground="{StaticResource White}" IconForeground="{StaticResource White}"
+                        x:Name="exit_but"
+                        Icon="ArrowExit20" IconSize="35"
+                        Content="Выйти" Click="exit_but_Click"/>
+                        </ui:NavigationStore.Footer>
 
+                    </ui:NavigationStore>
+
+                </DockPanel>
+                
             </Grid>
             <Border Grid.Row="1" Grid.Column="1" Background="{StaticResource Chat}" CornerRadius="10,0,0,0">
                 <Border.OpacityMask>
