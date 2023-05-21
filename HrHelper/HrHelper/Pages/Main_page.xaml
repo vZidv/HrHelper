@@ -51,8 +51,8 @@
                             <DataTemplate>
                                 <Grid>
                                     <StackPanel Orientation="Horizontal">
-                                        <ui:Button Icon="Edit16" Background="{StaticResource Blue}"
-                                        x:Name="edit_button"  />
+                                        <ui:Button Icon="Eye16" Background="{StaticResource Blue}"
+                                        x:Name="openSummary_button" Click="openSummary_button_Click" />
                                         <ui:Button Icon="Delete12" Background="{StaticResource Dnd}"
                                         x:Name="delete_button"/>
                                     </StackPanel>

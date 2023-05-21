@@ -33,9 +33,9 @@ namespace HrHelper.Pages
         }
         private void LoadComboBoxes()
         {
-            LoadStatusComboBox();
+            //LoadStatusComboBox();
             LoadJobTitleComboBox();
-            LoadbussynesComboBox();
+            //LoadbussynesComboBox();
         }
 
         private void LoadSummary(int id)
@@ -63,59 +63,69 @@ namespace HrHelper.Pages
                 }
             }
 
-            LoadContacts(summary);
+            //LoadContacts(summary);
 
-            dateBirthdayAge_tblock.Text = summary.Birthday.ToString("dd.MM.yyyy") + $"({GetAge(summary)} годиков)";
+            //Возраст
+            dateBirthday_tblock.Text = summary.Birthday.ToString("dd.MM.yyyy");
+            age_tblock.Text = GetAge(summary).ToString();
+
+            //Пол
             gender_tblock.Text = summary.Gender;
 
+            //Адрес
             town_tblock.Text = summary.Town;
             address_tblock.Text = summary.Address;
-            if (summary.Busyness != null)
-                busynessChange_cb.Text = summary.Busyness.Type;
 
+            //if (summary.Busyness != null)
+            //    busynessChange_cb.Text = summary.Busyness.Type;
+
+            //Оброзование
             educationInstution_tblock.Text = summary.EducationInstution;
+
             if (summary.Education != null)
                 education_tblock.Text = summary.Education.EducationName;
 
+            //Комментарии
             comments_tb.Text = summary.Comments;
 
+            //Статус
             SetStatus(summary.Status);
-            statusChange_cb.Text = summary.Status.Status;
+            //statusChange_cb.Text = summary.Status.Status;
         }
-        void LoadContacts(Summary summary)
-        {
-            if (summary.ContactsId == null)
-                return;
+        //void LoadContacts(Summary summary)
+        //{
+        //    if (summary.ContactsId == null)
+        //        return;
 
-            using (var db = new HrHelperDatabaseContext())
-                summary.Contacts = db.SummaryContacts.Where(o => o.Id == summary.ContactsId).First();
+        //    using (var db = new HrHelperDatabaseContext())
+        //        summary.Contacts = db.SummaryContacts.Where(o => o.Id == summary.ContactsId).First();
 
-            if (summary.Contacts.Phone != null)
-                ContactsAddView("Номер телефона", summary.Contacts.Phone);
-            if (summary.Contacts.Email != null)
-                ContactsAddView("Почта", summary.Contacts.Email);
-            if (summary.Contacts.Skype != null)
-                ContactsAddView("Skype", summary.Contacts.Skype);
-        }
-        void ContactsAddView(string titleContact, string contact)
-        {
-            StackPanel contact_sp = new StackPanel();
-            contact_sp.Orientation = Orientation.Horizontal;
+        //    if (summary.Contacts.Phone != null)
+        //        ContactsAddView("Номер телефона", summary.Contacts.Phone);
+        //    if (summary.Contacts.Email != null)
+        //        ContactsAddView("Почта", summary.Contacts.Email);
+        //    if (summary.Contacts.Skype != null)
+        //        ContactsAddView("Skype", summary.Contacts.Skype);
+        //}
+        //void ContactsAddView(string titleContact, string contact)
+        //{
+        //    StackPanel contact_sp = new StackPanel();
+        //    contact_sp.Orientation = Orientation.Horizontal;
 
-            TextBlock title_tb = new TextBlock();
-            title_tb.Text = titleContact;
-            title_tb.Style = (Style)Application.Current.Resources["defaultTextBlock"];
+        //    TextBlock title_tb = new TextBlock();
+        //    title_tb.Text = titleContact;
+        //    title_tb.Style = (Style)Application.Current.Resources["defaultTextBlock"];
 
-            TextBlock contact_tb = new TextBlock();
-            contact_tb.Margin = new Thickness(10);
-            contact_tb.Text = contact;
-            contact_tb.Style = (Style)Application.Current.Resources["valueTextBlock"];
+        //    TextBlock contact_tb = new TextBlock();
+        //    contact_tb.Margin = new Thickness(10);
+        //    contact_tb.Text = contact;
+        //    contact_tb.Style = (Style)Application.Current.Resources["valueTextBlock"];
 
-            contact_sp.Children.Add(title_tb);
-            contact_sp.Children.Add(contact_tb);
+        //    contact_sp.Children.Add(title_tb);
+        //    contact_sp.Children.Add(contact_tb);
 
-            contacts_sp.Children.Add(contact_sp);
-        }
+        //    contacts_sp.Children.Add(contact_sp);
+        //}
         int GetAge(Summary summary)
         {
             int year = (DateTime.Now.Year - summary.Birthday.Year);
@@ -148,29 +158,29 @@ namespace HrHelper.Pages
             }
             status_border.Background = Application.Current.Resources[$"{statusColor}"] as SolidColorBrush;
         }
-        private void LoadStatusComboBox()
-        {
-            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
-            {
-                SummaryStatus[] statuses = db.SummaryStatuses.ToArray();
-                foreach (SummaryStatus status in statuses)
-                {
-                    statusChange_cb.Items.Add(status.Status);
-                }
-            }
-        }
-        private void LoadbussynesComboBox()
-        {
-            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
-            {
-                Busyness[] busynesses = db.Busynesses.ToArray();
-                foreach (Busyness busyness in busynesses)
-                {
-                    busynessChange_cb.Items.Add(busyness.Type);
-                }
+        //private void LoadStatusComboBox()
+        //{
+        //    using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+        //    {
+        //        SummaryStatus[] statuses = db.SummaryStatuses.ToArray();
+        //        foreach (SummaryStatus status in statuses)
+        //        {
+        //            statusChange_cb.Items.Add(status.Status);
+        //        }
+        //    }
+        //}
+        //private void LoadbussynesComboBox()
+        //{
+        //    using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+        //    {
+        //        Busyness[] busynesses = db.Busynesses.ToArray();
+        //        foreach (Busyness busyness in busynesses)
+        //        {
+        //            busynessChange_cb.Items.Add(busyness.Type);
+        //        }
 
-            }
-        }
+        //    }
+        //}
         private void LoadJobTitleComboBox()
         {
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
@@ -194,78 +204,80 @@ namespace HrHelper.Pages
             }
         }
 
-        private void Page_Unloaded(object sender, RoutedEventArgs e)
-        {
-            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
-            {
-                Summary summary = db.Summaries.Where(o => o.Id == idSummary).First();
+        //private void Page_Unloaded(object sender, RoutedEventArgs e)
+        //{
+        //    using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+        //    {
+        //        Summary summary = db.Summaries.Where(o => o.Id == idSummary).First();
 
-                summary.Comments = comments_tb.Text;
-                summary.StatusId = db.SummaryStatuses.Where(o => o.Status == status_tblock.Text).First().Id;
-                if (busynessChange_cb.SelectedIndex != -1)
-                    summary.BusynessId = db.Busynesses.Where(o => o.Type == busynessChange_cb.Text).First().Id;
+        //        summary.Comments = comments_tb.Text;
+        //        summary.StatusId = db.SummaryStatuses.Where(o => o.Status == status_tblock.Text).First().Id;
+        //        if (busynessChange_cb.SelectedIndex != -1)
+        //            summary.BusynessId = db.Busynesses.Where(o => o.Type == busynessChange_cb.Text).First().Id;
 
-                if (jobTitleChange_cb.Text != String.Empty)
-                {
-                    SummaryForVacancy summaryFor;
+        //        if (jobTitleChange_cb.Text != String.Empty)
+        //        {
+        //            SummaryForVacancy summaryFor;
 
-                    try
-                    {
-                        summaryFor = db.SummaryForVacancies.Where(o => o.SummaryId == idSummary).First();
-                        summaryFor.JobId = db.Vacancies.Where(o => o.JobTitle == jobTitleChange_cb.Text).First().Id;
-                        db.SummaryForVacancies.Update(summaryFor);
-                    }
-                    catch
-                    {
-                        summaryFor = new SummaryForVacancy()
-                        {
-                            JobId = db.Vacancies.Where(o => o.JobTitle == jobTitleChange_cb.Text).First().Id,
-                            SummaryId = idSummary
-                        };
-                        db.SummaryForVacancies.Add(summaryFor);
-                    }
-                }
-                db.SaveChanges();
-            }
-        }
+        //            try
+        //            {
+        //                summaryFor = db.SummaryForVacancies.Where(o => o.SummaryId == idSummary).First();
+        //                summaryFor.JobId = db.Vacancies.Where(o => o.JobTitle == jobTitleChange_cb.Text).First().Id;
+        //                db.SummaryForVacancies.Update(summaryFor);
+        //            }
+        //            catch
+        //            {
+        //                summaryFor = new SummaryForVacancy()
+        //                {
+        //                    JobId = db.Vacancies.Where(o => o.JobTitle == jobTitleChange_cb.Text).First().Id,
+        //                    SummaryId = idSummary
+        //                };
+        //                db.SummaryForVacancies.Add(summaryFor);
+        //            }
+        //        }
+        //        db.SaveChanges();
+        //    }
+        //}
 
-        private void statusChange_cb_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            SummaryStatus status = new SummaryStatus()
-            {
-                Status = statusChange_cb.SelectedValue.ToString()
-            };
-            SetStatus(status);
-        }
+        //private void statusChange_cb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    SummaryStatus status = new SummaryStatus()
+        //    {
+        //        Status = statusChange_cb.SelectedValue.ToString()
+        //    };
+        //    SetStatus(status);
+        //}
 
-        private void excelExport_but_Click(object sender, RoutedEventArgs e)
-        {
-            ex.Application exApp = new ex.Application();
+        #region Excel Export
+        //private void excelExport_but_Click(object sender, RoutedEventArgs e)
+        //{
+        //    ex.Application exApp = new ex.Application();
 
-            exApp.Workbooks.Add();
-            ex.Worksheet wsh = (ex.Worksheet)exApp.ActiveSheet;
-            Summary summary;
-            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
-                summary = db.Summaries.Where(o => o.Id == idSummary).First();
-            wsh.Cells[1, 1] = "Имя";
-            wsh.Cells[1, 2] = "Фамилия";
-            wsh.Cells[1, 3] = "Отчество";
+        //    exApp.Workbooks.Add();
+        //    ex.Worksheet wsh = (ex.Worksheet)exApp.ActiveSheet;
+        //    Summary summary;
+        //    using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+        //        summary = db.Summaries.Where(o => o.Id == idSummary).First();
+        //    wsh.Cells[1, 1] = "Имя";
+        //    wsh.Cells[1, 2] = "Фамилия";
+        //    wsh.Cells[1, 3] = "Отчество";
 
-            wsh.Cells[1, 4] = "Дата рождения";
-            wsh.Cells[1, 5] = "Статус";
-            wsh.Cells[1, 6] = "Комментарии";
+        //    wsh.Cells[1, 4] = "Дата рождения";
+        //    wsh.Cells[1, 5] = "Статус";
+        //    wsh.Cells[1, 6] = "Комментарии";
 
-            wsh.Cells[2, 1] = summary.FirstName;
-            wsh.Cells[2, 2] = summary.LastName;
-            wsh.Cells[2, 3] = summary.Patronymic;
+        //    wsh.Cells[2, 1] = summary.FirstName;
+        //    wsh.Cells[2, 2] = summary.LastName;
+        //    wsh.Cells[2, 3] = summary.Patronymic;
 
-            wsh.Cells[2, 4] = summary.Birthday;
-            wsh.Cells[2, 5] = status_tblock.Text;
-            wsh.Cells[2, 6] = summary.Comments;
-            exApp.Visible = true;
-        }
+        //    wsh.Cells[2, 4] = summary.Birthday;
+        //    wsh.Cells[2, 5] = status_tblock.Text;
+        //    wsh.Cells[2, 6] = summary.Comments;
+        //    exApp.Visible = true;
+        //}
+        #endregion
 
-        private void jobTitleChange_cb_SelectionChanged(object sender, SelectionChangedEventArgs e) { }
+        //private void jobTitleChange_cb_SelectionChanged(object sender, SelectionChangedEventArgs e) { }
 
         private void wordExport_Click(object sender, RoutedEventArgs e)
         {
@@ -290,6 +302,7 @@ namespace HrHelper.Pages
 
             PdfExport.SummaryExport(items, summary);
         }
+
         private Dictionary<string, string> SummaryData()
         {
             var items = new Dictionary<string, string>
@@ -314,10 +327,10 @@ namespace HrHelper.Pages
             if (summary.Education != null)
                 items.Add("<Education>", summary.Education.EducationName);
             if (summary.Busyness != null)
-                items.Add("<Busyness>", busynessChange_cb.Text);
+                //items.Add("<Busyness>", busynessChange_cb.Text);
 
 
-            items.Add("<JobTitle>", jobTitleChange_cb.Text);
+            //items.Add("<JobTitle>", jobTitleChange_cb.Text);
             items.Add("<LastCompany>", summary.LastCompany);
             items.Add("<LastJobTitle>", summary.LastJobTitle);
             items.Add("<EducationInstution>", educationInstution_tblock.Text);
