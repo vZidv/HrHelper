@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:HrHelper.Pages"
       mc:Ignorable="d" 
      d:DesignHeight="800" d:DesignWidth="1500"
-      Title="SummaryEdit_page" >
+      Title="SummaryEdit_page" Loaded="Page_Loaded" >
 
     <Grid Background="{StaticResource Channels}">
         <Grid.RowDefinitions>
@@ -169,12 +169,15 @@
                             <TextBlock FontSize="20"
                                 HorizontalAlignment="Left" Margin="30,10"
                                 Text="Стаутс" Style="{StaticResource valueTextBlock}"/>
-                            <Border Background="{StaticResource Dnd}" CornerRadius="10" x:Name="status_border"
+                            <!--<Border Background="{StaticResource Dnd}" CornerRadius="10" x:Name="status_border"
                         Height="40" Width="300" HorizontalAlignment="Left" Margin="20,0">
                                 <TextBlock Text="Отказ" x:Name="status_tblock"
                                    Style="{StaticResource defaultTextBlock}"
                                    VerticalAlignment="Center"/>
-                            </Border>
+                            </Border>-->
+                            <ComboBox Text="text"  Foreground="{StaticResource White}"
+                                      FontWeight="DemiBold"
+                                x:Name="statusChange_cb" Width="250" Margin="20,0" SelectionChanged="statusChange_cb_SelectionChanged"/>
                         </StackPanel>
                         <StackPanel>
                             <TextBlock FontSize="20"

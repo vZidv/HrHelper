@@ -28,12 +28,12 @@ namespace HrHelper.Pages
 
             InitializeComponent();
 
-            LoadSummary(idSummary);
-            LoadComboBoxes();
+
+
         }
         private void LoadComboBoxes()
         {
-            //LoadStatusComboBox();
+            LoadStatusComboBox();
             LoadJobTitleComboBox();
             //LoadbussynesComboBox();
         }
@@ -137,9 +137,30 @@ namespace HrHelper.Pages
 
             return year;
         }
+        //void SetStatus(SummaryStatus status)
+        //{
+        //    status_tblock.Text = status.Status;
+        //    string statusColor = null;
+        //    switch (status.Status)
+        //    {
+        //        case "Приглашен":
+        //            statusColor = "Online";
+        //            break;
+        //        case "Принят":
+        //            statusColor = "Balance";
+        //            break;
+        //        case "Отказ":
+        //            statusColor = "Dnd";
+        //            break;
+        //        case "Без Статуса":
+        //            statusColor = "Grey";
+        //            break;
+        //    }
+        //    status_border.Background = Application.Current.Resources[$"{statusColor}"] as SolidColorBrush;
+        //}
         void SetStatus(SummaryStatus status)
         {
-            status_tblock.Text = status.Status;
+            statusChange_cb.Text = status.Status;
             string statusColor = null;
             switch (status.Status)
             {
@@ -156,19 +177,25 @@ namespace HrHelper.Pages
                     statusColor = "Grey";
                     break;
             }
-            status_border.Background = Application.Current.Resources[$"{statusColor}"] as SolidColorBrush;
+            statusChange_cb.Background = Application.Current.Resources[$"{statusColor}"] as SolidColorBrush;
+
+            //for (int i = 0; i < statusChange_cb.Items.Count; i++)
+            //{
+            //    SummaryStatus item = statusChange_cb.Items[i] as SummaryStatus;
+            //    if (item.Status == status.Status)
+            //    {
+            //        statusChange_cb.SelectedIndex = i;
+            //    }
+            //}
         }
-        //private void LoadStatusComboBox()
-        //{
-        //    using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
-        //    {
-        //        SummaryStatus[] statuses = db.SummaryStatuses.ToArray();
-        //        foreach (SummaryStatus status in statuses)
-        //        {
-        //            statusChange_cb.Items.Add(status.Status);
-        //        }
-        //    }
-        //}
+        private void LoadStatusComboBox()
+        {
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+              statusChange_cb.ItemsSource = db.SummaryStatuses.ToArray();
+              statusChange_cb.DisplayMemberPath = "Status";
+            }
+        }
         //private void LoadbussynesComboBox()
         //{
         //    using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
@@ -239,14 +266,6 @@ namespace HrHelper.Pages
         //    }
         //}
 
-        //private void statusChange_cb_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    SummaryStatus status = new SummaryStatus()
-        //    {
-        //        Status = statusChange_cb.SelectedValue.ToString()
-        //    };
-        //    SetStatus(status);
-        //}
 
         #region Excel Export
         //private void excelExport_but_Click(object sender, RoutedEventArgs e)
@@ -339,7 +358,19 @@ namespace HrHelper.Pages
             return items;
         }
 
+        private void statusChange_cb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SummaryStatus status = statusChange_cb.SelectedItem as SummaryStatus;
+            
+            SetStatus(status);
+            
+        }
 
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {          
+            LoadComboBoxes();
+            LoadSummary(idSummary);
+        }
     }
 
 }
