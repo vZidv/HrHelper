@@ -117,7 +117,8 @@
                 <Polygon Stroke="{StaticResource White}" Points=" 
                  0,1
                  300,1" Margin="8,2"/>
-                <TextBlock TextWrapping="Wrap" Style="{StaticResource valueTextBlock}" TextAlignment="Left"
+                <TextBlock x:Name="aboutYourself_tblock" 
+                    TextWrapping="Wrap" Style="{StaticResource valueTextBlock}" TextAlignment="Left"
                            FontWeight="Light" Margin="10,0"
                     Text="Люблю программирование, стремлюсь к изучению нового и улучшению своих профессиональных навыков. Имею опыт работы с языком C#,с git и github, знания в языке запросов sql и базах данных. Есть опыт работы в разработке vr и ar программ."/>
                 
@@ -186,6 +187,13 @@
                             <ComboBox Text="text"  Foreground="{StaticResource White}"
                                       FontWeight="DemiBold" Background="{StaticResource Blue}"
                                 x:Name="jobTitleChange_cb" Width="250"/>
+                            
+                            <TextBlock FontSize="20"
+                                HorizontalAlignment="Left" Margin="5,0"
+                                Text="Занятость" Style="{StaticResource valueTextBlock}"/>
+                            <ComboBox Text="text"  Foreground="{StaticResource White}"
+                                      FontWeight="DemiBold" Background="{StaticResource Blue}"
+                                x:Name="busynessChange_cb" Width="250"/>
                         </StackPanel>
                         
                     </StackPanel>
@@ -234,16 +242,23 @@
                         <ui:SymbolIcon Symbol="Phone20" FontSize="20" Foreground="{StaticResource White}"/>
                             <TextBlock Text="Номер телефона" Style="{StaticResource valueTextBlock}"
                                HorizontalAlignment="Left" Margin="2,5"/>
-                        <TextBlock Text="+73504461642" Style="{StaticResource valueTextBlock}" FontWeight="Light"
+                        <TextBlock x:Name="phone_tblock"
+                            Text="+73504461642" Style="{StaticResource valueTextBlock}" FontWeight="Light"
                                HorizontalAlignment="Left" Margin="5,5"/>
                     </DockPanel>
                     <DockPanel>
                         <ui:SymbolIcon Symbol="Mail20" FontSize="20" Foreground="{StaticResource White}"/>
                         <TextBlock Text="Почта" Style="{StaticResource valueTextBlock}"
                                HorizontalAlignment="Left" Margin="2,5"/>
-                        <TextBlock Text="btsi1@gmail.com" Style="{StaticResource valueTextBlock}" FontWeight="Light"
+                        <TextBlock x:Name="email_tblock"
+                            Text="btsi1@gmail.com" Style="{StaticResource valueTextBlock}" FontWeight="Light"
                                HorizontalAlignment="Left" Margin="5,5"/>
                     </DockPanel>
+                    <TextBlock Text="Другие способы связи" Style="{StaticResource valueTextBlock}"
+                               HorizontalAlignment="Left" Margin="2,5"/>
+                    <TextBox x:Name="contactsOther_tb"
+                        TextWrapping="Wrap" Margin="7,5" FontSize="14"
+                        Text="Скайп coolOleg@gr"/>
                 </StackPanel>
                 
             </Grid>

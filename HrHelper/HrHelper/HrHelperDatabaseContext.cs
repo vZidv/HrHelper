@@ -29,12 +29,10 @@ namespace HrHelper
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //localhost\SQLEXPRESS
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Server= DESKTOP-2BSAL1V\\SQLEXPRESS;Database=HrHelperDatabase;Trusted_Connection=True;");
-                //DESKTOP-2BSAL1V\\SQL
             }
         }
 
@@ -92,6 +90,8 @@ namespace HrHelper
 
                 entity.HasIndex(e => e.StatusId, "IX_Summary_Status");
 
+                entity.Property(e => e.AboutYourself).HasMaxLength(300);
+
                 entity.Property(e => e.Address).HasMaxLength(70);
 
                 entity.Property(e => e.Birthday).HasColumnType("date");
@@ -145,14 +145,18 @@ namespace HrHelper
             {
                 entity.Property(e => e.Email).HasMaxLength(30);
 
-                entity.Property(e => e.Phone).HasMaxLength(15);
+                entity.Property(e => e.OtherContacts).HasMaxLength(100);
 
-                entity.Property(e => e.Skype).HasMaxLength(50);
+                entity.Property(e => e.Phone).HasMaxLength(15);
             });
 
             modelBuilder.Entity<SummaryForVacancy>(entity =>
             {
                 entity.ToTable("SummaryForVacancy");
+
+                entity.HasIndex(e => e.JobId, "IX_SummaryForVacancy_JobId");
+
+                entity.HasIndex(e => e.SummaryId, "IX_SummaryForVacancy_SummaryId");
 
                 entity.HasOne(d => d.Job)
                     .WithMany(p => p.SummaryForVacancies)

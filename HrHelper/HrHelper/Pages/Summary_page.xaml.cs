@@ -28,14 +28,12 @@ namespace HrHelper.Pages
 
             InitializeComponent();
 
-
-
         }
         private void LoadComboBoxes()
         {
             LoadStatusComboBox();
             LoadJobTitleComboBox();
-            //LoadbussynesComboBox();
+            LoadbussynesComboBox();
         }
 
         private void LoadSummary(int id)
@@ -63,7 +61,7 @@ namespace HrHelper.Pages
                 }
             }
 
-            //LoadContacts(summary);
+            LoadContacts(summary);
 
             //Возраст
             dateBirthday_tblock.Text = summary.Birthday.ToString("dd.MM.yyyy");
@@ -76,8 +74,8 @@ namespace HrHelper.Pages
             town_tblock.Text = summary.Town;
             address_tblock.Text = summary.Address;
 
-            //if (summary.Busyness != null)
-            //    busynessChange_cb.Text = summary.Busyness.Type;
+            if (summary.Busyness != null)
+                busynessChange_cb.Text = summary.Busyness.Type;
 
             //Оброзование
             educationInstution_tblock.Text = summary.EducationInstution;
@@ -90,42 +88,24 @@ namespace HrHelper.Pages
 
             //Статус
             SetStatus(summary.Status);
-            //statusChange_cb.Text = summary.Status.Status;
+            // О себе
+            aboutYourself_tblock.Text = String.Empty;
+            if(summary.AboutYourself != String.Empty)
+                aboutYourself_tblock.Text = summary.AboutYourself;
+            
         }
-        //void LoadContacts(Summary summary)
-        //{
-        //    if (summary.ContactsId == null)
-        //        return;
+        void LoadContacts(Summary summary)
+        {
+            if (summary.ContactsId == null)
+                return;
 
-        //    using (var db = new HrHelperDatabaseContext())
-        //        summary.Contacts = db.SummaryContacts.Where(o => o.Id == summary.ContactsId).First();
+            using (var db = new HrHelperDatabaseContext())
+                summary.Contacts = db.SummaryContacts.Where(o => o.Id == summary.ContactsId).First();
 
-        //    if (summary.Contacts.Phone != null)
-        //        ContactsAddView("Номер телефона", summary.Contacts.Phone);
-        //    if (summary.Contacts.Email != null)
-        //        ContactsAddView("Почта", summary.Contacts.Email);
-        //    if (summary.Contacts.Skype != null)
-        //        ContactsAddView("Skype", summary.Contacts.Skype);
-        //}
-        //void ContactsAddView(string titleContact, string contact)
-        //{
-        //    StackPanel contact_sp = new StackPanel();
-        //    contact_sp.Orientation = Orientation.Horizontal;
-
-        //    TextBlock title_tb = new TextBlock();
-        //    title_tb.Text = titleContact;
-        //    title_tb.Style = (Style)Application.Current.Resources["defaultTextBlock"];
-
-        //    TextBlock contact_tb = new TextBlock();
-        //    contact_tb.Margin = new Thickness(10);
-        //    contact_tb.Text = contact;
-        //    contact_tb.Style = (Style)Application.Current.Resources["valueTextBlock"];
-
-        //    contact_sp.Children.Add(title_tb);
-        //    contact_sp.Children.Add(contact_tb);
-
-        //    contacts_sp.Children.Add(contact_sp);
-        //}
+            phone_tblock.Text = summary.Contacts.Phone;
+            email_tblock.Text = summary.Contacts.Email;
+            contactsOther_tb.Text = summary.Contacts.OtherContacts;
+        }
         int GetAge(Summary summary)
         {
             int year = (DateTime.Now.Year - summary.Birthday.Year);
@@ -137,27 +117,7 @@ namespace HrHelper.Pages
 
             return year;
         }
-        //void SetStatus(SummaryStatus status)
-        //{
-        //    status_tblock.Text = status.Status;
-        //    string statusColor = null;
-        //    switch (status.Status)
-        //    {
-        //        case "Приглашен":
-        //            statusColor = "Online";
-        //            break;
-        //        case "Принят":
-        //            statusColor = "Balance";
-        //            break;
-        //        case "Отказ":
-        //            statusColor = "Dnd";
-        //            break;
-        //        case "Без Статуса":
-        //            statusColor = "Grey";
-        //            break;
-        //    }
-        //    status_border.Background = Application.Current.Resources[$"{statusColor}"] as SolidColorBrush;
-        //}
+
         void SetStatus(SummaryStatus status)
         {
             statusChange_cb.Text = status.Status;
@@ -179,14 +139,7 @@ namespace HrHelper.Pages
             }
             statusChange_cb.Background = Application.Current.Resources[$"{statusColor}"] as SolidColorBrush;
 
-            //for (int i = 0; i < statusChange_cb.Items.Count; i++)
-            //{
-            //    SummaryStatus item = statusChange_cb.Items[i] as SummaryStatus;
-            //    if (item.Status == status.Status)
-            //    {
-            //        statusChange_cb.SelectedIndex = i;
-            //    }
-            //}
+
         }
         private void LoadStatusComboBox()
         {
@@ -196,18 +149,19 @@ namespace HrHelper.Pages
               statusChange_cb.DisplayMemberPath = "Status";
             }
         }
-        //private void LoadbussynesComboBox()
-        //{
-        //    using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
-        //    {
-        //        Busyness[] busynesses = db.Busynesses.ToArray();
-        //        foreach (Busyness busyness in busynesses)
-        //        {
-        //            busynessChange_cb.Items.Add(busyness.Type);
-        //        }
+        private void LoadbussynesComboBox()
+        {
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                Busyness[] busynesses = db.Busynesses.ToArray();
+                foreach (Busyness busyness in busynesses)
+                {
+                    busynessChange_cb.Items.Add(busyness.Type);
+                }
 
-        //    }
-        //}
+            }
+        }
+
         private void LoadJobTitleComboBox()
         {
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
@@ -336,7 +290,7 @@ namespace HrHelper.Pages
             {
                 items.Add("<PhoneNumber>", summary.Contacts.Phone);
                 items.Add("<Email>", summary.Contacts.Email);
-                items.Add("<Skype>", summary.Contacts.Skype);
+                //items.Add("<Skype>", summary.Contacts.Skype);
             }
             if (summary.Town != null)
             {

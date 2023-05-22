@@ -13,7 +13,7 @@ namespace HrHelper
         public int Id { get; set; }
         public string? Phone { get; set; }
         public string? Email { get; set; }
-        public string? Skype { get; set; }
+        public string? OtherContacts { get; set; }
 
         public virtual ICollection<Summary> Summaries { get; set; }
     }

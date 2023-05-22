@@ -27,6 +27,7 @@ namespace HrHelper
         public string? LastJobTitle { get; set; }
         public int? EducationId { get; set; }
         public string? EducationInstution { get; set; }
+        public string? AboutYourself { get; set; }
 
         public virtual Busyness? Busyness { get; set; }
         public virtual SummaryContact? Contacts { get; set; }

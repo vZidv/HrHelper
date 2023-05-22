@@ -125,7 +125,7 @@ namespace HrHelper.Pages
             // Contacts
             phone_tb.Text = summary.Contacts.Phone;
             email_tb.Text = summary.Contacts.Email;
-            skype_tb.Text = summary.Contacts.Skype;
+            //skype_tb.Text = summary.Contacts.Skype;
 
 
             birthday_datePicker.Text = summary.Birthday.ToString("dd.MM.yyyy");
@@ -198,44 +198,44 @@ namespace HrHelper.Pages
 
             }
 
-            SummaryContact contacts = new SummaryContact()
-            {
-                Phone = phone_tb.Text,
-                Email = email_tb.Text,
-                Skype = skype_tb.Text
-            };
+            //SummaryContact contacts = new SummaryContact()
+            //{
+            //    Phone = phone_tb.Text,
+            //    Email = email_tb.Text,
+            //    Skype = skype_tb.Text
+            //};
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
-                db.Add(contacts);
+                //db.Add(contacts);
                 db.SaveChanges();
             }
 
-            Summary newSummary = new Summary()
-            {
-                Id = summary.Id,
-                FirstName = firstName_tb.Text,
-                LastName = lastName_tb.Text,
-                Patronymic = patronymic_tb.Text,
+            //Summary newSummary = new Summary()
+            //{
+            //    Id = summary.Id,
+            //    FirstName = firstName_tb.Text,
+            //    LastName = lastName_tb.Text,
+            //    Patronymic = patronymic_tb.Text,
 
-                Gender = gender_cb.Text,
-                Birthday = date,
+            //    Gender = gender_cb.Text,
+            //    Birthday = date,
 
-                ContactsId = contacts.Id,
-                Address = address_tb.Text,
-                Town = town_tb.Text,
+            //    ContactsId = contacts.Id,
+            //    Address = address_tb.Text,
+            //    Town = town_tb.Text,
 
-                BusynessId = busyness,
-                PhotoId = CreatePhoto(),
-                Comments = comments_tb.Text,
-                StatusId = status,
-                LastCompany = lastCompany_tb.Text,
-                LastJobTitle = lastJobTitle_tb.Text,
-                EducationId = education,
-                EducationInstution = educationInstution_tb.Text
-            };
+            //    BusynessId = busyness,
+            //    PhotoId = CreatePhoto(),
+            //    Comments = comments_tb.Text,
+            //    StatusId = status,
+            //    LastCompany = lastCompany_tb.Text,
+            //    LastJobTitle = lastJobTitle_tb.Text,
+            //    EducationId = education,
+            //    EducationInstution = educationInstution_tb.Text
+            //};
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
-                db.Update(newSummary);
+                //db.Update(newSummary);
                 db.SaveChanges();
             }
             try
@@ -247,7 +247,7 @@ namespace HrHelper.Pages
                 };
                 using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
                 {
-                    db.Add(newSummary);
+                    //db.Add(newSummary);
                     db.SaveChanges();
                 }
             }

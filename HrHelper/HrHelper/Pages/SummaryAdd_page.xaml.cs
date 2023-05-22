@@ -173,7 +173,7 @@ namespace HrHelper.Pages
             {
                 Phone = phone_tb.Text,
                 Email = email_tb.Text,
-                Skype = skype_tb.Text
+                //Skype = skype_tb.Text
             };
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
