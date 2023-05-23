@@ -1,0 +1,23 @@
+﻿<Window x:Class="HrHelper.Windows.MinWin_win"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HrHelper.Windows"
+        xmlns:ui ="http://schemas.lepo.co/wpfui/2022/xaml"
+        Title="TimeFixer" Height="400" Width="450" 
+        WindowStyle="None" 
+        Background="Transparent" 
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Icon="/Source/Logo.png">
+    <Grid Background="Transparent">
+
+        <Border 
+            CornerRadius="0,0,25,25"
+            Background="{StaticResource Servers}">
+
+        </Border>
+        <Frame Name="mainFrame"/>
+        <ui:TitleBar ShowMaximize="False" Background="{StaticResource Chat}"/>
+    </Grid>
+</Window>

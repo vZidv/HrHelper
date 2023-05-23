@@ -201,7 +201,15 @@ namespace HrHelper
             {
                 entity.ToTable("Vacancy");
 
+                entity.Property(e => e.Description).HasMaxLength(200);
+
                 entity.Property(e => e.JobTitle).HasMaxLength(60);
+
+                entity.Property(e => e.MaxSalary).HasColumnType("money");
+
+                entity.Property(e => e.MinSalary).HasColumnType("money");
+
+                entity.Property(e => e.Skills).HasMaxLength(200);
             });
 
             OnModelCreatingPartial(modelBuilder);

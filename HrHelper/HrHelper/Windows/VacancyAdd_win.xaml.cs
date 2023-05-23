@@ -23,7 +23,7 @@ namespace HrHelper.Windows
             }
             MyMessageBox.Show("Внимание", "Вакансия успешно добавлена.",MyMessageBoxOptions.Ok);
 
-            Vacancy_page vacancy_Page = new Vacancy_page();
+            VacancyList_page vacancy_Page = new VacancyList_page();
             Settings.mainFrame.Navigate(vacancy_Page);
 
             this.Close();

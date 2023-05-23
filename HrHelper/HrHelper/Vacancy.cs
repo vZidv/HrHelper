@@ -12,6 +12,11 @@ namespace HrHelper
 
         public int Id { get; set; }
         public string JobTitle { get; set; } = null!;
+        public string? Description { get; set; }
+        public string? Skills { get; set; }
+        public int BusynessId { get; set; }
+        public decimal MinSalary { get; set; }
+        public decimal MaxSalary { get; set; }
 
         public virtual ICollection<SummaryForVacancy> SummaryForVacancies { get; set; }
     }

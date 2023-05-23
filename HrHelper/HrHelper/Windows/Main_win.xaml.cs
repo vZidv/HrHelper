@@ -21,7 +21,7 @@ namespace HrHelper.Windows
         #region User Menu
         private void person_but_Click(object sender, RoutedEventArgs e) => frameMain.Navigate(new Pages.Main_page());                          
         private void settings_but_Click(object sender, RoutedEventArgs e) => frameMain.Navigate(new Pages.Settings_page());
-        private void vacancy_but_Click(object sender, RoutedEventArgs e) => frameMain.Navigate(new Pages.Vacancy_page());
+        private void vacancy_but_Click(object sender, RoutedEventArgs e) => frameMain.Navigate(new Pages.VacancyList_page());
         private void exit_but_Click(object sender, RoutedEventArgs e)
         {
             Authorization_win win = new Authorization_win();
