@@ -35,6 +35,7 @@ namespace HrHelper.Pages
             LoadBusynnesComboBox();
             LoadEducationComboBox();
             LoadJobTitleComboBox();
+            LoadGenderCombobox();
         }
         private void LoadStatusComboBox()
         {
@@ -57,6 +58,14 @@ namespace HrHelper.Pages
                     jobTitle_cb.Items.Add(vacancy.JobTitle);
                 }
 
+            }
+        }
+        private void LoadGenderCombobox()
+        {
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                gender_cb.ItemsSource = db.Genders.ToArray();
+                gender_cb.DisplayMemberPath = "Name";
             }
         }
         private void LoadBusynnesComboBox()
@@ -183,25 +192,34 @@ namespace HrHelper.Pages
 
             Summary summary = new Summary()
             {
+                //ФИО
                 FirstName = firstName_tb.Text,
                 LastName = lastName_tb.Text,
-
                 Patronymic = patronymic_tb.Text,
-                Gender = gender_cb.Text,
+                
+                GenderId = (gender_cb.SelectedItem as Gender).Id,
+                
                 Birthday = date,
 
                 ContactsId = contacts.Id,
+                //Address
                 Address = address_tb.Text,
                 Town = town_tb.Text,
 
                 BusynessId = busyness,
+
                 PhotoId = CreatePhoto(),
+
                 Comments = comments_tb.Text,
+
                 StatusId = status,
+                //Last Company 
                 LastCompany = lastCompany_tb.Text,
                 LastJobTitle = lastJobTitle_tb.Text,
+                //Education
                 EducationId = education,
-                EducationInstution = educationInstution_tb.Text
+                EducationInstution = educationInstution_tb.Text,
+                AboutYourself = aboutYourself_tblock.Text
             };
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {

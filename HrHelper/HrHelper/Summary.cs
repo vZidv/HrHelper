@@ -14,7 +14,7 @@ namespace HrHelper
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
         public string? Patronymic { get; set; }
-        public string Gender { get; set; } = null!;
+        public int GenderId { get; set; }
         public DateTime Birthday { get; set; }
         public int? ContactsId { get; set; }
         public string? Address { get; set; }
@@ -32,6 +32,7 @@ namespace HrHelper
         public virtual Busyness? Busyness { get; set; }
         public virtual SummaryContact? Contacts { get; set; }
         public virtual Education? Education { get; set; }
+        public virtual Gender Gender { get; set; } = null!;
         public virtual Photo? Photo { get; set; }
         public virtual SummaryStatus Status { get; set; } = null!;
         public virtual ICollection<SummaryForVacancy> SummaryForVacancies { get; set; }

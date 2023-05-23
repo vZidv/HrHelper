@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:HrHelper.Pages"
       mc:Ignorable="d" 
      d:DesignHeight="800" d:DesignWidth="1500"
-      Title="SummaryEdit_page" Loaded="Page_Loaded" >
+      Title="SummaryEdit_page" Loaded="Page_Loaded" Unloaded="Page_Unloaded" >
 
     <Grid Background="{StaticResource Channels}">
         <Grid.RowDefinitions>
@@ -330,7 +330,7 @@
                         <TextBlock Text="Компания" Style="{StaticResource valueTextBlock}"
                                HorizontalAlignment="Left" Margin="2,5"/>
                         <TextBlock TextWrapping="Wrap" TextAlignment="Left"
-                            Text="БКО.РФ" 
+                            Text="БКО.РФ" x:Name="lastJobCompany_tblock" 
                             Style="{StaticResource valueTextBlock}" FontWeight="Light"
                                HorizontalAlignment="Left" Margin="5,5"/>
                     </DockPanel>
@@ -338,7 +338,8 @@
                         <ui:SymbolIcon Symbol="Mail20" Visibility="Hidden" FontSize="20" Foreground="{StaticResource White}"/>
                         <TextBlock Text="Должность" Style="{StaticResource valueTextBlock}"
                                HorizontalAlignment="Left" Margin="2,5"/>
-                        <TextBlock Text="Программист" TextWrapping="Wrap" Style="{StaticResource valueTextBlock}" FontWeight="Light"
+                        <TextBlock Text="Программист" x:Name="lastJobTitle_tblock"
+                                   TextWrapping="Wrap" Style="{StaticResource valueTextBlock}" FontWeight="Light"
                                HorizontalAlignment="Left" Margin="5,5"/>
                     </DockPanel>
                 </StackPanel>

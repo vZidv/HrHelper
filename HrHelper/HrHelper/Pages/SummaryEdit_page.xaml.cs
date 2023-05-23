@@ -25,7 +25,11 @@ namespace HrHelper.Pages
         public SummaryEdit_page(Summary summary)
         {
             InitializeComponent();
-                this.summary = summary;
+            this.summary = summary;
+
+        }
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
             LoadComboBoxes();
             LoadSummary();
         }
@@ -33,6 +37,7 @@ namespace HrHelper.Pages
         #region LoadComboBoxes
         private void LoadComboBoxes()
         {
+            LoadGenderCombobox();
             LoadStatusComboBox();
             LoadJobTitleComboBox();
             LoadbussynesComboBox();
@@ -123,13 +128,16 @@ namespace HrHelper.Pages
             }
 
             // Contacts
-            phone_tb.Text = summary.Contacts.Phone;
-            email_tb.Text = summary.Contacts.Email;
-            //skype_tb.Text = summary.Contacts.Skype;
+            if (summary.Contacts != null)
+            {
+                phone_tb.Text = summary.Contacts.Phone;
+                email_tb.Text = summary.Contacts.Email;
+                contactsOther_tb.Text = summary.Contacts.OtherContacts;
+            }
 
 
             birthday_datePicker.Text = summary.Birthday.ToString("dd.MM.yyyy");
-            gender_cb.Text = summary.Gender;
+
 
             town_tb.Text = summary.Town;
             address_tb.Text = summary.Address;
@@ -147,6 +155,8 @@ namespace HrHelper.Pages
 
             lastCompany_tb.Text = summary.LastCompany;
             lastJobTitle_tb.Text = summary.LastJobTitle;
+
+            gender_cb.Text = summary.Gender.Name;
         }
         private void save_but_Click(object sender, RoutedEventArgs e)
         {
@@ -198,44 +208,45 @@ namespace HrHelper.Pages
 
             }
 
-            //SummaryContact contacts = new SummaryContact()
-            //{
-            //    Phone = phone_tb.Text,
-            //    Email = email_tb.Text,
-            //    Skype = skype_tb.Text
-            //};
+            SummaryContact contacts = summary.Contacts;
+
+            contacts.Phone = phone_tb.Text;
+            contacts.Email = email_tb.Text;
+            contacts.OtherContacts = contactsOther_tb.Text;
+
+
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
                 //db.Add(contacts);
                 db.SaveChanges();
             }
 
-            //Summary newSummary = new Summary()
-            //{
-            //    Id = summary.Id,
-            //    FirstName = firstName_tb.Text,
-            //    LastName = lastName_tb.Text,
-            //    Patronymic = patronymic_tb.Text,
+            Summary newSummary = new Summary()
+            {
+                Id = summary.Id,
+                FirstName = firstName_tb.Text,
+                LastName = lastName_tb.Text,
+                Patronymic = patronymic_tb.Text,
 
-            //    Gender = gender_cb.Text,
-            //    Birthday = date,
+                GenderId = (gender_cb.SelectedItem as Gender).Id,
+                Birthday = date,
 
-            //    ContactsId = contacts.Id,
-            //    Address = address_tb.Text,
-            //    Town = town_tb.Text,
+                ContactsId = contacts.Id,
+                Address = address_tb.Text,
+                Town = town_tb.Text,
 
-            //    BusynessId = busyness,
-            //    PhotoId = CreatePhoto(),
-            //    Comments = comments_tb.Text,
-            //    StatusId = status,
-            //    LastCompany = lastCompany_tb.Text,
-            //    LastJobTitle = lastJobTitle_tb.Text,
-            //    EducationId = education,
-            //    EducationInstution = educationInstution_tb.Text
-            //};
+                BusynessId = busyness,
+                PhotoId = CreatePhoto(),
+                Comments = comments_tb.Text,
+                StatusId = status,
+                LastCompany = lastCompany_tb.Text,
+                LastJobTitle = lastJobTitle_tb.Text,
+                EducationId = education,
+                EducationInstution = educationInstution_tb.Text
+            };
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
-                //db.Update(newSummary);
+                db.Update(newSummary);
                 db.SaveChanges();
             }
             try
@@ -247,7 +258,7 @@ namespace HrHelper.Pages
                 };
                 using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
                 {
-                    //db.Add(newSummary);
+                    db.Add(newSummary);
                     db.SaveChanges();
                 }
             }
@@ -324,5 +335,17 @@ namespace HrHelper.Pages
             }
             catch { photoPath = summary.Photo.Path; };
         }
+
+        private void LoadGenderCombobox()
+        {
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                gender_cb.ItemsSource = db.Genders.ToArray();
+                gender_cb.DisplayMemberPath = "Name";
+            }
+
+        }
+
+
     }
 }

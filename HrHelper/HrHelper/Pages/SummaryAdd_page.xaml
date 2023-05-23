@@ -4,246 +4,376 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HrHelper.Pages"
+      xmlns:ui ="http://schemas.lepo.co/wpfui/2022/xaml"
       mc:Ignorable="d" 
       d:DesignHeight="900" d:DesignWidth="1600"
       Title="SummaryAdd_page">
 
-    <Grid>
+    <Grid Background="{StaticResource Channels}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.7*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.31*"/>
+
+            <RowDefinition Height="0.5*"/>
+
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.23*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.14*"/>
+            <ColumnDefinition Width="0.4*"/>
+            <ColumnDefinition Width="0.3*"/>
         </Grid.ColumnDefinitions>
-        <Grid  Grid.Column="0" Grid.Row="0">
+
+        <Grid Grid.Row="0" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border Grid.RowSpan="2"
+                Background="{StaticResource Servers}" Margin="0,0,5,5">
+                <Border.Effect>
+                    <DropShadowEffect Opacity="0.2"/>
+                </Border.Effect>
+            </Border>
+            <Grid Grid.Row="0">
+                <StackPanel>
+                    <TextBlock FontSize="30" Margin="20,10,10,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                               Text="Действия"
+                        Style="{StaticResource defaultTextBlock}"/>
+                    <Polygon Stroke="{StaticResource White}" Points=" 
+                 0,1
+                 300,1" Margin="17,2"/>
+                </StackPanel>
+
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <StackPanel Orientation="Horizontal">
+                    <ui:Button Margin="20,20,5,20" Click="summaryAdd_bt_Click"
+                               x:Name="save_but"
+                Content="Добавить" Icon="Save20" FontSize="20"
+                       HorizontalAlignment="Left" VerticalAlignment="Top"
+                    Background="{StaticResource Online}"/>
+                    <ui:Button Margin="5,20" x:Name="ummaryEdit_but"
+                Content="Отменить" Icon="CalendarCancel20" FontSize="20"
+                       HorizontalAlignment="Left" VerticalAlignment="Top"
+                    Background="{StaticResource Dnd}"/>
+                </StackPanel>
+
+
+            </Grid>
+
+        </Grid>
+
+        <Grid Grid.Column="0" Grid.RowSpan="3">
+            <Border Background="{StaticResource Servers}"/>
+
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="2">
+            <Border Background="{StaticResource Chat}" CornerRadius="12" Margin="0,0,5,5">
+                <Border.Effect>
+                    <DropShadowEffect Opacity="0.2"/>
+                </Border.Effect>
+            </Border>
+
             <StackPanel>
-                <Border MinHeight="280"
-                Margin="28,7,28,0" CornerRadius="15" Grid.Column="0" Grid.Row="0">
+                <TextBlock Text="Добавить комментарий" Style="{StaticResource defaultTextBlock}"
+                               HorizontalAlignment="Left" Margin="10,0"/>
+                <Polygon Stroke="{StaticResource White}" Points=" 
+                 0,1
+                 300,1" Margin="8,2"/>
+
+                <DockPanel>
+                    <TextBox x:Name="comments_tb"
+                        TextWrapping="Wrap" Margin="7,5" FontSize="14" MinHeight="60"
+                        Text=""/>
+                </DockPanel>
+            </StackPanel>
+
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="0">
+            <StackPanel Orientation="Vertical">
+                <Border  Width="200" Height="250" VerticalAlignment="Top"
+                Margin="20,25,20,0" CornerRadius="15" Grid.Column="0" Grid.Row="0">
                     <Border.Background>
                         <ImageBrush x:Name="photo_image" ImageSource="/Source/NoImage.png"/>
                     </Border.Background>
+                    <Border.Effect>
+                        <DropShadowEffect Opacity="0.4" Direction="-90" ShadowDepth="9" BlurRadius="7"/>
+                    </Border.Effect>
                 </Border>
 
-                <Button Content="Выбрать фото" x:Name="changePhoto_bt"
-                    Height="45" Width="200"
-                    Style="{StaticResource defaultBut}" Click="changePhoto_bt_Click" />
             </StackPanel>
-        </Grid>
-        <Grid Grid.Row="1" Grid.Column="0">
 
+        </Grid>
+        <Grid Grid.Column="0" Grid.Row="1">
+            <StackPanel>
+                <ui:Button Content="Выбрать фото" Background="{StaticResource AccentColor}" Margin="2"
+                    HorizontalAlignment="Center" FontSize="15" Click="changePhoto_bt_Click">
+                    <ui:Button.Effect>
+                        <DropShadowEffect Opacity="0.3" Direction="-90"/>
+                    </ui:Button.Effect>
+                </ui:Button>
+                <TextBlock Text="Обо мне" Style="{StaticResource defaultTextBlock}" 
+                           HorizontalAlignment="Left" Margin="8,5"/>
+                <Polygon Stroke="{StaticResource White}" Points=" 
+                 0,1
+                 300,1" Margin="8,2"/>
+                <TextBox x:Name="aboutYourself_tblock" 
+                    TextWrapping="Wrap" TextAlignment="Left"
+                           FontWeight="Light" Margin="10,0"
+                    Text=""/>
+
+            </StackPanel>
         </Grid>
         <Grid Grid.Row="0" Grid.Column="1">
-            <StackPanel Orientation="Horizontal">
-
-
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <StackPanel>
-                    <Grid>
-                        <TextBlock Text="Имя" FontSize="30"
-                            Style="{StaticResource headerTextBlock}" HorizontalAlignment="Left"/>
-                        <TextBox x:Name="firstName_tb" Style="{StaticResource inputTextbox}" HorizontalAlignment="Center"/>
-                    </Grid>
-                    <Grid>
-                        <TextBlock Text="Фамилия" FontSize="30"
-                            Style="{StaticResource headerTextBlock}" HorizontalAlignment="Left"/>
-                        <TextBox x:Name="lastName_tb" Style="{StaticResource inputTextbox}" HorizontalAlignment="Center"/>
-                    </Grid>
-                    <Grid>
-                        <TextBlock Text="Отчество" FontSize="30"
-                            Style="{StaticResource headerTextBlock}" HorizontalAlignment="Left"/>
-                        <TextBox x:Name="patronymic_tb" Style="{StaticResource inputTextbox}" HorizontalAlignment="Center"/>
-                    </Grid>
-                    <Polygon Stroke="{StaticResource White}" Points=" 
-                 0,20
-                 465,20" Margin="25,0,40,0"/>
-                    <Grid >
-                        <TextBlock Text="Возраст" HorizontalAlignment="Left" Margin="20,10" FontSize="30"
-                               Style="{StaticResource headerTextBlock}"/>
-                        <DatePicker x:Name="birthday_datePicker" Width="200" VerticalAlignment="Center"/>
-                    </Grid>
-                    <Grid>
-                        <TextBlock Text="Пол" HorizontalAlignment="Left" Margin="20,10" FontSize="30"
-                               Style="{StaticResource headerTextBlock}" />
-                        <ComboBox x:Name="gender_cb" Text="Мужской"
-                                  HorizontalAlignment="Center"
-                            Width="200" Style="{StaticResource defaultComboBoxStyle}">
-                            <ComboBoxItem Content="Мужской"/>
-                            <ComboBoxItem Content="Женский"/>
-                        </ComboBox>
-                    </Grid>
-                </StackPanel>
-                <StackPanel Margin="20,0"  >
-                    <TextBlock Text="Статус"
-                               Style="{StaticResource headerTextBlock}"/>
-                    <Polygon Stroke="{StaticResource White}" Points=" 
-                 5,10
-                 250,10" Margin="0"/>
-                    <Grid>
-                        <Border Background="{StaticResource Channels}" CornerRadius="12" Margin="0,6"/>
-                        <StackPanel Orientation="Horizontal">
-                            <StackPanel >
-                                <TextBlock Text="Статус" FontSize="30" Margin="10,12"
-                            Style="{StaticResource headerTextBlock}" HorizontalAlignment="Left"/>
-                                <TextBlock Text="Занятость" FontSize="30" Margin="10,12"
-                            Style="{StaticResource headerTextBlock}" HorizontalAlignment="Left"/>
-                                <TextBlock Text="Вакансия" FontSize="30" Margin="10,12"
-                            Style="{StaticResource headerTextBlock}" HorizontalAlignment="Left"/>
-                            </StackPanel>
-                            <StackPanel>
-                                <ComboBox x:Name="status_cb"
-                                    Width="250" Style="{StaticResource defaultComboBoxStyle}" Margin="17"/>
-                                <ComboBox x:Name="bussyness_cb"
-                                    Width="250" Style="{StaticResource defaultComboBoxStyle}" Margin="17"/>
-                                <ComboBox x:Name="jobTitle_cb"
-                                    Width="250" Style="{StaticResource defaultComboBoxStyle}" Margin="17"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </Grid>
-                    <Grid>
-
-
-                    </Grid>
-                </StackPanel>
-
-            </StackPanel>
-            <Button Content="Добавить" x:Name="summaryAdd_but" Click="summaryAdd_bt_Click"
-                Style="{StaticResource defaultBut}" VerticalAlignment="Top" HorizontalAlignment="Right"/>
-        </Grid>
-        <Grid Grid.Row="1" Grid.ColumnSpan="2">
-            <StackPanel 
-                Orientation="Horizontal" HorizontalAlignment="Left">
-                <StackPanel>
-                    <Grid>
-
-                        <StackPanel Margin="20,0">
-                            <TextBlock Text="Место проживания" 
-                               Style="{StaticResource headerTextBlock}"/>
-                            <Polygon Stroke="{StaticResource White}" Points=" 
-                 5,10
-                 250,10" Margin="0"/>
-                            <Grid>
-                                <Border Background="{StaticResource Channels}" CornerRadius="12" Margin="0,6"/>
-                                <StackPanel Orientation="Vertical">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Город" Style="{StaticResource headerTextBlock}"/>
-                                        <TextBox x:Name="town_tb" Style="{StaticResource inputTextbox}"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Адрес" Style="{StaticResource headerTextBlock}"/>
-                                        <TextBox x:Name="address_tb" Style="{StaticResource inputTextbox}"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                        </StackPanel>
-                    </Grid>
-                    <Grid >
-
-                        <StackPanel Margin="20,0" x:Name="contacts_sp" >
-                            <TextBlock Text="Контакты"
-                               Style="{StaticResource headerTextBlock}"/>
-                            <Polygon Stroke="{StaticResource White}" Points=" 
-                 5,10
-                 250,10" Margin="0"/>
-                            <Grid>
-                                <Border Background="{StaticResource Channels}" CornerRadius="12" Margin="0,6"/>
-                                <StackPanel Orientation="Horizontal">
-                                    <StackPanel >
-                                        <TextBlock Text="Телефон" FontSize="30" Margin="10,12"
-                            Style="{StaticResource headerTextBlock}" HorizontalAlignment="Left"/>
-                                        <TextBlock Text="Email" FontSize="30" Margin="10,12"
-                            Style="{StaticResource headerTextBlock}" HorizontalAlignment="Left"/>
-                                        <TextBlock Text="Skype" FontSize="30" Margin="10,12"
-                            Style="{StaticResource headerTextBlock}" HorizontalAlignment="Left"/>
-                                    </StackPanel>
-                                    <StackPanel>
-                                        <TextBox x:Name="phone_tb" Style="{StaticResource inputTextbox}" HorizontalAlignment="Center"/>
-                                        <TextBox x:Name="email_tb" Style="{StaticResource inputTextbox}" HorizontalAlignment="Center"/>
-                                        <TextBox x:Name="skype_tb" Style="{StaticResource inputTextbox}" HorizontalAlignment="Center"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                        </StackPanel>
-
-                    </Grid>
-
-                </StackPanel>
-
-                <Grid>
-
-                    <StackPanel Margin="20,0">
-                        <TextBlock Text="Пр.Место работы" 
-                               Style="{StaticResource headerTextBlock}"/>
-                        <Polygon Stroke="{StaticResource White}" Points=" 
-                 5,10
-                 250,10" Margin="0"/>
-                        <Grid>
-                            <Border Background="{StaticResource Channels}" CornerRadius="12" Margin="0,6"/>
-                            <StackPanel Orientation="Horizontal">
-                                <StackPanel >
-                                    <TextBlock Text="Компания" Style="{StaticResource headerTextBlock}" Margin="10"/>
-                                    <TextBlock Text="Должность" Style="{StaticResource headerTextBlock}" Margin="10"/>
-
-                                </StackPanel>
-                                <StackPanel >
-                                    <TextBox x:Name="lastCompany_tb" Style="{StaticResource inputTextbox}"/>
-                                    <TextBox x:Name="lastJobTitle_tb" Style="{StaticResource inputTextbox}"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </Grid>
-
-
-                        <StackPanel Margin="0,10">
-                            <TextBlock Text="Образование" 
-                               Style="{StaticResource headerTextBlock}"/>
-                            <Polygon Stroke="{StaticResource White}" Points=" 
-                 5,10
-                 250,10" Margin="0"/>
-                            <Grid>
-                                <Border Background="{StaticResource Channels}" CornerRadius="12" Margin="0,6"/>
-                                <StackPanel Orientation="Horizontal">
-                                    <StackPanel >
-                                        <TextBlock Text="Образование" Style="{StaticResource headerTextBlock}" Margin="10"/>
-                                        <TextBlock Text="Уч.Заведение" Style="{StaticResource headerTextBlock}" Margin="10"/>
-
-                                    </StackPanel>
-                                    <StackPanel >
-                                        <ComboBox x:Name="education_cb"
-                                    Width="250" Style="{StaticResource defaultComboBoxStyle}" Margin="17"/>
-                                        <TextBox  x:Name="educationInstution_tb"  Style="{StaticResource inputTextbox}"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                        </StackPanel>
-
-
-                    </StackPanel>
-                </Grid>
-                <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.ColumnSpan="2"
+                Background="{StaticResource Chat}" CornerRadius="0,0,12,0" Margin="0,0,5,5">
+                <Border.Effect>
+                    <DropShadowEffect Opacity="0.2"/>
+                </Border.Effect>
+            </Border>
+            <Grid Grid.Column="1">
+                <StackPanel Orientation="Horizontal">
                     <StackPanel>
-                        <StackPanel>
+                        <TextBlock FontSize="20"
+                                HorizontalAlignment="Left" Margin="30,20,30,5"
+                                Text="Стаутс" Style="{StaticResource valueTextBlock}"/>
+                        <ComboBox x:Name="status_cb"
+                            Text="text"  Foreground="{StaticResource White}"
+                                      FontWeight="DemiBold"
+                                 Width="250" Margin="20,0" />
+                        <TextBlock FontSize="20"
+                                HorizontalAlignment="Left" Margin="30,0,0,5"
+                                Text="Вакансия" Style="{StaticResource valueTextBlock}"/>
+                        <ComboBox x:Name="jobTitle_cb"
+                            Text="text"  Foreground="{StaticResource White}"
+                                      FontWeight="DemiBold" Background="{StaticResource Blue}"
+                                 Width="250"/>
 
-                            <TextBlock Text="Комментарии" 
-                               Style="{StaticResource headerTextBlock}"/>
-                            <Polygon Stroke="{StaticResource White}" Points=" 
-                 5,10
-                 250,10" Margin="0"/>
-                        </StackPanel>
+                        <TextBlock FontSize="20"
+                                HorizontalAlignment="Left" Margin="30,5"
+                                Text="Занятость" Style="{StaticResource valueTextBlock}"/>
+                        <ComboBox x:Name="bussyness_cb"
+                            Text="text"  Foreground="{StaticResource White}"
+                                      FontWeight="DemiBold" Background="{StaticResource Blue}"
+                                 Width="250"/>
                         <Grid>
-                            <Border MinHeight="400"
-                                Background="{StaticResource Channels}" CornerRadius="12" Margin="0,6,0,0"/>
-                            <TextBox x:Name="comments_tb" MinWidth="450"  MinHeight="380"
-                        FontSize="22" TextWrapping="Wrap"
-                        Style="{StaticResource defaultTextbox}"/>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="Пол" FontWeight="DemiBold"
+                                               HorizontalAlignment="Left" Margin="30,5" FontSize="17"
+                               Style="{StaticResource defaultTextBlock}"/>
+                                    <ComboBox x:Name="gender_cb" Margin="30,5"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="Дата рождения" FontWeight="DemiBold"
+                                               HorizontalAlignment="Left" Margin="30,5" FontSize="17"
+                               Style="{StaticResource defaultTextBlock}"/>
+                                    <DatePicker x:Name="birthday_datePicker" Margin="30,5"/>
+                                </StackPanel>
+                            </StackPanel>
                         </Grid>
+                    </StackPanel>
+
+                </StackPanel>
+            </Grid>
+            <StackPanel Orientation="Horizontal">
+
+
+                <StackPanel>
+
+                    <TextBlock x:Name="fullname_tblock" FontSize="30" Margin="20,20,20,0" HorizontalAlignment="Left"
+                               Text="Ф.И.О"
+                        Style="{StaticResource defaultTextBlock}"/>
+                    <StackPanel Orientation="Vertical" Margin="0,8,0,20">
+
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Имя" HorizontalAlignment="Left" Margin="20,0,10,0" FontSize="20"
+                               Style="{StaticResource defaultTextBlock}"/>
+                            <ui:TextBox x:Name="firstName_tb"
+                                Text="" FontWeight="DemiBold" FontSize="15"
+                                Margin="20,2" MinWidth="200"/>
+
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Фамилия" HorizontalAlignment="Left" Margin="20,0,10,0" FontSize="20"
+                               Style="{StaticResource defaultTextBlock}"/>
+                            <ui:TextBox x:Name="lastName_tb"
+                                Text="" FontWeight="DemiBold" FontSize="15"
+                                Margin="20,2" MinWidth="200"/>
+
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Отчество" HorizontalAlignment="Left" Margin="20,0,10,0" FontSize="20"
+                               Style="{StaticResource defaultTextBlock}"/>
+                            <ui:TextBox x:Name="patronymic_tb"
+                                Text="" FontWeight="DemiBold" FontSize="15"
+                                Margin="20,2" MinWidth="200"/>
+
+                        </StackPanel>
 
                     </StackPanel>
-                </Grid>
+
+
+
+                </StackPanel>
 
             </StackPanel>
+
         </Grid>
 
+        <Grid Grid.Row="1" Grid.Column="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.2*"/>
+                <ColumnDefinition Width="1.2*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border Grid.ColumnSpan="3"
+                Background="{StaticResource Chat}" CornerRadius="0,0,12,0" Margin="0,0,5,5">
+                <Border.Effect>
+                    <DropShadowEffect Opacity="0.2"/>
+                </Border.Effect>
+            </Border>
+
+            <Border Grid.Row="1" Grid.ColumnSpan="3"
+                Background="{StaticResource Chat}" CornerRadius="0,0,12,0" Margin="0,0,5,5">
+                <Border.Effect>
+                    <DropShadowEffect Opacity="0.2"/>
+                </Border.Effect>
+            </Border>
+
+            <Grid Grid.Column="0">
+                <StackPanel>
+                    <TextBlock Text="Контакты" Style="{StaticResource defaultTextBlock}"
+                               HorizontalAlignment="Left" Margin="10,0"/>
+                    <Polygon Stroke="{StaticResource White}" Points=" 
+                 0,1
+                 300,1" Margin="8,2"/>
+
+                    <DockPanel>
+                        <ui:SymbolIcon Symbol="Phone20" FontSize="20" Foreground="{StaticResource White}"/>
+                        <TextBlock 
+                            Text="Номер 
+                                   телефона" 
+                                   TextWrapping="Wrap" Style="{StaticResource valueTextBlock}"
+                               HorizontalAlignment="Left" Margin="2,5"/>
+                        <TextBox x:Name="phone_tb" MinWidth="130"
+                            Text=""  FontWeight="Light"
+                               HorizontalAlignment="Right" Margin="5,5"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <ui:SymbolIcon Symbol="Mail20" FontSize="20" Foreground="{StaticResource White}"/>
+                        <TextBlock Text="Почта" Style="{StaticResource valueTextBlock}"
+                               HorizontalAlignment="Left" Margin="2,5"/>
+                        <TextBox x:Name="email_tb" MinWidth="130"
+                            Text="" FontWeight="Light"
+                               HorizontalAlignment="Right" Margin="5,5"/>
+                    </DockPanel>
+                    <TextBlock Text="Другие способы связи" Style="{StaticResource valueTextBlock}"
+                               HorizontalAlignment="Left" Margin="2,5"/>
+                    <TextBox x:Name="contactsOther_tb"
+                        TextWrapping="Wrap" Margin="7,5" FontSize="14"
+                        Text=""/>
+                </StackPanel>
+
+            </Grid>
+            <Grid Grid.Column="1">
+                <StackPanel>
+                    <TextBlock Text="Место проживания" Style="{StaticResource defaultTextBlock}"
+                               HorizontalAlignment="Left" Margin="10,0"/>
+                    <Polygon Stroke="{StaticResource White}" Points=" 
+                 0,1
+                 300,1" Margin="8,2"/>
+
+                    <DockPanel>
+                        <ui:SymbolIcon Symbol="City20" FontSize="20" Foreground="{StaticResource White}"/>
+                        <TextBlock Text="Город" Style="{StaticResource valueTextBlock}"
+                               HorizontalAlignment="Left" Margin="2,5"/>
+                        <TextBox Text="" x:Name="town_tb" MinWidth="130"
+                                    FontWeight="Light"
+                               HorizontalAlignment="Left" Margin="5,5"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <ui:SymbolIcon Symbol="Home20" FontSize="20" Foreground="{StaticResource White}"/>
+                        <TextBlock Text="Адрес" Style="{StaticResource valueTextBlock}"
+                               HorizontalAlignment="Left" Margin="2,5"/>
+                        <TextBox x:Name="address_tb" MinWidth="130"
+                            Text="" TextWrapping="Wrap" TextAlignment="Left"
+                                    FontWeight="Light"
+                               HorizontalAlignment="Left" Margin="5,5"/>
+                    </DockPanel>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="0" Grid.Row="1">
+                <StackPanel>
+                    <TextBlock Text="Образование" Style="{StaticResource defaultTextBlock}"
+                               HorizontalAlignment="Left" Margin="10,0"/>
+                    <Polygon Stroke="{StaticResource White}" Points=" 
+                 0,1
+                 300,1" Margin="8,2"/>
+
+                    <DockPanel>
+                        <ui:SymbolIcon Symbol="Phone20" Visibility="Hidden" FontSize="20" Foreground="{StaticResource White}"/>
+                        <TextBlock Text="Учебное Зв." Style="{StaticResource valueTextBlock}"
+                               HorizontalAlignment="Left" Margin="2,5"/>
+                        <TextBox x:Name="educationInstution_tb"
+                            TextWrapping="Wrap" TextAlignment="Left"
+                            Text="" MinWidth="130"
+                            FontWeight="Light"
+                               HorizontalAlignment="Right" Margin="5,5"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <ui:SymbolIcon Symbol="Mail20" Visibility="Hidden" FontSize="20" Foreground="{StaticResource White}"/>
+                        <TextBlock Text="Образование" Style="{StaticResource valueTextBlock}"
+                               HorizontalAlignment="Left" Margin="2,5"/>
+                        <ComboBox x:Name="education_cb" 
+                            Margin="5,5" HorizontalAlignment="Right"
+                                  MinWidth="130"/>
+                    </DockPanel>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="1">
+                <StackPanel>
+                    <TextBlock Text="Прошлое место работы" Style="{StaticResource defaultTextBlock}"
+                               HorizontalAlignment="Left" Margin="10,0"/>
+                    <Polygon Stroke="{StaticResource White}" Points=" 
+                 0,1
+                 300,1" Margin="8,2"/>
+
+                    <DockPanel>
+                        <ui:SymbolIcon Symbol="Phone20" Visibility="Hidden" FontSize="20" Foreground="{StaticResource White}"/>
+                        <TextBlock Text="Компания" Style="{StaticResource valueTextBlock}"
+                               HorizontalAlignment="Left" Margin="2,5,7,5"/>
+                        <TextBox x:Name="lastCompany_tb" 
+                            TextWrapping="Wrap" TextAlignment="Left"  MinWidth="130"
+                            Text="" 
+                             FontWeight="Light"
+                               HorizontalAlignment="Center" Margin="5,5"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <ui:SymbolIcon Symbol="Mail20" Visibility="Hidden" FontSize="20" Foreground="{StaticResource White}"/>
+                        <TextBlock Text="Должность" Style="{StaticResource valueTextBlock}"
+                               HorizontalAlignment="Left" Margin="2,5"/>
+                        <TextBox x:Name="lastJobTitle_tb"
+                            Text="" TextWrapping="Wrap"  FontWeight="Light"
+                               HorizontalAlignment="Center" Margin="5,5" MinWidth="130"/>
+                    </DockPanel>
+                </StackPanel>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

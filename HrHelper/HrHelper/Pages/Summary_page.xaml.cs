@@ -41,11 +41,13 @@ namespace HrHelper.Pages
             using (var db = new HrHelperDatabaseContext())
             {
                 summary = db.Summaries.Where(o => o.Id == id).
-                 Include(r => r.Photo).Include(o => o.Contacts).Include(o => o.Busyness).Include(o => o.Status).Include(o => o.Education)
+                 Include(r => r.Photo).Include(o => o.Contacts).Include(o => o.Busyness).Include(o => o.Status).Include(o => o.Education).Include(o => o.Gender)
                  .First();
             }
+            //ФИО
             fullname_tblock.Text = $"{summary.LastName} {summary.FirstName} {summary.Patronymic}";
 
+            //Фото
             if (summary.Photo != null)
             {
                 string photoPath = Classes.PhotoFolder.ProjectPath() + summary.Photo.Path;
@@ -60,7 +62,11 @@ namespace HrHelper.Pages
                     photo_image.ImageSource = bitmap;
                 }
             }
-
+            
+            lastJobCompany_tblock.Text = summary.LastCompany;
+            lastJobTitle_tblock.Text = summary.LastJobTitle;
+            
+            //Контакты
             LoadContacts(summary);
 
             //Возраст
@@ -68,7 +74,7 @@ namespace HrHelper.Pages
             age_tblock.Text = GetAge(summary).ToString();
 
             //Пол
-            gender_tblock.Text = summary.Gender;
+            gender_tblock.Text = summary.Gender.Name;
 
             //Адрес
             town_tblock.Text = summary.Town;
@@ -79,7 +85,6 @@ namespace HrHelper.Pages
 
             //Оброзование
             educationInstution_tblock.Text = summary.EducationInstution;
-
             if (summary.Education != null)
                 education_tblock.Text = summary.Education.EducationName;
 
@@ -185,40 +190,40 @@ namespace HrHelper.Pages
             }
         }
 
-        //private void Page_Unloaded(object sender, RoutedEventArgs e)
-        //{
-        //    using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
-        //    {
-        //        Summary summary = db.Summaries.Where(o => o.Id == idSummary).First();
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                Summary summary = db.Summaries.Where(o => o.Id == idSummary).First();
 
-        //        summary.Comments = comments_tb.Text;
-        //        summary.StatusId = db.SummaryStatuses.Where(o => o.Status == status_tblock.Text).First().Id;
-        //        if (busynessChange_cb.SelectedIndex != -1)
-        //            summary.BusynessId = db.Busynesses.Where(o => o.Type == busynessChange_cb.Text).First().Id;
+                summary.Comments = comments_tb.Text;
+                summary.StatusId = db.SummaryStatuses.Where(o => o.Status == statusChange_cb.Text).First().Id;
+                if (busynessChange_cb.SelectedIndex != -1)
+                    summary.BusynessId = db.Busynesses.Where(o => o.Type == busynessChange_cb.Text).First().Id;
 
-        //        if (jobTitleChange_cb.Text != String.Empty)
-        //        {
-        //            SummaryForVacancy summaryFor;
+                if (jobTitleChange_cb.Text != String.Empty)
+                {
+                    SummaryForVacancy summaryFor;
 
-        //            try
-        //            {
-        //                summaryFor = db.SummaryForVacancies.Where(o => o.SummaryId == idSummary).First();
-        //                summaryFor.JobId = db.Vacancies.Where(o => o.JobTitle == jobTitleChange_cb.Text).First().Id;
-        //                db.SummaryForVacancies.Update(summaryFor);
-        //            }
-        //            catch
-        //            {
-        //                summaryFor = new SummaryForVacancy()
-        //                {
-        //                    JobId = db.Vacancies.Where(o => o.JobTitle == jobTitleChange_cb.Text).First().Id,
-        //                    SummaryId = idSummary
-        //                };
-        //                db.SummaryForVacancies.Add(summaryFor);
-        //            }
-        //        }
-        //        db.SaveChanges();
-        //    }
-        //}
+                    try
+                    {
+                        summaryFor = db.SummaryForVacancies.Where(o => o.SummaryId == idSummary).First();
+                        summaryFor.JobId = db.Vacancies.Where(o => o.JobTitle == jobTitleChange_cb.Text).First().Id;
+                        db.SummaryForVacancies.Update(summaryFor);
+                    }
+                    catch
+                    {
+                        summaryFor = new SummaryForVacancy()
+                        {
+                            JobId = db.Vacancies.Where(o => o.JobTitle == jobTitleChange_cb.Text).First().Id,
+                            SummaryId = idSummary
+                        };
+                        db.SummaryForVacancies.Add(summaryFor);
+                    }
+                }
+                db.SaveChanges();
+            }
+        }
 
 
         #region Excel Export

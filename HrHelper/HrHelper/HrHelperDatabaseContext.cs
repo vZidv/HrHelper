@@ -19,6 +19,7 @@ namespace HrHelper
         public virtual DbSet<AuthorizationUser> AuthorizationUsers { get; set; } = null!;
         public virtual DbSet<Busyness> Busynesses { get; set; } = null!;
         public virtual DbSet<Education> Educations { get; set; } = null!;
+        public virtual DbSet<Gender> Genders { get; set; } = null!;
         public virtual DbSet<Photo> Photos { get; set; } = null!;
         public virtual DbSet<Summary> Summaries { get; set; } = null!;
         public virtual DbSet<SummaryContact> SummaryContacts { get; set; } = null!;
@@ -69,6 +70,13 @@ namespace HrHelper
                 entity.Property(e => e.EducationName).HasMaxLength(60);
             });
 
+            modelBuilder.Entity<Gender>(entity =>
+            {
+                entity.ToTable("Gender");
+
+                entity.Property(e => e.Name).HasMaxLength(10);
+            });
+
             modelBuilder.Entity<Photo>(entity =>
             {
                 entity.ToTable("Photo");
@@ -102,8 +110,6 @@ namespace HrHelper
 
                 entity.Property(e => e.FirstName).HasMaxLength(25);
 
-                entity.Property(e => e.Gender).HasMaxLength(10);
-
                 entity.Property(e => e.LastCompany).HasMaxLength(50);
 
                 entity.Property(e => e.LastJobTitle).HasMaxLength(50);
@@ -128,6 +134,12 @@ namespace HrHelper
                     .WithMany(p => p.Summaries)
                     .HasForeignKey(d => d.EducationId)
                     .HasConstraintName("FK_Summary_Education");
+
+                entity.HasOne(d => d.Gender)
+                    .WithMany(p => p.Summaries)
+                    .HasForeignKey(d => d.GenderId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Summary_Gender");
 
                 entity.HasOne(d => d.Photo)
                     .WithMany(p => p.Summaries)
