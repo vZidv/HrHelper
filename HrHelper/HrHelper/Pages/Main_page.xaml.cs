@@ -28,7 +28,7 @@ namespace HrHelper.Pages
         {
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
-                Summary[] summaries = db.Summaries.ToArray();
+                Summary[] summaries = db.Summaries.Include(o => o.Status).ToArray();
                 foreach (Summary summary in summaries)
                 {
                     if (summary.BusynessId != null)
@@ -40,7 +40,7 @@ namespace HrHelper.Pages
 
         private void openSummary_button_Click(object sender, RoutedEventArgs e)
         {           
-
+            //ПЕРЕДЕЛАТЬ
             int id = ChoosePersonId();
             Classes.Settings.mainFrame.Navigate(new Pages.Summary_page(Convert.ToInt32(id)));
         }
@@ -64,12 +64,7 @@ namespace HrHelper.Pages
             return Convert.ToInt32(id);
         }
 
-        //public void ChangeSummaryForDataGrid(int status)
-        //{
-        //    using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
-        //        summary_dg.ItemsSource = db.Summaries.Where(o => o.StatusId == status).ToArray();     
-            
-        //}
+
         private void summaryAdd_bt_Click(object sender, RoutedEventArgs e) => Classes.Settings.mainFrame.Navigate(new Pages.SummaryAdd_page());
 
         private void search_tb_SelectionChanged(object sender, RoutedEventArgs e)
@@ -88,12 +83,5 @@ namespace HrHelper.Pages
 
         private void RowCountUpdate() => allClients_tblock.Text = $"Всего - {summary_dg.Items.Count}";
 
-
-
-
-        //private void acceptSammury_but_Click(object sender, RoutedEventArgs e) => ChangeSummaryForDataGrid(3);
-        //private void refusal_but_Click(object sender, RoutedEventArgs e) => ChangeSummaryForDataGrid(2);
-        //private void invitedSummary_but_Click(object sender, RoutedEventArgs e) => ChangeSummaryForDataGrid(1);
-        //private void withoutStatusSummary_but_Click(object sender, RoutedEventArgs e) => ChangeSummaryForDataGrid(4);
     }
 }

@@ -18,6 +18,7 @@ namespace HrHelper
         public decimal MinSalary { get; set; }
         public decimal MaxSalary { get; set; }
 
+        public virtual Busyness Busyness { get; set; } = null!;
         public virtual ICollection<SummaryForVacancy> SummaryForVacancies { get; set; }
     }
 }

@@ -83,7 +83,7 @@
                             <ui:NavigationItem Foreground="{StaticResource White}" IconForeground="{StaticResource White}"
                         x:Name="users_but"
                         Icon="ShieldPerson20" IconSize="35"
-                        Content="Пользователи"/>
+                        Content="Пользователи" Click="users_but_Click"/>
                             <ui:NavigationSeparator/>
                             <ui:NavigationItem Foreground="{StaticResource White}" IconForeground="{StaticResource White}"
                         x:Name="exit_but"

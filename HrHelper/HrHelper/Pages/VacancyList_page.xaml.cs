@@ -1,4 +1,5 @@
 ﻿using HrHelper.Windows;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,23 +30,29 @@ namespace HrHelper.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             LoadDataGrid();
-            RowCountUpdate();
         }
         private void LoadDataGrid()
         {
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
-                Vacancy[] summaries = db.Vacancies.ToArray();
-                summary_dg.ItemsSource = summaries;
+                Vacancy[] vacancy = db.Vacancies.Include(o => o.Busyness).ToArray();
+                vacancy_dg.ItemsSource = vacancy;
             }
             RowCountUpdate();
         }
-        private void RowCountUpdate() => allClients_tblock.Text = $"Всего - {summary_dg.Items.Count}";
+        private void RowCountUpdate() => allClients_tblock.Text = $"Всего - {vacancy_dg.Items.Count}";
 
         private void vacancyAdd_but_Click(object sender, RoutedEventArgs e) 
         {
             new MinWin_win(new VacancyAdd_page()).ShowDialog();
             LoadDataGrid();
-        } 
+        }
+
+        private void openVacancy_button_Click(object sender, RoutedEventArgs e)
+        {
+            Vacancy vacancy = vacancy_dg.SelectedItem as Vacancy;
+            new MinWin_win(new Vacancy_page(vacancy)).ShowDialog();
+            LoadDataGrid();
+        }
     }
 }

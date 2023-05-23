@@ -44,7 +44,7 @@
                         </DataGridTextColumn.Binding>
                     </DataGridTextColumn>
 
-                    <DataGridTextColumn Binding="{Binding Specialization}" Header="Специальность" MinWidth="170" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding Status.Status}" Header="Статус" MinWidth="170" Width="*"/>
                     <DataGridTextColumn Binding="{Binding Busyness.Type}" Header="Занятость" MinWidth="170" Width="*"/>
                     <DataGridTemplateColumn Header="Действие" MinWidth="170" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
