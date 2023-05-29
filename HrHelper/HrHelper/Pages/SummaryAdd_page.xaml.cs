@@ -243,7 +243,7 @@ namespace HrHelper.Pages
             {}
 
             Classes.MyMessageBox.Show("Внимание", "Пользователь добавлен.");
-            Classes.Settings.mainFrame.Navigate(new Main_page());
+            Classes.Settings.mainFrame.Navigate(new SummaryList_page());
         }
         int? CreatePhoto()
         {

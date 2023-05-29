@@ -1,4 +1,4 @@
-﻿<Page x:Class="HrHelper.Pages.Main_page"
+﻿<Page x:Class="HrHelper.Pages.SummaryList_page"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -26,13 +26,39 @@
             <ui:Button Content="➕ Кандидат" x:Name="summaryAdd_but"
                        VerticalAlignment="Bottom" Margin="10"
                        Background="{StaticResource Online}" Click="summaryAdd_bt_Click"/>
+            <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal">
+                <ComboBox Text="Вакансия"
+                          IsEditable="True" IsReadOnly="True" x:Name="vacancyChange_comboBox" SelectionChanged="vacancyChange_comboBox_SelectionChanged">
+                </ComboBox>
+                <ui:Button Content="Excel" x:Name="excelExport_but" Icon="Book24" Opacity="1"
+                        Margin="10" 
+                       Background="{StaticResource Online}" Click="excelExport_but_Click"/>
+            </StackPanel>
+
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" x:Name="Data_grid">
             <DataGrid RowStyle="{DynamicResource DataGridRowStyle}" CellStyle="{StaticResource DataGridCell}"
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}" Style="{DynamicResource defaultDataGridStyle}"  x:Name="summary_dg" IsReadOnly="True" RowHeaderWidth="0"
             Grid.Row="1" Margin="5,0,5,0" BorderThickness="0" AutoGenerateColumns="False" Grid.ColumnSpan="2">
 
                 <DataGrid.Columns>
+
+                    <DataGridTemplateColumn Width="100">
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <CheckBox Content="Всё" x:Name="selectAll_cb"
+                                Foreground="{StaticResource White}" FontWeight="Bold" Checked="selectAll_cb_Checked"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <CheckBox x:Name="selectSummary_cb" Click="selectSummary_cb_Click"/>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
                     <DataGridTextColumn Binding="{Binding Id}" Header="ID" />
                     <DataGridTextColumn Header="Ф.И.О" MinWidth="170" Width="*">
                         <DataGridTextColumn.Binding>
@@ -45,6 +71,7 @@
                     </DataGridTextColumn>
 
                     <DataGridTextColumn Binding="{Binding Status.Status}" Header="Статус" MinWidth="170" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding Contacts.Phone}" Header="Номер телефона" MinWidth="170" Width="*"/>
                     <DataGridTextColumn Binding="{Binding Busyness.Type}" Header="Занятость" MinWidth="170" Width="*"/>
                     <DataGridTemplateColumn Header="Действие" MinWidth="170" Width="*">
                         <DataGridTemplateColumn.CellTemplate>

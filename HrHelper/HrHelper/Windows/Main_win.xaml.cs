@@ -21,12 +21,12 @@ namespace HrHelper.Windows
             if (!PhotoFolder.CheckPhotoFolder())
                 PhotoFolder.CreatePhotoFolder();
 
-            frameMain.Navigate(new Pages.Main_page());
+            frameMain.Navigate(new Pages.SummaryList_page());
             Settings.mainFrame = frameMain;
         }
         //User Menu buttons
         #region User Menu
-        private void person_but_Click(object sender, RoutedEventArgs e) => frameMain.Navigate(new Pages.Main_page());                          
+        private void person_but_Click(object sender, RoutedEventArgs e) => frameMain.Navigate(new Pages.SummaryList_page());                          
         private void settings_but_Click(object sender, RoutedEventArgs e) => frameMain.Navigate(new Pages.Settings_page());
         private void vacancy_but_Click(object sender, RoutedEventArgs e) => frameMain.Navigate(new Pages.VacancyList_page());
         private void users_but_Click(object sender, RoutedEventArgs e) => frameMain.Navigate(new Pages.UserList_page());
