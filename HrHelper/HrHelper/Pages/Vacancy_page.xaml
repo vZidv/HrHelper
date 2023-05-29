@@ -26,7 +26,7 @@
             <ui:Button Content="Удалить" x:Name="deleteVacancy_but"
                        Background="{StaticResource Dnd}"
                        Margin="0,10,10,10" Width="100" Icon="Delete20"
-                       VerticalAlignment="Bottom" />
+                       VerticalAlignment="Bottom" Click="deleteVacancy_but_Click"/>
         </StackPanel>
 
         

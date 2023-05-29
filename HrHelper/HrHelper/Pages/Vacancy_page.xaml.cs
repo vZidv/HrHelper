@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HrHelper.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,7 @@ namespace HrHelper.Pages
     /// </summary>
     public partial class Vacancy_page : Page
     {
-        Vacancy vacancy;
+        Vacancy vacancy { get; set; }
         public Vacancy_page(Vacancy vacancy)
         {
             InitializeComponent();
@@ -41,5 +42,20 @@ namespace HrHelper.Pages
             minSalary_tb.Text = vacancy.MinSalary.ToString();
             maxSalary_tb.Text = vacancy.MaxSalary.ToString();
         }
+
+        private void deleteVacancy_but_Click(object sender, RoutedEventArgs e)
+        {
+            if (MyMessageBox.Show("Внимание", "Вы точно хотите удалить эту вакансию?", MyMessageBoxOptions.YesNo) == false)
+                return;
+
+            using(HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                db.Vacancies.Remove(vacancy);
+                db.SaveChanges();
+            }
+            MyMessageBox.Show("Внимание", "Вакансия успешно удалена!");
+            Settings.mainWindow.Close();
+        }
+
     }
 }

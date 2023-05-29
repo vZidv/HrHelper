@@ -52,7 +52,7 @@
                                         <ui:Button Icon="Eye16" Background="{StaticResource Blue}"
                                         x:Name="openVacancy_button" Click="openVacancy_button_Click" />
                                         <ui:Button Icon="Delete12" Background="{StaticResource Dnd}"
-                                        x:Name="delete_button"/>
+                                        x:Name="delete_button" Click="delete_button_Click"/>
                                     </StackPanel>
                                 </Grid>
                             </DataTemplate>

@@ -68,4 +68,13 @@
     <Resource Include="Source\Vacancy.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Database\HrHelperDatabase.mdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Database\HrHelperDatabase_log.ldf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

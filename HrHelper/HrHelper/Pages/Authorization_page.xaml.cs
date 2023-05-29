@@ -39,7 +39,8 @@ namespace HrHelper.Pages
                 if (password_tb.Password != user.Password)
                     Classes.MyMessageBox.Show("Ошибка", "Неверный пароль!", true);
 
-                new Main_win(user).Show();
+                //new Main_win(user).Show();
+                new Main_win().Show();
                 authorization_win.Close();
             }
             catch(Exception ex)

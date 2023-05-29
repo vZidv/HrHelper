@@ -25,6 +25,7 @@ namespace HrHelper.Windows
             InitializeComponent();
 
             page = startPage;
+
             Classes.Settings.mainFrame = mainFrame;
             Classes.Settings.mainWindow = this;
         }

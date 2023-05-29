@@ -1,4 +1,5 @@
-﻿using HrHelper.Windows;
+﻿using HrHelper.Classes;
+using HrHelper.Windows;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -52,7 +53,27 @@ namespace HrHelper.Pages
         {
             Vacancy vacancy = vacancy_dg.SelectedItem as Vacancy;
             new MinWin_win(new Vacancy_page(vacancy)).ShowDialog();
+
+            LoadDataGrid();
+        }
+
+        private void delete_button_Click(object sender, RoutedEventArgs e)
+        {
+            Vacancy vacancy = vacancy_dg.SelectedItem as Vacancy;
+            if (MyMessageBox.Show("Внимание", "Вы точно хотите удалить эту вакансию?", MyMessageBoxOptions.YesNo) == false)
+                return;
+
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                SummaryForVacancy[] summaryForVacancy = db.SummaryForVacancies.Where(o => o.JobId == vacancy.Id).ToArray();
+                db.SummaryForVacancies.RemoveRange(summaryForVacancy);
+                db.Vacancies.Remove(vacancy);
+                db.SaveChanges();
+            }
+
+            MyMessageBox.Show("Внимание", "Вакансия успешно удалена!");
             LoadDataGrid();
         }
     }
+    
 }

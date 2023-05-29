@@ -1,13 +1,13 @@
-﻿<Page x:Class="HrHelper.Pages.UserAdd_page"
+﻿<Page x:Class="HrHelper.Pages.UserEdit_page"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:ui ="http://schemas.lepo.co/wpfui/2022/xaml"
       xmlns:local="clr-namespace:HrHelper.Pages"
       mc:Ignorable="d" 
       d:Height="400" Width="450" 
-      Title="UserAdd_page" Loaded="Page_Loaded">
+      Title="UserEdit_page" Loaded="Page_Loaded">
 
     <Grid Background="Transparent">
 
@@ -17,13 +17,15 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Новый пользователь "  VerticalAlignment="Bottom"
+            <TextBlock TextAlignment="Left"
+                Text="Изменить 
+                       пользователя"  TextWrapping="Wrap"  VerticalAlignment="Bottom"
                        Margin="10" FontSize="25"
                        Style="{StaticResource headerTextBlock}"/>
-            <ui:Button Content="Добавить" x:Name="addUser_but"
-                       Background="{StaticResource Online}"
-                       Margin="10" Width="150"
-                       HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="addUser_but_Click"/>
+            <ui:Button Content="Изменить" x:Name="editUser_but"
+                       Background="{StaticResource Blue}"
+                       Margin="10" Width="150" Icon="Edit20"
+                       HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="editUser_but_Click" />
             <Grid Grid.Row="1" Margin="0,10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
