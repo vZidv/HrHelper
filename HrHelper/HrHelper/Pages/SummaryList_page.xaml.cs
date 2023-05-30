@@ -9,7 +9,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
+using System.Windows.Media;
 using ui = Wpf.Ui;
 
 //using ex = Microsoft.Office.Interop.Excel;
@@ -98,18 +100,6 @@ namespace HrHelper.Pages
 
         private void RowCountUpdate() => allClients_tblock.Text = $"Всего - {summary_dg.Items.Count}";
 
-        private void selectAll_cb_Checked(object sender, RoutedEventArgs e)
-        {
-            CheckBox checkBox = (CheckBox)sender;
-            if (checkBox.IsChecked == true)
-            {
-                MessageBox.Show("Все");
-            }
-            else if (checkBox.IsChecked == false)
-            {
-                MessageBox.Show("не все");
-            }
-        }
 
 
         private void vacancyChange_comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -138,25 +128,6 @@ namespace HrHelper.Pages
             Data_grid.Children.Add(dataGrid);
             dataGrid.ItemsSource = selectedSummary;
             dataGrid.Visibility = Visibility.Hidden;
-            //dataGrid.Columns.Add(new DataGridTextColumn()
-            //{
-            //    Header = "Ф.И.О",
-            //    Width = new DataGridLength(200),
-            //    FontSize = 12,
-            //    Binding = new Binding("Name")
-            //
-            // dataGrid.AutoGenerateColumns = false;
-
-
-            //TextBlock cellContent = dataGrid.Columns[1].GetCellContent(dataGrid.Items[0]) != null ? dataGrid.Columns[1].GetCellContent(dataGrid.Items[0]) as TextBlock : null;
-            //MessageBox.Show(cellContent.Text);
-            //MessageBox.Show("Исчез");
-            //summary_dg.Visibility = Visibility.Hidden;
-            //MessageBox.Show("Появился");
-            //Data_grid.Children.Add(dataGrid);
-
-
-
         }
         private DataGrid CopyDataGrid()
         {
@@ -183,7 +154,6 @@ namespace HrHelper.Pages
             {
                 newGrid.ItemsSource = selectedSummary;
                 ExcelExport.ExportSummaryList(newGrid);
-                MessageBox.Show("А все");
             };
 
             return newGrid;
@@ -201,6 +171,65 @@ namespace HrHelper.Pages
                 selectedSummary.Remove(summary_dg.SelectedItem as Summary);
             }
             excelButtonChangeOpacity();
+        }
+
+        private void selectAll_cb_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBox currentCheckB = (CheckBox)sender;
+            if (currentCheckB.IsChecked == true)
+            {
+                foreach (var item in summary_dg.Items)
+                {
+                    selectedSummary.Add((Summary)item);
+
+                    var row = summary_dg.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
+                    if (row != null)
+                    {
+                        var checkBox = FindVisualChild<CheckBox>(row);
+                        if (checkBox != null && checkBox.Name == "selectSummary_cb")
+                        {
+                            checkBox.IsChecked = true;                            
+                        }
+                    }
+                }
+
+            }          
+            else if (currentCheckB.IsChecked == false)
+            {
+                foreach (var item in summary_dg.Items)
+                {
+                    var row = summary_dg.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
+                    if (row != null)
+                    {
+                        var checkBox = FindVisualChild<CheckBox>(row);
+                        if (checkBox != null && checkBox.Name == "selectSummary_cb")
+                        {
+                            checkBox.IsChecked = false;
+                        }
+                    }
+                }
+            }
+            excelButtonChangeOpacity();
+        }
+
+        private T FindVisualChild<T>(DependencyObject obj) where T : DependencyObject
+        {
+            if (obj != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+                    if (child != null && child is T)
+                        return (T)child;
+                    else
+                    {
+                        T childOfChild = FindVisualChild<T>(child);
+                        if (childOfChild != null)
+                            return childOfChild;
+                    }
+                }
+            }
+            return null;
         }
     }
 }

@@ -47,14 +47,13 @@
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
                                 <CheckBox Content="Всё" x:Name="selectAll_cb"
-                                Foreground="{StaticResource White}" FontWeight="Bold" Checked="selectAll_cb_Checked"/>
+                                Foreground="{StaticResource White}" FontWeight="Bold" Click="selectAll_cb_Click"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
+                        
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Grid>
-                                    <CheckBox x:Name="selectSummary_cb" Click="selectSummary_cb_Click"/>
-                                </Grid>
+                                <CheckBox x:Name="selectSummary_cb" Click="selectSummary_cb_Click"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
