@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:HrHelper"     
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-             StartupUri="Windows/Main_win.xaml">
+             StartupUri="Windows/Authorization_win.xaml">
     <!--Windows/Authorization_win.xaml-->
     <!--Windows/Main_win.xaml-->
     <Application.Resources>

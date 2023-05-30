@@ -77,6 +77,10 @@
                         x:Name="vacancy_but"
                         Icon="AppGeneric20" IconSize="35"
                         Content="Вакансии" Click="vacancy_but_Click"/>
+                            <ui:NavigationItem Foreground="{StaticResource White}" IconForeground="{StaticResource White}"
+                        x:Name="requestVacancy_but"
+                        Icon="NotepadPerson20" IconSize="35"
+                        Content="Запросы" Click="requestVacancy_but_Click"/>
                             <ui:NavigationSeparator/>
                         </ui:NavigationStore.Items>
                         <ui:NavigationStore.Footer>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -28,14 +27,14 @@ namespace HrHelper
         public virtual DbSet<SummaryStatus> SummaryStatuses { get; set; } = null!;
         public virtual DbSet<UserType> UserTypes { get; set; } = null!;
         public virtual DbSet<Vacancy> Vacancies { get; set; } = null!;
+        public virtual DbSet<VacancyRequest> VacancyRequests { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer($"Server= DESKTOP-2BSAL1V\\SQLEXPRESS;Database=HrHelperDatabase;Trusted_Connection=True;");
-                //Server= DESKTOP-2BSAL1V\\SQLEXPRESS;Database=HrHelperDatabase;Trusted_Connection=True;
+                optionsBuilder.UseSqlServer("Server= DESKTOP-2BSAL1V\\SQLEXPRESS;Database=HrHelperDatabase;Trusted_Connection=True;");
             }
         }
 
@@ -95,6 +94,8 @@ namespace HrHelper
                 entity.HasIndex(e => e.ContactsId, "IX_Summary_ContactsId");
 
                 entity.HasIndex(e => e.EducationId, "IX_Summary_EducationId");
+
+                entity.HasIndex(e => e.GenderId, "IX_Summary_GenderId");
 
                 entity.HasIndex(e => e.PhotoId, "IX_Summary_PhotoId");
 
@@ -203,6 +204,8 @@ namespace HrHelper
             {
                 entity.ToTable("Vacancy");
 
+                entity.HasIndex(e => e.BusynessId, "IX_Vacancy_BusynessId");
+
                 entity.Property(e => e.Description).HasMaxLength(200);
 
                 entity.Property(e => e.JobTitle).HasMaxLength(60);
@@ -218,6 +221,31 @@ namespace HrHelper
                     .HasForeignKey(d => d.BusynessId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Vacancy_Busyness");
+            });
+
+            modelBuilder.Entity<VacancyRequest>(entity =>
+            {
+                entity.ToTable("VacancyRequest");
+
+                entity.Property(e => e.Department).HasMaxLength(50);
+
+                entity.Property(e => e.Description).HasMaxLength(200);
+
+                entity.Property(e => e.Name).HasMaxLength(60);
+
+                entity.Property(e => e.Skills).HasMaxLength(200);
+
+                entity.HasOne(d => d.Busyness)
+                    .WithMany(p => p.VacancyRequests)
+                    .HasForeignKey(d => d.BusynessId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_VacancyRequest_Busyness");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.VacancyRequests)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_VacancyRequest_AuthorizationUser");
             });
 
             OnModelCreatingPartial(modelBuilder);

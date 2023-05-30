@@ -11,12 +11,13 @@ namespace HrHelper.Windows
 
 
         //AuthorizationUser user
-        public Main_win()
+        public Main_win(AuthorizationUser user)
         {
             InitializeComponent();
 
-            //this.use = user;
-            //IsAdmin(user);
+            this.use = user;
+            Settings.currentUser = user;
+            IsAdmin(user);
 
             if (!PhotoFolder.CheckPhotoFolder())
                 PhotoFolder.CreatePhotoFolder();
@@ -26,6 +27,7 @@ namespace HrHelper.Windows
         }
         //User Menu buttons
         #region User Menu
+        private void requestVacancy_but_Click(object sender, RoutedEventArgs e) => frameMain.Navigate(new Pages.RequestVacancyList_page());
         private void person_but_Click(object sender, RoutedEventArgs e) => frameMain.Navigate(new Pages.SummaryList_page());                          
         private void settings_but_Click(object sender, RoutedEventArgs e) => frameMain.Navigate(new Pages.Settings_page());
         private void vacancy_but_Click(object sender, RoutedEventArgs e) => frameMain.Navigate(new Pages.VacancyList_page());
@@ -49,6 +51,8 @@ namespace HrHelper.Windows
                 
             users_but.Visibility = Visibility.Visible;
         }
+
+
 
     }
 }

@@ -40,7 +40,7 @@ namespace HrHelper.Pages
                     Classes.MyMessageBox.Show("Ошибка", "Неверный пароль!", true);
 
                 //new Main_win(user).Show();
-                new Main_win().Show();
+                new Main_win(user).Show();
                 authorization_win.Close();
             }
             catch(Exception ex)

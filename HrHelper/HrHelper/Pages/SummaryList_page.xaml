@@ -43,7 +43,7 @@
 
                 <DataGrid.Columns>
 
-                    <DataGridTemplateColumn Width="100">
+                    <DataGridTemplateColumn Width="75">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
                                 <CheckBox Content="Всё" x:Name="selectAll_cb"

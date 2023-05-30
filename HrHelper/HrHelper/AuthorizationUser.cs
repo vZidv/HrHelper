@@ -5,11 +5,17 @@ namespace HrHelper
 {
     public partial class AuthorizationUser
     {
+        public AuthorizationUser()
+        {
+            VacancyRequests = new HashSet<VacancyRequest>();
+        }
+
         public int Id { get; set; }
         public string Login { get; set; } = null!;
         public string Password { get; set; } = null!;
         public int Type { get; set; }
 
         public virtual UserType TypeNavigation { get; set; } = null!;
+        public virtual ICollection<VacancyRequest> VacancyRequests { get; set; }
     }
 }
