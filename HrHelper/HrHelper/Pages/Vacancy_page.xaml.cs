@@ -57,5 +57,9 @@ namespace HrHelper.Pages
             Settings.mainWindow.Close();
         }
 
+        private void editVacancy_but_Click(object sender, RoutedEventArgs e)
+        {
+            Settings.mainFrame.Navigate(new VacancyEdit_page(vacancy));
+        }
     }
 }

@@ -5,7 +5,7 @@
         <Setter Property="TextAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="FontSize" Value="18"/>
-        <Setter Property="Foreground"  Value="{StaticResource White}"/>
+        <Setter Property="Foreground"  Value="{DynamicResource White}"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
     <Style x:Key="headerTextBlock" TargetType="TextBlock" BasedOn="{StaticResource defaultTextBlock}">

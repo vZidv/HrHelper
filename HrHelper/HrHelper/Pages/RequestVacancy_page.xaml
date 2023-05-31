@@ -54,7 +54,7 @@
                                FontWeight="DemiBold"/>
                 </Grid>
 
-                <ui:TextBox PlaceholderText="Название вакансии"  x:Name="jobTitle_tb"  IsReadOnly="True"
+                <TextBox  x:Name="jobTitle_tb"  IsReadOnly="True"
                                 Margin="5"/>
                 <Grid>
                     <TextBlock Text="Описание"
@@ -64,7 +64,7 @@
                                FontWeight="DemiBold"/>
                 </Grid>
 
-                <ui:TextBox PlaceholderText="Описание"  x:Name="description_tb" TextWrapping="Wrap"  IsReadOnly="True"
+                <TextBox   x:Name="description_tb" TextWrapping="Wrap"  IsReadOnly="True"
                                 Margin="5" MinHeight="150" />
 
 
@@ -77,14 +77,14 @@
                                HorizontalAlignment="Left" 
                                Margin="5,0" FontSize="15"
                                FontWeight="DemiBold"/>
-                <ui:TextBox  x:Name="busyness_tb"   IsReadOnly="True"
+                <TextBox  x:Name="busyness_tb"   IsReadOnly="True"
                         Margin="5"  />
                 <TextBlock Text="Отдел" 
                                Style="{StaticResource defaultTextBlock}" 
                                HorizontalAlignment="Left" 
                                Margin="5,0" FontSize="15"
                                FontWeight="DemiBold"/>
-                <ui:TextBox PlaceholderText="Отдел" x:Name="department_tb"   IsReadOnly="True"
+                <TextBox  x:Name="department_tb"   IsReadOnly="True"
                             TextWrapping="Wrap" AcceptsReturn="True"
                                 Margin="5" />
                 <TextBlock Text="От кого" 
@@ -92,7 +92,7 @@
                                HorizontalAlignment="Left" 
                                Margin="5,0" FontSize="15"
                                FontWeight="DemiBold"/>
-                <ui:TextBox PlaceholderText="Логин" x:Name="login_tb" IsReadOnly="True"  
+                <TextBox  x:Name="login_tb" IsReadOnly="True"  
                             TextWrapping="Wrap" AcceptsReturn="True"
                                 Margin="5"/>
                 <Grid>
@@ -103,7 +103,7 @@
                                FontWeight="DemiBold"/>
                 </Grid>
 
-                <ui:TextBox PlaceholderText="Навыки кандидата"  x:Name="skills_tb" TextWrapping="Wrap" 
+                <TextBox   x:Name="skills_tb" TextWrapping="Wrap" 
                                  IsReadOnly="True" Margin="5"/>
 
 
