@@ -21,15 +21,33 @@ namespace HrHelper.Pages
     /// </summary>
     public partial class VacancyAdd_page : Page
     {
+        public Vacancy vacancy {get;set;}
+
         public VacancyAdd_page()
         {
             InitializeComponent();
         }
+        public void LoadVacancyData(Vacancy vacancy)
+        {
+            if (vacancy == null)
+                return;
 
+
+            jobTitle_tb.Text = vacancy.JobTitle;
+            description_tb.Text = vacancy.Description;
+            skills_tb.Text = vacancy.Skills;
+            busyness_cb.Text = vacancy.Busyness.Type;
+
+            if (minSalary_tb != null)
+                minSalary_tb.Text = vacancy.MinSalary.ToString();
+
+            if (maxSalary_tb != null)
+                maxSalary_tb.Text = vacancy.MaxSalary.ToString();           
+        }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            LoadBusynessComboBox();
+            LoadBusynessComboBox();         
         }
         private void LoadBusynessComboBox()
         {
@@ -54,12 +72,21 @@ namespace HrHelper.Pages
 
         private void addVacancy_but_Click(object sender, RoutedEventArgs e)
         {
+            Busyness busyness = busyness_cb.SelectedItem as Busyness;
+            if(busyness == null)
+            {
+                using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+                {
+                    busyness = db.Busynesses.Where(o => o.Type == busyness_cb.Text).First();
+                }
+            }
+               
             Vacancy vacancy = new Vacancy()
             {
                 JobTitle = jobTitle_tb.Text,
                 Description = description_tb.Text,
                 Skills= skills_tb.Text,
-                BusynessId = (busyness_cb.SelectedItem as Busyness).Id,
+                BusynessId = busyness.Id,
                 MaxSalary =Convert.ToDecimal( maxSalary_tb.Text),
                 MinSalary = Convert.ToDecimal(minSalary_tb.Text)
 

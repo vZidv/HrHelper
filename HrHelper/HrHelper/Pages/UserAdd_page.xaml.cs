@@ -72,7 +72,7 @@ namespace HrHelper.Pages
             {
                 Login = login_tb.Text,
                 Password = password_tb.Text,
-                Type = (userType_cb.SelectedItem as UserType).Id
+                UserTypeId = (userType_cb.SelectedItem as UserType).Id
             };
 
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())

@@ -29,7 +29,7 @@ namespace HrHelper.Pages
                 AuthorizationUser user;
 
                 using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
-                    user = db.AuthorizationUsers.Where(u => u.Login == login_tb.Text).Include(o => o.TypeNavigation).FirstOrDefault();
+                    user = db.AuthorizationUsers.Where(u => u.Login == login_tb.Text).Include(o => o.UserType).FirstOrDefault();
 
                 if (user == null || password_tb.Password != user.Password)
                 {

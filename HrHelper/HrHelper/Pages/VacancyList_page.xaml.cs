@@ -65,7 +65,7 @@ namespace HrHelper.Pages
 
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
-                SummaryForVacancy[] summaryForVacancy = db.SummaryForVacancies.Where(o => o.JobId == vacancy.Id).ToArray();
+                SummaryForVacancy[] summaryForVacancy = db.SummaryForVacancies.Where(o => o.VacancyId == vacancy.Id).ToArray();
                 db.SummaryForVacancies.RemoveRange(summaryForVacancy);
                 db.Vacancies.Remove(vacancy);
                 db.SaveChanges();

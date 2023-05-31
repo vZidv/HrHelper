@@ -36,7 +36,7 @@ namespace HrHelper.Pages
         {
             using(HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
-                users_dg.ItemsSource = db.AuthorizationUsers.Include(o=>o.TypeNavigation).ToArray();
+                users_dg.ItemsSource = db.AuthorizationUsers.Include(o=>o.UserType).ToArray();
             }
             RowCountUpdate();
         }

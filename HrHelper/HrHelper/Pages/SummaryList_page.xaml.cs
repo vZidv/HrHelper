@@ -65,7 +65,7 @@ namespace HrHelper.Pages
                     }
                     else
                     {
-                        summaries = db.Summaries.Where(o => o.SummaryForVacancies.Any(u => u.JobId == (vacancyChange_comboBox.SelectedItem as Vacancy).Id)).ToArray();
+                        summaries = db.Summaries.Where(o => o.SummaryForVacancies.Any(u => u.VacancyId == (vacancyChange_comboBox.SelectedItem as Vacancy).Id)).ToArray();
                     }
                     return summaries;
                 }

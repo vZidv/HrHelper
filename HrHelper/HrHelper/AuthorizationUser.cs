@@ -13,9 +13,9 @@ namespace HrHelper
         public int Id { get; set; }
         public string Login { get; set; } = null!;
         public string Password { get; set; } = null!;
-        public int Type { get; set; }
+        public int UserTypeId { get; set; }
 
-        public virtual UserType TypeNavigation { get; set; } = null!;
+        public virtual UserType UserType { get; set; } = null!;
         public virtual ICollection<VacancyRequest> VacancyRequests { get; set; }
     }
 }

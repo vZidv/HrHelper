@@ -26,7 +26,7 @@ namespace HrHelper.Pages
 
                 foreach (var user in users)
                 {
-                    user.TypeNavigation = db.UserTypes.Where(o => o.Id == user.Type).First();
+                    user.UserType = db.UserTypes.Where(o => o.Id == user.UserTypeId).First();
                 }
             }
             users_dg.ItemsSource = users;

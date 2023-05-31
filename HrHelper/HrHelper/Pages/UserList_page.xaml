@@ -36,7 +36,7 @@
                     <DataGridTextColumn Binding="{Binding Id}" Header="ID" />
                     <DataGridTextColumn Binding="{Binding Login}" Header="Логин" MinWidth="170" Width="*"/>
                     <DataGridTextColumn Binding="{Binding Password}" Header="Пароль" MinWidth="170" Width="*"/>
-                    <DataGridTextColumn Binding="{Binding TypeNavigation.Type}" Header="Тип" MinWidth="170" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding UserType.Type}" Header="Тип" MinWidth="170" Width="*"/>
 
                     <DataGridTemplateColumn Header="Действие" MinWidth="170" Width="*">
                         <DataGridTemplateColumn.CellTemplate>

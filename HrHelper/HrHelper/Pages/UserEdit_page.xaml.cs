@@ -38,7 +38,7 @@ namespace HrHelper.Pages
         {
             login_tb.Text = user.Login;
             password_tb.Text = user.Password;
-            userType_cb.Text = user.TypeNavigation.Type;
+            userType_cb.Text = user.UserType.Type;
         }
         private void LoadUserTypeComboBox()
         {
@@ -53,7 +53,7 @@ namespace HrHelper.Pages
         {
             user.Login = login_tb.Text;
             user.Password = password_tb.Text;
-            user.Type = (userType_cb.SelectedItem as UserType).Id;
+            user.UserTypeId = (userType_cb.SelectedItem as UserType).Id;
 
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {

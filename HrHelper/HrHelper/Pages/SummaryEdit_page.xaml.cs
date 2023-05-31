@@ -99,7 +99,7 @@ namespace HrHelper.Pages
                 if (summaryFor == null)
                     jobTitle_cb.Text = String.Empty;
                 else
-                    jobTitle_cb.Text = db.Vacancies.Where(o => o.Id == summaryFor.JobId).First().JobTitle;
+                    jobTitle_cb.Text = db.Vacancies.Where(o => o.Id == summaryFor.VacancyId).First().JobTitle;
             }
         }
         #endregion
@@ -254,7 +254,7 @@ namespace HrHelper.Pages
                 SummaryForVacancy summaryFor = new SummaryForVacancy()
                 {
                     SummaryId = summary.Id,
-                    JobId = vacancy
+                    VacancyId = vacancy
                 };
                 using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
                 {

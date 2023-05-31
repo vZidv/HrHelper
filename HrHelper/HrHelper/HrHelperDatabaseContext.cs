@@ -44,15 +44,15 @@ namespace HrHelper
             {
                 entity.ToTable("AuthorizationUser");
 
-                entity.HasIndex(e => e.Type, "IX_AuthorizationUser_Type");
+                entity.HasIndex(e => e.UserTypeId, "IX_AuthorizationUser_Type");
 
                 entity.Property(e => e.Login).HasMaxLength(30);
 
                 entity.Property(e => e.Password).HasMaxLength(50);
 
-                entity.HasOne(d => d.TypeNavigation)
+                entity.HasOne(d => d.UserType)
                     .WithMany(p => p.AuthorizationUsers)
-                    .HasForeignKey(d => d.Type)
+                    .HasForeignKey(d => d.UserTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_AuthorizationUser_UserType");
             });
@@ -169,21 +169,21 @@ namespace HrHelper
             {
                 entity.ToTable("SummaryForVacancy");
 
-                entity.HasIndex(e => e.JobId, "IX_SummaryForVacancy_JobId");
+                entity.HasIndex(e => e.VacancyId, "IX_SummaryForVacancy_JobId");
 
                 entity.HasIndex(e => e.SummaryId, "IX_SummaryForVacancy_SummaryId");
-
-                entity.HasOne(d => d.Job)
-                    .WithMany(p => p.SummaryForVacancies)
-                    .HasForeignKey(d => d.JobId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SummaryForVacancy_Vacancy");
 
                 entity.HasOne(d => d.Summary)
                     .WithMany(p => p.SummaryForVacancies)
                     .HasForeignKey(d => d.SummaryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SummaryForVacancy_Summary");
+
+                entity.HasOne(d => d.Vacancy)
+                    .WithMany(p => p.SummaryForVacancies)
+                    .HasForeignKey(d => d.VacancyId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SummaryForVacancy_Vacancy");
             });
 
             modelBuilder.Entity<SummaryStatus>(entity =>
@@ -231,7 +231,7 @@ namespace HrHelper
 
                 entity.Property(e => e.Description).HasMaxLength(200);
 
-                entity.Property(e => e.Name).HasMaxLength(60);
+                entity.Property(e => e.JobTitle).HasMaxLength(60);
 
                 entity.Property(e => e.Skills).HasMaxLength(200);
 

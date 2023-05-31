@@ -186,7 +186,7 @@ namespace HrHelper.Pages
                 if (summaryFor == null)
                     jobTitleChange_cb.Text = String.Empty;
                 else
-                    jobTitleChange_cb.Text = db.Vacancies.Where(o => o.Id == summaryFor.JobId).First().JobTitle;
+                    jobTitleChange_cb.Text = db.Vacancies.Where(o => o.Id == summaryFor.VacancyId).First().JobTitle;
             }
         }
 
@@ -208,14 +208,14 @@ namespace HrHelper.Pages
                     try
                     {
                         summaryFor = db.SummaryForVacancies.Where(o => o.SummaryId == idSummary).First();
-                        summaryFor.JobId = db.Vacancies.Where(o => o.JobTitle == jobTitleChange_cb.Text).First().Id;
+                        summaryFor.VacancyId = db.Vacancies.Where(o => o.JobTitle == jobTitleChange_cb.Text).First().Id;
                         db.SummaryForVacancies.Update(summaryFor);
                     }
                     catch
                     {
                         summaryFor = new SummaryForVacancy()
                         {
-                            JobId = db.Vacancies.Where(o => o.JobTitle == jobTitleChange_cb.Text).First().Id,
+                            VacancyId = db.Vacancies.Where(o => o.JobTitle == jobTitleChange_cb.Text).First().Id,
                             SummaryId = idSummary
                         };
                         db.SummaryForVacancies.Add(summaryFor);

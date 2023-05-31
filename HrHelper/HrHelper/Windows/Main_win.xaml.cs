@@ -17,12 +17,13 @@ namespace HrHelper.Windows
 
             this.use = user;
             Settings.currentUser = user;
-            IsAdmin(user);
+
+            ConfigureUserWindow(user);
 
             if (!PhotoFolder.CheckPhotoFolder())
                 PhotoFolder.CreatePhotoFolder();
 
-            frameMain.Navigate(new Pages.SummaryList_page());
+            
             Settings.mainFrame = frameMain;
         }
         //User Menu buttons
@@ -40,19 +41,26 @@ namespace HrHelper.Windows
         }
 
         #endregion
-
-        private void IsAdmin(AuthorizationUser user)
+        private void ConfigureUserWindow(AuthorizationUser user)
         {
-            if (user.TypeNavigation.Type != "admin")
+            switch(user.UserType.Type)
             {
-                users_but.Visibility = Visibility.Hidden;
-                return;
+                case "admin":
+                    users_but.Visibility = Visibility.Visible;
+                    frameMain.Navigate(new Pages.SummaryList_page());
+                    break;
+                case "user":
+                    users_but.Visibility = Visibility.Hidden;
+                    frameMain.Navigate(new Pages.SummaryList_page());
+                    break;
+                case "client":
+                    frameMain.Navigate(new Pages.RequestVacancyList_page());
+                    users_but.Visibility = Visibility.Hidden;
+                    person_but.Visibility = Visibility.Hidden;
+                    vacancy_but.Visibility = Visibility.Hidden;
+                    break;
+
             }
-                
-            users_but.Visibility = Visibility.Visible;
         }
-
-
-
     }
 }

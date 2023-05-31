@@ -60,7 +60,7 @@
                                Margin="5,0" FontSize="15"
                                FontWeight="DemiBold"/>
                 <ComboBox  x:Name="busyness_cb" SelectedValue="HowDidFindU.Id" 
-                        Margin="5"  />
+                        Margin="5" IsEditable="True" IsReadOnly="True"  />
                 <TextBlock Text="Заработная плата" 
                                Style="{StaticResource defaultTextBlock}" 
                                HorizontalAlignment="Left" 

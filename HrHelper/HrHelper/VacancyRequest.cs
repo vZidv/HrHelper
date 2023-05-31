@@ -6,7 +6,7 @@ namespace HrHelper
     public partial class VacancyRequest
     {
         public int Id { get; set; }
-        public string Name { get; set; } = null!;
+        public string JobTitle { get; set; } = null!;
         public string? Description { get; set; }
         public string? Skills { get; set; }
         public int BusynessId { get; set; }

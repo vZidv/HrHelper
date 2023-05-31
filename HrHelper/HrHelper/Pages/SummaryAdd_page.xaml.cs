@@ -231,7 +231,7 @@ namespace HrHelper.Pages
                 SummaryForVacancy summaryFor = new SummaryForVacancy()
                 {
                     SummaryId = summary.Id,
-                    JobId = vacancy
+                    VacancyId = vacancy
                 };
                 using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
                 {

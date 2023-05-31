@@ -67,7 +67,7 @@ namespace HrHelper.Windows
                     {
                         Login = "dima",
                         Password = "123",
-                        Type = 1
+                        UserTypeId = 1
                     };
                     db.AuthorizationUsers.Add(user);
 

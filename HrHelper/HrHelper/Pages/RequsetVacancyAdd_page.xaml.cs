@@ -31,6 +31,7 @@ namespace HrHelper.Pages
             LoadBusynessComboBox();
             login_tb.Text = Settings.currentUser.Login;
         }
+
         private void LoadBusynessComboBox()
         {
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
@@ -44,7 +45,7 @@ namespace HrHelper.Pages
         {
             VacancyRequest vacancyRequest = new VacancyRequest()
             {
-                Name = jobTitle_tb.Text,
+                JobTitle = jobTitle_tb.Text,
                 Description = description_tb.Text,
                 Skills = skills_tb.Text,
                 BusynessId = (busyness_cb.SelectedItem as Busyness).Id,

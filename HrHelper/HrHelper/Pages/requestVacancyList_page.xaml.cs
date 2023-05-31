@@ -31,12 +31,32 @@ namespace HrHelper.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             LoadDataGrid();
+            ConfigureUserWindow(Settings.currentUser);
+        }
+
+        private void ConfigureUserWindow(AuthorizationUser user)
+        {
+            switch (user.UserType.Type)
+            {
+                case "admin":
+                    requestVacancyAdd_but.Visibility = Visibility.Visible;
+                    requestVacancyAdd_but.IsEnabled = true;
+                    break;
+                case "user":
+                    requestVacancyAdd_but.Visibility = Visibility.Hidden;
+                    requestVacancyAdd_but.IsEnabled = false;
+                    break;
+                case "client":
+                    requestVacancyAdd_but.Visibility = Visibility.Visible;
+                    requestVacancyAdd_but.IsEnabled = true;
+                    break;
+            }
         }
         private void LoadDataGrid()
         {
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
-                VacancyRequest[] vacancyRequests = db.VacancyRequests.Include(o => o.Busyness).ToArray();
+                VacancyRequest[] vacancyRequests = db.VacancyRequests.Include(o => o.Busyness).Include(o => o.User).ToArray();
                 vacancy_dg.ItemsSource = vacancyRequests;
             }
             RowCountUpdate();
@@ -62,6 +82,14 @@ namespace HrHelper.Pages
             }
 
             MyMessageBox.Show("Внимание", "Запрос успешно удален!");
+            LoadDataGrid();
+        }
+
+        private void openRequestVacancy_button_Click(object sender, RoutedEventArgs e)
+        {
+            VacancyRequest vacancyRequest = vacancy_dg.SelectedItem as VacancyRequest;
+
+            new MinWin_win(new Pages.RequestVacancy_page(vacancyRequest)).ShowDialog();
             LoadDataGrid();
         }
     }
