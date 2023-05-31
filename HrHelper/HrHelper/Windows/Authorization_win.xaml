@@ -13,6 +13,7 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+
         <Border Height="550" Width="800" Grid.RowSpan="2"
                 CornerRadius="25">
             <Border.Background>
@@ -23,6 +24,19 @@
             </Border.Background>
         </Border>
         <ui:TitleBar Background="{StaticResource Chat}" ShowMaximize="False"/>
-        <Frame x:Name="mainFrame" Grid.Row="1"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width ="430"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="390"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Frame x:Name="mainFrame" Grid.Row="1" Grid.Column="1"/>
+        </Grid>
+
     </Grid>
 </Window>
