@@ -10,11 +10,15 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
 
+                <ResourceDictionary x:Name="ThemeDictionary">
+                    <ResourceDictionary.MergedDictionaries>
+                        <!--<ResourceDictionary Source="Dictionary/BlackThemeColors.xaml"/>-->
+                        <ResourceDictionary Source="Dictionary/WhiteThemeColors.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+                
                 <ui:ThemesDictionary Theme="Light" />
                 <ui:ControlsDictionary />
-                
-                <!--<ResourceDictionary Source="Dictionary/WhiteThemeColors.xaml"/>-->
-                <ResourceDictionary Source="Dictionary/BlackThemeColors.xaml"/>
                 <ResourceDictionary Source="Dictionary/TextBoxes.xaml"/>
                 <ResourceDictionary Source="Dictionary/Buttons.xaml"/>
                 <ResourceDictionary Source="Dictionary/TextBlocks.xaml"/>

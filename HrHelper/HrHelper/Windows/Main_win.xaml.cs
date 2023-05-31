@@ -25,6 +25,7 @@ namespace HrHelper.Windows
 
             
             Settings.mainFrame = frameMain;
+            Settings.mainWindow = this;
         }
         //User Menu buttons
         #region User Menu
@@ -33,6 +34,7 @@ namespace HrHelper.Windows
         private void settings_but_Click(object sender, RoutedEventArgs e) => frameMain.Navigate(new Pages.Settings_page());
         private void vacancy_but_Click(object sender, RoutedEventArgs e) => frameMain.Navigate(new Pages.VacancyList_page());
         private void users_but_Click(object sender, RoutedEventArgs e) => frameMain.Navigate(new Pages.UserList_page());
+        private void settings_but_Click_1(object sender, RoutedEventArgs e) => frameMain.Navigate(new Pages.Settings_page());
         private void exit_but_Click(object sender, RoutedEventArgs e)
         {
             Authorization_win win = new Authorization_win();
@@ -62,5 +64,7 @@ namespace HrHelper.Windows
 
             }
         }
+
+
     }
 }

@@ -197,14 +197,6 @@
                     <StackPanel Orientation="Vertical" Margin="0,8,0,20">
 
                         <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Имя" HorizontalAlignment="Left" Margin="20,0,10,0" FontSize="20"
-                               Style="{StaticResource defaultTextBlock}"/>
-                            <ui:TextBox x:Name="firstName_tb"
-                                Text="" FontWeight="DemiBold" FontSize="15"
-                                Margin="20,2" MinWidth="200"/>
-
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical">
                             <TextBlock Text="Фамилия" HorizontalAlignment="Left" Margin="20,0,10,0" FontSize="20"
                                Style="{StaticResource defaultTextBlock}"/>
                             <ui:TextBox x:Name="lastName_tb"
@@ -212,6 +204,16 @@
                                 Margin="20,2" MinWidth="200"/>
 
                         </StackPanel>
+
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Имя" HorizontalAlignment="Left" Margin="20,0,10,0" FontSize="20"
+                               Style="{StaticResource defaultTextBlock}"/>
+                            <ui:TextBox x:Name="firstName_tb"
+                                Text="" FontWeight="DemiBold" FontSize="15"
+                                Margin="20,2" MinWidth="200"/>
+
+                        </StackPanel>
+                        
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text="Отчество" HorizontalAlignment="Left" Margin="20,0,10,0" FontSize="20"
                                Style="{StaticResource defaultTextBlock}"/>

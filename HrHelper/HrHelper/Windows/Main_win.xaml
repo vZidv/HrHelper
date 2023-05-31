@@ -34,7 +34,7 @@
         </Style>
     </Window.Resources>
   
-    <Border Background="{StaticResource Channels}" CornerRadius="0,0,0,0"
+    <Border Background="{DynamicResource Channels}" CornerRadius="0,0,0,0"
             Grid.ColumnSpan="2" Grid.RowSpan="3">
         <Border.OpacityMask>
             <VisualBrush>
@@ -60,7 +60,7 @@
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="1">
-                <ui:TitleBar Background="{StaticResource Channels}"/>
+                <ui:TitleBar Background="{DynamicResource Channels}"/>
             </Grid>
 
             <Grid Grid.Column="0" Grid.RowSpan="2">
@@ -69,31 +69,31 @@
                 VerticalAlignment="Top" DockPanel.Dock="Top"/>
                     <ui:NavigationStore DockPanel.Dock="Top">
                         <ui:NavigationStore.Items>
-                            <ui:NavigationItem Foreground="{StaticResource White}" IconForeground="{StaticResource White}"
+                            <ui:NavigationItem Foreground="{DynamicResource White}" IconForeground="{DynamicResource White}"
                         x:Name="requestVacancy_but"
                         Icon="NotepadPerson20" IconSize="35"
                         Content="Запросы" Click="requestVacancy_but_Click"/>
-                            <ui:NavigationItem Foreground="{StaticResource White}" IconForeground="{StaticResource White}"
+                            <ui:NavigationItem Foreground="{DynamicResource White}" IconForeground="{DynamicResource White}"
                         x:Name="person_but"
                         Icon="Person20" IconSize="35"
                         Content="Кандидаты" Click="person_but_Click"/>
-                            <ui:NavigationItem Foreground="{StaticResource White}" IconForeground="{StaticResource White}"
+                            <ui:NavigationItem Foreground="{DynamicResource White}" IconForeground="{DynamicResource White}"
                         x:Name="vacancy_but"
                         Icon="AppGeneric20" IconSize="35"
                         Content="Вакансии" Click="vacancy_but_Click"/>
                             <ui:NavigationSeparator/>
                         </ui:NavigationStore.Items>
                         <ui:NavigationStore.Footer>
-                            <ui:NavigationItem Foreground="{StaticResource White}" IconForeground="{StaticResource White}"
+                            <ui:NavigationItem Foreground="{DynamicResource White}" IconForeground="{DynamicResource White}"
                         x:Name="users_but"
                         Icon="ShieldPerson20" IconSize="35"
                         Content="Пользователи" Click="users_but_Click"/>
-                            <ui:NavigationItem Foreground="{StaticResource White}" IconForeground="{StaticResource White}"
+                            <ui:NavigationItem Foreground="{DynamicResource White}" IconForeground="{DynamicResource White}"
                         x:Name="settings_but"
                         Icon="Settings20" IconSize="35"
-                        Content="Пользователи" Click="users_but_Click"/>
+                        Content="Пользователи" Click="settings_but_Click_1"/>
                             <ui:NavigationSeparator/>
-                            <ui:NavigationItem Foreground="{StaticResource White}" IconForeground="{StaticResource White}"
+                            <ui:NavigationItem Foreground="{DynamicResource White}" IconForeground="{DynamicResource White}"
                         x:Name="exit_but"
                         Icon="ArrowExit20" IconSize="35"
                         Content="Выйти" Click="exit_but_Click"/>
@@ -104,7 +104,7 @@
                 </DockPanel>
                 
             </Grid>
-            <Border Grid.Row="1" Grid.Column="1" Background="{StaticResource Chat}" CornerRadius="10,0,0,0">
+            <Border Grid.Row="1" Grid.Column="1" Background="{DynamicResource Chat}" CornerRadius="10,0,0,0">
                 <Border.OpacityMask>
                     <VisualBrush>
                         <VisualBrush.Visual>

@@ -2,10 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <SolidColorBrush x:Key="Chat" Color="#FFFFFF"/>
-    <SolidColorBrush x:Key="Channels" Color="#2F3136"/>
-    <SolidColorBrush x:Key="Servers" Color="#202225"/>
+    <SolidColorBrush x:Key="Channels" Color="#B3B3B3"/>
+    <SolidColorBrush x:Key="Servers" Color="#8F8F8F"/>
     <SolidColorBrush x:Key="Grey" Color="#99AAB5"/>
-    <SolidColorBrush x:Key="White" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="White" Color="#000000"/>
     <SolidColorBrush x:Key="Bravery" Color="#9B84EE"/>
     <SolidColorBrush x:Key="Balance" Color="#44DDBF"/>
     <SolidColorBrush x:Key="Brilliance" Color="#F47B68"/>

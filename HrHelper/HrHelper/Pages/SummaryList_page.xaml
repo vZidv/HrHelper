@@ -19,7 +19,7 @@
             <ui:AutoSuggestBox PlaceholderText="Поиск"
                 Width="300"
                 x:Name="search_tb" SelectionChanged="search_tb_SelectionChanged"/>
-            <TextBlock Text="Кандидаты" 
+            <TextBlock Text="Кандидаты" Foreground="{DynamicResource White}"
                        Style="{StaticResource defaultTextBlock}"
                        HorizontalAlignment="Left" VerticalAlignment="Top" 
                        FontSize="22" Margin="7"/>
@@ -47,13 +47,21 @@
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
                                 <CheckBox Content="Всё" x:Name="selectAll_cb"
-                                Foreground="{StaticResource White}" FontWeight="Bold" Click="selectAll_cb_Click"/>
+                                Foreground="{StaticResource White}" FontWeight="Bold" Click="selectAll_cb_Click">
+                                    <CheckBox.Effect>
+                                        <DropShadowEffect Opacity="0.3" />
+                                    </CheckBox.Effect>
+                                </CheckBox>
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox x:Name="selectSummary_cb" Click="selectSummary_cb_Click"/>
+                                <CheckBox x:Name="selectSummary_cb" Click="selectSummary_cb_Click">
+                                    <CheckBox.Effect>
+                                        <DropShadowEffect Opacity="0.3" />
+                                    </CheckBox.Effect>
+                                </CheckBox>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

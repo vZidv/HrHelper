@@ -19,7 +19,7 @@
             <ui:AutoSuggestBox PlaceholderText="Поиск"
                 Width="300"
                 x:Name="search_tb" />
-            <TextBlock Text="Пользователи" 
+            <TextBlock Text="Пользователи" Foreground="{DynamicResource White}" 
                        Style="{StaticResource defaultTextBlock}"
                        HorizontalAlignment="Left" VerticalAlignment="Top" 
                        FontSize="20" Margin="5"/>

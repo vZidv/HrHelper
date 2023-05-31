@@ -27,7 +27,7 @@
         </Border>
     </DataTemplate>
     <Style x:Key="DataGridCell" TargetType="DataGridCell">
-        <Setter Property="Foreground" Value="{StaticResource FontGridColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource FontGridColor}"/>
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="FontWeight" Value="DemiBold"/>
         <Setter Property="Padding" Value="5,0"/>
@@ -49,14 +49,14 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="{StaticResource AccentColorAction}"/>
+                <Setter Property="Background" Value="{DynamicResource AccentColorAction}"/>
                 <Setter Property="BorderThickness" Value="0"/>
             </Trigger>
         </Style.Triggers>
     </Style>
     
     <Style x:Key="DataGridRowStyle" TargetType="{x:Type DataGridRow}">
-        <Setter Property="Background" Value="{StaticResource Chat}"/>
+        <Setter Property="Background" Value="{DynamicResource Chat}"/>
         <Setter Property="MinHeight" Value="30"/>
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
@@ -101,10 +101,10 @@
     
     
     <Style x:Key="DataGridColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
-        <Setter Property="Background" Value="{StaticResource Channels}"/>
+        <Setter Property="Background" Value="{DynamicResource Channels}"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Padding" Value="10"/>
-        <Setter Property="Foreground" Value="{StaticResource FontGridColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource FontGridColor}"/>
         <Setter Property="MinHeight" Value="25"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -159,11 +159,11 @@
     
     <Style x:Key="defaultDataGridStyle" TargetType="{x:Type DataGrid}">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{StaticResource FontGridColor}"/> <!--DynamicResource {x:Static SystemColors.ControlTextBrushKey}-->
+        <Setter Property="Foreground" Value="{DynamicResource FontGridColor}"/> <!--DynamicResource {x:Static SystemColors.ControlTextBrushKey}-->
         <Setter Property="BorderBrush" Value="#FF688CAF"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="GridLinesVisibility" Value="Horizontal"/>
-        <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource Channels}"/>
+        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource Channels}"/>
         <Setter Property="HeadersVisibility" Value="Column"/>
         <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected"/>
         <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>

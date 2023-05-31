@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
     <SolidColorBrush x:Key="Chat" Color="#36393F"/>
     <SolidColorBrush x:Key="Channels" Color="#2F3136"/>
     <SolidColorBrush x:Key="Servers" Color="#202225"/>
