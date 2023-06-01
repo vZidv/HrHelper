@@ -225,7 +225,7 @@ namespace HrHelper
 
             modelBuilder.Entity<VacancyRequest>(entity =>
             {
-                entity.ToTable("VacancyRequest");
+                entity.ToTable("vacancyRequest");
 
                 entity.Property(e => e.Department).HasMaxLength(50);
 

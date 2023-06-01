@@ -14,29 +14,23 @@ namespace HrHelper.Pages
     {
         public Settings_page() => InitializeComponent();
 
-        private void deleteDb_but_Click(object sender, RoutedEventArgs e)
-        {
-            if (!Classes.MyMessageBox.Show("Внимание!", "Вы собираетесь удалить базу данных! " +
-                "После удаления вся информация из базы данных будет удалена без возможности восстановления, программа автоматически закроется. Вы уверены, что хотите это сделать?", Classes.MyMessageBoxOptions.YesNo))
-                return;
-            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
-                db.Database.EnsureDeleted();
-            Classes.MyMessageBox.Show("Внимание!", "База данных удалина!");
-
-            Application.Current.Shutdown();
-        }
-
+        // Метод для изменения темы цветов приложения
         private void ChangeColorsTheme(string theme)
         {
+            // Создаем объект Uri для файла ресурсов XAML с указанным именем темы
             Uri url = new Uri($@"Dictionary\{theme}", UriKind.Relative);
+
+            // Получаем объект приложения
             var app = (App)Application.Current;
+
+            // Вызываем метод ChangeTheme объекта приложения, чтобы изменить тему цветов на новую тему, определенную в файле ресурсов
             app.ChangeTheme(url);
+
+            // Обновляем визуальный интерфейс главного окна приложения
             Application.Current.MainWindow.InvalidateVisual();
             Application.Current.MainWindow.UpdateLayout();
             this.UpdateLayout();
             this.InvalidateVisual();
-
-
         }
 
         private void themeColors_cb_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -45,9 +39,9 @@ namespace HrHelper.Pages
             {
                 ChangeColorsTheme("WhiteThemeColors.xaml");
                 Wpf.Ui.Appearance.Theme.Apply(
-                  Wpf.Ui.Appearance.ThemeType.Light,     // Theme type
-                  Wpf.Ui.Appearance.BackgroundType.Mica, // Background type
-                  true                                   // Whether to change accents automatically
+                  Wpf.Ui.Appearance.ThemeType.Light,     
+                  Wpf.Ui.Appearance.BackgroundType.Mica, 
+                  true                                   
                 );
             }
                 
@@ -55,9 +49,9 @@ namespace HrHelper.Pages
             {
                 ChangeColorsTheme("BlackThemeColors.xaml");
                 Wpf.Ui.Appearance.Theme.Apply(
-                  Wpf.Ui.Appearance.ThemeType.Dark,     // Theme type
-                  Wpf.Ui.Appearance.BackgroundType.Mica, // Background type
-                  true                                   // Whether to change accents automatically
+                  Wpf.Ui.Appearance.ThemeType.Dark,     
+                  Wpf.Ui.Appearance.BackgroundType.Mica, 
+                  true                                   
                 );
             }
                 

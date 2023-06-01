@@ -46,7 +46,7 @@
             <RowDefinition Height="0.3*"/>
             <RowDefinition Height="0.4*"/>
         </Grid.RowDefinitions>
-        <Border CornerRadius="14" Margin="5"
+        <Border CornerRadius="14" Margin="5" Opacity="0"
             Grid.RowSpan="2" Background="{DynamicResource Chat}">
             <Border.Effect>
                 <DropShadowEffect Opacity="0.3" Direction="-90" BlurRadius="7" ShadowDepth="8"/>
@@ -59,15 +59,27 @@
             <StackPanel>
                 <Grid>
                     <ui:TextBox PlaceholderText="Логин" x:Name="login_tb"
-                              FontWeight="DemiBold" FontSize="20" Width="300" Margin="10"/>
+                              FontWeight="DemiBold" FontSize="20" Width="300" Margin="10">
+                        <ui:TextBox.Effect>
+                            <DropShadowEffect Opacity="0.4" Direction="-90"/>
+                        </ui:TextBox.Effect>
+                    </ui:TextBox>
                 </Grid>
                 <Grid>
                     <ui:PasswordBox PlaceholderText="Пароль" x:Name="password_tb"
-                     Width="300" FontSize="20" Margin="10" FontWeight="DemiBold"/>
+                     Width="300" FontSize="20" Margin="10" FontWeight="DemiBold">
+                        <ui:TextBox.Effect>
+                            <DropShadowEffect Opacity="0.4" Direction="-90"/>
+                        </ui:TextBox.Effect>
+                    </ui:PasswordBox>
                 </Grid>
-                <ui:Button x:Name="Authorization_but" IsDefault="True"
-                        Style="{StaticResource defaultBut}" Height="50" Width="220" 
-                    Content="Авторизаваться" Click="Authorization_but_Click"/>
+                <ui:Button x:Name="Authorization_but" IsDefault="True" Foreground="White" FontWeight="DemiBold" Margin="20"
+                         Height="50" Width="200" HorizontalAlignment="Center" Background="{StaticResource AccentColor}"
+                    Content="Авторизаваться" Click="Authorization_but_Click">
+                    <ui:Button.Effect>
+                        <DropShadowEffect Opacity="0.4" Direction="-90" ShadowDepth="8" BlurRadius="5"/>
+                    </ui:Button.Effect>
+                </ui:Button>
 
             </StackPanel>
         </Grid>

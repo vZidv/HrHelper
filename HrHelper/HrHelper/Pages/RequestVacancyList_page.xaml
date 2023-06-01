@@ -34,7 +34,7 @@
 
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Id}" Header="ID" />
-                    <DataGridTextColumn Binding="{Binding Name}" Header="Название" MinWidth="170" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding JobTitle}" Header="Название" MinWidth="170" Width="*"/>
                     <DataGridTextColumn Binding="{Binding Department}" Header="Отдел" MinWidth="170" Width="*"/>
                     <DataGridTextColumn Binding="{Binding Busyness.Type}" Header="Занятость" MinWidth="170" Width="*"/>
                     <DataGridTemplateColumn Header="Действие" MinWidth="170" Width="*">

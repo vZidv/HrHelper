@@ -31,9 +31,9 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition/>
+                <RowDefinition Height="0.5*"/>
                 <RowDefinition Height="390"/>
-                <RowDefinition/>
+                <RowDefinition  Height="1.5*"/>
             </Grid.RowDefinitions>
             <Frame x:Name="mainFrame" Grid.Row="1" Grid.Column="1"/>
         </Grid>

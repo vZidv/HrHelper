@@ -53,6 +53,16 @@ namespace HrHelper.Pages
                     buttonsForUser_st.IsEnabled = true;
                     break;
                 case "client":
+                    if (vacancyRequest.UserId != Settings.currentUser.Id)
+                    {
+                        buttonsForClient_st.Visibility = Visibility.Hidden;
+                        buttonsForUser_st.Visibility = Visibility.Hidden;
+
+                        buttonsForClient_st.IsEnabled = false;
+                        buttonsForUser_st.IsEnabled = false;
+                        break;
+                    }
+
                     buttonsForClient_st.Visibility = Visibility.Visible;
                     buttonsForUser_st.Visibility = Visibility.Hidden;
 
@@ -103,5 +113,10 @@ namespace HrHelper.Pages
             Settings.mainFrame.Navigate(vacancyAdd);
 
         }
+
+        private void editRequestVacancy_but_Click(object sender, RoutedEventArgs e) => Settings.mainFrame.Navigate(new RequestVacancyEdit_page(vacancyRequest));
+
+
+
     }
 }
