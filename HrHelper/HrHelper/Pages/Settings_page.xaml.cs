@@ -32,6 +32,8 @@ namespace HrHelper.Pages
             Application.Current.MainWindow.UpdateLayout();
             this.UpdateLayout();
             this.InvalidateVisual();
+
+            Classes.Settings.WriteToJson("AppTheme",$"{theme}");
         }
 
         private void themeColors_cb_SelectionChanged(object sender, SelectionChangedEventArgs e)

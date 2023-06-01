@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
+using Wpf.Ui.Appearance;
 
 namespace HrHelper.Windows
 {
@@ -14,7 +15,23 @@ namespace HrHelper.Windows
             CheckDatabase();
             mainFrame.Content = new Pages.Authorization_page() { authorization_win = this };
         }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            ChangeTheme();
+        }
+        private void ChangeTheme()
+        {
+            Uri url = new Uri($@"Dictionary\{Classes.Settings.GetFrommJson("AppTheme")}", UriKind.Relative);
+            // Получаем объект приложения
+            var app = (App)Application.Current;
+            // Вызываем метод ChangeTheme объекта приложения, чтобы изменить тему цветов на новую тему, определенную в файле ресурсов
+            app.ChangeTheme(url);
 
+            Application.Current.MainWindow.InvalidateVisual();
+            Application.Current.MainWindow.UpdateLayout();
+            this.UpdateLayout();
+            this.InvalidateVisual();
+        }
         void CheckDatabase()
         {
             try
@@ -79,6 +96,7 @@ namespace HrHelper.Windows
                 Classes.MyMessageBox.Show("Ошибка", ex.Message);
             };
         }
+
 
     }
 }
