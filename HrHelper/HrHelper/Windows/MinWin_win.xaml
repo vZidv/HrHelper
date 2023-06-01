@@ -9,7 +9,7 @@
         WindowStyle="None" 
         Background="Transparent" 
         AllowsTransparency="True"
-        WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Icon="/Source/Logo.png">
+        WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Icon="/Source/Logo.png" Unloaded="Window_Unloaded">
     <Grid Background="Transparent">
 
         <Border 

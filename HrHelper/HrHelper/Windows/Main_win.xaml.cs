@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using HrHelper.Classes;
 using Wpf.Ui.Controls;
@@ -7,6 +8,11 @@ namespace HrHelper.Windows
 {
     public partial class Main_win : Window
     {
+        public Frame frame
+        {
+            get { return frameMain; }
+
+        }
         AuthorizationUser use { get; set; }
 
 

@@ -26,6 +26,7 @@ namespace HrHelper.Windows
 
             page = startPage;
 
+            Classes.Settings.lastWindow = Classes.Settings.mainWindow;
             Classes.Settings.mainFrame = mainFrame;
             Classes.Settings.mainWindow = this;
         }
@@ -33,6 +34,12 @@ namespace HrHelper.Windows
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             mainFrame.Navigate(page);
+        }
+
+        private void Window_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Classes.Settings.mainWindow = Classes.Settings.lastWindow;
+            Classes.Settings.mainFrame = (Classes.Settings.mainWindow as Main_win).frame;
         }
     }
 }

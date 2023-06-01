@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         xmlns:local="clr-namespace:HrHelper.Windows"
         mc:Ignorable="d"
         Title="HrHelper" Height="250" Width="400" WindowStyle="None" Background="Transparent" WindowStartupLocation="CenterScreen"
@@ -21,7 +22,7 @@
         <Border 
             Grid.RowSpan="3" Grid.ColumnSpan="2" Background="{StaticResource Channels}" CornerRadius="15"/>
         <Border 
-            Grid.Row="0"  Grid.ColumnSpan="2" Background="{StaticResource Servers}" CornerRadius="15,15,0,0">
+            Grid.Row="0"  Grid.ColumnSpan="2" Background="{StaticResource Chat}" CornerRadius="15,15,0,0">
             <Border.OpacityMask>
                 <VisualBrush>
                     <VisualBrush.Visual>
@@ -40,7 +41,7 @@
                         <Line X1="0" Y1="0" X2="70" Y2="0"  StrokeThickness="10" Margin="15,0">
                             <Line.Style>
                                 <Style TargetType="Line">
-                                    <Setter Property="Stroke" Value="{StaticResource Chat}"/>
+                                    <Setter Property="Stroke" Value="{StaticResource White}"/>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding IsMouseOver,ElementName=minWind_but}" Value="true">
                                             <Setter Property="Stroke" Value="{StaticResource Channels}"/>
@@ -54,7 +55,7 @@
                         <Path Data="M1,1L15,15M15,1L1,15" StrokeThickness="3.5">
                             <Path.Style>
                                 <Style TargetType="Path">
-                                    <Setter Property="Stroke" Value="{StaticResource Chat}"/>
+                                    <Setter Property="Stroke" Value="{StaticResource White}"/>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding IsMouseOver,ElementName=close_but }" Value="true">
                                             <Setter Property="Stroke" Value="{StaticResource Channels}"/>
@@ -71,11 +72,14 @@
 
 
         <Grid Grid.Column="0" Grid.Row="1">
-            <Path x:Name="errorIcon_path" Visibility="Hidden"
-                VerticalAlignment="Top" Margin="3,10"
-                Data="F0 M24,21z M0,0z M1.83657931,19.32L11.5863724,2.00844 21.3361655,19.32 1.83657931,19.32z M22.8696828,18.65808L12.9063724,0.966C12.5438897,0.32256 12.0647172,0 11.5863724,0 11.1080276,0 10.6288552,0.32256 10.2672,0.966L0.303062069,18.65808C-0.421903448,19.94664,0.198786207,21,1.68430345,21L21.4884414,21C22.9739586,21,23.5954759,19.94664,22.8696828,18.65808z M10.7587862,14.28L12.4139586,14.28 13.2415448,6.72 9.9312,6.72 10.7587862,14.28z M11.5863724,15.12C10.6727172,15.12 9.9312,15.87264 9.9312,16.8 9.9312,17.72736 10.6727172,18.48 11.5863724,18.48 12.5008552,18.48 13.2415448,17.72736 13.2415448,16.8 13.2415448,15.87264 12.5008552,15.12 11.5863724,15.12z"
-Stretch="Uniform"
-Fill="{StaticResource AccentColor}" />
+            <ui:SymbolIcon Symbol="ShieldError24" x:Name="errorIcon_path" 
+                           Visibility="Visible" FontSize="60"
+                VerticalAlignment="Top" Margin="3,10" Foreground="{DynamicResource Dnd}"
+                >
+                <ui:SymbolIcon.Effect>
+                    <DropShadowEffect BlurRadius="12" Opacity="0.4" Direction="-160"/>
+                </ui:SymbolIcon.Effect>
+            </ui:SymbolIcon>
         </Grid>
         <StackPanel Grid.Row="1" Grid.Column="1">
             <TextBlock x:Name="title_tb" FontSize="17" Foreground="{StaticResource White}"

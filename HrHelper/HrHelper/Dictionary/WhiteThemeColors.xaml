@@ -22,6 +22,7 @@
     <SolidColorBrush x:Key="AccentColorAction2" Color="#BF6177"/>
     <SolidColorBrush x:Key="Blue" Color="#4186D3"/>
     <SolidColorBrush x:Key="BlueAction" Color="#689AD3"/>
+    <SolidColorBrush x:Key="ToolBar" Color="#36393F"/>
 
     <SolidColorBrush x:Key="FontGridColor" Color="#000"/>
 </ResourceDictionary>

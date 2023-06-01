@@ -2,6 +2,7 @@
 using HrHelper.Windows;
 using PdfSharp.Pdf.Content.Objects;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Security.Policy;
 using System.Windows;
@@ -55,6 +56,28 @@ namespace HrHelper.Pages
                 );
             }
                 
+        }
+
+
+
+        private void userGuide_tblock_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // Указываем путь к файлу руководства пользователя
+            string userManualPath = Path.Combine(Directory.GetCurrentDirectory(), "Руководство пользователя.chm");
+
+            // Проверяем, существует ли файл по указанному пути
+            if (File.Exists(userManualPath))
+            {
+                // Открываем файл руководства пользователя во внешней программе
+                ProcessStartInfo processStartInfo = new ProcessStartInfo(userManualPath);
+                processStartInfo.UseShellExecute = true;
+                Process.Start(processStartInfo);
+            }
+            else
+            {
+                // Если файл не найден, выводим сообщение об ошибке
+                MyMessageBox.Show("Ошибка", "Файл руководства пользователя не найден по указанному пути.", true);
+            }
         }
     }
 }

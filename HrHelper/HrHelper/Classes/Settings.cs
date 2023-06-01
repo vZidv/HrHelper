@@ -8,6 +8,7 @@ namespace HrHelper.Classes
     {
         static public Frame mainFrame { get; set; }
         static public Window mainWindow { get; set; }
+        static public Window? lastWindow { get; set; }
         static public AuthorizationUser currentUser { get; set; }
     }
 }
