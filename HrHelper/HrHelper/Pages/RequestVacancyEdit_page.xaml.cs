@@ -58,7 +58,12 @@ namespace HrHelper.Pages
 
         private void saveRequestVacancy_but_Click(object sender, RoutedEventArgs e)
         {
-
+            List<Control> controls = new List<Control>() { jobTitle_tb, busyness_cb, department_tb };
+            if (Classes.CheckValue.CheckElementNullValue(controls) == true)
+            {
+                MyMessageBox.Show("Ошибка", "Пожалуйста, заполните обязательные поля", true);
+                return;
+            }
 
             vacancyRequest.JobTitle = jobTitle_tb.Text;
             vacancyRequest.Description = description_tb.Text;

@@ -52,10 +52,10 @@
                 Content="Добавить" Icon="Save20" FontSize="20"
                        HorizontalAlignment="Left" VerticalAlignment="Top"
                     Background="{StaticResource Online}"/>
-                    <ui:Button Margin="5,20" x:Name="ummaryEdit_but"
+                    <ui:Button Margin="5,20" x:Name="dontSave_but"
                 Content="Отменить" Icon="CalendarCancel20" FontSize="20"
                        HorizontalAlignment="Left" VerticalAlignment="Top"
-                    Background="{StaticResource Dnd}"/>
+                    Background="{StaticResource Dnd}" Click="dontSave_but_Click"/>
                 </StackPanel>
 
 
@@ -82,7 +82,7 @@
                  300,1" Margin="8,2"/>
 
                 <DockPanel>
-                    <TextBox x:Name="comments_tb"
+                    <TextBox x:Name="comments_tb" MaxLength="200"
                         TextWrapping="Wrap" Margin="7,5" FontSize="14" MinHeight="60"
                         Text=""/>
                 </DockPanel>
@@ -117,7 +117,7 @@
                 <Polygon Stroke="{StaticResource White}" Points=" 
                  0,1
                  300,1" Margin="8,2"/>
-                <TextBox x:Name="aboutYourself_tblock" 
+                <TextBox x:Name="aboutYourself_tblock" MaxLength="300" 
                     TextWrapping="Wrap" TextAlignment="Left"
                            FontWeight="Light" Margin="10,0"
                     Text=""/>
@@ -199,7 +199,7 @@
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text="Фамилия" HorizontalAlignment="Left" Margin="20,0,10,0" FontSize="20"
                                Style="{StaticResource defaultTextBlock}"/>
-                            <ui:TextBox x:Name="lastName_tb"
+                            <ui:TextBox x:Name="lastName_tb" MaxLength="25"
                                 Text="" FontWeight="DemiBold" FontSize="15"
                                 Margin="20,2" MinWidth="200"/>
 
@@ -208,7 +208,7 @@
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text="Имя" HorizontalAlignment="Left" Margin="20,0,10,0" FontSize="20"
                                Style="{StaticResource defaultTextBlock}"/>
-                            <ui:TextBox x:Name="firstName_tb"
+                            <ui:TextBox x:Name="firstName_tb" MaxLength="25"
                                 Text="" FontWeight="DemiBold" FontSize="15"
                                 Margin="20,2" MinWidth="200"/>
 
@@ -217,7 +217,7 @@
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text="Отчество" HorizontalAlignment="Left" Margin="20,0,10,0" FontSize="20"
                                Style="{StaticResource defaultTextBlock}"/>
-                            <ui:TextBox x:Name="patronymic_tb"
+                            <ui:TextBox x:Name="patronymic_tb" MaxLength="25"
                                 Text="" FontWeight="DemiBold" FontSize="15"
                                 Margin="20,2" MinWidth="200"/>
 
@@ -273,15 +273,15 @@
                                    телефона" 
                                    TextWrapping="Wrap" Style="{StaticResource valueTextBlock}"
                                HorizontalAlignment="Left" Margin="2,5"/>
-                        <TextBox x:Name="phone_tb" MinWidth="130"
+                        <TextBox x:Name="phone_tb" MinWidth="130" MaxLength="15"
                             Text=""  FontWeight="Light"
-                               HorizontalAlignment="Right" Margin="5,5"/>
+                               HorizontalAlignment="Right" Margin="5,5" PreviewTextInput="phone_tb_PreviewTextInput"/>
                     </DockPanel>
                     <DockPanel>
                         <ui:SymbolIcon Symbol="Mail20" FontSize="20" Foreground="{StaticResource White}"/>
                         <TextBlock Text="Почта" Style="{StaticResource valueTextBlock}"
                                HorizontalAlignment="Left" Margin="2,5"/>
-                        <TextBox x:Name="email_tb" MinWidth="130"
+                        <TextBox x:Name="email_tb" MinWidth="130" MaxLength="30"
                             Text="" FontWeight="Light"
                                HorizontalAlignment="Right" Margin="5,5"/>
                     </DockPanel>
@@ -305,7 +305,7 @@
                         <ui:SymbolIcon Symbol="City20" FontSize="20" Foreground="{StaticResource White}"/>
                         <TextBlock Text="Город" Style="{StaticResource valueTextBlock}"
                                HorizontalAlignment="Left" Margin="2,5"/>
-                        <TextBox Text="" x:Name="town_tb" MinWidth="130"
+                        <TextBox Text="" x:Name="town_tb" MinWidth="130" MaxLength="40"
                                     FontWeight="Light"
                                HorizontalAlignment="Left" Margin="5,5"/>
                     </DockPanel>
@@ -313,7 +313,7 @@
                         <ui:SymbolIcon Symbol="Home20" FontSize="20" Foreground="{StaticResource White}"/>
                         <TextBlock Text="Адрес" Style="{StaticResource valueTextBlock}"
                                HorizontalAlignment="Left" Margin="2,5"/>
-                        <TextBox x:Name="address_tb" MinWidth="130"
+                        <TextBox x:Name="address_tb" MinWidth="130" MaxLength="70"
                             Text="" TextWrapping="Wrap" TextAlignment="Left"
                                     FontWeight="Light"
                                HorizontalAlignment="Left" Margin="5,5"/>
@@ -332,7 +332,7 @@
                         <ui:SymbolIcon Symbol="Phone20" Visibility="Hidden" FontSize="20" Foreground="{StaticResource White}"/>
                         <TextBlock Text="Учебное Зв." Style="{StaticResource valueTextBlock}"
                                HorizontalAlignment="Left" Margin="2,5"/>
-                        <TextBox x:Name="educationInstution_tb"
+                        <TextBox x:Name="educationInstution_tb" MaxLength="50"
                             TextWrapping="Wrap" TextAlignment="Left"
                             Text="" MinWidth="130"
                             FontWeight="Light"
@@ -360,7 +360,7 @@
                         <ui:SymbolIcon Symbol="Phone20" Visibility="Hidden" FontSize="20" Foreground="{StaticResource White}"/>
                         <TextBlock Text="Компания" Style="{StaticResource valueTextBlock}"
                                HorizontalAlignment="Left" Margin="2,5,7,5"/>
-                        <TextBox x:Name="lastCompany_tb" 
+                        <TextBox x:Name="lastCompany_tb" MaxLength="50" 
                             TextWrapping="Wrap" TextAlignment="Left"  MinWidth="130"
                             Text="" 
                              FontWeight="Light"
@@ -370,7 +370,7 @@
                         <ui:SymbolIcon Symbol="Mail20" Visibility="Hidden" FontSize="20" Foreground="{StaticResource White}"/>
                         <TextBlock Text="Должность" Style="{StaticResource valueTextBlock}"
                                HorizontalAlignment="Left" Margin="2,5"/>
-                        <TextBox x:Name="lastJobTitle_tb"
+                        <TextBox x:Name="lastJobTitle_tb" MaxLength="50"
                             Text="" TextWrapping="Wrap"  FontWeight="Light"
                                HorizontalAlignment="Center" Margin="5,5" MinWidth="130"/>
                     </DockPanel>

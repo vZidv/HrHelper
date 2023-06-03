@@ -41,8 +41,18 @@ namespace HrHelper.Pages
             }
         }
 
+
         private void addRequestVacancy_but_Click(object sender, RoutedEventArgs e)
         {
+            List<Control> controls = new List<Control>() { jobTitle_tb, busyness_cb, department_tb };
+            if (Classes.CheckValue.CheckElementNullValue(controls) == true)
+            {
+                MyMessageBox.Show("Ошибка", "Пожалуйста, заполните обязательные поля",true);
+                return;
+            }
+
+
+
             VacancyRequest vacancyRequest = new VacancyRequest()
             {
                 JobTitle = jobTitle_tb.Text,
@@ -51,8 +61,8 @@ namespace HrHelper.Pages
                 BusynessId = (busyness_cb.SelectedItem as Busyness).Id,
                 Department = department_tb.Text,
                 UserId = Settings.currentUser.Id
-
             };
+
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
                 db.VacancyRequests.Add(vacancyRequest);

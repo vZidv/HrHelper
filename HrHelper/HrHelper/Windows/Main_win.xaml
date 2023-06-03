@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HrHelper.Windows"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
-        Title="HrHelper"  Height="800" Width="1500" WindowStartupLocation="CenterScreen" WindowStyle="None"  Background="Transparent" Icon="/Source/LogoMini.png">
+        Title="HrHelper"  Height="500" Width="1000" WindowStartupLocation="CenterScreen" WindowStyle="None"  Background="Transparent" Icon="/Source/LogoMini.png">
     <Window.Resources>
         <Style x:Key="MenuButton" TargetType="Button">
             <Setter Property="Height" Value="60"/>

@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using HrHelper.Classes;
+using System.Text.RegularExpressions;
 
 namespace HrHelper.Pages
 {
@@ -110,30 +111,18 @@ namespace HrHelper.Pages
             return result;
         }
 
-        bool CheckCorrectInputData()
-        {
-            //if true,then all good 
-            //Проверка Имя,Фамилия
-            TextBox[] fullname = new TextBox[] { firstName_tb, lastName_tb };
-            if (!CheckTextBoxForEmpty(fullname, "Поле имя или фамилия пустое!"))
-                return false;
-            else if (birthday_datePicker.Text == string.Empty)
-            {
-                birthday_datePicker.BorderBrush = (SolidColorBrush)Application.Current.Resources["Dnd"];
-                MyMessageBox.Show("Ошибка", "Не указана дата рождения!", true);
-                return false;
-            }
-
-            return true;
-        }
-
         /// <summary>
         /// Add new Summary 
         /// </summary>
         private void summaryAdd_bt_Click(object sender, RoutedEventArgs e)
         {
-            if (!CheckCorrectInputData())
+            List<Control> controls = new List<Control>() {firstName_tb,lastName_tb,gender_cb,birthday_datePicker,status_cb};
+
+            if (Classes.CheckValue.CheckElementNullValue(controls) == true)
+            {
+                MyMessageBox.Show("Ошибка", "Пожалуйста, заполните обязательные поля", true);
                 return;
+            }
 
             DateTime date = Convert.ToDateTime(birthday_datePicker.SelectedDate);
             date.ToString("yyyy-MM-dd");
@@ -278,6 +267,17 @@ namespace HrHelper.Pages
                 photo_image.ImageSource = new BitmapImage(new Uri(dialog.FileName));
             }
             catch { photoPath = null; }
+        }
+
+        private void dontSave_but_Click(object sender, RoutedEventArgs e)
+        {
+            Settings.mainFrame.GoBack();
+        }
+
+        private void phone_tb_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

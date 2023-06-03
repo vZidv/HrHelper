@@ -36,7 +36,8 @@
                                FontWeight="DemiBold"/>
                 </Grid>
 
-                <ui:TextBox PlaceholderText="Название вакансии"  x:Name="jobTitle_tb"  
+                <ui:TextBox PlaceholderText="Название вакансии"  MaxLength="60"
+                            x:Name="jobTitle_tb"  
                                 Margin="5"/>
                 <Grid>
                     <TextBlock Text="Описание"
@@ -46,7 +47,8 @@
                                FontWeight="DemiBold"/>
                 </Grid>
 
-                <ui:TextBox PlaceholderText="Описание"  x:Name="description_tb" TextWrapping="Wrap" 
+                <ui:TextBox PlaceholderText="Описание" MaxLength="200"
+                            x:Name="description_tb" TextWrapping="Wrap" 
                                 Margin="5" MinHeight="150"/>
 
 
@@ -66,7 +68,7 @@
                                HorizontalAlignment="Left" 
                                Margin="5,0" FontSize="15"
                                FontWeight="DemiBold"/>
-                <ui:TextBox PlaceholderText="Отдел" x:Name="department_tb" 
+                <ui:TextBox PlaceholderText="Отдел" x:Name="department_tb" MaxLength="50"
                             TextWrapping="Wrap" AcceptsReturn="True"
                                 Margin="5" />
                 <TextBlock Text="От кого" 
@@ -74,7 +76,7 @@
                                HorizontalAlignment="Left" 
                                Margin="5,0" FontSize="15"
                                FontWeight="DemiBold"/>
-                <ui:TextBox PlaceholderText="Логин" x:Name="login_tb" IsReadOnly="True" 
+                <TextBox  x:Name="login_tb" IsReadOnly="True" 
                             TextWrapping="Wrap" AcceptsReturn="True"
                                 Margin="5"/>
                 <Grid>
@@ -85,7 +87,8 @@
                                FontWeight="DemiBold"/>
                 </Grid>
 
-                <ui:TextBox PlaceholderText="Навыки кандидата"  x:Name="skills_tb" TextWrapping="Wrap" 
+                <ui:TextBox PlaceholderText="Навыки кандидата" MaxLength="50" 
+                            x:Name="skills_tb" TextWrapping="Wrap" 
                                 Margin="5"/>
 
 
