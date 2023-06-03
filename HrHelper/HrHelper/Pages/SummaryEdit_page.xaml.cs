@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -160,8 +161,14 @@ namespace HrHelper.Pages
         }
         private void save_but_Click(object sender, RoutedEventArgs e)
         {
-            if (!CheckCorrectInputData())
+            List<Control> controls = new List<Control>() { firstName_tb, lastName_tb, gender_cb, birthday_datePicker, status_cb };
+
+            if (Classes.CheckValue.CheckElementNullValue(controls) == true)
+            {
+                MyMessageBox.Show("Ошибка", "Пожалуйста, заполните обязательные поля", true);
                 return;
+            }
+
 
             DateTime date = Convert.ToDateTime(birthday_datePicker.SelectedDate);
             date.ToString("yyyy-MM-dd");
@@ -268,22 +275,6 @@ namespace HrHelper.Pages
             Classes.MyMessageBox.Show("Внимание", "Пользователь обновлен.");
             Classes.Settings.mainFrame.Navigate(new Summary_page(summary.Id));
         }
-        bool CheckCorrectInputData()
-        {
-            //if true,then all good 
-
-            //Проверка Имя,Фамилия
-            TextBox[] fullname = new TextBox[] { firstName_tb, lastName_tb };
-            if (!CheckTextBoxForEmpty(fullname, "Поле имя или фамилия пустое!"))
-                return false;
-            else if (birthday_datePicker.Text == string.Empty)
-            {
-                birthday_datePicker.BorderBrush = (SolidColorBrush)Application.Current.Resources["Dnd"];
-                MyMessageBox.Show("Ошибка", "Не указана дата рождения!", true);
-                return false;
-            }
-            return true;
-        }
         int? CreatePhoto()
         {
             if (photoPath == null || photoPath == String.Empty)
@@ -346,6 +337,10 @@ namespace HrHelper.Pages
 
         }
 
-
+        private void phone_tb_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
     }
 }

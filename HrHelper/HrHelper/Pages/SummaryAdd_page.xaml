@@ -287,7 +287,7 @@
                     </DockPanel>
                     <TextBlock Text="Другие способы связи" Style="{StaticResource valueTextBlock}"
                                HorizontalAlignment="Left" Margin="2,5"/>
-                    <TextBox x:Name="contactsOther_tb"
+                    <TextBox x:Name="contactsOther_tb" MaxLength="100"
                         TextWrapping="Wrap" Margin="7,5" FontSize="14"
                         Text=""/>
                 </StackPanel>

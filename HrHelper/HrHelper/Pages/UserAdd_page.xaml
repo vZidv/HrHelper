@@ -30,9 +30,9 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <StackPanel >
-                    <ui:TextBox PlaceholderText="Логин"  x:Name="login_tb"
+                    <ui:TextBox PlaceholderText="Логин"  x:Name="login_tb" MaxLength="30"
                                 Margin="5"/>
-                    <ui:TextBox PlaceholderText="Пароль"  x:Name="password_tb"
+                    <ui:TextBox PlaceholderText="Пароль"  x:Name="password_tb" MaxLength="30"
                                 Margin="5"/>
 
                 </StackPanel>

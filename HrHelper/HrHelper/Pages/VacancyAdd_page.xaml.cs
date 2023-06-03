@@ -72,6 +72,13 @@ namespace HrHelper.Pages
 
         private void addVacancy_but_Click(object sender, RoutedEventArgs e)
         {
+            List<Control> controls = new List<Control>() {jobTitle_tb,busyness_cb,maxSalary_tb,minSalary_tb};
+            if (Classes.CheckValue.CheckElementNullValue(controls) == true)
+            {
+                MyMessageBox.Show("Ошибка", "Пожалуйста, заполните обязательные поля", true);
+                return;
+            }
+
             Busyness busyness = busyness_cb.SelectedItem as Busyness;
             if(busyness == null)
             {

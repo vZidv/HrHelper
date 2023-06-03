@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -45,12 +46,14 @@ namespace HrHelper.Pages
 
         private void minSalary_tb_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
 
         private void maxSalary_tb_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
 
         private void dontEditVacancy_but_Click(object sender, RoutedEventArgs e)
@@ -68,6 +71,13 @@ namespace HrHelper.Pages
 
         private void saveVacancy_but_Click(object sender, RoutedEventArgs e)
         {
+            List<Control> controls = new List<Control>() { jobTitle_tb, busyness_cb, maxSalary_tb, minSalary_tb };
+            if (Classes.CheckValue.CheckElementNullValue(controls) == true)
+            {
+                MyMessageBox.Show("Ошибка", "Пожалуйста, заполните обязательные поля", true);
+                return;
+            }
+
             Busyness busyness = busyness_cb.SelectedItem as Busyness;
             if (busyness == null)
             {

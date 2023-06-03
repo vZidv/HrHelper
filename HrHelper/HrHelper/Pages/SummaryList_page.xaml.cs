@@ -178,6 +178,7 @@ namespace HrHelper.Pages
             CheckBox currentCheckB = (CheckBox)sender;
             if (currentCheckB.IsChecked == true)
             {
+                selectedSummary.Clear();
                 foreach (var item in summary_dg.Items)
                 {
                     selectedSummary.Add((Summary)item);
@@ -196,6 +197,7 @@ namespace HrHelper.Pages
             }          
             else if (currentCheckB.IsChecked == false)
             {
+                selectedSummary.Clear();
                 foreach (var item in summary_dg.Items)
                 {
                     var row = summary_dg.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;

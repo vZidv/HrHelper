@@ -22,19 +22,26 @@
                        пользователя"  TextWrapping="Wrap"  VerticalAlignment="Bottom"
                        Margin="10" FontSize="25"
                        Style="{StaticResource headerTextBlock}"/>
-            <ui:Button Content="Изменить" x:Name="editUser_but"
-                       Background="{StaticResource Blue}"
-                       Margin="10" Width="150" Icon="Edit20"
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <ui:Button Content="Сохранить" x:Name="editUser_but"
+                       Background="{StaticResource Online}"
+                       Margin="10" Width="130" Icon="Save20"
                        HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="editUser_but_Click" />
+                <ui:Button Content="Отменить" x:Name="dontSave_but"
+                       Background="{StaticResource Dnd}"
+                       Margin="0,10,10,10" Width="100" 
+                       HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="dontSave_but_Click" />
+            </StackPanel>
+
             <Grid Grid.Row="1" Margin="0,10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <StackPanel >
-                    <ui:TextBox PlaceholderText="Логин"  x:Name="login_tb"
+                    <ui:TextBox PlaceholderText="Логин"  x:Name="login_tb" MaxLength="30"
                                 Margin="5"/>
-                    <ui:TextBox PlaceholderText="Пароль"  x:Name="password_tb"
+                    <ui:TextBox PlaceholderText="Пароль"  x:Name="password_tb" MaxLength="50"
                                 Margin="5"/>
 
                 </StackPanel>

@@ -51,6 +51,14 @@ namespace HrHelper.Pages
 
         private void editUser_but_Click(object sender, RoutedEventArgs e)
         {
+            List<Control> controls = new List<Control>() { login_tb, password_tb, userType_cb };
+
+            if (Classes.CheckValue.CheckElementNullValue(controls) == true)
+            {
+                MyMessageBox.Show("Ошибка", "Пожалуйста, заполните обязательные поля", true);
+                return;
+            }
+
             user.Login = login_tb.Text;
             user.Password = password_tb.Text;
             user.UserTypeId = (userType_cb.SelectedItem as UserType).Id;
@@ -61,6 +69,11 @@ namespace HrHelper.Pages
                 db.SaveChanges();
             }
             MyMessageBox.Show("Внимание", "Данные успешно обновлены!");
+            Settings.mainWindow.Close();
+        }
+
+        private void dontSave_but_Click(object sender, RoutedEventArgs e)
+        {
             Settings.mainWindow.Close();
         }
     }
