@@ -44,8 +44,8 @@
                                     <StackPanel Orientation="Horizontal">
                                         <ui:Button Icon="Eye16" Background="{StaticResource Blue}"
                                         x:Name="openRequestVacancy_button" Click="openRequestVacancy_button_Click"  />
-                                        <ui:Button Icon="Delete12" Background="{StaticResource Dnd}"
-                                        x:Name="delete_button" Click="delete_button_Click" />
+                                        <!--<ui:Button Icon="Delete12" Background="{StaticResource Dnd}"
+                                        x:Name="delete_button" Click="delete_button_Click" />-->
                                     </StackPanel>
                                 </Grid>
                             </DataTemplate>

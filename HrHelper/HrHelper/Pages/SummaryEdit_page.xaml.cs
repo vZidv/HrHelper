@@ -272,7 +272,7 @@ namespace HrHelper.Pages
             catch
             { }
 
-            Classes.MyMessageBox.Show("Внимание", "Пользователь обновлен.");
+            Classes.MyMessageBox.Show("Внимание", "Резюме обновлено.");
             Classes.Settings.mainFrame.Navigate(new Summary_page(summary.Id));
         }
         int? CreatePhoto()

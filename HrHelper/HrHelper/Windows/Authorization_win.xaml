@@ -23,7 +23,7 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <ui:TitleBar Background="{StaticResource Chat}" ShowMaximize="False"/>
+        <ui:TitleBar Background="{DynamicResource Chat}" ShowMaximize="False"/>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />

@@ -233,5 +233,24 @@ namespace HrHelper.Pages
             }
             return null;
         }
+
+        private void delete_button_Click(object sender, RoutedEventArgs e)
+        {
+            Summary summary = summary_dg.SelectedItem as Summary;
+            if (MyMessageBox.Show("Внимание", "Вы точно хотите удалить этого кандидата?", MyMessageBoxOptions.YesNo) == false)
+                return;
+
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                SummaryForVacancy[] summaryForVacancy = db.SummaryForVacancies.Where(o => o.SummaryId == summary.Id).ToArray();
+                db.SummaryForVacancies.RemoveRange(summaryForVacancy);
+                db.Summaries.Remove(summary);
+                db.SaveChanges();
+            }
+
+            MyMessageBox.Show("Внимание", "Кандидат успешно удален!");
+            summary_dg.ItemsSource = LoadSummariesData();
+            RowCountUpdate();
+        }
     }
 }

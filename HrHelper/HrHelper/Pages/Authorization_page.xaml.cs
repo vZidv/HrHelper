@@ -36,8 +36,6 @@ namespace HrHelper.Pages
                     Classes.MyMessageBox.Show("Ошибка", "Неверный логин или пароль!", true);
                     return;
                 }
-                if (password_tb.Password != user.Password)
-                    Classes.MyMessageBox.Show("Ошибка", "Неверный пароль!", true);
 
                 //new Main_win(user).Show();
                 new Main_win(user).Show();

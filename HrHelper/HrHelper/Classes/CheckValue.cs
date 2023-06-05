@@ -23,17 +23,22 @@ namespace HrHelper.Classes
         {
             bool hasError = false;
 
+            // Проверка каждого элемента управления в списке
             foreach (Control control in controls)
             {
+                // Проверка, имеет элемент управления свойство Text
                 if (control.GetType().GetProperty("Text") != null)
                 {
+                    // Получение значения свойства Text элемента управления
                     string textValue = control.GetType().GetProperty("Text").GetValue(control)?.ToString();
 
+                    // Если значение свойства Text пустое или null, то установка границы элемента управления красным цветом и установка флага ошибки
                     if (string.IsNullOrEmpty(textValue))
                     {
                         control.BorderBrush = (SolidColorBrush)Application.Current.Resources["Dnd"];
                         hasError = true;
                     }
+                    // Иначе - очистка границы элемента управления
                     else
                     {
                         control.ClearValue(Border.BorderBrushProperty);

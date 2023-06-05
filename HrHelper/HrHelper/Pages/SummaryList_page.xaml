@@ -70,8 +70,8 @@
                     <DataGridTextColumn Header="Ф.И.О" MinWidth="170" Width="*">
                         <DataGridTextColumn.Binding>
                             <MultiBinding StringFormat="{}{0} {1} {2}">
-                                <Binding Path="FirstName"/>
                                 <Binding Path="LastName"/>
+                                <Binding Path="FirstName"/>
                                 <Binding Path="Patronymic"/>
                             </MultiBinding>
                         </DataGridTextColumn.Binding>
@@ -88,7 +88,7 @@
                                         <ui:Button Icon="Eye16" Background="{StaticResource Blue}"
                                         x:Name="openSummary_button" Click="openSummary_button_Click" />
                                         <ui:Button Icon="Delete12" Background="{StaticResource Dnd}"
-                                        x:Name="delete_button"/>
+                                        x:Name="delete_button" Click="delete_button_Click"/>
                                     </StackPanel>
                                 </Grid>
                             </DataTemplate>

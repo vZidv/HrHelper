@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HrHelper.Windows"
         xmlns:ui ="http://schemas.lepo.co/wpfui/2022/xaml"
-        Title="TimeFixer" Height="400" Width="450" 
+        Title="HrHelper" Height="400" Width="450" 
         WindowStyle="None" 
         Background="Transparent" 
         AllowsTransparency="True"
@@ -14,7 +14,7 @@
 
         <Border 
             CornerRadius="0,0,25,25"
-            Background="{StaticResource Servers}">
+            Background="{DynamicResource Servers}">
 
         </Border>
         <Frame Name="mainFrame"/>

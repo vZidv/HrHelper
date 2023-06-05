@@ -7,33 +7,7 @@
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d" MinHeight="650" MinWidth="1150"
         Title="HrHelper"  Height="700" Width="1300" WindowStartupLocation="CenterScreen" WindowStyle="None"  Background="Transparent" Icon="/Source/LogoMini.png">
-    <Window.Resources>
-        <Style x:Key="MenuButton" TargetType="Button">
-            <Setter Property="Height" Value="60"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Margin" Value="0,10,0,0"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="{StaticResource Grey}"/>
-                            </Trigger>
-                            <Trigger Property="IsFocused" Value="True" >
-                                <Setter Property="Background" Value="{StaticResource Grey}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
 
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
-  
     <Border Background="{DynamicResource Channels}" CornerRadius="0,0,0,0"
             Grid.ColumnSpan="2" Grid.RowSpan="3">
         <Border.OpacityMask>

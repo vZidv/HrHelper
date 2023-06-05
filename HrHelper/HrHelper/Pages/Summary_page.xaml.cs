@@ -295,7 +295,7 @@ namespace HrHelper.Pages
             {
                 items.Add("<PhoneNumber>", summary.Contacts.Phone);
                 items.Add("<Email>", summary.Contacts.Email);
-                //items.Add("<Skype>", summary.Contacts.Skype);
+                items.Add("<Skype>", summary.Contacts.OtherContacts);
             }
             if (summary.Town != null)
             {
@@ -305,10 +305,10 @@ namespace HrHelper.Pages
             if (summary.Education != null)
                 items.Add("<Education>", summary.Education.EducationName);
             if (summary.Busyness != null)
-                //items.Add("<Busyness>", busynessChange_cb.Text);
+                items.Add("<Busyness>", busynessChange_cb.Text);
 
 
-            //items.Add("<JobTitle>", jobTitleChange_cb.Text);
+            items.Add("<JobTitle>", jobTitleChange_cb.Text);
             items.Add("<LastCompany>", summary.LastCompany);
             items.Add("<LastJobTitle>", summary.LastJobTitle);
             items.Add("<EducationInstution>", educationInstution_tblock.Text);
