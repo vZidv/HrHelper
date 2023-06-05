@@ -49,6 +49,7 @@ namespace HrHelper.Pages
                 }
             }
         }
+        // Метод LoadJobTitleComboBox загружает список вакансий в комбобокс
         private void LoadJobTitleComboBox()
         {
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
@@ -58,9 +59,10 @@ namespace HrHelper.Pages
                 {
                     jobTitle_cb.Items.Add(vacancy.JobTitle);
                 }
-
             }
         }
+
+        // Метод LoadGenderCombobox загружает список полов в комбобокс
         private void LoadGenderCombobox()
         {
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
@@ -69,6 +71,8 @@ namespace HrHelper.Pages
                 gender_cb.DisplayMemberPath = "Name";
             }
         }
+
+        // Метод LoadBusynnesComboBox загружает список уровней занятости в комбобокс
         private void LoadBusynnesComboBox()
         {
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
@@ -78,9 +82,10 @@ namespace HrHelper.Pages
                 {
                     bussyness_cb.Items.Add(busyness.Type);
                 }
-
             }
         }
+
+        // Метод LoadEducationComboBox загружает список образований в комбобокс
         private void LoadEducationComboBox()
         {
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
@@ -90,26 +95,9 @@ namespace HrHelper.Pages
                 {
                     education_cb.Items.Add(education.EducationName);
                 }
-
             }
         }
-        bool CheckTextBoxForEmpty(TextBox[] textBoxes, string errorMessage)
-        {
-            //if true,then all good 
-            bool result = true;
-            foreach (TextBox textBox in textBoxes)
-            {
-                if (textBox.Text == string.Empty)
-                {
-                    textBox.BorderBrush = (SolidColorBrush)Application.Current.Resources["Dnd"];
-                    result = false;
-                }
-            }
-            if (!result)
-                MyMessageBox.Show("Ошибка", errorMessage, true);
 
-            return result;
-        }
 
         /// <summary>
         /// Add new Summary 
@@ -171,7 +159,7 @@ namespace HrHelper.Pages
             {
                 Phone = phone_tb.Text,
                 Email = email_tb.Text,
-                //Skype = skype_tb.Text
+                OtherContacts = contactsOther_tb.Text
             };
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {

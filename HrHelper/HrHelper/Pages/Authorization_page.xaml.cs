@@ -18,35 +18,39 @@ namespace HrHelper.Pages
         public Authorization_page() => InitializeComponent();
 
         private void Authorization_but_Click(object sender, RoutedEventArgs e)
-        {         
+        {
+            // Проверка на пустые поля логина и пароля
             if (login_tb.Text == String.Empty || password_tb.Password == String.Empty)
             {
-                Classes.MyMessageBox.Show("Ошибка","Поле логин или пароль пустое!",true);
+                Classes.MyMessageBox.Show("Ошибка", "Поле логин или пароль пустое!", true);
                 return;
             }
             try
             {
                 AuthorizationUser user;
 
+                // Получение пользователя из базы данных
                 using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
                     user = db.AuthorizationUsers.Where(u => u.Login == login_tb.Text).Include(o => o.UserType).FirstOrDefault();
 
+                // Проверка на существование пользователя и совпадение пароля
                 if (user == null || password_tb.Password != user.Password)
                 {
                     Classes.MyMessageBox.Show("Ошибка", "Неверный логин или пароль!", true);
                     return;
                 }
 
-                //new Main_win(user).Show();
+                // Открытие главного окна и закрытие окна авторизации
                 new Main_win(user).Show();
                 authorization_win.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MyMessageBox.Show("Ошибка",ex.Message);
+                MyMessageBox.Show("Ошибка", ex.Message);
             }
         }
-
-  
     }
+
+
 }
+

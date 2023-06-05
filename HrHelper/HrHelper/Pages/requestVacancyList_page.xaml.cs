@@ -34,6 +34,7 @@ namespace HrHelper.Pages
             ConfigureUserWindow(Settings.currentUser);
         }
 
+        // Метод ConfigureUserWindow настраивает окно пользователя в зависимости от его типа
         private void ConfigureUserWindow(AuthorizationUser user)
         {
             switch (user.UserType.Type)
@@ -52,6 +53,8 @@ namespace HrHelper.Pages
                     break;
             }
         }
+
+        // Метод LoadDataGrid загружает данные в таблицу vacancy_dg из базы данных
         private void LoadDataGrid()
         {
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
@@ -61,36 +64,50 @@ namespace HrHelper.Pages
             }
             RowCountUpdate();
         }
+
+        // Метод RowCountUpdate обновляет количество строк в таблице vacancy_dg
         private void RowCountUpdate() => allClients_tblock.Text = $"Всего - {vacancy_dg.Items.Count}";
 
+        // Обработчик события нажатия кнопки requestVacancyAdd_but
         private void requestVacancyAdd_but_Click(object sender, RoutedEventArgs e)
         {
+            // Открывает окно MinWin_win с страницей RequsetVacancyAdd_page и ожидает закрытия окна
             new MinWin_win(new Pages.RequsetVacancyAdd_page()).ShowDialog();
             LoadDataGrid();
         }
 
+        // Обработчик события нажатия кнопки delete_button
         private void delete_button_Click(object sender, RoutedEventArgs e)
         {
+            // Получает выбранный элемент таблицы vacancy_dg
             VacancyRequest vacancyRequest = vacancy_dg.SelectedItem as VacancyRequest;
+            // Проверяет, хочет ли пользователь удалить выбранный элемент
             if (MyMessageBox.Show("Внимание", "Вы точно хотите удалить этот запрос?", MyMessageBoxOptions.YesNo) == false)
                 return;
 
+            // Удаляет выбранный элемент из базы данных
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
                 db.VacancyRequests.Remove(vacancyRequest);
                 db.SaveChanges();
             }
 
+            // Показывает сообщение об успешном удалении элемента и обновляет таблицу vacancy_dg
             MyMessageBox.Show("Внимание", "Запрос успешно удален!");
             LoadDataGrid();
         }
 
+        // Обработчик события нажатия кнопки openRequestVacancy_button
         private void openRequestVacancy_button_Click(object sender, RoutedEventArgs e)
         {
+            // Получает выбранный элемент таблицы vacancy_dg
             VacancyRequest vacancyRequest = vacancy_dg.SelectedItem as VacancyRequest;
 
+            // Открывает окно MinWin_win с страницей RequestVacancy_page и ожидает закрытия окна
             new MinWin_win(new Pages.RequestVacancy_page(vacancyRequest)).ShowDialog();
             LoadDataGrid();
         }
+
+      
     }
 }

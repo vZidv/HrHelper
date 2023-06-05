@@ -33,8 +33,10 @@ namespace HrHelper.Pages
         {
             LoadVacancy(vacancy);
         }
+        // Функция для загрузки данных вакансии в форму
         private void LoadVacancy(Vacancy vacancy)
         {
+            // Заполняем поля формы данными из объекта вакансии
             jobTitle_tb.Text = vacancy.JobTitle;
             description_tb.Text = vacancy.Description;
             skills_tb.Text = vacancy.Skills;
@@ -43,22 +45,32 @@ namespace HrHelper.Pages
             maxSalary_tb.Text = vacancy.MaxSalary.ToString();
         }
 
+        // Обработчик нажатия кнопки "Удалить вакансию"
         private void deleteVacancy_but_Click(object sender, RoutedEventArgs e)
         {
+            // Проверяем, точно ли пользователь хочет удалить выбранную вакансию
             if (MyMessageBox.Show("Внимание", "Вы точно хотите удалить эту вакансию?", MyMessageBoxOptions.YesNo) == false)
                 return;
 
-            using(HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            // Создаем контекст базы данных
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
+                // Удаляем вакансию из базы данных
                 db.Vacancies.Remove(vacancy);
                 db.SaveChanges();
             }
+
+            // Выводим сообщение об успешном удалении вакансии
             MyMessageBox.Show("Внимание", "Вакансия успешно удалена!");
+
+            // Закрываем окно
             Settings.mainWindow.Close();
         }
 
+        // Обработчик нажатия кнопки "Редактировать вакансию"
         private void editVacancy_but_Click(object sender, RoutedEventArgs e)
         {
+            // Переходим на страницу редактирования вакансии и передаем выбранную вакансию в качестве параметра
             Settings.mainFrame.Navigate(new VacancyEdit_page(vacancy));
         }
     }

@@ -13,7 +13,10 @@ namespace HrHelper.Classes
 {
     public static class ExcelExport
     {
-        
+        /// <summary>
+        /// Экспорт данных из DataGrid в Excel
+        /// </summary>
+        ///param name="dataGrid">DataGrid, данные из которого нужно экспортировать</param>   
         public static void ExportSummaryList(DataGrid dataGrid)
         {
             Thread.Sleep(1000);

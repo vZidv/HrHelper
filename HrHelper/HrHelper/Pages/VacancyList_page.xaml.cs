@@ -32,46 +32,69 @@ namespace HrHelper.Pages
         {
             LoadDataGrid();
         }
+        // Функция для загрузки данных в таблицу
         private void LoadDataGrid()
         {
+            // Создаем контекст базы данных
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
+                // Получаем список вакансий из базы данных, включая связанные данные
                 Vacancy[] vacancy = db.Vacancies.Include(o => o.Busyness).ToArray();
-                vacancy_dg.ItemsSource = vacancy;
+                // Заполняем таблицу данными из списка вакансий        vacancy_dg.ItemsSource = vacancy;
             }
+            // Обновляем количество строк в таблице
             RowCountUpdate();
         }
+
+        // Функция для обновления количества строк в таблице
         private void RowCountUpdate() => allClients_tblock.Text = $"Всего - {vacancy_dg.Items.Count}";
 
-        private void vacancyAdd_but_Click(object sender, RoutedEventArgs e) 
+        // Обработчик нажатия кнопки "Добавить вакансию"
+        private void vacancyAdd_but_Click(object sender, RoutedEventArgs e)
         {
+            // Открываем окно добавления вакансии
             new MinWin_win(new VacancyAdd_page()).ShowDialog();
+            // Обновляем таблицу
             LoadDataGrid();
         }
 
+        // Обработчик нажатия кнопки "Открыть вакансию"
         private void openVacancy_button_Click(object sender, RoutedEventArgs e)
         {
+            // Получаем выбранную вакансию из таблицы
             Vacancy vacancy = vacancy_dg.SelectedItem as Vacancy;
+            // Открываем окно с информацией о вакансии
             new MinWin_win(new Vacancy_page(vacancy)).ShowDialog();
 
+            // Обновляем таблицу
             LoadDataGrid();
         }
 
+        // Обработчик нажатия кнопки "Удалить вакансию"
         private void delete_button_Click(object sender, RoutedEventArgs e)
         {
+            // Получаем выбранную ваксию из таблицы
             Vacancy vacancy = vacancy_dg.SelectedItem as Vacancy;
+            // Проверяем, точно ли пользователь хочет удалить вакансию
             if (MyMessageBox.Show("Внимание", "Вы точно хотите удалить эту вакансию?", MyMessageBoxOptions.YesNo) == false)
-                return;
+        return;
 
+            // Создаем контексты данных
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
+                // Получаем список связанных данных для вакансии
                 SummaryForVacancy[] summaryForVacancy = db.SummaryForVacancies.Where(o => o.VacancyId == vacancy.Id).ToArray();
+                // Удаляем связанные данные
                 db.SummaryForVacancies.RemoveRange(summaryForVacancy);
+                // Удаляем вакансию
                 db.Vacancies.Remove(vacancy);
+                // Сохраняем изменения в базе данных
                 db.SaveChanges();
             }
 
+            // Выводим сообщение об успешном удалении вакансии
             MyMessageBox.Show("Внимание", "Вакансия успешно удалена!");
+            // Обновляем таблицу
             LoadDataGrid();
         }
     }

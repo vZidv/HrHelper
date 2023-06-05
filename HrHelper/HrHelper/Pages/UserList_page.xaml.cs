@@ -32,44 +32,71 @@ namespace HrHelper.Pages
         {
             LoadDataGrid();
         }
+        // Функция для загрузки данных пользователей ву
         private void LoadDataGrid()
         {
-            using(HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            // Создаем контекст базы данных
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
-                users_dg.ItemsSource = db.AuthorizationUsers.Include(o=>o.UserType).ToArray();
+                // Загружаем данные пользователей в таблицу, включая типы пользователей
+                users_dg.ItemsSource = db.AuthorizationUsers.Include(o => o.UserType).ToArray();
             }
+
+            // Обновляем количество строк в таблице
             RowCountUpdate();
         }
 
+        // Функция для обновления количества строк в таблице
         private void RowCountUpdate() => alluses_tblock.Text = $"Всего - {users_dg.Items.Count}";
 
+        // Обработчик нажатия кнопки "Добавить пользователя"
         private void userAdd_but_Click(object sender, RoutedEventArgs e)
         {
+            // Создаем окно для добавления пользователя
             MinWin_win win = new MinWin_win(new UserAdd_page());
+
+            // Отображаем окно и ждем, пока пользователь закроет его
             win.ShowDialog();
+
+            // Обновляем данные в таблице
             LoadDataGrid();
         }
 
+        // Обработчик нажатия кнопки "Удалить пользователя"
         private void delete_button_Click(object sender, RoutedEventArgs e)
         {
+            // Получаем выбранного пользователя
             AuthorizationUser user = users_dg.SelectedItem as AuthorizationUser;
+
+            // Проверяем, точно ли пользователь хочет удалить выбранного пользователя
             if (MyMessageBox.Show("Внимание", "Вы точно хотите удалить этого пользователя?", MyMessageBoxOptions.YesNo) == false)
                 return;
 
+            // Создаем контекст базы данных
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
+                // Удаляем пользователя из базы данных
                 db.AuthorizationUsers.Remove(user);
                 db.SaveChanges();
             }
+
+            // Выводим сообщение об успешном удалении пользователя
             MyMessageBox.Show("Внимание", "Пользователь успешно удален!");
 
+            // Обновляем данные в таблице
             LoadDataGrid();
         }
 
+        // Обработчик нажатия кнопки "Редактировать пользователя"
         private void edit_button_Click(object sender, RoutedEventArgs e)
         {
+            // Создаем окно для редактирования пользователя и передаем выбранного пользователя в качестве параметра
             MinWin_win win = new MinWin_win(new UserEdit_page(users_dg.SelectedItem as AuthorizationUser));
+
+            // Отображаем окно и ждем, пока пользователь закроет его
             win.ShowDialog();
+
+            // Обновляем данные в таблице
             LoadDataGrid();
         }
     }

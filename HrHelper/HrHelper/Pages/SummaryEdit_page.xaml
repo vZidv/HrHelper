@@ -52,7 +52,7 @@
                 Content="Сохранить" Icon="Save20" FontSize="20"
                        HorizontalAlignment="Left" VerticalAlignment="Top"
                     Background="{StaticResource Online}"/>
-                    <ui:Button Margin="5,20" x:Name="ummaryEdit_but"
+                    <ui:Button Margin="5,20" x:Name="dontSave_but" Click="dontSave_but_Click"
                 Content="Отменить" Icon="CalendarCancel20" FontSize="20"
                        HorizontalAlignment="Left" VerticalAlignment="Top"
                     Background="{StaticResource Dnd}"/>
@@ -84,7 +84,7 @@
                 <DockPanel>
                     <TextBox x:Name="comments_tb" MaxLength="200"
                         TextWrapping="Wrap" Margin="7,5" FontSize="14"
-                        Text="я звонила, думает, т.е. график может не устраивать молодого человека - поздно"/>
+                        Text=""/>
                 </DockPanel>
             </StackPanel>
 

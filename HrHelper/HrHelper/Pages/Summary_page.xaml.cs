@@ -99,18 +99,24 @@ namespace HrHelper.Pages
                 aboutYourself_tblock.Text = summary.AboutYourself;
             
         }
+        // Метод LoadContacts загружает контактную информацию из базы данных и отображает ее на форме
         void LoadContacts(Summary summary)
         {
+            // Проверяет, есть ли у резюме контакная информация
             if (summary.ContactsId == null)
                 return;
 
+            // Загружает контактную информацию из базы данных и присваивает ее свойству Contacts резюме
             using (var db = new HrHelperDatabaseContext())
                 summary.Contacts = db.SummaryContacts.Where(o => o.Id == summary.ContactsId).First();
 
+            // Отображает контактную информацию на форме
             phone_tblock.Text = summary.Contacts.Phone;
             email_tblock.Text = summary.Contacts.Email;
             contactsOther_tb.Text = summary.Contacts.OtherContacts;
         }
+
+        // Метод GetAge вычисляет возраст на основе даты рождения, указанной в резюм
         int GetAge(Summary summary)
         {
             int year = (DateTime.Now.Year - summary.Birthday.Year);
@@ -123,9 +129,12 @@ namespace HrHelper.Pages
             return year;
         }
 
+        // Метод SetStatus устанавливает статус резюме и отображает его на форме
         void SetStatus(SummaryStatus status)
         {
+            // Устанавливает текст стата в ComboBox statusChange_cb
             statusChange_cb.Text = status.Status;
+            // Устанавливает цвет фона ComboBox statusChange_cb в зависимости от статуса
             string statusColor = null;
             switch (status.Status)
             {
@@ -143,9 +152,9 @@ namespace HrHelper.Pages
                     break;
             }
             statusChange_cb.Background = Application.Current.Resources[$"{statusColor}"] as SolidColorBrush;
-
-
         }
+
+        
         private void LoadStatusComboBox()
         {
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
@@ -225,71 +234,49 @@ namespace HrHelper.Pages
             }
         }
 
-
-        #region Excel Export
-        //private void excelExport_but_Click(object sender, RoutedEventArgs e)
-        //{
-        //    ex.Application exApp = new ex.Application();
-
-        //    exApp.Workbooks.Add();
-        //    ex.Worksheet wsh = (ex.Worksheet)exApp.ActiveSheet;
-        //    Summary summary;
-        //    using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
-        //        summary = db.Summaries.Where(o => o.Id == idSummary).First();
-        //    wsh.Cells[1, 1] = "Имя";
-        //    wsh.Cells[1, 2] = "Фамилия";
-        //    wsh.Cells[1, 3] = "Отчество";
-
-        //    wsh.Cells[1, 4] = "Дата рождения";
-        //    wsh.Cells[1, 5] = "Статус";
-        //    wsh.Cells[1, 6] = "Комментарии";
-
-        //    wsh.Cells[2, 1] = summary.FirstName;
-        //    wsh.Cells[2, 2] = summary.LastName;
-        //    wsh.Cells[2, 3] = summary.Patronymic;
-
-        //    wsh.Cells[2, 4] = summary.Birthday;
-        //    wsh.Cells[2, 5] = status_tblock.Text;
-        //    wsh.Cells[2, 6] = summary.Comments;
-        //    exApp.Visible = true;
-        //}
-        #endregion
-
-        //private void jobTitleChange_cb_SelectionChanged(object sender, SelectionChangedEventArgs e) { }
-
+        // Метод wordExport_Click вызывается при нажатии кнопки экспорта резюме в Word
         private void wordExport_Click(object sender, RoutedEventArgs e)
         {
+            // Получает данные резюме
             var items = SummaryData();
 
+            // Получает путь к фото, если оно есть
             string? photo = null;
             if (summary.Photo != null)
                 photo = summary.Photo.Path;
 
+            // Экспортирует резюме в Word
             WordExport.ExportSummary(items, summary);
         }
 
+        // Метод summaryEdit_but_Click вызывается при нажатии кнопки редактирования резюме
         private void summaryEdit_but_Click(object sender, RoutedEventArgs e) => Settings.mainFrame.Navigate(new SummaryEdit_page(summary));
 
+        // Метод pdfExport_but_Click вызывается при нажатии кнопки экспорта резюме в PDF
         private void pdfExport_but_Click(object sender, RoutedEventArgs e)
         {
+            // Получает данные резюме
             var items = SummaryData();
 
+            // Получает путь к фото, если оно есть
             string? photo = null;
             if (summary.Photo != null)
                 photo = summary.Photo.Path;
 
+            // Экспортирует резюме в PDF
             PdfExport.SummaryExport(items, summary);
         }
 
+        // Метод SummaryData возвращает словарь с данными резюме, которые будут использоваться при экспорте в Word или PDF
         private Dictionary<string, string> SummaryData()
         {
             var items = new Dictionary<string, string>
-            {
-                {"<Fullname>", fullname_tblock.Text},
-                {"<Gender>", gender_tblock.Text},
-                {"<Age>", GetAge(summary).ToString()},
-                {"<BirthdayDate>",summary.Birthday.ToString("d MMMM yyyy")},
-            };
+    {
+        {"<Fullname>", fullname_tblock.Text},
+        {"<Gender>", gender_tblock.Text},
+        {"<Age>", GetAge(summary).ToString()},
+        {"<BirthdayDate>",summary.Birthday.ToString("d MMMM yyyy")},
+    };
             // Summary contacts
             if (summary.Contacts != null)
             {
@@ -317,19 +304,27 @@ namespace HrHelper.Pages
             return items;
         }
 
+        // Метод statusChange_cb_SelectionChanged вызывается при изменении статуса резюме в ComboBox
         private void statusChange_cb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Получает выбранный статус
             SummaryStatus status = statusChange_cb.SelectedItem as SummaryStatus;
-            
+
+            // Устанавливает статус и цвет фона ComboBox
             SetStatus(status);
-            
+
         }
 
+        // Метод Page_Loaded вызывается при загрузке страницы
         private void Page_Loaded(object sender, RoutedEventArgs e)
-        {          
+        {
+            // Загружает ComboBox'ы
             LoadComboBoxes();
+            // Загружает резюме
             LoadSummary(idSummary);
         }
+
+        
     }
 
 }

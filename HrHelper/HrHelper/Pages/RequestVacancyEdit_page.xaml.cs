@@ -33,6 +33,7 @@ namespace HrHelper.Pages
             LoadBusynessComboBox();
             LoadRequestVacancy();
         }
+        // Загружаем список типов занятости в комбобокс
         private void LoadBusynessComboBox()
         {
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
@@ -41,6 +42,8 @@ namespace HrHelper.Pages
                 busyness_cb.DisplayMemberPath = "Type";
             }
         }
+
+        // Загружаем данные запроса в соответствующие поля
         private void LoadRequestVacancy()
         {
             jobTitle_tb.Text = vacancyRequest.JobTitle;
@@ -51,13 +54,16 @@ namespace HrHelper.Pages
             skills_tb.Text = vacancyRequest.Skills;
         }
 
+        // Обработчик кнопки "Не сохранять запрос"
         private void dontSaveRequestVacancy_but_Click(object sender, RoutedEventArgs e)
         {
             Classes.Settings.mainFrame.GoBack();
         }
 
+        // Обработчик кнопки "Сохранить запрос"
         private void saveRequestVacancy_but_Click(object sender, RoutedEventArgs e)
         {
+            // Проверяем, заполнены ли обязательные поля
             List<Control> controls = new List<Control>() { jobTitle_tb, busyness_cb, department_tb };
             if (Classes.CheckValue.CheckElementNullValue(controls) == true)
             {
@@ -65,6 +71,7 @@ namespace HrHelper.Pages
                 return;
             }
 
+            // Обновляем данные запроса в базе данных
             vacancyRequest.JobTitle = jobTitle_tb.Text;
             vacancyRequest.Description = description_tb.Text;
             vacancyRequest.Skills = skills_tb.Text;
@@ -78,6 +85,7 @@ namespace HrHelper.Pages
                 db.SaveChanges();
             }
 
+            // Показываем сообщение об успешном обновлении и возвращаемся на предыдущую страницу
             MyMessageBox.Show("Внимание", "Ваш запрос обновлен!");
             Settings.mainFrame.GoBack();
         }

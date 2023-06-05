@@ -36,9 +36,11 @@ namespace HrHelper.Pages
         }
         private void ConfigureUserWindow(AuthorizationUser user)
         {
+            // Определяем тип пользователя и настраиваем окно в соответствии с этим типом
             switch (user.UserType.Type)
             {
                 case "admin":
+                    // Администратор может видеть кнопки для пользователей, но не для клиентов
                     buttonsForClient_st.Visibility = Visibility.Hidden;
                     buttonsForUser_st.Visibility = Visibility.Visible;
 
@@ -46,6 +48,7 @@ namespace HrHelper.Pages
                     buttonsForUser_st.IsEnabled = true;
                     break;
                 case "user":
+                    // Пользователь может видеть кнопки для пользователей, но не для клиентов
                     buttonsForClient_st.Visibility = Visibility.Hidden;
                     buttonsForUser_st.Visibility = Visibility.Visible;
 
@@ -53,6 +56,7 @@ namespace HrHelper.Pages
                     buttonsForUser_st.IsEnabled = true;
                     break;
                 case "client":
+                    // Клиент может видеть кнопки только для клиентов, если это его запрос
                     if (vacancyRequest.UserId != Settings.currentUser.Id)
                     {
                         buttonsForClient_st.Visibility = Visibility.Hidden;
@@ -71,8 +75,10 @@ namespace HrHelper.Pages
                     break;
             }
         }
+
         private void LoadRequestVacancy()
-        {     
+        {
+            // Загружаем данные запроса в соответствующие поля
             jobTitle_tb.Text = vacancyRequest.JobTitle;
             description_tb.Text = vacancyRequest.Description;
             busyness_tb.Text = vacancyRequest.Busyness.Type;
@@ -83,20 +89,25 @@ namespace HrHelper.Pages
 
         private void delete_but_Click(object sender, RoutedEventArgs e)
         {
+            // Проверяем, хочет ли пользователь удалить запрос
             if (MyMessageBox.Show("Внимание", "Вы точно хотите удалить этот запрос?", MyMessageBoxOptions.YesNo) == false)
                 return;
 
+            // Удаляем запрос из базы данных
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
                 db.VacancyRequests.Remove(vacancyRequest);
                 db.SaveChanges();
             }
+
+            // Показываем сообщение об успешном удалении и закрываем окно
             MyMessageBox.Show("Внимание", "Запрос успешно удалён!");
             Settings.mainWindow.Close();
         }
 
         private void vacancyCreate_but_Click(object sender, RoutedEventArgs e)
         {
+            // Создаем новую вакансию на основе данных из полей
             Vacancy vacancy;
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
@@ -105,13 +116,14 @@ namespace HrHelper.Pages
                     JobTitle = jobTitle_tb.Text,
                     Description = description_tb.Text,
                     Skills = skills_tb.Text,
-                    Busyness = db.Busynesses.Where(o => o.Type == busyness_tb.Text).First(),                   
+                    Busyness = db.Busynesses.Where(o => o.Type == busyness_tb.Text).First(),
                 };
             }
+
+            // Загружаем данные вакансии на страницу добавления вакансии и переходим на эту страницу
             VacancyAdd_page vacancyAdd = new VacancyAdd_page();
             vacancyAdd.LoadVacancyData(vacancy);
             Settings.mainFrame.Navigate(vacancyAdd);
-
         }
 
         private void editRequestVacancy_but_Click(object sender, RoutedEventArgs e) => Settings.mainFrame.Navigate(new RequestVacancyEdit_page(vacancyRequest));

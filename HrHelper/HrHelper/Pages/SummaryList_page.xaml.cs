@@ -52,11 +52,15 @@ namespace HrHelper.Pages
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
                 return db.Summaries.Include(o => o.Busyness).Include(o => o.Status).Include(o => o.SummaryForVacancies).Include(o => o.Contacts).ToArray();
         }
+        // Функция для сортировки данных кандидатов
         private Summary[] SortSummaryData()
         {
             Summary[] summaries;
+
+            // Создаем контекст базы данных
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
+                // Если выбрана конкретная вакансия, то выбираем кандидатов, связанных с этой вакансией
                 if (vacancyChange_comboBox.SelectedItem != null)
                 {
                     if ((vacancyChange_comboBox.SelectedItem as Vacancy).JobTitle == "Все вакансии")
@@ -71,33 +75,47 @@ namespace HrHelper.Pages
                 }
             }
 
+            // Если вакансия не выбрана, то загружаем все данные кандидатов
             return LoadSummariesData();
         }
 
+        // Обработчик нажатия кнопки "Открыть кандидата"
         private void openSummary_button_Click(object sender, RoutedEventArgs e)
         {
+            // Получаем выбранный элемент таблицы
             Summary summary = summary_dg.SelectedItem as Summary;
+
+            // Переходим на страницу с информацией о кандидате
             Classes.Settings.mainFrame.Navigate(new Pages.Summary_page(Convert.ToInt32(summary.Id)));
         }
 
+        // Обработчик нажатия кнопки "Добавить кандидата"
         private void summaryAdd_bt_Click(object sender, RoutedEventArgs e) => Classes.Settings.mainFrame.Navigate(new Pages.SummaryAdd_page());
 
+        // Обработчик изменения текста в поле поиска
         private void search_tb_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            //Доделать
+            // Получаем отсортированные данные кандидатов
             Summary[] summary = SortSummaryData();
+
+            // Создаем контекст базы данных
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
+                // Фильтруем данные кандидатов по имени, фамилии и отчеству
                 summary = db.Summaries.Where(o =>
                 EF.Functions.Like(o.FirstName, $"%{search_tb.Text}%") ||
                 EF.Functions.Like(o.LastName, $"%{search_tb.Text}%") ||
                 EF.Functions.Like(o.Patronymic, $"%{search_tb.Text}%")).ToArray();
+
+                // Обновляем таблицу с данными кандидатов
                 summary_dg.ItemsSource = summary;
 
+                // Обновляем количество строк в таблице
                 RowCountUpdate();
             }
         }
 
+        // Функция для обновления количества строк в таблице
         private void RowCountUpdate() => allClients_tblock.Text = $"Всего - {summary_dg.Items.Count}";
 
 
@@ -132,8 +150,6 @@ namespace HrHelper.Pages
         private DataGrid CopyDataGrid()
         {
             DataGrid newGrid = new DataGrid();
-
-            // Копируем заголовки столбцов из существующего DataGrid
 
             for (int i = 0; i < summary_dg.Columns.Count; i++)
             {
@@ -175,32 +191,48 @@ namespace HrHelper.Pages
 
         private void selectAll_cb_Click(object sender, RoutedEventArgs e)
         {
+            // Получаем текущий CheckBox
             CheckBox currentCheckB = (CheckBox)sender;
+
+            // Если CheckBox выбран, то выбираем все элементы в таблице
             if (currentCheckB.IsChecked == true)
             {
+                // Очищаем список выбранных элементов
                 selectedSummary.Clear();
+
+                // Проходим по всем элементам в таблице
                 foreach (var item in summary_dg.Items)
                 {
+                    // Добавляем элемент в список выбранных элементов
                     selectedSummary.Add((Summary)item);
 
+                    // Получаем строку таблицы
                     var row = summary_dg.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
+
+                    // Если строка не пустая, то находим CheckBox в строке и выбираем его
                     if (row != null)
                     {
                         var checkBox = FindVisualChild<CheckBox>(row);
                         if (checkBox != null && checkBox.Name == "selectSummary_cb")
                         {
-                            checkBox.IsChecked = true;                            
+                            checkBox.IsChecked = true;
                         }
                     }
                 }
-
-            }          
+            }
+            // Если CheckBox не выбран, то снимаем выбор со всех элементов в таблице
             else if (currentCheckB.IsChecked == false)
             {
+                // Очищаем список выбранных элементов
                 selectedSummary.Clear();
+
+                // Проходим по всем элемент в таблице
                 foreach (var item in summary_dg.Items)
                 {
+                    // Получаем строку таблицы
                     var row = summary_dg.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
+
+                    // Если строка не пустая, то находим CheckBox в строке и снимаем его выбор
                     if (row != null)
                     {
                         var checkBox = FindVisualChild<CheckBox>(row);
@@ -211,10 +243,13 @@ namespace HrHelper.Pages
                     }
                 }
             }
+
+            // Обновляем прозрачность кнопки экспорта в Excel
             excelButtonChangeOpacity();
         }
 
-        private T FindVisualChild<T>(DependencyObject obj) where T : DependencyObject
+        // Функция для поиска дочернего элемента заданного типа
+        T FindVisualChild<T>(DependencyObject obj) where T : DependencyObject
         {
             if (obj != null)
             {
@@ -236,10 +271,14 @@ namespace HrHelper.Pages
 
         private void delete_button_Click(object sender, RoutedEventArgs e)
         {
+            // Получаем выбранный элемент таблицы
             Summary summary = summary_dg.SelectedItem as Summary;
+
+            // Показываем диалоговое окно для подтверждения удаления
             if (MyMessageBox.Show("Внимание", "Вы точно хотите удалить этого кандидата?", MyMessageBoxOptions.YesNo) == false)
                 return;
 
+            // Удаляем выбранный элемент из базы данных
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
                 SummaryForVacancy[] summaryForVacancy = db.SummaryForVacancies.Where(o => o.SummaryId == summary.Id).ToArray();
@@ -248,8 +287,13 @@ namespace HrHelper.Pages
                 db.SaveChanges();
             }
 
+            // Показываем сообщение об успешном удалении элемента
             MyMessageBox.Show("Внимание", "Кандидат успешно удален!");
+
+            // Обновляем таблицу
             summary_dg.ItemsSource = LoadSummariesData();
+
+            // Обновляем количество строк в таблице
             RowCountUpdate();
         }
     }

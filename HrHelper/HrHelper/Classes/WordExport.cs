@@ -13,10 +13,13 @@ namespace HrHelper.Classes
 {
     public static class WordExport
     {
+        // Получает текущий путь к проекту
         static public string ProjectPath()
         {
             return Directory.GetCurrentDirectory();
         }
+
+        // Экспортирует сводку в файл Word с использованием SaveFileDialog
         static public bool ExportSummary(Dictionary<string, string> items, Summary summary,Microsoft.Win32.SaveFileDialog dialog)
         {
             string filleName = ProjectPath() + "\\Word\\SummaryModel.docx";
@@ -63,7 +66,7 @@ namespace HrHelper.Classes
                         ReplaceWith: missing, Replace: replace);
                 }
                 document.Save();
-                //app.Visible = true;
+                
                 app.Documents.Close();
                 return true;
             }
@@ -79,7 +82,7 @@ namespace HrHelper.Classes
 
             return false;
         }
-
+        // Экспортирует сводку в файл Word с созданием SaveFileDialog
         static public bool ExportSummary(Dictionary<string, string> items,Summary summary)
         {
             string filleName = ProjectPath() + "\\Word\\SummaryModel.docx";
@@ -147,6 +150,8 @@ namespace HrHelper.Classes
 
             return false;
         }
+
+        // Добавляет фотографию в документ Word
         private static void AddPhoto(Word.Document document, string photo)
         {
             object f = false;

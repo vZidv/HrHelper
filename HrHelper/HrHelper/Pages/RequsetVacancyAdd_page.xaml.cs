@@ -32,6 +32,7 @@ namespace HrHelper.Pages
             login_tb.Text = Settings.currentUser.Login;
         }
 
+        // Метод LoadBusynessComboBox загружает список должностей в ComboBox busyness_cb из базы данных
         private void LoadBusynessComboBox()
         {
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
@@ -41,18 +42,19 @@ namespace HrHelper.Pages
             }
         }
 
-
+        // Обработчик события нажатия кнопки addRequestVacancy_but
         private void addRequestVacancy_but_Click(object sender, RoutedEventArgs e)
         {
+            // Создает список элементов управления, которые должны быть заполнены пользователем
             List<Control> controls = new List<Control>() { jobTitle_tb, busyness_cb, department_tb };
+            // Проверяет, заполнены ли обязательные поля
             if (Classes.CheckValue.CheckElementNullValue(controls) == true)
             {
-                MyMessageBox.Show("Ошибка", "Пожалуйста, заполните обязательные поля",true);
+                MyMessageBox.Show("Ошибка", "Пожалуйста, заполните обязательные поля", true);
                 return;
             }
 
-
-
+            // Создает новый объект VacancyRequest и заполняет его данными из формы
             VacancyRequest vacancyRequest = new VacancyRequest()
             {
                 JobTitle = jobTitle_tb.Text,
@@ -63,14 +65,18 @@ namespace HrHelper.Pages
                 UserId = Settings.currentUser.Id
             };
 
+            // Добавляет новый объект VacancyRequest в базу данных и сохраняет изменения
             using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
             {
                 db.VacancyRequests.Add(vacancyRequest);
                 db.SaveChanges();
             }
 
+            // Показывает сообщение об успешном добавлении запроса и закрывает окно
             MyMessageBox.Show("Внимание", "Ваш запрос добавлен!");
             Settings.mainWindow.Close();
         }
+
+       
     }
 }
