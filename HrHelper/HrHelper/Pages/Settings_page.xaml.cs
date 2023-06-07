@@ -18,22 +18,29 @@ namespace HrHelper.Pages
         // Метод для изменения темы цветов приложения
         private void ChangeColorsTheme(string theme)
         {
-            // Создаем объект Uri для файла ресурсов XAML с указанным именем темы
-            Uri url = new Uri($@"Dictionary\{theme}", UriKind.Relative);
+            try
+            {
+                // Создаем объект Uri для файла ресурсов XAML с указанным именем темы
+                Uri url = new Uri($@"Dictionary\{theme}", UriKind.Relative);
 
-            // Получаем объект приложения
-            var app = (App)Application.Current;
+                // Получаем объект приложения
+                var app = (App)Application.Current;
 
-            // Вызываем метод ChangeTheme объекта приложения, чтобы изменить тему цветов на новую тему, определенную в файле ресурсов
-            app.ChangeTheme(url);
+                // Вызываем метод ChangeTheme объекта приложения, чтобы изменить тему цветов на новую тему, определенную в файле ресурсов
+                app.ChangeTheme(url);
 
-            // Обновляем визуальный интерфейс главного окна приложения
-            Application.Current.MainWindow.InvalidateVisual();
-            Application.Current.MainWindow.UpdateLayout();
-            this.UpdateLayout();
-            this.InvalidateVisual();
+                // Обновляем визуальный интерфейс главного окна приложения
+                Application.Current.MainWindow.InvalidateVisual();
+                Application.Current.MainWindow.UpdateLayout();
+                this.UpdateLayout();
+                this.InvalidateVisual();
 
-            Classes.Settings.WriteToJson("AppTheme",$"{theme}");
+                Classes.Settings.WriteToJson("AppTheme", $"{theme}");
+            }
+            catch(Exception ex)
+            {
+                MyMessageBox.Show("Ошибка", ex.Message, true);
+            }
         }
 
         private void themeColors_cb_SelectionChanged(object sender, SelectionChangedEventArgs e)

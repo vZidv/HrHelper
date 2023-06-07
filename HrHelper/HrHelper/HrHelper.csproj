@@ -18,6 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Remove="Dictionary\BlackThemeColors.xaml" />
+    <Page Remove="Dictionary\WhiteThemeColors.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <COMReference Include="Microsoft.Office.Interop.Excel">
       <WrapperTool>tlbimp</WrapperTool>
       <VersionMinor>8</VersionMinor>
@@ -58,6 +63,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Dictionary\BlackThemeColors.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Dictionary\WhiteThemeColors.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Source\exit.png" />
     <Resource Include="Source\Logo.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

@@ -40,7 +40,8 @@ namespace HrHelper.Pages
             {
                 // Получаем список вакансий из базы данных, включая связанные данные
                 Vacancy[] vacancy = db.Vacancies.Include(o => o.Busyness).ToArray();
-                // Заполняем таблицу данными из списка вакансий        vacancy_dg.ItemsSource = vacancy;
+                // Заполняем таблицу данными из списка вакансий
+                vacancy_dg.ItemsSource = vacancy;
             }
             // Обновляем количество строк в таблице
             RowCountUpdate();
