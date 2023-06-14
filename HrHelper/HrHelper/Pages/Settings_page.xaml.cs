@@ -29,12 +29,6 @@ namespace HrHelper.Pages
                 // Вызываем метод ChangeTheme объекта приложения, чтобы изменить тему цветов на новую тему, определенную в файле ресурсов
                 app.ChangeTheme(url);
 
-                // Обновляем визуальный интерфейс главного окна приложения
-                Application.Current.MainWindow.InvalidateVisual();
-                Application.Current.MainWindow.UpdateLayout();
-                this.UpdateLayout();
-                this.InvalidateVisual();
-
                 Classes.Settings.WriteToJson("AppTheme", $"{theme}");
             }
             catch(Exception ex)
@@ -48,21 +42,11 @@ namespace HrHelper.Pages
             if (themeColors_cb.SelectedIndex  == 0)
             {
                 ChangeColorsTheme("WhiteThemeColors.xaml");
-                Wpf.Ui.Appearance.Theme.Apply(
-                  Wpf.Ui.Appearance.ThemeType.Light,     
-                  Wpf.Ui.Appearance.BackgroundType.Mica, 
-                  true                                   
-                );
             }
                 
             else if (themeColors_cb.SelectedIndex == 1)
             {
                 ChangeColorsTheme("BlackThemeColors.xaml");
-                Wpf.Ui.Appearance.Theme.Apply(
-                  Wpf.Ui.Appearance.ThemeType.Dark,     
-                  Wpf.Ui.Appearance.BackgroundType.Mica, 
-                  true                                   
-                );
             }
                 
         }

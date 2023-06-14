@@ -18,7 +18,7 @@
         <Grid Grid.Row="0">
             <ui:AutoSuggestBox PlaceholderText="Поиск"
                 Width="300"
-                x:Name="search_tb" />
+                x:Name="search_tb" SelectionChanged="search_tb_SelectionChanged" />
             <TextBlock Text="Пользователи" Foreground="{DynamicResource White}" 
                        Style="{StaticResource defaultTextBlock}"
                        HorizontalAlignment="Left" VerticalAlignment="Top" 

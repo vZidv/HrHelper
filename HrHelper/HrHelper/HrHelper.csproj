@@ -5,6 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>LogoMini.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -47,6 +48,10 @@
       <VersionMajor>2</VersionMajor>
       <Guid>d37e2a3e-8545-3a39-9f4f-31827c9124ab</Guid>
     </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="LogoMini.ico" />
   </ItemGroup>
 
   <ItemGroup>

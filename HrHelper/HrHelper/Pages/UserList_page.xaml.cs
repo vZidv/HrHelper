@@ -99,5 +99,21 @@ namespace HrHelper.Pages
             // Обновляем данные в таблице
             LoadDataGrid();
         }
+
+        private void search_tb_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                // Фильтруем данные
+                AuthorizationUser[]  authorizationUsers = db.AuthorizationUsers.Where(o =>
+                EF.Functions.Like(o.Login, $"%{search_tb.Text}%")).Include(o => o.UserType).ToArray();
+
+                // Обновляем таблицу с данными 
+                users_dg.ItemsSource = authorizationUsers;
+
+                // Обновляем количество строк в таблице
+                RowCountUpdate();
+            }
+        }
     }
 }

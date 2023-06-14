@@ -108,6 +108,20 @@ namespace HrHelper.Pages
             LoadDataGrid();
         }
 
-      
+        private void search_tb_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            {
+                // Фильтруем данные
+                VacancyRequest[] vacancies = db.VacancyRequests.Where(o =>
+                EF.Functions.Like(o.JobTitle, $"%{search_tb.Text}%")).Include(o => o.Busyness).Include(o => o.User).ToArray();
+
+                // Обновляем таблицу с данными 
+                vacancy_dg.ItemsSource = vacancies;
+
+                // Обновляем количество строк в таблице
+                RowCountUpdate();
+            }
+        }
     }
 }

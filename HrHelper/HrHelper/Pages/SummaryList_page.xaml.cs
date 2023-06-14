@@ -277,27 +277,34 @@ namespace HrHelper.Pages
             // Показываем диалоговое окно для подтверждения удаления
             if (MyMessageBox.Show("Внимание", "Вы точно хотите удалить этого кандидата?", MyMessageBoxOptions.YesNo) == false)
                 return;
-
-            // Удаляем выбранный элемент из базы данных
-            using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+            try
             {
-                SummaryForVacancy[] summaryForVacancy = db.SummaryForVacancies.Where(o => o.SummaryId == summary.Id).ToArray();
-                if(summaryForVacancy.Length > 0)
-                    db.SummaryForVacancies.RemoveRange(summaryForVacancy);
-                db.SaveChanges();
+                // Удаляем выбранный элемент из базы данных
+                using (HrHelperDatabaseContext db = new HrHelperDatabaseContext())
+                {
+                    SummaryForVacancy[] summaryForVacancy = db.SummaryForVacancies.Where(o => o.SummaryId == summary.Id).ToArray();
+                    if (summaryForVacancy.Length > 0)
+                        db.SummaryForVacancies.RemoveRange(summaryForVacancy);
+                    db.SaveChanges();
+                    summary = db.Summaries.Where(o => o.Id == summary.Id).First();
 
-                db.Summaries.Remove(summary);
-                db.SaveChanges();
+                    db.Summaries.Remove(summary);
+                    db.SaveChanges();
+                }
+
+                // Показываем сообщение об успешном удалении элемента
+                MyMessageBox.Show("Внимание", "Кандидат успешно удален!");
+
+                // Обновляем таблицу
+                summary_dg.ItemsSource = LoadSummariesData();
+
+                // Обновляем количество строк в таблице
+                RowCountUpdate();
             }
-
-            // Показываем сообщение об успешном удалении элемента
-            MyMessageBox.Show("Внимание", "Кандидат успешно удален!");
-
-            // Обновляем таблицу
-            summary_dg.ItemsSource = LoadSummariesData();
-
-            // Обновляем количество строк в таблице
-            RowCountUpdate();
+            catch (Exception ex)
+            {               
+                MyMessageBox.Show("Ошибка", $"Не удалось удалить кандидата: {ex.Message}");
+            }
         }
     }
 }

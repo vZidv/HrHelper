@@ -12,7 +12,7 @@ namespace HrHelper.Windows
         {
             InitializeComponent();
 
-            CheckDatabase();
+            //CheckDatabase();
             mainFrame.Content = new Pages.Authorization_page() { authorization_win = this };
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)

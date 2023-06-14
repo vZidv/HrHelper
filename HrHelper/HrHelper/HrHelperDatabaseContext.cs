@@ -35,8 +35,8 @@ namespace HrHelper
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                //optionsBuilder.UseSqlServer($"Data Source={Classes.Settings.GetFrommJson("sqlServerName")};AttachDbFilename={Directory.GetCurrentDirectory()}\\Database\\HrHelperDatabase.mdf;Integrated Security=True;Encrypt = false; Connect Timeout=10;");
-                optionsBuilder.UseSqlServer($"Data Source={Classes.Settings.GetFrommJson("sqlServerName")};Database=HrHelperDatabase;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer($"Data Source={Classes.Settings.GetFrommJson("sqlServerName")};AttachDbFilename={Directory.GetCurrentDirectory()}\\Database\\HrHelperDatabase.mdf;Integrated Security=True;Encrypt = false; Connect Timeout=10;");
+                // optionsBuilder.UseSqlServer($"Data Source={Classes.Settings.GetFrommJson("sqlServerName")};Database=HrHelperDatabase;Trusted_Connection=True;");
                 //DESKTOP-2BSAL1V\\SQLEXPRESS;Database=HrHelperDatabase;Trusted_Connection=True;
                 //(LocalDB)\\MSSQLLocalDB
             }
